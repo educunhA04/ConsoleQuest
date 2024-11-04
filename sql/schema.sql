@@ -27,6 +27,7 @@ DROP TYPE IF EXISTS order_status CASCADE;
 -----------------------------------------
 -- Drop Functions
 -----------------------------------------
+DROP FUNCTION IF EXISTS product_search_update CASCADE;
 DROP FUNCTION IF EXISTS enforce_order_cancellation CASCADE;
 DROP FUNCTION IF EXISTS prevent_admin_purchase CASCADE;
 DROP FUNCTION IF EXISTS verify_purchase_for_review CASCADE;
@@ -429,8 +430,8 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS trg_address_change_restriction ON ShippingAddress;
+DROP TRIGGER IF EXISTS trg_address_change_restriction ON Shipping_Address;
 CREATE TRIGGER trg_address_change_restriction
-BEFORE UPDATE ON ShippingAddress
+BEFORE UPDATE ON Shipping_Address
 FOR EACH ROW EXECUTE PROCEDURE restrict_address_change_for_shipped_orders();
 
