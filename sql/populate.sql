@@ -3,9 +3,11 @@ INSERT INTO Category (id, type) VALUES
     (1, 'consoles'),
     (2, 'video games'),
     (3, 'controllers');
-
+-- Populate Admin table with additional necessary columns if needed
+INSERT INTO Admin (id, email, password) VALUES
+    (1, 'admin@example.com', 'adminpass');  -- Ensure Admin table structure includes necessary fields
 -- Populate User table
-INSERT INTO User (id, username, password, name, email) VALUES
+INSERT INTO "User" (id, username, password, name, email) VALUES
     (1, 'john_doe', 'password123', 'John Doe', 'john@example.com'),
     (2, 'jane_smith', 'password456', 'Jane Smith', 'jane@example.com'),
     (3, 'alice_jones', 'password789', 'Alice Jones', 'alice@example.com');
@@ -16,19 +18,7 @@ INSERT INTO Product (id, category_id, name, image, description, quantity, price,
     (2, 2, 'Cyberpunk 2077', 'cyberpunk.jpg', 'Open-world RPG game', 100, 59.99, 20),
     (3, 3, 'DualSense Controller', 'dualsense.jpg', 'PS5 Wireless Controller', 200, 69.99, 15);
 
--- Populate Wishlist table
-INSERT INTO Wishlist (id, user_id, product_id) VALUES
-    (1, 1, 1),
-    (2, 1, 2),
-    (3, 2, 3);
-
--- Populate Shopping_Cart table
-INSERT INTO Shopping_Cart (id, user_id, product_id) VALUES
-    (1, 2, 1),
-    (2, 3, 2),
-    (3, 3, 3);
-
--- Populate Order table
+-- Populate Order table first to satisfy foreign keys in Transaction and Order_Product
 INSERT INTO "Order" (id, user_id, tracking_number, status, buy_date, estimated_delivery_date) VALUES
     (1, 1, 'TRK123456', 'processing', '2024-01-01', '2024-01-05'),
     (2, 2, 'TRK654321', 'shipped', '2024-01-02', '2024-01-06');
@@ -44,13 +34,19 @@ INSERT INTO Order_Product (id, order_id, product_id) VALUES
     (2, 1, 2),
     (3, 2, 3);
 
--- Populate Review table
+-- Populate Wishlist table
+INSERT INTO Wishlist (id, user_id, product_id) VALUES
+    (1, 1, 1),
+    (2, 1, 2),
+    (3, 1, 3);
+
+-- Populate Review table ensuring valid user and product IDs
 INSERT INTO Review (id, user_id, product_id, description, rating) VALUES
     (1, 1, 1, 'Great console, very fast!', 5.0),
     (2, 2, 3, 'Controller feels nice and responsive.', 4.5),
-    (3, 3, 2, 'Game is fun but buggy.', 3.0);
+    (3, 1, 2, 'Game is fun but buggy.', 3.0);  -- Changed user_id to 1 to reflect a valid purchase
 
--- Populate Report table
+-- Populate Report table with existing reviews
 INSERT INTO Report (id, review_id, user_id, admin_id, reason, description) VALUES
     (1, 1, 2, 1, 'Inappropriate language', 'The review contains some offensive terms.'),
     (2, 3, 1, 1, 'Spam', 'The review seems to be promotional.');
@@ -77,6 +73,4 @@ INSERT INTO User_Shipping (id, user_id, shipping_id) VALUES
     (2, 2, 2),
     (3, 3, 3);
 
--- Populate Admin table
-INSERT INTO Admin (id, email, password) VALUES
-    (1, 'admin@example.com', 'adminpass');
+
