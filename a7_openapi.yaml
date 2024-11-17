@@ -144,8 +144,8 @@ paths:
   
   /users/{id}:
     get:
-      operationId: R106
-      summary: 'R106: View User Profile'
+      operationId: R201
+      summary: 'R201: View User Profile'
       description: 'Displays individual user profile information. Access: USR'
       tags:
         - 'M02: Individual Profile'
@@ -162,8 +162,8 @@ paths:
           description: 'User not found. Redirect to error page.'
 
     put:
-      operationId: R107
-      summary: 'R107: Edit User Profile'
+      operationId: R202
+      summary: 'R202: Edit User Profile'
       description: 'Allows user to edit personal profile information. Access: USR'
       tags:
         - 'M02: Individual Profile'
@@ -198,8 +198,8 @@ paths:
   /reviews:
     #add review
     post:
-      operationId: R201
-      summary: 'R201: Add Review'
+      operationId: R301
+      summary: 'R301: Add Review'
       description: 'Allows users to add a review for a product they have purchased. Access: USR'
       tags:
         - 'M03: Reviews'
@@ -232,8 +232,8 @@ paths:
   /reviews/{id}:
     #delete review
     delete:
-      operationId: R202
-      summary: 'R202: Delete Review'
+      operationId: R302
+      summary: 'R302: Delete Review'
       description: 'Allows users to delete their own review. Access: USR'
       tags:
         - 'M03: Reviews'
@@ -254,8 +254,8 @@ paths:
 
     put:
       #edit review
-      operationId: R203
-      summary: 'R203: Edit Review'
+      operationId: R303
+      summary: 'R303: Edit Review'
       description: 'Allows users to edit their own review. Access: USR'
       tags:
         - 'M03: Reviews'
@@ -294,8 +294,8 @@ paths:
   /reviews/{id}/report:
     #report review
     post:
-      operationId: R204
-      summary: 'R204: Report Review'
+      operationId: R304
+      summary: 'R304: Report Review'
       description: 'Allows users to report a review for inappropriate content. Access: USR'
       tags:
         - 'M03: Reviews'
