@@ -1,0 +1,325 @@
+openapi: 3.0.0
+
+info:
+  version: '1.0'
+  title: 'ConsoleQuest API'
+  description: 'Web Resources Specification (A7) for ConsoleQuest'
+
+servers:
+  - url: https://lbaw24151.lbaw.fe.up.pt
+    description: Production server
+
+externalDocs:
+ description: Find more info here.
+ url: https://git.fe.up.pt/lbaw/lbaw2425/lbaw24151/-/wikis/eap
+
+tags:
+  - name: 'M01: Authentication'
+  - name: 'M02: Individual Profile'
+  - name: 'M03: Reviews'
+  #temos de ir pondo mais à medida que os fazemos
+
+paths:
+
+######M01: Authentication######
+  /login:
+    get:
+      operationId: R101
+      summary: 'R101: Login Form'
+      description: 'Provide login form. Access: PUB'
+      tags:
+        - 'M01: Authentication'
+      responses:
+        '200':
+          description: 'Ok. Show login UI'
+
+    post:
+      operationId: R102
+      summary: 'R102: Login Action'
+      description: 'Processes the login form submission. Access: PUB'
+      tags:
+        - 'M01: Authentication'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded: #post stuff needs to be encoded 
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
+      responses:
+        '302':
+          description: 'Redirect after processing login credentials'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful login. Redirect to user profile.'
+                  value: '/users/{id}'
+                302Error:
+                  description: 'Failed login. Redirect to login form.'
+                  value: '/login'
+
+  /logout:
+    post:
+      operationId: R103
+      summary: 'R103: Logout Action'
+      description: 'Logout the current authenticated user. Access: USR, ADM'
+      tags:
+        - 'M01: Authentication'
+      responses:
+        '302':
+          description: 'Redirect after logout'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful logout. Redirect to login form.'
+                  value: '/login'
+
+  /register:
+    get:
+      operationId: R104
+      summary: 'R104: Register Form'
+      description: 'Provide registration form. Access: PUB'
+      tags:
+        - 'M01: Authentication'
+      responses:
+        '200':
+          description: 'Ok. Show registration UI'
+
+    post:
+      operationId: R105
+      summary: 'R105: Register Action'
+      description: 'Processes the registration form submission. Access: PUB'
+      tags:
+        - 'M01: Authentication'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                picture:
+                  type: string
+                  format: binary
+              required:
+                - name
+                - email
+                - password
+      responses:
+        '302':
+          description: 'Redirect after registration processing'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful registration. Redirect to user profile.'
+                  value: '/users/{id}'
+                302Failure:
+                  description: 'Failed registration. Redirect to registration form.'
+                  value: '/register'
+
+
+######M02: Individual Profile######
+  
+  /users/{id}:
+    get:
+      operationId: R106
+      summary: 'R106: View User Profile'
+      description: 'Displays individual user profile information. Access: USR'
+      tags:
+        - 'M02: Individual Profile'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: 'Ok. Show User Profile UI'
+        '404':
+          description: 'User not found. Redirect to error page.'
+
+    put:
+      operationId: R107
+      summary: 'R107: Edit User Profile'
+      description: 'Allows user to edit personal profile information. Access: USR'
+      tags:
+        - 'M02: Individual Profile'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                picture:
+                  type: string
+                  format: binary
+              required:
+                - name
+                - email
+      responses:
+        '200':
+          description: 'Profile updated successfully. Redirect to updated profile view.'
+        '400':
+          description: 'Bad request. Missing or invalid fields in profile update form.'
+        '404':
+          description: 'User not found. Redirect to error page.'
+
+
+######M03: Reviews######
+
+  /reviews:
+    #add review
+    post:
+      operationId: R201
+      summary: 'R201: Add Review'
+      description: 'Allows users to add a review for a product they have purchased. Access: USR'
+      tags:
+        - 'M03: Reviews'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: integer
+                rating:
+                  type: integer
+                  description: 'Rating between 1 and 5'
+                comment:
+                  type: string
+              required:
+                - product_id
+                - rating
+                - comment
+      responses:
+        '201':
+          description: 'Review added successfully.'
+        '400':
+          description: 'Bad request. Missing or invalid fields in review form.'
+        '404':
+          description: 'Product not found. Cannot add review.'
+
+  /reviews/{id}:
+    #delete review
+    delete:
+      operationId: R202
+      summary: 'R202: Delete Review'
+      description: 'Allows users to delete their own review. Access: USR'
+      tags:
+        - 'M03: Reviews'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: 'Review ID'
+      responses:
+        '200':
+          description: 'Review deleted successfully.'
+        '403':
+          description: 'Forbidden. User is not authorized to delete this review.'
+        '404':
+          description: 'Review not found.'
+
+    put:
+      #edit review
+      operationId: R203
+      summary: 'R203: Edit Review'
+      description: 'Allows users to edit their own review. Access: USR'
+      tags:
+        - 'M03: Reviews'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: 'Review ID'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                rating:
+                  type: integer
+                  description: 'Updated rating between 1 and 5'
+                comment:
+                  type: string
+              required:
+                - rating
+                - comment
+      responses:
+        '200':
+          description: 'Review updated successfully.'
+        '400':
+          description: 'Bad request. Missing or invalid fields in review form.'
+        '403':
+          description: 'Forbidden. User is not authorized to edit this review.'
+        '404':
+          description: 'Review not found.'
+
+  /reviews/{id}/report:
+    #report review
+    post:
+      operationId: R204
+      summary: 'R204: Report Review'
+      description: 'Allows users to report a review for inappropriate content. Access: USR'
+      tags:
+        - 'M03: Reviews'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: 'Review ID'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  description: 'Reason for reporting the review'
+              required:
+                - reason
+      responses:
+        '200':
+          description: 'Review reported successfully.'
+        '404':
+          description: 'Review not found.'
