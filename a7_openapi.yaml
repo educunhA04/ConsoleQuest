@@ -17,6 +17,11 @@ tags:
   - name: 'M01: Authentication'
   - name: 'M02: Individual Profile'
   - name: 'M03: Reviews'
+  - name: 'M04: Administration'
+  - name: 'M05: Search'
+  - name: 'M06: Wishlist and Shopping Cart'
+  - name: 'M07: Notification'
+  - name: 'M08: Order'
   #temos de ir pondo mais à medida que os fazemos
 
 paths:
@@ -26,7 +31,7 @@ paths:
     get:
       operationId: R101
       summary: 'R101: Login Form'
-      description: 'Provide login form. Access: PUB'
+      description: 'Provide login form. Access: VST'
       tags:
         - 'M01: Authentication'
       responses:
@@ -36,7 +41,7 @@ paths:
     post:
       operationId: R102
       summary: 'R102: Login Action'
-      description: 'Processes the login form submission. Access: PUB'
+      description: 'Processes the login form submission. Access: VST'
       tags:
         - 'M01: Authentication'
       requestBody:
@@ -91,7 +96,7 @@ paths:
     get:
       operationId: R104
       summary: 'R104: Register Form'
-      description: 'Provide registration form. Access: PUB'
+      description: 'Provide registration form. Access: VST'
       tags:
         - 'M01: Authentication'
       responses:
@@ -101,7 +106,7 @@ paths:
     post:
       operationId: R105
       summary: 'R105: Register Action'
-      description: 'Processes the registration form submission. Access: PUB'
+      description: 'Processes the registration form submission. Access: VST'
       tags:
         - 'M01: Authentication'
       requestBody:
@@ -523,7 +528,7 @@ paths:
     get:
       operationId: R501
       summary: 'R501: Search Products'
-      description: 'Allows users to search and filter products based on various criteria. Access: PUB, USR'
+      description: 'Allows users to search and filter products based on various criteria. Access: VST, USR'
       tags:
         - 'M05: Search'
       parameters:
@@ -616,7 +621,7 @@ paths:
     get:
       operationId: R502
       summary: 'R502: Get Search Suggestions'
-      description: 'Provides autocomplete suggestions for the search input. Access: PUB, USR'
+      description: 'Provides autocomplete suggestions for the search input. Access: VST, USR'
       tags:
         - 'M05: Search'
       parameters:
