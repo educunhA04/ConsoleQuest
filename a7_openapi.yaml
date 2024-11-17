@@ -183,9 +183,11 @@ paths:
                   type: string
                 email:
                   type: string
-                picture:
+                username:
+                  type: string 
+                password:
                   type: string
-                  format: binary
+                
               required:
                 - name
                 - email
@@ -215,11 +217,13 @@ paths:
             schema:
               type: object
               properties:
+                user_id:
+                  type: integer
                 product_id:
                   type: integer
                 rating:
                   type: integer
-                  description: 'Rating between 1 and 5'
+                  description: 'Rating between 0 and 5'
                 comment:
                   type: string
               required:
@@ -280,7 +284,7 @@ paths:
               properties:
                 rating:
                   type: integer
-                  description: 'Updated rating between 1 and 5'
+                  description: 'Updated rating between 0 and 5'
                 comment:
                   type: string
               required:
