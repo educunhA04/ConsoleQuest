@@ -239,7 +239,7 @@ paths:
     delete:
       operationId: R302
       summary: 'R302: Delete Review'
-      description: 'Allows users to delete their own review. Access: USR'
+      description: 'Allows users to delete their own review. Access: RVA'
       tags:
         - 'M03: Reviews'
       parameters:
@@ -261,7 +261,7 @@ paths:
       #edit review
       operationId: R303
       summary: 'R303: Edit Review'
-      description: 'Allows users to edit their own review. Access: USR'
+      description: 'Allows users to edit their own review. Access: RVA'
       tags:
         - 'M03: Reviews'
       parameters:
