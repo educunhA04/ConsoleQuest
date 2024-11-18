@@ -25,8 +25,10 @@
             <header>
                 <h1><a href="{{ url('/home') }}">Console Quest</a></h1>
                     @if (Auth::check())
+                        <a class="button" href="{{ url('/shoppingcart') }}"> Shopping Cart </a>
+                        <a class="button" href="{{ url('/wishlist') }}"> Wishlist </a>
                         <a class="button" href="{{ url('/logout') }}"> Logout </a> 
-                        <span>{{ Auth::user()->name }}</span>
+                        <span>{{ Auth::user()->username }}</span>
                     @else
                         <a class="button" href="{{ url('/login') }}"> Login </a>
                         <a class="button" href="{{ url('/register') }}"> Register </a>
@@ -36,5 +38,10 @@
                 @yield('content')
             </section>
         </main>
+        <footer>
+                <a href=""> About US</a>
+                <a href=""> Terms and Conditions </a>
+                <a href=""> FAQs </a> 
+        </footer>
     </body>
 </html>
