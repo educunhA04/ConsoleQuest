@@ -1,0 +1,42 @@
+/* Style for the main product grid layout */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns in a row */
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Style for individual product containers */
+.product-container {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+/* Hover effect for product containers */
+.product-container:hover {
+    transform: scale(1.05);
+}
+
+/* Style for the product image */
+.product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Style for the product name */
+.product-name {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: #333;
+}
+
+/* Style for the product price */
+.product-price {
+    font-size: 1em;
+    color: #888;
+}
