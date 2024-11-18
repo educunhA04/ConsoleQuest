@@ -29,22 +29,34 @@ class LoginController extends Controller
      * Handle an authentication attempt.
      */
     public function authenticate(Request $request): RedirectResponse
-    {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
- 
-        if (Auth::attempt($credentials, $request->filled('remember'))) {
-            $request->session()->regenerate();
- 
-            return redirect()->intended('/cards');
-        }
- 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+{
+    // Validate the input
+    $request->validate([
+        'login' => ['required'], // Use a common field name for both email and username
+        'password' => ['required'],
+    ]);
+
+    // Check if the input is an email or username
+    $field = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+    // Retrieve the credentials based on email or username
+    $credentials = [
+        $field => $request->login,
+        'password' => $request->password,
+    ];
+
+    // Attempt to authenticate with the credentials
+    if (Auth::attempt($credentials, $request->filled('remember'))) {
+        $request->session()->regenerate();
+        return redirect()->route('register'); // Redirect to desired route
     }
+
+    // Return back with an error if authentication fails
+    return back()->withErrors([
+        'login' => 'The provided credentials do not match our records.',
+    ])->onlyInput('login');
+}
+
 
     /**
      * Log out the user from application.

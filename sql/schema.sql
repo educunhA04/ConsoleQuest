@@ -67,24 +67,24 @@ CREATE TYPE order_status AS ENUM(
 -----------------------------------------
 
 CREATE TABLE "User" (
-    id INT PRIMARY KEY,
+    id SERIAL  PRIMARY KEY,
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
     name TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL
 );
 CREATE TABLE Admin (
-    id INT PRIMARY KEY,
+    id SERIAL  PRIMARY KEY,
     email TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL
 );
 CREATE TABLE Category (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     type categories NOT NULL 
 );
 
 CREATE TABLE Product (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     category_id INT NOT NULL UNIQUE ,
     name TEXT NOT NULL,
     image TEXT,
@@ -96,7 +96,7 @@ CREATE TABLE Product (
 );
 
 CREATE TABLE Wishlist (
-    id INT PRIMARY KEY,
+    id SERIAL  PRIMARY KEY,
     user_id INT NOT NULL ,
     product_id INT NOT NULL ,
     UNIQUE (user_id, product_id),
@@ -105,7 +105,7 @@ CREATE TABLE Wishlist (
 );
 
 CREATE TABLE Shopping_Cart (
-    id INT PRIMARY KEY,
+    id SERIAL  PRIMARY KEY,
     user_id INT NOT NULL ,
     product_id INT NOT NULL ,
     UNIQUE (user_id, product_id),
@@ -114,7 +114,7 @@ CREATE TABLE Shopping_Cart (
 );
 
 CREATE TABLE "Order" (
-    id INT PRIMARY KEY,
+    id  SERIAL  PRIMARY KEY,
     user_id INT NOT NULL UNIQUE ,
     tracking_number TEXT UNIQUE NOT NULL,
     status order_status NOT NULL,
@@ -124,7 +124,7 @@ CREATE TABLE "Order" (
 );
 
 CREATE TABLE Transaction (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id INT NOT NULL UNIQUE ,
     order_id INT NOT NULL UNIQUE ,
     code TEXT UNIQUE NOT NULL,
@@ -138,7 +138,7 @@ CREATE TABLE Transaction (
 );
 
 CREATE TABLE Order_Product (
-    id INT PRIMARY KEY,
+    id  SERIAL PRIMARY KEY,
     order_id INT NOT NULL ,
     product_id INT NOT NULL ,
     UNIQUE (order_id, product_id),
@@ -147,7 +147,7 @@ CREATE TABLE Order_Product (
 );
 
 CREATE TABLE Review (
-    id INT PRIMARY KEY,
+    id SERIAL  PRIMARY KEY,
     user_id INT NOT NULL ,
     product_id INT NOT NULL ,
     description TEXT NOT NULL,
@@ -157,7 +157,7 @@ CREATE TABLE Review (
 );
 
 CREATE TABLE Report (
-    id INT PRIMARY KEY,
+    id SERIAL  PRIMARY KEY,
     review_id INT NOT NULL ,
     user_id INT NOT NULL ,
     admin_id INT NOT NULL,
@@ -169,14 +169,14 @@ CREATE TABLE Report (
 );
 
 CREATE TABLE Notification (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     description TEXT NOT NULL,
     viewed BOOLEAN DEFAULT FALSE,
     date DATE NOT NULL CHECK (date <= CURRENT_DATE)
 );
 
 CREATE TABLE Notification_User (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id INT NOT NULL ,
     notification_id INT NOT NULL,
     UNIQUE (user_id, notification_id),
@@ -185,7 +185,7 @@ CREATE TABLE Notification_User (
 );
 
 CREATE TABLE Shipping_Address (
-    id INT PRIMARY KEY,
+    id SERIAL  PRIMARY KEY,
     postal_code TEXT NOT NULL,
     address TEXT NOT NULL,
     location TEXT NOT NULL,
@@ -194,7 +194,7 @@ CREATE TABLE Shipping_Address (
 );
 
 CREATE TABLE User_Shipping (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id INT NOT NULL ,
     shipping_id INT NOT NULL ,
     UNIQUE (user_id, shipping_id),
