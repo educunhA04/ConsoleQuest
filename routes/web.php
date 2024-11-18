@@ -8,6 +8,9 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ShoppingCartController;
+use App\Http\Controllers\WishlistController;
+
 
 
 /*
@@ -26,6 +29,13 @@ Route::redirect('/', '/home');
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/home', 'show')->name('home');
+});
+Route::controller(ShoppingCartController::class)->group(function () {
+    Route::get('/shoppingcart', 'show')->name('shoppingcart');
+});
+Route::controller(WishlistController::class)->group(function () {
+    Route::get('/wishlist', 'show')->name('wishlist');
+
 });
 
 
