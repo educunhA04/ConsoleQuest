@@ -1,0 +1,1127 @@
+openapi: 3.0.0
+
+info:
+  version: '1.0'
+  title: 'ConsoleQuest API'
+  description: 'Web Resources Specification (A7) for ConsoleQuest'
+
+servers:
+  - url: https://lbaw24151.lbaw.fe.up.pt
+    description: Production server
+
+externalDocs:
+ description: Find more info here.
+ url: https://git.fe.up.pt/lbaw/lbaw2425/lbaw24151/-/wikis/eap
+
+tags:
+  - name: 'M01: Authentication'
+  - name: 'M02: Individual Profile'
+  - name: 'M03: Reviews'
+  - name: 'M04: Administration'
+  - name: 'M05: Search'
+  - name: 'M06: Wishlist and Shopping Cart'
+  - name: 'M07: Notification'
+  - name: 'M08: Order'
+  #temos de ir pondo mais à medida que os fazemos
+
+paths:
+
+######M01: Authentication######
+  /login:
+    get:
+      operationId: R101
+      summary: 'R101: Login Form'
+      description: 'Provide login form. Access: VST'
+      tags:
+        - 'M01: Authentication'
+      responses:
+        '200':
+          description: 'Ok. Show login UI'
+
+    post:
+      operationId: R102
+      summary: 'R102: Login Action'
+      description: 'Processes the login form submission. Access: VST'
+      tags:
+        - 'M01: Authentication'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded: #post stuff needs to be encoded 
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
+      responses:
+        '302':
+          description: 'Redirect after processing login credentials'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful login. Redirect to user profile.'
+                  value: '/users/{id}'
+                302Error:
+                  description: 'Failed login. Redirect to login form.'
+                  value: '/login'
+
+  /logout:
+    post:
+      operationId: R103
+      summary: 'R103: Logout Action'
+      description: 'Logout the current authenticated user. Access: USR, ADM'
+      tags:
+        - 'M01: Authentication'
+      responses:
+        '302':
+          description: 'Redirect after logout'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful logout. Redirect to login form.'
+                  value: '/login'
+
+  /register:
+    get:
+      operationId: R104
+      summary: 'R104: Register Form'
+      description: 'Provide registration form. Access: VST'
+      tags:
+        - 'M01: Authentication'
+      responses:
+        '200':
+          description: 'Ok. Show registration UI'
+
+    post:
+      operationId: R105
+      summary: 'R105: Register Action'
+      description: 'Processes the registration form submission. Access: VST'
+      tags:
+        - 'M01: Authentication'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                picture:
+                  type: string
+                  format: binary
+              required:
+                - name
+                - email
+                - password
+      responses:
+        '302':
+          description: 'Redirect after registration processing'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful registration. Redirect to user profile.'
+                  value: '/users/{id}'
+                302Failure:
+                  description: 'Failed registration. Redirect to registration form.'
+                  value: '/register'
+
+
+######M02: Individual Profile######
+  
+  /users/{id}:
+    get:
+      operationId: R201
+      summary: 'R201: View User Profile'
+      description: 'Displays individual user profile information. Access: USR'
+      tags:
+        - 'M02: Individual Profile'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: 'Ok. Show User Profile UI'
+        '404':
+          description: 'User not found. Redirect to error page.'
+
+    put:
+      operationId: R202
+      summary: 'R202: Edit User Profile'
+      description: 'Allows user to edit personal profile information. Access: USR'
+      tags:
+        - 'M02: Individual Profile'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                username:
+                  type: string 
+                password:
+                  type: string
+                
+              required:
+                - name
+                - email
+      responses:
+        '200':
+          description: 'Profile updated successfully. Redirect to updated profile view.'
+        '400':
+          description: 'Bad request. Missing or invalid fields in profile update form.'
+        '404':
+          description: 'User not found. Redirect to error page.'
+
+
+######M03: Reviews######
+
+  /reviews:
+    #add review
+    post:
+      operationId: R301
+      summary: 'R301: Add Review'
+      description: 'Allows users to add a review for a product they have purchased. Access: USR'
+      tags:
+        - 'M03: Reviews'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                product_id:
+                  type: integer
+                rating:
+                  type: integer
+                  description: 'Rating between 0 and 5'
+                comment:
+                  type: string
+              required:
+                - product_id
+                - rating
+                - comment
+      responses:
+        '201':
+          description: 'Review added successfully.'
+        '400':
+          description: 'Bad request. Missing or invalid fields in review form.'
+        '404':
+          description: 'Product not found. Cannot add review.'
+
+  /reviews/{id}:
+    #delete review
+    delete:
+      operationId: R302
+      summary: 'R302: Delete Review'
+      description: 'Allows users to delete their own review. Access: RVA'
+      tags:
+        - 'M03: Reviews'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: 'Review ID'
+      responses:
+        '200':
+          description: 'Review deleted successfully.'
+        '403':
+          description: 'Forbidden. User is not authorized to delete this review.'
+        '404':
+          description: 'Review not found.'
+
+    put:
+      #edit review
+      operationId: R303
+      summary: 'R303: Edit Review'
+      description: 'Allows users to edit their own review. Access: RVA'
+      tags:
+        - 'M03: Reviews'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: 'Review ID'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                rating:
+                  type: integer
+                  description: 'Updated rating between 0 and 5'
+                comment:
+                  type: string
+              required:
+                - rating
+                - comment
+      responses:
+        '200':
+          description: 'Review updated successfully.'
+        '400':
+          description: 'Bad request. Missing or invalid fields in review form.'
+        '403':
+          description: 'Forbidden. User is not authorized to edit this review.'
+        '404':
+          description: 'Review not found.'
+
+  /reviews/{id}/report:
+    #report review
+    post:
+      operationId: R304
+      summary: 'R304: Report Review'
+      description: 'Allows users to report a review for inappropriate content. Access: USR'
+      tags:
+        - 'M03: Reviews'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: 'Review ID'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  description: 'Reason for reporting the review'
+              required:
+                - reason
+      responses:
+        '200':
+          description: 'Review reported successfully.'
+        '404':
+          description: 'Review not found.'
+######M04: Administration######
+
+  /admin/users:
+    get:
+      operationId: R401
+      summary: 'R401: View and Search Users'
+      description: 'Allows administrators to view and search user accounts. Access: ADM'
+      tags:
+        - 'M04: Administration'
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+          required: false
+          description: 'Search query for filtering users by name or email.'
+      responses:
+        '200':
+          description: 'List of users matching the search query.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    status:
+                      type: string
+                      enum:
+                        - active
+                        - blocked
+        '403':
+          description: 'Forbidden. Access denied.'
+
+  /admin/users/{id}/block:
+    put:
+      operationId: R402
+      summary: 'R402: Block User Account'
+      description: 'Allows administrators to block a user account. Access: ADM'
+      tags:
+        - 'M04: Administration'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: 'User ID'
+      responses:
+        '200':
+          description: 'User account blocked successfully.'
+        '404':
+          description: 'User not found.'
+
+  /admin/users/{id}/unblock:
+    put:
+      operationId: R403
+      summary: 'R403: Unblock User Account'
+      description: 'Allows administrators to unblock a user account. Access: ADM'
+      tags:
+        - 'M04: Administration'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: 'User ID'
+      responses:
+        '200':
+          description: 'User account unblocked successfully.'
+        '404':
+          description: 'User not found.'
+
+  /admin/products:
+    post:
+      operationId: R404
+      summary: 'R404: Add New Product'
+      description: 'Allows administrators to add new products to the catalog. Access: ADM'
+      tags:
+        - 'M04: Administration'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                price:
+                  type: number
+                  format: float
+                quantity:
+                  type: integer
+                category:
+                  type: string
+                  enum:
+                    - controllers
+                    - games
+                    - consoles
+                discount_percent:
+                  type: number
+                  format: float
+                  default: 0
+              required:
+                - name
+                - price
+                - quantity
+                - category
+      responses:
+        '201':
+          description: 'Product added successfully.'
+        '400':
+          description: 'Bad request. Missing or invalid fields in product form.'
+
+  /admin/products/{id}:
+    delete:
+      operationId: R405
+      summary: 'R405: Remove Product'
+      description: 'Allows administrators to remove a product from the catalog. Access: ADM'
+      tags:
+        - 'M04: Administration'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: 'Product ID'
+      responses:
+        '200':
+          description: 'Product removed successfully.'
+        '404':
+          description: 'Product not found.'
+
+  /admin/reviews/{id}:
+    delete:
+      operationId: R406
+      summary: 'R406: Delete Review'
+      description: 'Allows administrators to delete inappropriate or reported reviews. Access: ADM'
+      tags:
+        - 'M04: Administration'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: 'Review ID'
+      responses:
+        '200':
+          description: 'Review deleted successfully.'
+        '404':
+          description: 'Review not found.'
+
+  /admin/static-pages/{id}:
+    put:
+      operationId: R407
+      summary: 'R407: Update Static Pages'
+      description: 'Allows administrators to update the content of static pages (e.g., About Us, Privacy Policy). Access: ADM'
+      tags:
+        - 'M04: Administration'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: 'Static Page ID'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+              required:
+                - content
+      responses:
+        '200':
+          description: 'Static page updated successfully.'
+        '404':
+          description: 'Static page not found.'
+######M05: Search######
+
+  /search/products:
+    get:
+      operationId: R501
+      summary: 'R501: Search Products'
+      description: 'Allows users to search and filter products based on various criteria. Access: VST, USR'
+      tags:
+        - 'M05: Search'
+      parameters:
+        - in: query
+          name: query
+          schema:
+            type: string
+          required: false
+          description: 'Search term for product name or description.'
+        - in: query
+          name: category
+          schema:
+            type: string
+            enum:
+              - controllers
+              - games
+              - consoles
+          required: false
+          description: 'Filter by product category.'
+        - in: query
+          name: price_min
+          schema:
+            type: number
+            format: float
+          required: false
+          description: 'Filter by minimum price.'
+        - in: query
+          name: price_max
+          schema:
+            type: number
+            format: float
+          required: false
+          description: 'Filter by maximum price.'
+        - in: query
+          name: discount_only
+          schema:
+            type: boolean
+          required: false
+          description: 'Filter products with discounts only.'
+        - in: query
+          name: sort
+          schema:
+            type: string
+            enum:
+              - price_asc
+              - price_desc
+              - name_asc
+              - name_desc
+              - rating_desc
+          required: false
+          description: 'Sort results by price, name, or rating.'
+      responses:
+        '200':
+          description: 'List of products matching search and filter criteria.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    price:
+                      type: number
+                      format: float
+                    category:
+                      type: string
+                      enum:
+                        - controllers
+                        - games
+                        - consoles
+                    discount_percent:
+                      type: number
+                      format: float
+                    rating:
+                      type: number
+                      format: float
+                    image:
+                      type: string
+                      format: uri
+        '400':
+          description: 'Bad request. Invalid query parameters.'
+
+  /search/suggestions:
+    get:
+      operationId: R502
+      summary: 'R502: Get Search Suggestions'
+      description: 'Provides autocomplete suggestions for the search input. Access: VST, USR'
+      tags:
+        - 'M05: Search'
+      parameters:
+        - in: query
+          name: query
+          schema:
+            type: string
+          required: true
+          description: 'Search term for product suggestions.'
+      responses:
+        '200':
+          description: 'List of suggested product names matching the query.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: 'Bad request. Missing or invalid query parameter.'
+
+  /search/recent:
+    get:
+      operationId: R503
+      summary: 'R503: Get Recent Searches'
+      description: 'Allows authenticated users to view their recent search history. Access: USR'
+      tags:
+        - 'M05: Search'
+      responses:
+        '200':
+          description: 'List of recent search terms for the authenticated user.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '403':
+          description: 'Forbidden. User is not authenticated.'
+######M06: Wishlist and Shopping Cart######
+
+  /wishlist:
+    get:
+      operationId: R601
+      summary: 'R601: View Wishlist'
+      description: 'Displays the current user’s wishlist. Access: USR'
+      tags:
+        - 'M06: Wishlist and Shopping Cart'
+      responses:
+        '200':
+          description: 'List of products in the user’s wishlist.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    price:
+                      type: number
+                      format: float
+                    category:
+                      type: string
+                      enum:
+                        - controllers
+                        - games
+                        - consoles
+                    image:
+                      type: string
+                      format: uri
+        '403':
+          description: 'Forbidden. User is not authenticated.'
+
+    post:
+      operationId: R602
+      summary: 'R602: Add to Wishlist'
+      description: 'Allows users to add a product to their wishlist. Access: USR'
+      tags:
+        - 'M06: Wishlist and Shopping Cart'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: integer
+              required:
+                - product_id
+      responses:
+        '201':
+          description: 'Product added to wishlist successfully.'
+        '400':
+          description: 'Bad request. Missing or invalid product ID.'
+
+    delete:
+      operationId: R603
+      summary: 'R603: Remove from Wishlist'
+      description: 'Allows users to remove a product from their wishlist. Access: USR'
+      tags:
+        - 'M06: Wishlist and Shopping Cart'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: integer
+              required:
+                - product_id
+      responses:
+        '200':
+          description: 'Product removed from wishlist successfully.'
+        '404':
+          description: 'Product not found in wishlist.'
+
+  /cart:
+    get:
+      operationId: R604
+      summary: 'R604: View Shopping Cart'
+      description: 'Displays the current user’s shopping cart. Access: USR'
+      tags:
+        - 'M06: Wishlist and Shopping Cart'
+      responses:
+        '200':
+          description: 'List of products in the user’s shopping cart.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    price:
+                      type: number
+                      format: float
+                    quantity:
+                      type: integer
+                    category:
+                      type: string
+                      enum:
+                        - controllers
+                        - games
+                        - consoles
+                    image:
+                      type: string
+                      format: uri
+        '403':
+          description: 'Forbidden. User is not authenticated.'
+
+    post:
+      operationId: R605
+      summary: 'R605: Add to Shopping Cart'
+      description: 'Allows users to add a product to their shopping cart. Access: USR'
+      tags:
+        - 'M06: Wishlist and Shopping Cart'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: integer
+                quantity:
+                  type: integer
+                  default: 1
+              required:
+                - product_id
+      responses:
+        '201':
+          description: 'Product added to shopping cart successfully.'
+        '400':
+          description: 'Bad request. Missing or invalid product ID or quantity.'
+
+    put:
+      operationId: R606
+      summary: 'R606: Update Shopping Cart'
+      description: 'Allows users to update the quantity of a product in their shopping cart. Access: USR'
+      tags:
+        - 'M06: Wishlist and Shopping Cart'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: integer
+                quantity:
+                  type: integer
+              required:
+                - product_id
+                - quantity
+      responses:
+        '200':
+          description: 'Shopping cart updated successfully.'
+        '400':
+          description: 'Bad request. Missing or invalid product ID or quantity.'
+
+    delete:
+      operationId: R607
+      summary: 'R607: Remove from Shopping Cart'
+      description: 'Allows users to remove a product from their shopping cart. Access: USR'
+      tags:
+        - 'M06: Wishlist and Shopping Cart'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: integer
+              required:
+                - product_id
+      responses:
+        '200':
+          description: 'Product removed from shopping cart successfully.'
+        '404':
+          description: 'Product not found in shopping cart.'
+######M07: Notification######
+
+  /notifications:
+    get:
+      operationId: R701
+      summary: 'R701: View Notifications'
+      description: 'Retrieve a list of notifications for the authenticated user. Access: USR'
+      tags:
+        - 'M07: Notification'
+      parameters:
+        - in: query
+          name: unread_only
+          schema:
+            type: boolean
+            default: false
+          required: false
+          description: 'Filter to show only unread notifications if true.'
+      responses:
+        '200':
+          description: 'List of notifications for the user.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    message:
+                      type: string
+                    timestamp:
+                      type: string
+                      format: date-time
+                    read:
+                      type: boolean
+        '403':
+          description: 'Forbidden. User is not authenticated.'
+
+  /notifications/{id}:
+    put:
+      operationId: R702
+      summary: 'R702: Mark Notification as Read'
+      description: 'Marks a specific notification as read. Access: USR'
+      tags:
+        - 'M07: Notification'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: 'Notification ID'
+      responses:
+        '200':
+          description: 'Notification marked as read successfully.'
+        '404':
+          description: 'Notification not found.'
+        '403':
+          description: 'Forbidden. User does not have permission to access this notification.'
+
+    delete:
+      operationId: R703
+      summary: 'R703: Delete Notification'
+      description: 'Deletes a specific notification. Access: USR'
+      tags:
+        - 'M07: Notification'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: 'Notification ID'
+      responses:
+        '200':
+          description: 'Notification deleted successfully.'
+        '404':
+          description: 'Notification not found.'
+        '403':
+          description: 'Forbidden. User does not have permission to delete this notification.'
+
+  /notifications/mark-all-read:
+    post:
+      operationId: R704
+      summary: 'R704: Mark All Notifications as Read'
+      description: 'Marks all notifications for the user as read. Access: USR'
+      tags:
+        - 'M07: Notification'
+      responses:
+        '200':
+          description: 'All notifications marked as read successfully.'
+        '403':
+          description: 'Forbidden. User is not authenticated.'
+######M08: Order######
+
+  /orders:
+    get:
+      operationId: R801
+      summary: 'R801: View All Orders'
+      description: 'Retrieve a list of all orders placed by the authenticated user. Access: USR'
+      tags:
+        - 'M08: Order'
+      responses:
+        '200':
+          description: 'List of orders for the user.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    date:
+                      type: string
+                      format: date-time
+                    total_amount:
+                      type: number
+                      format: float
+                    status:
+                      type: string
+                      enum:
+                        - pending
+                        - shipped
+                        - delivered
+                        - canceled
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          product_id:
+                            type: integer
+                          name:
+                            type: string
+                          quantity:
+                            type: integer
+                          price:
+                            type: number
+                            format: float
+        '403':
+          description: 'Forbidden. User is not authenticated.'
+
+  /orders/{id}:
+    get:
+      operationId: R802
+      summary: 'R802: View Order Details'
+      description: 'Retrieve details of a specific order placed by the authenticated user. Access: USR'
+      tags:
+        - 'M08: Order'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: 'Order ID'
+      responses:
+        '200':
+          description: 'Details of the specified order.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  date:
+                    type: string
+                    format: date-time
+                  total_amount:
+                    type: number
+                    format: float
+                  status:
+                    type: string
+                    enum:
+                      - pending
+                      - shipped
+                      - delivered
+                      - canceled
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        product_id:
+                          type: integer
+                        name:
+                          type: string
+                        quantity:
+                          type: integer
+                        price:
+                          type: number
+                          format: float
+        '403':
+          description: 'Forbidden. User does not have access to this order.'
+        '404':
+          description: 'Order not found.'
+
+    delete:
+      operationId: R803
+      summary: 'R803: Cancel Order'
+      description: 'Cancel a specific order if it is still in the pending state. Access: USR'
+      tags:
+        - 'M08: Order'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: 'Order ID'
+      responses:
+        '200':
+          description: 'Order canceled successfully.'
+        '403':
+          description: 'Forbidden. User does not have permission to cancel this order.'
+        '404':
+          description: 'Order not found.'
+        '400':
+          description: 'Bad request. Cannot cancel an order that is not in the pending state.'
+
+  /orders/track/{id}:
+    get:
+      operationId: R804
+      summary: 'R804: Track Order Status'
+      description: 'Retrieve the current status of a specific order placed by the authenticated user. Access: USR'
+      tags:
+        - 'M08: Order'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: 'Order ID'
+      responses:
+        '200':
+          description: 'Current status of the order.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  status:
+                    type: string
+                    enum:
+                      - pending
+                      - shipped
+                      - delivered
+                      - canceled
+                  estimated_delivery:
+                    type: string
+                    format: date-time
+        '403':
+          description: 'Forbidden. User does not have access to this order.'
+        '404':
+          description: 'Order not found.'

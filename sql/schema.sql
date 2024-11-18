@@ -1,3 +1,8 @@
+DROP SCHEMA IF EXISTS rabeira CASCADE;
+CREATE SCHEMA IF NOT EXISTS rabeira;
+SET search_path TO rabeira;
+
+
 -----------------------------------------
 -- Drop Tables
 -----------------------------------------
