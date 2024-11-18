@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="{{app()->getLocale()}}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Console Quest Products</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-</head>
-<body>
-
+@extends('layouts.app')
+@section('content')
 <div class="product-grid">
-<?php
+    <?php
     // Placeholder loop for products. Replace this with database fetching logic.
     for ($i = 0; $i < 8; $i++) {
         echo '<div class="product-container">';
@@ -19,8 +11,6 @@
         echo '</div>';
     }
     ?>
-
 </div>
 
-</body>
-</html>
+@endsection

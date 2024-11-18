@@ -48,7 +48,7 @@ class LoginController extends Controller
     // Attempt to authenticate with the credentials
     if (Auth::attempt($credentials, $request->filled('remember'))) {
         $request->session()->regenerate();
-        return redirect()->route('register'); // Redirect to desired route
+        return redirect()->route('home'); // Redirect to desired route
     }
 
     // Return back with an error if authentication fails
