@@ -28,7 +28,7 @@
                         <a class="button" href="{{ url('/shoppingcart') }}"> Shopping Cart </a>
                         <a class="button" href="{{ url('/wishlist') }}"> Wishlist </a>
                         <a class="button" href="{{ url('/logout') }}"> Logout </a> 
-                        <span>{{ Auth::user()->username }}</span>
+                        <a href = "{{ url('/profile') }}"> <span>{{ Auth::user()->username }}</span></a>
                     @else
                         <a class="button" href="{{ url('/login') }}"> Login </a>
                         <a class="button" href="{{ url('/register') }}"> Register </a>

@@ -11,6 +11,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ProductPageController;
+use App\Http\Controllers\ProfileController;
 
 
 /*
@@ -49,6 +50,10 @@ Route::controller(WishlistController::class)->group(function () {
 });
 Route::controller(ProductPageController::class)->group(function () {
     Route::get('/product', 'show')->name('product');
+});
+
+Route::controller(ProfileController::class)->group(function () {
+    Route::get('/profile', 'show')->name('profile');
 });
 
 
