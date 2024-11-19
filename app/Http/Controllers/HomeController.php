@@ -3,21 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Illuminate\View\View;
-use Illuminate\Support\Facades\Auth;
-
-use App\Models\Home;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
     /**
-     * Show the application dashboard.
-     *
-     * @return View
+     * Display the home page with a list of products (if needed).
      */
     public function show(): View
     {
-        return view('Home');
+        // Fetch all the products
+        $products = Product::orderBy('id')->get();
+
+        return view('home', ['products' => $products]);
     }
 }
