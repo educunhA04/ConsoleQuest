@@ -448,6 +448,6 @@ INSERT INTO Category (id, type) VALUES
 
 -- Populate Product table
 INSERT INTO Product (id, category_id, name, image, description, quantity, price, discount_percent) VALUES
-    (1, 1, 'PlayStation 5', 'ps5.jpg', 'Next-gen gaming console', 50, 499.99, 10),
-    (2, 2, 'Cyberpunk 2077', 'cyberpunk.jpg', 'Open-world RPG game', 100, 59.99, 20),
-    (3, 3, 'DualSense Controller', 'dualsense.jpg', 'PS5 Wireless Controller', 200, 69.99, 15);
+    (1, 1, 'PlayStation 5', '/dbimages/pg5.jpg', 'Next-gen gaming console', 50, 499.99, 10),
+    (2, 2, 'EA FC 25', '/dbimages/eafc25.jpg', 'Cancer game', 100, 59.99, 20),
+    (3, 3, 'DualSense Controller', '/dbimages/dualsense.jpg', 'PS5 Wireless Controller', 200, 69.99, 15);
