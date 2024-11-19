@@ -16,6 +16,6 @@ class HomeController extends Controller
         // Fetch all the products
         $products = Product::class::orderBy('id')->get();
 
-        return view('home', ['products' => $products]);
+        return view('Home', ['products' => $products]);
     }
 }
