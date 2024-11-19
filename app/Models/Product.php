@@ -4,9 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Iluminate\Database\Eloquent\Relations\BelongsTo;
+
 
 class Product extends Model
 {
+
+    public $timestamps = false;
+
     use HasFactory;
 
     protected $table = Product;
