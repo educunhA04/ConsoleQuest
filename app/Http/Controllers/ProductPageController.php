@@ -8,7 +8,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 
 
-class ProductController extends Controller
+class ProductPageController extends Controller
 {
     /**
      * Show the application dashboard.
