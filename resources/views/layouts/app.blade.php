@@ -21,8 +21,7 @@
         </script>
     </head>
     <body>
-        <main>
-            <header>
+        <header>
                 <h1><a href="{{ url('/home') }}">Console Quest</a></h1>
                     @if (Auth::check())
                         <a class="button" href="{{ url('/shoppingcart') }}"> Shopping Cart </a>
@@ -34,6 +33,7 @@
                         <a class="button" href="{{ url('/register') }}"> Register </a>
                     @endif
             </header>
+        <main>
             <section id="content">
                 @yield('content')
             </section>

@@ -85,7 +85,7 @@ CREATE TABLE Category (
 
 CREATE TABLE Product (
     id SERIAL PRIMARY KEY,
-    category_id INT NOT NULL UNIQUE ,
+    category_id INT NOT NULL ,
     name TEXT NOT NULL,
     image TEXT,
     description TEXT,
@@ -450,4 +450,6 @@ INSERT INTO Category (id, type) VALUES
 INSERT INTO Product (id, category_id, name, image, description, quantity, price, discount_percent) VALUES
     (1, 1, 'PlayStation 5', '/dbimages/pg5.jpg', 'Next-gen gaming console', 50, 499.99, 10),
     (2, 2, 'EA FC 25', '/dbimages/eafc25.jpg', 'Cancer game', 100, 59.99, 20),
-    (3, 3, 'DualSense Controller', '/dbimages/dualsense.jpg', 'PS5 Wireless Controller', 200, 69.99, 15);
+    (3, 2, 'Fifa Street', '/dbimages/fifastreet.jpg', 'Goat game', 100, 19.99, 0),
+    (4, 2, 'League of Legnds', '/dbimages/LOL.jpeg', 'Virgin game', 10, 9.99, 0),
+    (5, 3, 'DualSense Controller', '/dbimages/dualsense.jpg', 'PS5 Wireless Controller', 200, 69.99, 15);
