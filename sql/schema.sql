@@ -440,3 +440,14 @@ CREATE TRIGGER trg_address_change_restriction
 BEFORE UPDATE ON Shipping_Address
 FOR EACH ROW EXECUTE PROCEDURE restrict_address_change_for_shipped_orders();
 
+-- Populate Category table
+INSERT INTO Category (id, type) VALUES
+    (1, 'consoles'),
+    (2, 'video games'),
+    (3, 'controllers');
+
+-- Populate Product table
+INSERT INTO Product (id, category_id, name, image, description, quantity, price, discount_percent) VALUES
+    (1, 1, 'PlayStation 5', 'ps5.jpg', 'Next-gen gaming console', 50, 499.99, 10),
+    (2, 2, 'Cyberpunk 2077', 'cyberpunk.jpg', 'Open-world RPG game', 100, 59.99, 20),
+    (3, 3, 'DualSense Controller', 'dualsense.jpg', 'PS5 Wireless Controller', 200, 69.99, 15);
