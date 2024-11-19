@@ -11,7 +11,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\WishlistController;
 
-
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,10 +27,10 @@ use App\Http\Controllers\WishlistController;
 // Home
 Route::redirect('/', '/home');
 
-Route::get('/product', function () {
-    return view("Product");
-});
 
+Route::controller(ProductController::class)->group(function () {
+    Route::get('/product', 'show')->name('product');
+});
 Route::controller(HomeController::class)->group(function () {
     Route::get('/home', 'show')->name('home');
 });
