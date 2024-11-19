@@ -453,3 +453,4 @@ INSERT INTO Product (id, category_id, name, image, description, quantity, price,
     (3, 2, 'Fifa Street', '/dbimages/fifastreet.jpg', 'Goat game', 100, 19.99, 0),
     (4, 2, 'League of Legnds', '/dbimages/LOL.jpeg', 'Virgin game', 10, 9.99, 0),
     (5, 3, 'DualSense Controller', '/dbimages/dualsense.jpg', 'PS5 Wireless Controller', 200, 69.99, 15);
+

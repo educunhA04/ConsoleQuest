@@ -107,3 +107,10 @@
 .profile-buttons .button:first-child {
     background-color: #ff5555; /* Red for logout */
 }
+
+@media (max-width: 600px) {
+    .profile-buttons {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 10px; /* Reduce spacing between buttons */
+    }
+}

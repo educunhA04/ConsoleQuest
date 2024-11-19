@@ -12,6 +12,7 @@ use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ProductPageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EditprofileController;
 
 
 /*
@@ -53,9 +54,14 @@ Route::controller(ProductPageController::class)->group(function () {
 });
 
 Route::controller(ProfileController::class)->group(function () {
-    Route::get('/profile', 'show')->name('profile');
+    Route::get('/profile', 'profile')->name('profile');
 });
 
+Route::controller(ProfileController::class)->group(function () {
+    Route::get('/editprofile', 'edit')->name('editprofile');
+});
+
+Route::post('/updateprofile', [ProfileController::class, 'update'])->name('updateprofile');
 
 // Cards
 Route::controller(CardController::class)->group(function () {

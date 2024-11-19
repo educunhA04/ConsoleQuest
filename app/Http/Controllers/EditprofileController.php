@@ -1,19 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
-class ProfileController extends Controller
+class EditprofileController extends Controller
 {
-    public function profile()
-    {
-        return view('Profile');
-    }
-
-    public function edit()
+    public function show()
     {
         return view('Editprofile');
     }
@@ -25,9 +19,7 @@ class ProfileController extends Controller
             'name' => 'required|string|max:50',
             'username' => 'required|string|max:50|unique:User,username,' . Auth::id(),
             'email' => 'required|string|email|max:75|unique:User,email,' . Auth::id(),
-            'password' => 'nullable|string|min:8|confirmed|regex:/[A-Z]/|regex:/[0-9]/',
-            //ainda precisa do aviso de senha incorreta
-            //ainda nao testei se sobrepoe usernames mas em principio nao
+            'password' => 'nullable|string|min:8confirmed|regex:/[A-Z]/|regex:/[0-9]/',
         ]);
 
         // Update the user's information
@@ -46,3 +38,5 @@ class ProfileController extends Controller
         return redirect('/profile')->with('success', 'Profile updated successfully!');
     }
 }
+
+
