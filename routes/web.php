@@ -27,6 +27,10 @@ use App\Http\Controllers\WishlistController;
 // Home
 Route::redirect('/', '/home');
 
+Route::get('/product', function () {
+    return view("Product");
+});
+
 Route::controller(HomeController::class)->group(function () {
     Route::get('/home', 'show')->name('home');
 });
