@@ -34,7 +34,7 @@ DROP TYPE IF EXISTS order_status CASCADE;
 -----------------------------------------
 DROP FUNCTION IF EXISTS product_search_update CASCADE;
 DROP FUNCTION IF EXISTS enforce_order_cancellation CASCADE;
-DROP FUNCTION IF EXISTS prevent_admin_purchase CASCADE;
+--DROP FUNCTION IF EXISTS prevent_admin_purchase CASCADE;
 DROP FUNCTION IF EXISTS verify_purchase_for_review CASCADE;
 DROP FUNCTION IF EXISTS validate_promotion_release_date CASCADE;
 DROP FUNCTION IF EXISTS restrict_out_of_stock_cart_addition CASCADE;
@@ -108,6 +108,7 @@ CREATE TABLE Shopping_Cart (
     id SERIAL  PRIMARY KEY,
     user_id INT NOT NULL ,
     product_id INT NOT NULL ,
+    quantity INT NOT NULL,
     UNIQUE (user_id, product_id),
     FOREIGN KEY (user_id) REFERENCES "User"(id) ON UPDATE CASCADE,
     FOREIGN KEY (product_id) REFERENCES Product(id) ON UPDATE CASCADE
@@ -272,18 +273,18 @@ BEFORE UPDATE ON "Order"
 FOR EACH ROW EXECUTE FUNCTION enforce_order_cancellation();
 
 -- trigger02
-CREATE OR REPLACE FUNCTION prevent_admin_purchase() RETURNS TRIGGER AS $$
-BEGIN
-    IF (SELECT is_admin FROM Admin WHERE id = NEW.admin_id) THEN
-        RAISE EXCEPTION 'Administrators cannot purchase products';
-    END IF;
-    RETURN NEW;
-END
-$$ LANGUAGE plpgsql;
-DROP TRIGGER IF EXISTS trg_admin_purchase_prevention ON Shopping_Cart;
-CREATE TRIGGER trg_admin_purchase_prevention
-BEFORE INSERT ON Shopping_Cart
-FOR EACH ROW EXECUTE PROCEDURE prevent_admin_purchase();                           
+--CREATE OR REPLACE FUNCTION prevent_admin_purchase() RETURNS TRIGGER AS $$
+--BEGIN
+--    IF (SELECT is_admin FROM Admin WHERE id = NEW.admin_id) THEN
+--        RAISE EXCEPTION 'Administrators cannot purchase products';
+--    END IF;
+--    RETURN NEW;
+--END
+--$$ LANGUAGE plpgsql;
+--DROP TRIGGER IF EXISTS trg_admin_purchase_prevention ON Shopping_Cart;
+--CREATE TRIGGER trg_admin_purchase_prevention
+--BEFORE INSERT ON Shopping_Cart
+--FOR EACH ROW EXECUTE PROCEDURE prevent_admin_purchase();                           
 
 
 -- trigger03
@@ -365,19 +366,19 @@ FOR EACH ROW EXECUTE PROCEDURE enforce_own_wishlist();
 
 
 -- trigger08
-CREATE OR REPLACE FUNCTION enforce_own_shopping_cart() RETURNS TRIGGER AS $$
-BEGIN
-    IF NEW.user_id != current_setting('app.current_user_id')::int THEN
-        RAISE EXCEPTION 'A user can only add products to their own shopping cart';
-    END IF;
-    RETURN NEW;
-END
-$$ LANGUAGE plpgsql;
+--CREATE OR REPLACE FUNCTION enforce_own_shopping_cart() RETURNS TRIGGER AS $$
+--BEGIN
+--    IF NEW.user_id != current_user_id() THEN
+--        RAISE EXCEPTION 'A user can only add products to their own shopping cart';
+--    END IF;
+--    RETURN NEW;
+--END
+--$$ LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS trg_own_shopping_cart ON Shopping_Cart;
-CREATE TRIGGER trg_own_shopping_cart
-BEFORE INSERT ON Shopping_Cart
-FOR EACH ROW EXECUTE PROCEDURE enforce_own_shopping_cart();
+--DROP TRIGGER IF EXISTS trg_own_shopping_cart ON Shopping_Cart;
+--CREATE TRIGGER trg_own_shopping_cart
+--BEFORE INSERT ON Shopping_Cart
+--FOR EACH ROW EXECUTE PROCEDURE enforce_own_shopping_cart();
 
 -- trigger09
 CREATE OR REPLACE FUNCTION enforce_own_review_modification() RETURNS TRIGGER AS $$
