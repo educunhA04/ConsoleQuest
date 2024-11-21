@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Iluminate\Database\Eloquent\Relations\BelongsTo;
-
+use Illuminate\Database\Eloquent\Relations\BelongsTo;  // Corrected the typo here
+use App\Models\Category;
 
 class Product extends Model
 {
-
     public $timestamps = false;
 
     use HasFactory;

@@ -35,7 +35,7 @@ Route::redirect('/', '/home');
 // Product routes
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
-
+Route::get('/home/{id}', [ProductPageController::class, 'show'])->name('product.show');
 
 
 Route::controller(HomeController::class)->group(function () {
