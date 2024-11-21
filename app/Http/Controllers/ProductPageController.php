@@ -3,22 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Product; // Import the Product model
 use Illuminate\View\View;
-use Illuminate\Support\Facades\Auth;
-
 
 class ProductPageController extends Controller
 {
-    /**
-     * Show the application dashboard.
-     *
-     * @return View
-     */
-
-    public function show()
+    public function show($id): View
     {
-        return view('pages/product'); 
-    }
+        // Fetch the product by ID or fail with a 404 error if not found
+        $product = Product::findOrFail($id);
 
+        // Return the 'product' view with the product data
+        return view('pages.product', compact('product'));
+    }
 }
+
