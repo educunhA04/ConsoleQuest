@@ -17,7 +17,7 @@ class Category extends Model
     protected $primaryKey = 'id';
 
     // Set the table name if it's not the default 'categories'
-    protected $table = Category;
+    protected $table = 'category';
 
     /**
      * The attributes that are mass assignable.
