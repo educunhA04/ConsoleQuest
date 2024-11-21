@@ -11,6 +11,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ProductPageController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EditprofileController;
 
