@@ -1,25 +1,13 @@
+@extends('layouts.app')
 <head>
     <title>Console Quest - {{ $product->name }}</title> <!-- Use the product name for the title -->
     <link rel="stylesheet" href="{{ asset('css/pages/product.css') }}">
 </head>
 <body>
-
-    <div class="navbar">
-        <div class="logo">Console Quest</div>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Controllers</a>
-            <a href="#">Games</a>
-            <a href="#">Consoles</a>
-        </div>
-        <div class="user-actions">
-            <a href="#">❤️</a>
-            <a href="#">🛒</a>
-            <a href="#">Sign In | Sign Up</a>
-        </div>
+    @section('content')
+    <div class="breadcrumb">
+        Home / {{ $product->category->type ?? 'Categoria Desconhecida' }} / {{ $product->name }} <!-- Dynamically show category and product name -->
     </div>
-
-
     <div class="product-page">
         <div class="product-info">
             <h1 class="product-name">{{ $product->name }}</h1> <!-- Product name -->
@@ -56,5 +44,6 @@
     <div class="footer">
         About Us | Terms and Conditions | FAQs
     </div>
+    @endsection
 
 </body>
