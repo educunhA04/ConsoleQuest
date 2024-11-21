@@ -41,10 +41,12 @@ Route::get('/home/{id}', [ProductPageController::class, 'show'])->name('product.
 Route::controller(HomeController::class)->group(function () {
     Route::get('/home', 'show')->name('home');
 });
-
+//Shopping Cart
 Route::controller(ShoppingCartController::class)->group(function () {
     Route::get('/shoppingcart', 'show')->name('shoppingcart');
 });
+Route::post('/cart/add', [ShoppingCartController::class, 'add'])->name('cart.add');
+
 Route::controller(WishlistController::class)->group(function () {
     Route::get('/wishlist', 'show')->name('wishlist');
 

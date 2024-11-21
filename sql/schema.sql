@@ -108,6 +108,7 @@ CREATE TABLE Shopping_Cart (
     id SERIAL  PRIMARY KEY,
     user_id INT NOT NULL ,
     product_id INT NOT NULL ,
+    quantity INT NOT NULL,
     UNIQUE (user_id, product_id),
     FOREIGN KEY (user_id) REFERENCES "User"(id) ON UPDATE CASCADE,
     FOREIGN KEY (product_id) REFERENCES Product(id) ON UPDATE CASCADE
