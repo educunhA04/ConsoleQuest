@@ -26,7 +26,7 @@
             <div class="rating">
                 ★★★★☆ <!-- You can replace this with dynamic ratings if needed -->
             </div>
-            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="product-image"> <!-- Product image -->
+            <img src="{{ $product->image }}"  alt="{{ $product->name }}" class="product-image"> <!-- Product image -->
         </div>
 
         <div class="product-details">
