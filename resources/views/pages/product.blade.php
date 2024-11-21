@@ -1,5 +1,5 @@
 <head>
-    <title>Console Quest - Product Page</title>
+    <title>Console Quest - {{ $product->name }}</title> <!-- Use the product name for the title -->
     <link rel="stylesheet" href="{{ asset('css/pages/product.css') }}">
 </head>
 <body>
@@ -19,23 +19,20 @@
         </div>
     </div>
 
-    <div class="breadcrumb">
-        Home / Controllers / Lorem ipsum
-    </div>
 
     <div class="product-page">
         <div class="product-info">
-            <h1 class="product-name">Lorem ipsum dolor sit amet</h1>
+            <h1 class="product-name">{{ $product->name }}</h1> <!-- Product name -->
             <div class="rating">
-                ★★★★☆
+                ★★★★☆ <!-- You can replace this with dynamic ratings if needed -->
             </div>
-            <img src="placeholder.jpg" alt="Product Image" class="product-image">
+            <img src="{{ $product->image }}"  alt="{{ $product->name }}" class="product-image"> <!-- Product image -->
         </div>
 
         <div class="product-details">
             <span class="wishlist-icon">♡</span>
-            <div class="price">33.00 €</div>
-            <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In hac sectione, delineatur structurarum situs webis, demonstrans principales paginas et relationes inter eas.</p>
+            <div class="price">{{ number_format($product->price, 2) }} €</div> <!-- Product price -->
+            <p class="description">{{ $product->description }}</p> <!-- Product description -->
             <button class="add-to-cart-btn">ADICIONAR AO CARRINHO</button>
         </div>
         

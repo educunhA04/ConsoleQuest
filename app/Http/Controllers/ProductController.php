@@ -20,11 +20,16 @@ class ProductController extends Controller
         // Check if the current user is authorized to view the product
         $this->authorize('view', $product);
 
+        return view('product.show', compact('product')); // Return the view
+        /*
         // Return the product details to the 'products.show' view
         return view('products.show', [
             'product' => $product
         ]);
+        */
     }
+
+ 
 
     /**
      * Display a listing of all products.
