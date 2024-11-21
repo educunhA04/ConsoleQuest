@@ -31,6 +31,8 @@ use App\Http\Controllers\EditprofileController;
 
 // Home
 Route::redirect('/', '/home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::post('/home', [HomeController::class, 'index']);
 
 
 // Product routes
