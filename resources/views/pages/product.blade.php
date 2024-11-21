@@ -41,9 +41,6 @@
         </div>
     </div>
 
-    <div class="footer">
-        About Us | Terms and Conditions | FAQs
-    </div>
     @endsection
 
 </body>
