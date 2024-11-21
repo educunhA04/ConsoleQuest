@@ -6,7 +6,7 @@
     border-radius: 8px;
     padding: 5px 10px;
     flex: 1;
-    margin-right: 20px;
+    margin: 0 20px;
     max-width: 50%;
 }
 
@@ -31,6 +31,7 @@
 .search-container button:hover {
     background-color: #002244;
 }
+
 
 /* Responsividade */
 @media (max-width: 768px) {

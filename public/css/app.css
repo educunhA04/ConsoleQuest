@@ -3,25 +3,25 @@
 
 body {
     background-color: #ffffff;
-    color: #003366; /* Azul escuro */
+    color: #003366; /* Dark Blue */
 }
 
-/* Header Layout */
+/* Main Header */
 .main-header {
   background-color: #003366;
   color: white;
-  padding: 15px 30px;
+  padding: 0.9rem 1.8rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1);
 }
 
 .header-content {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 /* Logo */
@@ -30,47 +30,70 @@ body {
   text-decoration: none;
   font-size: 1.8rem;
   font-weight: bold;
-  margin-right: 20px;
 }
 
-/* Navigation */
-.header-nav a {
+
+/* Navigation Bar */
+.main-nav {
+  background-color: #5274a2; /* Azul escuro */
   color: white;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: bold;
-  margin: 0 10px;
-  transition: color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.6rem 0;
+  box-shadow: 0 0.1rem 0.3rem #5274a2;
 }
 
-.header-nav a:hover {
-  color: #d3edc3;
+.main-nav a {
+  color:white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.main-nav a:hover {
+  color: #94b9f1;
+}
+
+.main-nav a:not(:last-child)::after {
+  content: "|"; 
+  color: white; /* Cor do separador */
+  margin-left: 2rem;
+  margin-right: 2rem;
+  font-size: 1.2rem;
+
 }
 
 /* User Actions */
 .user-actions .icon {
-  font-size: 1.2rem;
-  color: white;
-  margin: 0 5px;
-  transition: color 0.3s ease;
+    font-size: 1.2rem;
+    color: white;
+    margin: 0 0.3rem;
+    transition: color 0.3s ease;
 }
 
 .user-actions .icon:hover {
-  color: #d3edc3;
+    color: #94b9f1;
 }
 
 /* General Cards Layout */
 #cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin: 1.24rem;
 }
 
 #cards article.card {
     display: flex;
     flex-direction: column;
-    background-color: #d3edc3;
+    background-color: #94b9f1;
     padding: 1em;
     margin: 1em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #cards article.card header {
@@ -96,29 +119,29 @@ body {
 
 /* Links, Forms, and Buttons */
 a {
-    color: #9b4dca;
+    color: #ffffff;
 }
 
 input[type=text]:focus,
 input[type=email]:focus,
 input[type=password]:focus {
-    border-color: #003366;;
+    border-color: #003366;
 }
 
-/* Footer Layout */
+/* Footer */
 footer {
   background-color: #003366;
   color: white;
-  padding: 20px 30px;
+  padding: 1.2rem 1.8rem;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 1.2rem;
 }
 
 .footer-links {
   display: flex;
   justify-content: center;
-  gap: 30px;
-  margin-bottom: 10px;
+  gap: 1.8rem;
+  margin-bottom: 0.6rem;
 }
 
 .footer-links a {
@@ -136,7 +159,6 @@ footer p {
   margin: 0;
   font-size: 0.9rem;
 }
-
 
 /* Responsiveness */
 @media (max-width: 70em) {

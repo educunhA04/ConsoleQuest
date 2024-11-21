@@ -32,7 +32,7 @@
                 <!-- Left Section (Logo) -->
                 <h1><a href="{{ url('/home') }}">Console Quest</a></h1>
 
-                <!-- Center Section (Search Bar) -->
+                <!-- Search Bar -->
                 <div class="search-container">
                     <form id="searchForm" method="POST" action="{{ url('/home') }}">
                         @csrf
@@ -41,14 +41,7 @@
                     </form>
                 </div>
 
-                <!-- Right Section (Navigation and User Actions) -->
-                <nav class="header-nav">
-                    <a href="{{ url('/home') }}">Home</a>
-                    <a href="{{ url('/controllers') }}">Controllers</a>
-                    <a href="{{ url('/games') }}">Games</a>
-                    <a href="{{ url('/consoles') }}">Consoles</a>
-                </nav>
-
+                <!-- Right Section (User Actions) -->
                 <div class="user-actions">
                     <a href="{{ url('/wishlist') }}" class="icon"><i class="fas fa-heart"></i></a>
                     <a href="{{ url('/shoppingcart') }}" class="icon"><i class="fas fa-shopping-cart"></i></a>
@@ -61,6 +54,14 @@
                 </div>
             </div>
         </header>
+
+        <!-- Navigation Bar -->
+        <nav class="main-nav">
+            <a href="{{ url('/home') }}">Home</a>
+            <a href="{{ url('/controllers') }}">Controllers</a>
+            <a href="{{ url('/games') }}">Games</a>
+            <a href="{{ url('/consoles') }}">Consoles</a>
+        </nav>
 
         <!-- Main Content -->
         <main>
