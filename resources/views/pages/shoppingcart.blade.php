@@ -1,10 +1,9 @@
 @extends('layouts.app')
 @section('content')
 
-
 <div class="checkout-page">
     <header class="checkout-header">
-    <link rel="stylesheet" href="{{ asset('css/pages/shoppingcart.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/pages/shoppingcart.css') }}">
         <nav class="progress-bar">
             <span class="progress-step active">Resumo</span>
             <span class="progress-step">Identificação</span>
@@ -16,20 +15,20 @@
     <div class="cart-section">
         <h1>As tuas compras</h1>
         <p>Confirma os produtos e quantidades da tua encomenda</p>
-        <div class="product-row">
+        <div class="product-row" data-product-id="1">
             <div class="product-details">
                 <img src="placeholder.jpg" alt="Lorem Ipsum" class="product-image">
                 <div class="product-info">
                     <div class="product-name">Lorem Ipsum</div>
                     <div class="product-attributes">
-                        <span>Ref: #000000/span><br>
+                        <span>Ref: #000000</span><br>
                     </div>
                 </div>
             </div>
             <div class="product-actions">
-                <button class="btn-quantity">-</button>
-                <input type="number" value="1" class="quantity-input">
-                <button class="btn-quantity">+</button>
+                <button class="btn-quantity btn-decrease">-</button>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-1">
+                <button class="btn-quantity btn-increase">+</button>
                 <div class="product-links">
                     <a href="#">Remover</a> |
                     <a href="#">Guardar nos favoritos</a> |
@@ -64,6 +63,7 @@
         <button class="btn-continue">CONTINUAR</button>
     </div>
 </div>
+
 
 
 @endsection

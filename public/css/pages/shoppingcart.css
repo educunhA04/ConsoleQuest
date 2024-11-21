@@ -112,7 +112,7 @@ body {
     padding: 5px 10px;
     background-color: #ddd;
     border: none;
-    border-radius: 5px;
+    border-radius: 0;
     cursor: pointer;
 }
 
@@ -154,7 +154,7 @@ body {
     flex: 1;
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 0;
 }
 
 .promo-input .btn-apply {
@@ -162,7 +162,7 @@ body {
     background-color: #00254d;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 0;
     cursor: pointer;
 }
 
@@ -194,7 +194,7 @@ body {
     background-color: #00254d;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 0;
     font-size: 16px;
     cursor: pointer;
 }
