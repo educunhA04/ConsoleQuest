@@ -69,26 +69,37 @@
     background-color: #ff0000; /* Vermelho para "Excluído de Promoção" */
 }
 
-/* Ícones */
+/* Icon container styling */
 .icon-container {
     position: absolute;
     top: 10px;
     right: 10px;
     display: flex;
-    gap: 10px;
+    gap: 5px; /* Space between icons */
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease; /* Smooth fade-in effect */
+}
+
+.product-container:hover .icon-container {
+    opacity: 1; /* Icons become visible */
+    cursor: pointer;
 }
 
 .icon {
-    font-size: 18px;
-    color: #aaa;
+    font-size: 18px; /* Adjust icon size */
+    color: #fff; /* Icon color */
+    background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background for better visibility */
+    border-radius: 5%; /* Circular icon background */
+    padding: 5px;
     cursor: pointer;
-    transition: color 0.3s ease, transform 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
+/* Hover effect for icons */
 .icon:hover {
-    color: #333; /* Mais escuro no hover */
-    transform: scale(1.2);
+    transform: scale(1.2); /* Slightly enlarge icons */
 }
+
 
 /* Responsividade */
 @media (max-width: 768px) {
