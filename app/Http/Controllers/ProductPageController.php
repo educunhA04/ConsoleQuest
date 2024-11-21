@@ -8,13 +8,16 @@ use Illuminate\View\View;
 
 class ProductPageController extends Controller
 {
+    
     public function show($id): View
     {
         // Fetch the product by ID or fail with a 404 error if not found
-        $product = Product::findOrFail($id);
+        $product = Product::with('category')->findOrFail($id);
 
-        // Return the 'product' view with the product data
+        // Return the 'product' view with the product and its category data
         return view('pages.product', compact('product'));
     }
+
+
 }
 
