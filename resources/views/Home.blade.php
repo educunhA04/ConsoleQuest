@@ -8,7 +8,6 @@
                 <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
                     @csrf
                     <input type="hidden" name="item_id" value="{{ $product->id }}">
-                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                     <input type="hidden" name="quantity" value="1"> 
                     <button type="submit" class="icon cart-icon" aria-label="Add to cart">
                         &#x1F6D2; 
