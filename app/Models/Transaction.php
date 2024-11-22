@@ -13,9 +13,11 @@ class Transaction extends Model
     public $timestamps = false; 
 
     protected $fillable = [
+        'user_id',
+        'order_id',
         'code',
         'price',
-        'NIF',
+        'nif',
         'credit_card_number',
         'credit_card_exp_date',
         'credit_card_cvv',

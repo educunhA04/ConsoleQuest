@@ -5,33 +5,36 @@
 
 <div class="checkout-container">
     <h2>Finalizar Compra</h2>
-    <form method="POST" action="{{ route('checkout.process') }}">
+    <form method="POST" action="{{ route('checkout.finalize') }}">
         @csrf
 
-        <!-- Informações do NIF -->
+        <!-- Campo NIF -->
         <div class="form-group">
             <label for="NIF">NIF:</label>
-            <input type="text" name="NIF" id="NIF" required class="form-control">
+            <input type="text" name="NIF" id="NIF" required>
         </div>
 
         <!-- Informações do Cartão de Crédito -->
         <div class="form-group">
             <label for="credit_card_number">Número do Cartão:</label>
-            <input type="text" name="credit_card_number" id="credit_card_number" required class="form-control">
+            <input type="text" name="credit_card_number" id="credit_card_number" required>
         </div>
 
         <div class="form-group">
             <label for="credit_card_exp_date">Data de Validade:</label>
-            <input type="date" name="credit_card_exp_date" id="credit_card_exp_date" required class="form-control">
+            <input type="date" name="credit_card_exp_date" id="credit_card_exp_date" required>
         </div>
 
         <div class="form-group">
             <label for="credit_card_cvv">CVV:</label>
-            <input type="text" name="credit_card_cvv" id="credit_card_cvv" required class="form-control">
-        </div>
+            <input type="text" name="credit_card_cvv" id="credit_card_cvv" required>
+         </div>
+        
 
-       
+        <!-- Botão para Finalizar -->
+        <button type="submit" class="btn btn-primary">Finalizar Compra</button>
     </form>
+
     <!-- Itens no Checkout -->
     <div class="checkout-items">
         @foreach ($cartItems as $cartItem)

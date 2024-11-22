@@ -22,9 +22,9 @@ class Order extends Model
     ];
 
     // Definição de constantes para status do pedido
-    const STATUS_PROCESSING = 'Processing';
-    const STATUS_SHIPPED = 'Shipped';
-    const STATUS_DELIVERED = 'Delivered';
+    const STATUS_PROCESSING = 'processing';
+    const STATUS_SHIPPED = 'shipped';
+    const STATUS_DELIVERED = 'delivered';
 
     /**
      * Relacionamento com Transaction
