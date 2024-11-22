@@ -52,10 +52,13 @@ Route::controller(ShoppingCartController::class)->group(function () {
 });
 Route::post('/cart/add', [ShoppingCartController::class, 'add'])->name('cart.add');
 
+//Wishlist
 Route::controller(WishlistController::class)->group(function () {
     Route::get('/wishlist', 'show')->name('wishlist');
 
 });
+Route::post('/wishlist/add', [WishlistController::class, 'add'])->name('wishlist.add');
+
 Route::controller(ProductPageController::class)->group(function () {
     Route::get('/product', 'show')->name('product');
 });
