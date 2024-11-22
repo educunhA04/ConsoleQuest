@@ -49,8 +49,15 @@ Route::get('/home/{id}', [ProductPageController::class, 'show'])->name('product.
 //Shopping Cart
 Route::controller(ShoppingCartController::class)->group(function () {
     Route::get('/shoppingcart', 'show')->name('shoppingcart');
+    Route::post('/cart/add', 'add')->name('cart.add');
+    Route::post('/cart/update', 'update')->name('cart.update');
+    Route::post('/cart/remove', 'remove')->name('cart.remove');
+    Route::post('/cart/clear', 'clear')->name('cart.clear');
+    Route::post('/cart/checkout', 'checkout')->name('cart.checkout');
+    Route::get('/cart/checkout', 'checkout')->name('cart.checkout');
+    Route::post('/cart/checkout/finalize', 'finalize')->name('checkout.finalize');
 });
-Route::post('/cart/add', [ShoppingCartController::class, 'add'])->name('cart.add');
+
 
 //Wishlist
 Route::controller(WishlistController::class)->group(function () {

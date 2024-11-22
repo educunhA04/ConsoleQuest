@@ -1,145 +1,171 @@
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .navbar {
-            background-color: #1c3d72;
-            color: white;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
 
-        .breadcrumb {
-            padding: 10px 20px;
-            font-size: 14px;
-            color: #555;
-            background-color: #e6e6e6;
-        }
+.navbar {
+    background-color: #1c3d72;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .product-page {
-            display: flex;
-            justify-content: space-around;
-            padding: 20px;
-            background-color: white;
-            margin: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
 
-        .product-info {
-            flex: 2;
-            padding-right: 20px;
-        }
+.breadcrumb {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #555;
+    background-color: #e6e6e6;
+}
 
-        .product-name {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
+/* Ajustes na página de produtos para usar Grid */
+.product-page {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Colunas flexíveis */
+    gap: 20px; /* Espaçamento entre os produtos */
+    padding: 20px;
+    background-color: white;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 
-        .rating {
-            margin-bottom: 20px;
-        }
+/* Contêiner de informações do produto */
+.product-info {
+    flex: 2;
+    padding-right: 20px;
+}
 
-        .rating span {
-            font-size: 20px;
-            color: #f39c12;
-        }
+/* Nome do produto */
+.product-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 
-        .product-image {
-            width: 100%;
-            max-width: 300px;
-            height: auto;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
+.rating {
+    margin-bottom: 20px;
+}
 
-        .product-details {
-            flex: 1;
-            border-left: 1px solid #ddd;
-            padding-left: 20px;
-        }
+.rating span {
+    font-size: 20px;
+    color: #f39c12;
+}
 
-        .price {
-            font-size: 28px;
-            font-weight: bold;
-            color: #1c3d72;
-            margin-bottom: 10px;
-        }
+/* Imagem do produto com altura fixada */
+.product-image {
+    width: 100%;
+    max-width: 300px;
+    height: 200px; /* Altura fixa */
+    object-fit: cover; /* Ajusta a imagem proporcionalmente */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
 
-        .description {
-            margin-bottom: 20px;
-            font-size: 14px;
-            color: #555;
-        }
+/* Detalhes do produto */
+.product-details {
+    flex: 1;
+    border-left: 1px solid #ddd;
+    padding-left: 20px;
+}
 
-        .wishlist-icon {
-            font-size: 20px;
-            color: #1c3d72;
-            float: right;
-            cursor: pointer;
-        }
+/* Preço do produto */
+.price {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1c3d72;
+    margin-bottom: 10px;
+}
 
-        .add-to-cart-btn {
-            display: inline-block;
-            background-color: #1c3d72;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+/* Descrição do produto */
+.description {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #555;
+}
 
-        .add-to-cart-btn:hover {
-            background-color: #145292;
-        }
+/* Ícone de adicionar à lista de desejos */
+.wishlist-icon {
+    font-size: 20px;
+    color: #1c3d72;
+    float: right;
+    cursor: pointer;
+}
 
-        .reviews {
-            margin-top: 20px;
-        }
+/* Botão de adicionar ao carrinho */
+.add-to-cart-btn {
+    display: inline-block;
+    background-color: #1c3d72;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-        .reviews h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
+.add-to-cart-btn:hover {
+    background-color: #145292;
+}
 
-        .review {
-            border-top: 1px solid #ddd;
-            padding-top: 10px;
-            margin-top: 10px;
-        }
+/* Revisões do produto */
+.reviews {
+    margin-top: 20px;
+}
 
-        .review p {
-            font-size: 14px;
-            color: #555;
-        }
+.reviews h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
 
-        .footer {
-            background-color: #f1f1f1;
-            padding: 20px;
-            text-align: center;
-            font-size: 14px;
-            color: #777;
-        }
+.review {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.review p {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Rodapé */
+.footer {
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .product-page {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas para tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .product-page {
+        grid-template-columns: 1fr; /* 1 coluna para dispositivos móveis */
+    }
+}
