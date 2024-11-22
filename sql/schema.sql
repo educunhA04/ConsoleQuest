@@ -350,19 +350,19 @@ BEFORE INSERT ON Review
 FOR EACH ROW EXECUTE PROCEDURE enforce_single_review_per_product();
 
 -- trigger07
-CREATE OR REPLACE FUNCTION enforce_own_wishlist() RETURNS TRIGGER AS $$
-BEGIN
-    IF NEW.user_id != current_setting('app.current_user_id')::int THEN
-        RAISE EXCEPTION 'A user can only add products to their own wishlist';
-    END IF;
-    RETURN NEW;
-END
-$$ LANGUAGE plpgsql;
+--CREATE OR REPLACE FUNCTION enforce_own_wishlist() RETURNS TRIGGER AS $$
+--BEGIN
+--    IF NEW.user_id != current_setting('app.current_user_id')::int THEN
+--        RAISE EXCEPTION 'A user can only add products to their own wishlist';
+--    END IF;
+--    RETURN NEW;
+--END
+--$$ LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS trg_own_wishlist ON Wishlist;
-CREATE TRIGGER trg_own_wishlist
-BEFORE INSERT ON Wishlist
-FOR EACH ROW EXECUTE PROCEDURE enforce_own_wishlist();
+--DROP TRIGGER IF EXISTS trg_own_wishlist ON Wishlist;
+--CREATE TRIGGER trg_own_wishlist
+--BEFORE INSERT ON Wishlist
+--FOR EACH ROW EXECUTE PROCEDURE enforce_own_wishlist();
 
 
 -- trigger08

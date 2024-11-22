@@ -9,7 +9,13 @@
         @foreach ($products as $product)
         <div class="product-container">
             <div class="icon-container">
-                <span class="icon heart-icon">&#x2661;</span>
+                <form action="{{ route('wishlist.add') }}" method="POST" class="add-to-wishlist-form">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <button type="submit" class="icon hear-icon" aria-label="Add to wishlist">
+                        &#x2661;
+                    </button>
+                </form>
                 <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
