@@ -14,6 +14,7 @@ use App\Http\Controllers\ProductPageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EditprofileController;
+use App\Http\Controllers\CheckoutController;
 
 
 /*
@@ -110,4 +111,9 @@ Route::controller(LoginController::class)->group(function () {
 Route::controller(RegisterController::class)->group(function () {
     Route::get('/register', 'showRegistrationForm')->name('register');
     Route::post('/register', 'register');
+});
+
+//checkout controller
+Route::controller(CheckoutController::class)->group(function () {
+    Route::post('/checkout', 'checkout')->name('checkout.process');
 });
