@@ -57,10 +57,10 @@
 
         <!-- Navigation Bar -->
         <nav class="main-nav">
-            <a href="{{ url('/home') }}">Home</a>
-            <a href="{{ url('/controllers') }}">Controllers</a>
-            <a href="{{ url('/games') }}">Games</a>
-            <a href="{{ url('/consoles') }}">Consoles</a>
+            <a href="{{ route('home') }}">Home</a>
+            <a href="{{ route('home.controllers') }}">Controllers</a>
+            <a href="{{ route('home.games') }}">Games</a>
+            <a href="{{ route('home.consoles') }}">Consoles</a>
         </nav>
 
         <!-- Main Content -->

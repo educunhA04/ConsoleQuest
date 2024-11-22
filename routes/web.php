@@ -33,7 +33,12 @@ use App\Http\Controllers\EditprofileController;
 Route::redirect('/', '/home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/home', [HomeController::class, 'index']);
-
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/home', 'show')->name('home');
+});
+Route::get('/controllers', [HomeController::class, 'showControllers'])->name('home.controllers');
+Route::get('/games', [HomeController::class, 'showGames'])->name('home.games');
+Route::get('/consoles', [HomeController::class, 'showConsoles'])->name('home.consoles');
 
 // Product routes
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
@@ -41,9 +46,6 @@ Route::get('/products/{id}', [ProductController::class, 'show'])->name('products
 Route::get('/home/{id}', [ProductPageController::class, 'show'])->name('product.show');
 
 
-Route::controller(HomeController::class)->group(function () {
-    Route::get('/home', 'show')->name('home');
-});
 //Shopping Cart
 Route::controller(ShoppingCartController::class)->group(function () {
     Route::get('/shoppingcart', 'show')->name('shoppingcart');

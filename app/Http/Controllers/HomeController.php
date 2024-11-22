@@ -18,6 +18,23 @@ class HomeController extends Controller
 
         return view('Home', ['products' => $products]);
     }
+    public function showControllers(): View
+    {
+        $products = Product::where('category_id', 3)->orderBy('id')->get();
+        return view('Home', ['products' => $products]);
+    }
+
+    public function showGames(): View
+    {
+        $products = Product::where('category_id', 2)->orderBy('id')->get();
+        return view('Home', ['products' => $products]);
+    }
+
+    public function showConsoles(): View
+    {
+        $products = Product::where('category_id', 1)->orderBy('id')->get();
+        return view('Home', ['products' => $products]);
+    }
 
     public function index(Request $request)
     {
