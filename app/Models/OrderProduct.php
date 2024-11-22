@@ -11,7 +11,7 @@ class OrderProduct extends Model
 
     use HasFactory;
 
-    protected $table = 'order_products'; // Nome da tabela
+    protected $table = 'order_product'; // Nome da tabela
     protected $primaryKey = 'id'; // Chave primária
     public $timestamps = true; // Para created_at e updated_at
 

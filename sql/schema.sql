@@ -142,6 +142,7 @@ CREATE TABLE Order_Product (
     id  SERIAL PRIMARY KEY,
     order_id INT NOT NULL ,
     product_id INT NOT NULL ,
+    quantity INT NOT NULL,
     UNIQUE (order_id, product_id),
     FOREIGN KEY (order_id) REFERENCES "Order"(id) ON UPDATE CASCADE,
     FOREIGN KEY (product_id) REFERENCES Product(id) ON UPDATE CASCADE

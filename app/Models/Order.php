@@ -11,16 +11,14 @@ class Order extends Model
 
     use HasFactory;
 
-    protected $table = 'orders'; // Nome da tabela
-    protected $primaryKey = 'id'; // Chave primária
-    public $timestamps = true; // Para created_at e updated_at
+    protected $table = 'Order'; // Nome da tabela
+    public $timestamps = false; // Para created_at e updated_at
 
     protected $fillable = [
         'tracking_number',
         'status',
         'estimated_delivery_date',
         'buy_date',
-        'transaction_id',
     ];
 
     // Definição de constantes para status do pedido

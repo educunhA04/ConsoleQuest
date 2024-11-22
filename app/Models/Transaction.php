@@ -9,9 +9,8 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    protected $table = 'transactions'; // Nome da tabela
-    protected $primaryKey = 'id'; // Chave primária
-    public $timestamps = true; // Para created_at e updated_at
+    protected $table = 'transaction'; 
+    public $timestamps = false; 
 
     protected $fillable = [
         'code',
