@@ -456,3 +456,5 @@ INSERT INTO Product (id, category_id, name, image, description, quantity, price,
     (4, 2, 'League of Legnds', '/dbimages/LOL.jpeg', 'Virgin game', 10, 9.99, 0),
     (5, 3, 'DualSense Controller', '/dbimages/dualsense.jpg', 'PS5 Wireless Controller', 200, 69.99, 15);
 
+INSERT INTO Admin (id, email, password) VALUES
+    (1, 'admin@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W');  -- Ensure Admin table structure includes necessary fields
