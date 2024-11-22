@@ -36,10 +36,11 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/home', [HomeController::class, 'index']);
 Route::controller(HomeController::class)->group(function () {
     Route::get('/home', 'show')->name('home');
+    Route::get('/controllers', [HomeController::class, 'showControllers'])->name('home.controllers');
+    Route::get('/games', [HomeController::class, 'showGames'])->name('home.games');
+    Route::get('/consoles', [HomeController::class, 'showConsoles'])->name('home.consoles');
 });
-Route::get('/controllers', [HomeController::class, 'showControllers'])->name('home.controllers');
-Route::get('/games', [HomeController::class, 'showGames'])->name('home.games');
-Route::get('/consoles', [HomeController::class, 'showConsoles'])->name('home.consoles');
+
 
 // Product routes
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
