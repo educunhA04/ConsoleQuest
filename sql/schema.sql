@@ -116,7 +116,7 @@ CREATE TABLE Shopping_Cart (
 
 CREATE TABLE "Order" (
     id  SERIAL  PRIMARY KEY,
-    user_id INT NOT NULL UNIQUE ,
+    user_id INT NOT NULL,
     tracking_number TEXT UNIQUE NOT NULL,
     status order_status NOT NULL,
     buy_date DATE NOT NULL,
@@ -126,11 +126,11 @@ CREATE TABLE "Order" (
 
 CREATE TABLE Transaction (
     id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL UNIQUE ,
+    user_id INT NOT NULL,
     order_id INT NOT NULL UNIQUE ,
     code TEXT UNIQUE NOT NULL,
     price NUMERIC(10, 2) NOT NULL CHECK (price >= 0),
-    NIF TEXT NOT NULL,
+    NIF TEXT,
     credit_card_number TEXT NOT NULL,
     credit_card_exp_date DATE NOT NULL,
     credit_card_cvv TEXT NOT NULL,
@@ -306,19 +306,19 @@ BEFORE INSERT ON Review
 FOR EACH ROW EXECUTE FUNCTION verify_purchase_for_review();
 
 -- trigger04
-CREATE OR REPLACE FUNCTION validate_promotion_release_date() RETURNS TRIGGER AS $$
-BEGIN
-    IF NEW.discount_percent > 0 AND NEW.promotion_date > CURRENT_DATE THEN
-        RAISE EXCEPTION 'Promotion release date cannot be in the future';
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
+--CREATE OR REPLACE FUNCTION validate_promotion_release_date() RETURNS TRIGGER AS $$
+--BEGIN
+--    IF NEW.discount_percent > 0 AND NEW.promotion_date > CURRENT_DATE THEN
+--        RAISE EXCEPTION 'Promotion release date cannot be in the future';
+ --   END IF;
+ --   RETURN NEW;
+--END;
+--$$ LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS trg_validate_promotion_release_date ON Product;
-CREATE TRIGGER trg_validate_promotion_release_date
-BEFORE UPDATE ON Product
-FOR EACH ROW EXECUTE FUNCTION validate_promotion_release_date();
+--DROP TRIGGER IF EXISTS trg_validate_promotion_release_date ON Product;
+--CREATE TRIGGER trg_validate_promotion_release_date
+--BEFORE UPDATE ON Product
+--FOR EACH ROW EXECUTE FUNCTION validate_promotion_release_date();
 
 -- trigger05
 CREATE OR REPLACE FUNCTION restrict_out_of_stock_cart_addition() RETURNS TRIGGER AS $$

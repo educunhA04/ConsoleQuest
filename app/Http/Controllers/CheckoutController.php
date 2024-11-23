@@ -51,47 +51,41 @@ class CheckoutController extends Controller
         $totalPrice = $cartItems->sum(function ($cartItem) {
             return $cartItem->quantity * $cartItem->product->price;
         });
-
-         // Cria a transação com o user_id
-         $order = Order::create([
+        $validated = $request->validate([
+            'NIF' => 'string|max:15',
+            'credit_card_number' => 'required|digits:16',
+            'credit_card_exp_date' => 'required|date|after:today',
+            'credit_card_cvv' => 'required|digits:3',
+        ]);
+    
+        $order = Order::create([
+            'user_id' => $user->id,
             'tracking_number' => uniqid('ORD_'),
             'status' => Order::STATUS_PROCESSING,
             'estimated_delivery_date' => now()->addDays(7),
             'buy_date' => now(),
-            //'transaction_id' => null, // Temporarily set as null
         ]);
     
-        // Create the transaction with the order_id
         $transaction = Transaction::create([
             'user_id' => $user->id,
-            'order_id' => $order->id, // Link the transaction to the order
+            'order_id' => $order->id, 
             'code' => uniqid('TXN_'),
             'price' => $totalPrice,
-            'nif' => $request->input('NIF'), // Optional fields
-            'credit_card_number' => $request->input('credit_card_number'),
-            'credit_card_exp_date' => $request->input('credit_card_exp_date'),
-            'credit_card_cvv' => $request->input('credit_card_cvv'),
+            'nif' => $validated['NIF'],
+            'credit_card_number' => $validated['credit_card_number'], 
+            'credit_card_exp_date' => $validated['credit_card_exp_date'], 
+            'credit_card_cvv' => $validated['credit_card_cvv'], 
         ]);
-    
-        // Update the order with the transaction_id
-        $order->update([
-            'transaction_id' => $transaction->id,
-        ]);
-    
-        
-        // Adicione os produtos à tabela OrderProduct e diminua a quantidade no estoque
+     
         foreach ($cartItems as $cartItem) {
             OrderProduct::create([
                 'order_id' => $order->id,
                 'product_id' => $cartItem->product->id,
                 'quantity' => $cartItem->quantity,
             ]);
-    
-            // Atualize a quantidade do produto no estoque
             $cartItem->product->decrement('quantity', $cartItem->quantity);
         }
     
-        // Limpe o carrinho do usuário
         ShoppingCart::where('user_id', $user->id)->delete();
     
         // Redirecione para uma página de confirmação

@@ -13,7 +13,7 @@ class OrderProduct extends Model
 
     protected $table = 'order_product'; // Nome da tabela
     protected $primaryKey = 'id'; // Chave primária
-    public $timestamps = true; // Para created_at e updated_at
+    public $timestamps = false; // Para created_at e updated_at
 
     protected $fillable = [
         'order_id',

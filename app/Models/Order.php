@@ -15,6 +15,7 @@ class Order extends Model
     public $timestamps = false; // Para created_at e updated_at
 
     protected $fillable = [
+        'user_id',
         'tracking_number',
         'status',
         'estimated_delivery_date',
