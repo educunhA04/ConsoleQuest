@@ -50,7 +50,7 @@
         
 
         <!-- Botão para Finalizar -->
-        <button type="submit" class="btn btn-primary">Finalizar Compra</button>
+        <button type="submit" class="checkout-btn">Finalizar Compra</button>
     </form>
 
     
