@@ -117,7 +117,7 @@ class ShoppingCartController extends Controller
         $cartItems = ShoppingCart::where('user_id', $userId)->get();
 
         if ($cartItems->isEmpty()) {
-            return redirect()->route('shoppingcart')->with('error', 'O seu carrinho está vazio!');
+            return redirect()->route('cart.show')->with('error', 'O seu carrinho está vazio!');
         }
 
         // Redireciona para a página de checkout

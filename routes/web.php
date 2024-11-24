@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\EditprofileController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\ProductPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\WishlistController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +95,11 @@ Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLoginForm')->name('login');
     Route::post('/login', 'authenticate')->name('login.authenticate');
     Route::get('/logout', 'logout')->name('logout');
+});
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('/login', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
+    Route::post('/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
 });
 
 Route::controller(RegisterController::class)->group(function () {
