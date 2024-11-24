@@ -15,6 +15,8 @@ use App\Http\Controllers\ProductPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\AdminController;
+
 
 
 /*
@@ -28,7 +30,7 @@ use App\Http\Controllers\WishlistController;
 
 // Home
 Route::redirect('/', '/home');
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::post('/home', [HomeController::class, 'index'])->name('home');
 Route::controller(HomeController::class)->group(function () {
     Route::get('/home', 'show')->name('home');
     Route::get('/controllers', 'showControllers')->name('home.controllers');
@@ -96,10 +98,15 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('/login', 'authenticate')->name('login.authenticate');
     Route::get('/logout', 'logout')->name('logout');
 });
+//admin
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
     Route::post('/login', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
     Route::post('/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
+});
+Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'show'])->name('dashboard');
+    Route::get('/dashboard', [AdminController::class, 'show'])->name('viewUser');
 });
 
 Route::controller(RegisterController::class)->group(function () {
