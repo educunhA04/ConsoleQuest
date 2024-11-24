@@ -21,11 +21,39 @@ class AdminController extends Controller
         return view('pages.admin/dashboard',['users' => $users]);
     }
 
-    public function viewUser($name)
+    public function viewUser(Request $request): View
     {
-        $user = User::findOrFail();  
+        $user = User::findOrFail($request->input('user_id')); 
+        return view('pages.admin/viewUser', ['user' => $user]);
+    }
+    public function changeUser(Request $request): View
+    {
+        $user = User::findOrFail($request->input('user_id')); 
+        return view('pages.admin/changeUser', ['user' => $user]);
+    }
+    public function update(Request $request)
+    {
+        // Validate the input
+        $validated = $request->validate([
+            'name' => 'required|string|max:50',
+            'username' => 'required|string|max:50|unique:User,username,' . $request->user_id,
+            'email' => 'required|string|email|max:75|unique:User,email,' . $request->user_id,
+            'password' => 'nullable|string|min:8|confirmed|regex:/[A-Z]/|regex:/[0-9]/',
+          
+        ]);
 
-        return view('pages.admin/viewUser', compact('user'));
+        $user = User::findOrFail($request->input('user_id'));
+        $user->name = $validated['name'];
+        $user->username = $validated['username'];
+        $user->email = $validated['email'];
+
+        if (!empty($request->password)) {
+            $user->password = Hash::make($validated['password']);
+        }
+
+        $user->save();
+
+        return redirect('/admin/dashboard')->with('success', 'Profile updated successfully!');
     }
 
    

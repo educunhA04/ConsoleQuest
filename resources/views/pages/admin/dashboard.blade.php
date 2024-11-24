@@ -11,7 +11,13 @@
                     <h3>{{ $user->username }}</h3>
                     <p>Email: {{ $user->email }}</p>
                     <p>Name: {{ $user->name }}</p>
-                    <a href="{{ route('admin.viewUser', $user->username) }}">View Profile</a>
+                    <form action="{{ route('admin.viewUser') }}" method="POST" >
+                        @csrf
+                        <input type="hidden" name="user_id" value="{{ $user->id }}">
+                        <button type="submit" class="button-link">View Profile</button>
+                    </form>
+
+
                 </div>
             @endforeach
         </div>

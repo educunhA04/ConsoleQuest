@@ -1,0 +1,81 @@
+/* General Form Styling */
+.admin-profile-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Input Fields */
+.admin-profile-form label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.admin-profile-form input[type="text"],
+.admin-profile-form input[type="email"],
+.admin-profile-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.admin-profile-form input[type="text"]:focus,
+.admin-profile-form input[type="email"]:focus,
+.admin-profile-form input[type="password"]:focus {
+    outline: none;
+    border-color: #003366;
+    box-shadow: 0 0 5px rgba(0, 102, 204, 0.3);
+}
+
+/* Button Styling */
+.admin-edit-profile .edit-button {
+    background-color: #003366;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.admin-edit-profile .edit-button:hover {
+    background-color: white;
+    color: #003366;
+    border: #003366;
+    border: 2px solid #003366;
+}
+
+/* Adjust the appearance of the form when on small screens */
+@media (max-width: 768px) {
+    .admin-profile-form {
+        padding: 15px;
+    }
+    
+    .admin-profile-form label {
+        font-size: 13px;
+    }
+    
+    .admin-profile-form input[type="text"],
+    .admin-profile-form input[type="email"],
+    .admin-profile-form input[type="password"] {
+        font-size: 14px;
+    }
+    
+    .admin-profile-form .save-button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}

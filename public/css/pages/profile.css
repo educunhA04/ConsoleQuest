@@ -107,7 +107,25 @@
 .profile-buttons .button:first-child {
     background-color: #ff5555; /* Red for logout */
 }
+.admin-profile-form .save-button {
+    background-color: #003366;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
 
+.admin-profile-form .save-button:hover {
+    background-color: white;
+    color: #003366;
+    border: #003366;
+    border: 2px solid #003366;
+}
 @media (max-width: 600px) {
     .profile-buttons {
         flex-direction: column; /* Stack buttons vertically */

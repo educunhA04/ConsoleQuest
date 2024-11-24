@@ -16,6 +16,9 @@
         <link href="{{ url('css/home.css') }}" rel="stylesheet">
         <link href="{{ url('css/search.css') }}" rel="stylesheet">
         <link href="{{ url('css/pages/admindashboard.css') }}" rel="stylesheet">
+        <link href="{{ url('css/pages/adminchangeprofile.css') }}" rel="stylesheet">
+
+
 
 
         <!-- Font Awesome (for icons) -->
