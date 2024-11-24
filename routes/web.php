@@ -106,7 +106,7 @@ Route::prefix('admin')->group(function () {
 });
 Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'show'])->name('dashboard');
-    Route::get('/dashboard', [AdminController::class, 'show'])->name('viewUser');
+    Route::get('/user/{username}', [AdminController::class, 'viewUser'])->name('viewUser');
 });
 
 Route::controller(RegisterController::class)->group(function () {

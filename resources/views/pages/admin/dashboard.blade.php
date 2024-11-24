@@ -8,9 +8,10 @@
         <div class="user-list">
             @foreach ($users as $user)
                 <div class="user-card">
-                    <h3>{{ $user->name }}</h3>
+                    <h3>{{ $user->username }}</h3>
                     <p>Email: {{ $user->email }}</p>
-                    <a href="{{ route('admin.viewUser', $user->id) }}">View Profile</a>
+                    <p>Name: {{ $user->name }}</p>
+                    <a href="{{ route('admin.viewUser', $user->username) }}">View Profile</a>
                 </div>
             @endforeach
         </div>

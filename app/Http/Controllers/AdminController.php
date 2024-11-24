@@ -21,14 +21,12 @@ class AdminController extends Controller
         return view('pages.admin/dashboard',['users' => $users]);
     }
 
-public function viewUser($id)
-{
-    // Find the user by ID
-    $user = User::findOrFail($id);  // Will throw 404 if user not found
+    public function viewUser($name)
+    {
+        $user = User::findOrFail();  
 
-    // Pass the user data to the view
-    return view('admin.viewUser', compact('user'));
-}
+        return view('pages.admin/viewUser', compact('user'));
+    }
 
    
 }
