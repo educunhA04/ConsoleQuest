@@ -17,6 +17,7 @@
 }
 
 #login-form input[type="text"],
+#login-form input[type="email"],
 #login-form input[type="password"] {
     width: 95%;
     padding: 0.625rem; 

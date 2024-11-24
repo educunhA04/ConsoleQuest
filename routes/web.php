@@ -72,25 +72,7 @@ Route::controller(CheckoutController::class)->group(function () {
     Route::post('/checkout/finalize', 'finalize')->name('checkout.finalize');
 });
 
-// Cards
-Route::controller(CardController::class)->group(function () {
-    Route::get('/cards', 'list')->name('cards.list');
-    Route::get('/cards/{id}', 'show')->name('cards.show');
-});
 
-// API (Cards and Items)
-Route::prefix('api')->group(function () {
-    Route::controller(CardController::class)->group(function () {
-        Route::put('/cards', 'create')->name('api.cards.create');
-        Route::delete('/cards/{card_id}', 'delete')->name('api.cards.delete');
-    });
-
-    Route::controller(ItemController::class)->group(function () {
-        Route::put('/cards/{card_id}', 'create')->name('api.items.create');
-        Route::post('/item/{id}', 'update')->name('api.items.update');
-        Route::delete('/item/{id}', 'delete')->name('api.items.delete');
-    });
-});
 
 // Authentication
 Route::controller(LoginController::class)->group(function () {

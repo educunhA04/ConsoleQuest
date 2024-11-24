@@ -10,13 +10,15 @@ use Illuminate\Http\RedirectResponse;
 class AdminLoginController extends Controller
 {
     public function showLoginForm()
-    {
-        if (Auth::guard('admin')->check()) {
-            return redirect('/admin/dashboard');
-        } else {
-            return view('auth.admin/login');
-        }
+{
+    if (Auth::guard('admin')->check()) {
+        return redirect('/admin/dashboard');
+    } elseif (Auth::guard('web')->check()) { 
+        return redirect('/home'); 
+    } else {
+        return view('auth.admin/login'); 
     }
+}
 
     public function authenticate(Request $request): RedirectResponse
 {

@@ -17,13 +17,17 @@ class LoginController extends Controller
      * Display a login form.
      */
     public function showLoginForm()
-    {
-        if (Auth::check()) {
-            return redirect('/cards');
-        } else {
-            return view('auth.login');
-        }
+{
+    if (Auth::guard('web')->check()) {
+        return redirect('/home');
+    } 
+    elseif (Auth::guard('admin')->check()) {
+        return redirect('/admin/dashboard'); 
+    } 
+    else {
+        return view('auth.login');
     }
+}
 
     /**
      * Handle an authentication attempt.
