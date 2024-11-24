@@ -38,6 +38,13 @@
                 <h1><a href="{{ url('/admin/dashboard') }}">Console Quest</a></h1>
 
                
+                <div class="search-container">
+                    <form id="adminsearchForm" method="POST" action="{{ url('/admin/dashboard') }}">
+                        @csrf
+                        <input type="text" name="query" id="query" value="{{ $query ?? '' }}" placeholder="Search...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
 
                 <!-- Right Section (User Actions) -->
                 <div class="user-actions">

@@ -106,6 +106,7 @@ Route::prefix('admin')->group(function () {
 });
 Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'show'])->name('dashboard');
+    Route::post('/dashboard', [AdminController::class, 'showFiltredUsers'])->name('dashboard');
     Route::post('/view-user', [AdminController::class, 'viewUser'])->name('viewUser');
     Route::post('/change-user', [AdminController::class, 'changeUser'])->name('changeUser');
     Route::post('/update-profile', [AdminController::class, 'update'])->name('updateProfile');

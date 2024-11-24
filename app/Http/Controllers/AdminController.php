@@ -31,6 +31,24 @@ class AdminController extends Controller
         $user = User::findOrFail($request->input('user_id')); 
         return view('pages.admin/changeUser', ['user' => $user]);
     }
+    public function showFiltredUsers(Request $request): View
+    {
+        $query = $request->input('query', '');
+        $sanitizedQuery = strtolower(trim($query)); // Converte para minúsculas e remove espaços extras
+        $queryNoSpaces = str_replace(' ', '', $sanitizedQuery); // Remove todos os espaços
+
+        $users = User::query();
+        if ($sanitizedQuery) {
+            $users = $users->whereRaw('LOWER(REPLACE(name, \' \', \'\')) LIKE ?', ["%{$queryNoSpaces}%"])
+                ->orWhereRaw('LOWER(REPLACE(username, \' \', \'\')) LIKE ?', ["%{$queryNoSpaces}%"])
+                ->orWhereRaw('LOWER(REPLACE(email, \' \', \'\')) LIKE ?', ["%{$queryNoSpaces}%"]);
+                
+        }
+        $users = $users->get();
+
+
+        return view('pages.admin/dashboard',['users' => $users]);
+    }
     public function update(Request $request)
     {
         // Validate the input
