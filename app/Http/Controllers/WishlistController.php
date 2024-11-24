@@ -29,6 +29,9 @@ class WishlistController extends Controller
     }
     public function add(Request $request)
     {
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'Você precisa estar logado para adicionar itens á wishlist.');
+        }
     $validated = $request->validate([
         'product_id' => 'required|integer|exists:product,id',
     ]);

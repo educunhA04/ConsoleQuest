@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<form method="POST" action="{{ route('login') }}">
+<form method="POST" action="{{ route('login') }}" id = "login-form">
     {{ csrf_field() }}
 
     <label for="login">E-mail or Username</label>
