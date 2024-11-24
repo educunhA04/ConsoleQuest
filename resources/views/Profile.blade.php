@@ -15,13 +15,8 @@
                 <div class="detail-row"><strong>Email:</strong> {{ Auth::user()->email }}</div>
             </div>
 
-            <!-- My Orders Section -->
-            <div class="orders-section">
-                <h2>My Orders</h2>
-                <div class="orders-placeholder">
-                    <p>No orders to display yet.</p>
-                </div>
-            </div>
+            <!-- Include Orders Section -->
+            @include('partials/orders')
         </div>
         <a class="button" href="{{ url('/logout') }}"> Logout </a>
         <a class="button" href="{{ url('/editprofile') }}"> Edit Profile </a>
