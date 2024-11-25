@@ -30,7 +30,10 @@ class OrderController extends Controller
         // Obtenha os produtos associados ao pedido
         $orderProducts = OrderProduct::where('order_id', $orderId)->get();
 
-        // Retorne a view com os dados do pedido
-        return view('pages.orderDetail', compact('order', 'orderProducts'));
+        // Retorne os dados do pedido como JSON
+        return response()->json([
+            'order' => $order,
+            'orderProducts' => $orderProducts
+        ]);
     }
 }
