@@ -31,7 +31,7 @@ use App\Http\Controllers\AdminController;
 
 // Home
 Route::redirect('/', '/home');
-Route::post('/home', [HomeController::class, 'index'])->name('home');
+Route::post('/home', [HomeController::class, 'index'])->name('home.index');
 Route::controller(HomeController::class)->group(function () {
     Route::get('/home', 'show')->name('home');
     Route::get('/controllers', 'showControllers')->name('home.controllers');
@@ -93,7 +93,7 @@ Route::prefix('admin')->group(function () {
 });
 Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'show'])->name('dashboard');
-    Route::post('/dashboard', [AdminController::class, 'showFiltredUsers'])->name('dashboard');
+    Route::post('/dashboard', [AdminController::class, 'showFiltredUsers'])->name('dashboard.filtred');
     Route::post('/view-user', [AdminController::class, 'viewUser'])->name('viewUser');
     Route::post('/change-user', [AdminController::class, 'changeUser'])->name('changeUser');
     Route::post('/update-profile', [AdminController::class, 'update'])->name('updateProfile');
