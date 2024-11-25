@@ -366,13 +366,6 @@ CREATE TRIGGER trg_out_of_stock_wishlist_addition
 BEFORE INSERT ON Wishlist
 FOR EACH ROW EXECUTE PROCEDURE restrict_out_of_stock_wishlist_addition();
 
-SELECT SETVAL('"User_id_seq"', 1);
-SELECT SETVAL('Admin_id_seq', 1);
-SELECT SETVAL('Category_id_seq', 3);
-SELECT SETVAL('Product_id_seq', 5);
-SELECT SETVAL('"Order_id_seq"', 2);
-SELECT SETVAL('Transaction_id_seq', 2);
-SELECT SETVAL('Order_Product_id_seq', 3);
 
 INSERT INTO Category (id, type) VALUES
     (1, 'consoles'),
@@ -404,3 +397,11 @@ INSERT INTO Order_Product (id, order_id, product_id,quantity) VALUES
     (1, 1, 1 ,1),
     (2, 1, 2 ,1),
     (3, 2, 3, 1);
+    
+SELECT SETVAL('"User_id_seq"', (SELECT MAX(id) FROM "User"));
+SELECT SETVAL('Admin_id_seq', (SELECT MAX(id) FROM Admin));
+SELECT SETVAL('Category_id_seq', (SELECT MAX(id) FROM Category));
+SELECT SETVAL('Product_id_seq', (SELECT MAX(id) FROM Product));
+SELECT SETVAL('"Order_id_seq"', (SELECT MAX(id) FROM "Order"));
+SELECT SETVAL('Transaction_id_seq', (SELECT MAX(id) FROM Transaction));
+SELECT SETVAL('Order_Product_id_seq', (SELECT MAX(id) FROM Order_Product));
