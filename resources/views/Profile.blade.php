@@ -18,8 +18,10 @@
             <!-- Include Orders Section -->
             @include('partials/orders')
         </div>
+        <div class= "profile-buttons">
         <a class="button" href="{{ url('/logout') }}"> Logout </a>
         <a class="button" href="{{ url('/editprofile') }}"> Edit Profile </a>
+        </div>
     </div>
     
 </div>
