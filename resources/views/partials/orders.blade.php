@@ -11,7 +11,7 @@
         <!-- Each order block -->
         <div class="order-block">
             <p><strong>Tracking ID:</strong> {{ $order->tracking_number }}</p>
-            <p><strong>Date:</strong> {{ $order->buy_date->format('Y-m-d') }}</p>
+            <p><strong>Date:</strong> {{ $order->buy_date }}</p>
             <p><strong>Status:</strong> {{ ucfirst($order->status) }}</p>
         </div>
     </div>
