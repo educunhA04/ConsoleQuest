@@ -1,5 +1,5 @@
 .orders-container {
-    max-height: 300px;
+    max-height: 200px; /* Ajuste a altura para acomodar dois pedidos */
     overflow-y: auto;
     border: 1px solid #ddd;
     padding: 10px;
