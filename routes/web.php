@@ -15,6 +15,7 @@ use App\Http\Controllers\ProductPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminController;
 
 
@@ -72,7 +73,11 @@ Route::controller(CheckoutController::class)->group(function () {
     Route::post('/checkout/finalize', 'finalize')->name('checkout.finalize');
 });
 
-
+//Order
+Route::controller(OrderController::class)->group(function () {
+    Route::get('/orders', 'index')->name('orders.index');
+    Route::get('/orders/{orderId}', 'show')->name('orders.show');
+});
 
 // Authentication
 Route::controller(LoginController::class)->group(function () {

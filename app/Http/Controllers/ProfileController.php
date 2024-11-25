@@ -4,13 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
     public function profile()
     {
-        return view('Profile');
+        $userId = auth()->id();
+
+        // Encontre os pedidos do usuário
+        $orders = Order::where('user_id', $userId)->get();
+
+        // Retorne a view com os dados do perfil e dos pedidos
+        return view('Profile', compact('orders'));
     }
 
     public function edit()
