@@ -366,7 +366,13 @@ CREATE TRIGGER trg_out_of_stock_wishlist_addition
 BEFORE INSERT ON Wishlist
 FOR EACH ROW EXECUTE PROCEDURE restrict_out_of_stock_wishlist_addition();
 
-
+SELECT SETVAL('"User_id_seq"', 1);
+SELECT SETVAL('Admin_id_seq', 1);
+SELECT SETVAL('Category_id_seq', 3);
+SELECT SETVAL('Product_id_seq', 5);
+SELECT SETVAL('"Order_id_seq"', 2);
+SELECT SETVAL('Transaction_id_seq', 2);
+SELECT SETVAL('Order_Product_id_seq', 3);
 
 INSERT INTO Category (id, type) VALUES
     (1, 'consoles'),
