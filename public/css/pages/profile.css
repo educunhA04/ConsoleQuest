@@ -83,6 +83,35 @@
     font-size: 1em;
 }
 
+/* Style for error messages */
+.text-danger {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+/* Style for the alert container showing global errors */
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.alert-danger ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.alert-danger li {
+    margin: 5px 0;
+}
+
+
 /* Style for the button container */
 .profile-buttons {
     display: flex;

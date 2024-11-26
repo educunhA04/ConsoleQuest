@@ -33,8 +33,13 @@ class ProfileController extends Controller
             'username' => 'required|string|max:50|unique:User,username,' . Auth::id(),
             'email' => 'required|string|email|max:75|unique:User,email,' . Auth::id(),
             'password' => 'nullable|string|min:8|confirmed|regex:/[A-Z]/|regex:/[0-9]/',
-            //ainda precisa do aviso de senha incorreta
-            //ainda nao testei se sobrepoe usernames mas em principio nao
+        ], [
+            // Custom error messages for the password
+            'password.min' => 'The password must be at least 8 characters long.',
+            'password.confirmed' => 'The password confirmation does not match.',
+            'password.regex' => 'The password must include at least one uppercase letter and one number.',
+            'username.unique' => 'The username has already been taken.',
+            'email.unique' => 'The email has already been taken.',
         ]);
 
         // Update the user's information
@@ -44,7 +49,7 @@ class ProfileController extends Controller
         $user->email = $validated['email'];
 
         // Update the password only if a new one is provided
-        if (!empty($request->password)) {
+        if (!empty($validated['password'])) {
             $user->password = Hash::make($validated['password']);
         }
 
