@@ -18,6 +18,12 @@ class HomeController extends Controller
 
         return view('Home', ['products' => $products]);
     }
+
+    public function aboutus(): View
+    {
+        return view('pages.aboutus');
+    }
+
     public function showControllers(): View
     {
         $products = Product::where('category_id', 3)->orderBy('id')->get();

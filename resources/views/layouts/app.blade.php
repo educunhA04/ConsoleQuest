@@ -76,8 +76,15 @@
 
         <!-- Footer -->
         <footer>
+            <!-- <div class= "contacts">
+                <p> Contact us! </p>
+                <p> Email:
+                    <a href="mailto: consolequest@gmail.com"> consolequest@gmail.com </a>
+                <p> Phone: 123-456-7890 </p>
+           </div> --> 
+            </div>
             <div class="footer-links">
-                <a href="{{ url('/about-us') }}">About Us</a>
+                <a href="{{ url('/aboutus') }}">About Us</a>
                 <a href="{{ url('/terms') }}">Terms and Conditions</a>
                 <a href="{{ url('/faqs') }}">FAQs</a>
             </div>
