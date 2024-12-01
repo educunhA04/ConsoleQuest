@@ -89,10 +89,12 @@ class AdminController extends Controller
     {
     $validated = $request->validate([
         'quantity' => 'required|integer|min:0', 
+        'discount' => 'required|numeric|min:0', 
     ]);
 
     $product = Product::findOrFail($request->product_id);
     $product->quantity = $validated['quantity'];
+    $product->discount_percent = $validated['discount'];
     $product->save();
 
     return view('pages.admin/viewProduct', compact('product'));

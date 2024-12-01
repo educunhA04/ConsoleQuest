@@ -23,8 +23,10 @@
 
                 <label for="quantity">Quantity</label>
                 <input type="number" id="quantity" name="quantity" value="{{ $product->quantity }}" min="0" required>
+                <label for="quantity">Discount</label>
+                <input type="number" id="discount" name="discount" value="{{ $product->discount_percent }}" min="0" max = "100" required>
                 <input type="hidden" id = "product_id" name="product_id" value="{{ $product->id }}">
-                <button type="submit" class="update-button">Update Quantity</button>
+                <button type="submit" class="update-button">Update Product</button>
             </form>
         </div>
     </div>
