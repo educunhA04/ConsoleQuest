@@ -12,7 +12,7 @@ class AdminLoginController extends Controller
     public function showLoginForm()
 {
     if (Auth::guard('admin')->check()) {
-        return redirect('/admin/dashboard');
+        return redirect('/admin/dashboard/users');
     } elseif (Auth::guard('web')->check()) { 
         return redirect('/home'); 
     } else {

@@ -22,7 +22,7 @@ class LoginController extends Controller
         return redirect('/home');
     } 
     elseif (Auth::guard('admin')->check()) {
-        return redirect('/admin/dashboard'); 
+        return redirect('/admin/dashboard/users'); 
     } 
     else {
         return view('auth.login');

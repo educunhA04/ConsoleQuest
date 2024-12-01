@@ -1,0 +1,75 @@
+.admin-create-form-container {
+    max-width: 80vw;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-create-form-container h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.admin-create-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.admin-create-form label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.admin-create-form input, 
+.admin-create-form select, 
+.admin-create-form textarea {
+    padding: 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.admin-create-form textarea {
+    resize: vertical;
+    min-height: 10vh;
+}
+
+.admin-submit-btn {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    color: white;
+    background-color: #003366;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.admin-submit-btn:hover {
+    background-color: #0056b3;
+}
+
+@media screen and (max-width: 768px) {
+    .admin-create-form-container {
+        padding: 1.5rem;
+    }
+
+    .admin-create-form label,
+    .admin-create-form input,
+    .admin-create-form select,
+    .admin-create-form textarea {
+        font-size: 1.2rem;
+    }
+
+    .admin-submit-btn {
+        font-size: 1rem;
+    }
+}

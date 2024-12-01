@@ -98,6 +98,16 @@ class AdminController extends Controller
     return view('pages.admin/viewProduct', compact('product'));
 
     }
+    public function createUserShow()
+    {
+        return view('pages.admin/createUser');  
+    }
+
+    public function createProductShow()
+    {
+        return view('pages.admin/createProduct'); 
+    }
+
 
 
    

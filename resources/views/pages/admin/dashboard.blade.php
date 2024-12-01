@@ -20,6 +20,7 @@
                 </div>
             @endforeach
         </div>
+        <a href="{{ route('admin.createUser') }}" class="admin-button-link">New User</a>
     @elseif (isset($products))
         <h2>Products:</h2>
         
@@ -36,6 +37,7 @@
         </div>
             @endforeach
         </div>
+        <a href="{{ route('admin.createProduct') }}" class="admin-button-link">New Product</a>
     @endif
 </div>
 @endsection

@@ -18,6 +18,7 @@
         <link href="{{ url('css/pages/admindashboard.css') }}" rel="stylesheet">
         <link href="{{ url('css/pages/adminchangeprofile.css') }}" rel="stylesheet">
         <link href="{{ url('css/pages/adminproduct.css') }}" rel="stylesheet">
+        <link href="{{ url('css/pages/admincreate.css') }}" rel="stylesheet">
         <link href="{{ url('css/pages/login.css') }}" rel="stylesheet">
 
 
