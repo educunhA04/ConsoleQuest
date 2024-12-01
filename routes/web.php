@@ -104,8 +104,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::post('/update-profile', [AdminController::class, 'update'])->name('updateProfile');
     Route::get('/create-user', [AdminController::class, 'createUserShow'])->name('createUser');
     Route::get('/create_product', [AdminController::class, 'createProductShow'])->name('createProduct');
-    Route::get('/store-user', [AdminController::class, 'storeUser'])->name('storeUser');
-    Route::get('/store-product', [AdminController::class, 'storeProduct'])->name('storeProduct');
+    Route::post('/store-user', [AdminController::class, 'storeUser'])->name('storeUser');
+    Route::post('/store-product', [AdminController::class, 'storeProduct'])->name('storeProduct');
 
 });
 
