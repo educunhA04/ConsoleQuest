@@ -41,7 +41,7 @@
 
                
                 <div class="search-container">
-                    <form id="adminsearchForm" method="POST" action="{{ url('/admin/dashboard') }}">
+                    <form id="adminsearchForm" method="POST" action="{{ url('/admin/dashboard/users') }}">
                         @csrf
                         <input type="text" name="query" id="query" value="{{ $query ?? '' }}" placeholder="Search...">
                         <button type="submit"><i class="fas fa-search"></i></button>
@@ -57,6 +57,10 @@
             </div>
         </header>
 
+        <nav class="main-nav">
+            <a href="{{ route('admin.dashboard.users') }}">Users</a>
+            <a href="{{ route('home.controllers') }}">Products</a>
+        </nav>
 
 
         <!-- Main Content -->

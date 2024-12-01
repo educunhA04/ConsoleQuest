@@ -16,8 +16,6 @@
                         <input type="hidden" name="user_id" value="{{ $user->id }}">
                         <button type="submit" class="button-link">View Profile</button>
                     </form>
-
-
                 </div>
             @endforeach
         </div>
