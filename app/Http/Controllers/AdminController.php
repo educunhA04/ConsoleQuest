@@ -83,8 +83,22 @@ class AdminController extends Controller
 
         $user->save();
 
-        return redirect('/admin/dashboard')->with('success', 'Profile updated successfully!');
+        return redirect('/admin/dashboard/users')->with('success', 'Profile updated successfully!');
     }
+    public function changeProduct(Request $request): View  
+    {
+    $validated = $request->validate([
+        'quantity' => 'required|integer|min:0', 
+    ]);
+
+    $product = Product::findOrFail($request->product_id);
+    $product->quantity = $validated['quantity'];
+    $product->save();
+
+    return view('pages.admin/viewProduct', compact('product'));
+
+    }
+
 
    
 }

@@ -23,7 +23,7 @@
 
                 <label for="quantity">Quantity</label>
                 <input type="number" id="quantity" name="quantity" value="{{ $product->quantity }}" min="0" required>
-
+                <input type="hidden" id = "product_id" name="product_id" value="{{ $product->id }}">
                 <button type="submit" class="update-button">Update Quantity</button>
             </form>
         </div>
