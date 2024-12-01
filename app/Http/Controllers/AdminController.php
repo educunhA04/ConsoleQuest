@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Admin;
 use App\Models\User;
+use App\Models\Product;
 
 
 class AdminController extends Controller
@@ -20,12 +21,23 @@ class AdminController extends Controller
         $users = User::orderBy('id')->get();
         return view('pages.admin/dashboard',['users' => $users]);
     }
+    public function showProducts(): View
+    {
 
+        $products = Product::orderBy('id')->get();
+        return view('pages.admin/dashboard',['products' => $products]);
+    }
     public function viewUser(Request $request): View
     {
         $user = User::findOrFail($request->input('user_id')); 
         return view('pages.admin/viewUser', ['user' => $user]);
     }
+    public function viewProduct($id)
+    {
+    $product = Product::findOrFail($id); 
+    return view('pages.admin/viewProduct', compact('product'));
+    }
+
     public function changeUser(Request $request): View
     {
         $user = User::findOrFail($request->input('user_id')); 

@@ -17,6 +17,7 @@
         <link href="{{ url('css/search.css') }}" rel="stylesheet">
         <link href="{{ url('css/pages/admindashboard.css') }}" rel="stylesheet">
         <link href="{{ url('css/pages/adminchangeprofile.css') }}" rel="stylesheet">
+        <link href="{{ url('css/pages/adminproduct.css') }}" rel="stylesheet">
         <link href="{{ url('css/pages/login.css') }}" rel="stylesheet">
 
 
@@ -59,7 +60,7 @@
 
         <nav class="main-nav">
             <a href="{{ route('admin.dashboard.users') }}">Users</a>
-            <a href="{{ route('home.controllers') }}">Products</a>
+            <a href="{{ route('admin.dashboard.products') }}">Products</a>
         </nav>
 
 
