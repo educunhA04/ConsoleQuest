@@ -9,6 +9,8 @@ use App\Models\OrderProduct;
 use App\Models\Transaction;
 use App\Models\Product;
 use App\Models\ShoppingCart;
+use App\Models\Notification;
+use App\Models\NotificationUser;
 
 class CheckoutController extends Controller
 {
@@ -85,7 +87,15 @@ class CheckoutController extends Controller
             ]);
             $cartItem->product->decrement('quantity', $cartItem->quantity);
         }
-    
+        $notification = Notification::create([
+            'description' => "Compra efetuada com sucesso" ,
+            'viewed' => FALSE,
+            'date' => Now(),
+        ]);
+        $notification_user = NotificationUser::create([
+            'user_id' => $user->id,
+            'notification_id' => $notification->id,
+        ]);
         ShoppingCart::where('user_id', $user->id)->delete();
     
         // Redirecione para uma página de confirmação
