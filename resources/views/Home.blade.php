@@ -27,7 +27,7 @@
 
             </div>
             <a href="{{ route('product.show', ['id' => $product->id]) }}" class="product-link">
-                <img src="{{ $product->image }}" alt="{{ $product->name }}" class="product-image">
+                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="product-image">
                 <div class="product-name">{{ $product->name }}</div>
                 <div class="product-price">${{ number_format($product->price, 2) }}</div>
             </a>

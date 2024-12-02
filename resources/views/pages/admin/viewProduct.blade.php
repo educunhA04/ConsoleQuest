@@ -6,7 +6,7 @@
     
     <div class="admin-product-container">
         <div class="admin-product-image">
-            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
+            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
         </div>
         
         <div class="admin-product-info">

@@ -39,7 +39,7 @@
         <header class="main-header">
             <div class="header-content">
                 <!-- Left Section (Logo) -->
-                <h1><a href="{{ url('/admin/dashboard') }}">Console Quest</a></h1>
+                <h1><a href="{{ url('/admin/dashboard/users') }}">Console Quest</a></h1>
 
                
                 <div class="search-container">
