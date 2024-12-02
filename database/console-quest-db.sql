@@ -202,6 +202,12 @@ CREATE TABLE User_Shipping (
     FOREIGN KEY (shipping_id) REFERENCES Shipping_Address(id) ON UPDATE CASCADE
 );
 
+CREATE TABLE password_reset_tokens (
+    email VARCHAR(255) UNIQUE NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NULL,
+    PRIMARY KEY (email, token)
+);
 
 -----------------------------------------
 -- PERFORMANCE INDICES
@@ -398,6 +404,9 @@ INSERT INTO Order_Product (id, order_id, product_id,quantity) VALUES
     (2, 1, 2 ,1),
     (3, 2, 3, 1);
     
+INSERT INTO "password_reset_tokens" (email, token, created_at) 
+VALUES ('rafa@gmail.com', '5f4e7fdc19c37882511ab68f1ff3cfd3', NOW());
+
 SELECT SETVAL('"User_id_seq"', (SELECT MAX(id) FROM "User"));
 SELECT SETVAL('Admin_id_seq', (SELECT MAX(id) FROM Admin));
 SELECT SETVAL('Category_id_seq', (SELECT MAX(id) FROM Category));

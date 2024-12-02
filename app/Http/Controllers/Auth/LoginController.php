@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 
 use Illuminate\View\View;
 
@@ -28,6 +29,32 @@ class LoginController extends Controller
         return view('auth.login');
     }
 }
+    public function showLinkRequestForm()
+    {
+        if (Auth::guard('web')->check()) {
+            return redirect('/home');
+        } 
+        elseif (Auth::guard('admin')->check()) {
+            return redirect('/admin/dashboard/users'); 
+        } 
+        else {
+            return view('auth.recoverPass');
+        }
+    }
+    public function sendResetLinkEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:User,email',
+        ]);
+
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        return $status == Password::RESET_LINK_SENT
+            ? back()->with('status', __($status))
+            : back()->withErrors(['email' => __($status)]);
+    }
 
     /**
      * Handle an authentication attempt.

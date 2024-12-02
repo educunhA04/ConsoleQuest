@@ -1,35 +1,32 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- CSRF Token -->
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Styles -->
-        <link href="{{ url('css/milligram.min.css') }}" rel="stylesheet">
-        <link href="{{ url('css/app.css') }}" rel="stylesheet">
-        <link href="{{ url('css/home.css') }}" rel="stylesheet">
-        <link href="{{ url('css/search.css') }}" rel="stylesheet">
-        <link href="{{ url('css/pages/login.css') }}" rel="stylesheet">
-        <link href="{{ url('css/pages/register.css') }}" rel="stylesheet">
+    <!-- Styles -->
+    <link href="{{ url('css/milligram.min.css') }}" rel="stylesheet">
+    <link href="{{ url('css/app.css') }}" rel="stylesheet">
+    <link href="{{ url('css/home.css') }}" rel="stylesheet">
+    <link href="{{ url('css/search.css') }}" rel="stylesheet">
+    <link href="{{ url('css/pages/login.css') }}" rel="stylesheet">
+    <link href="{{ url('css/pages/register.css') }}" rel="stylesheet">
+    <link href="{{ url('css/pages/recoverPass.css') }}" rel="stylesheet">
 
+    <!-- Font Awesome (for icons) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
-
-        <!-- Font Awesome (for icons) -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
-        <!-- Scripts -->
-        <script type="text/javascript">
-            // Fix for Firefox autofocus CSS bug
-        </script>
-        <script type="text/javascript" src="{{ url('js/app.js') }}" defer></script>
-    </head>
-    <body>
+    <!-- Scripts -->
+    <script type="text/javascript" src="{{ url('js/app.js') }}" defer></script>
+</head>
+<body>
+    <div class="page-container">
         <!-- Header -->
         <header class="main-header">
             <div class="header-content">
@@ -76,13 +73,6 @@
 
         <!-- Footer -->
         <footer>
-            <!-- <div class= "contacts">
-                <p> Contact us! </p>
-                <p> Email:
-                    <a href="mailto: consolequest@gmail.com"> consolequest@gmail.com </a>
-                <p> Phone: 123-456-7890 </p>
-           </div> --> 
-            </div>
             <div class="footer-links">
                 <a href="{{ url('/aboutus') }}">About Us</a>
                 <a href="{{ url('/terms') }}">Terms and Conditions</a>
@@ -90,5 +80,6 @@
             </div>
             <p>&copy; {{ date('Y') }} Console Quest. All rights reserved.</p>
         </footer>
-    </body>
+    </div>
+</body>
 </html>

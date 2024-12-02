@@ -135,9 +135,9 @@
 .sold-out {
     position: absolute;
     top: 50%;
-    left: 0;
-    width: 100%;
-    transform: rotate(-15deg) translateY(-50%); /* Adds a diagonal line */
+    left: -30%; /* Extend beyond the left edge */
+    width: 160%; /* Extend beyond the right edge */
+    transform: rotate(-15deg) translateY(-50%); /* Diagonal positioning */
     text-align: center;
     font-size: 1.25rem; /* Larger for prominence */
     font-weight: bold;
@@ -149,15 +149,19 @@
     pointer-events: none; /* Prevent interaction */
 }
 
+.product-container.sold-out-container {
+    position: relative; /* Ensure positioning context for the "Sold Out" banner */
+}
+
 .product-container.sold-out-container::after {
     content: '';
     position: absolute;
     top: 50%;
-    left: 0;
-    width: 100%;
+    left: -30%; /* Extend line beyond the left edge */
+    width: 160%; /* Extend line beyond the right edge */
     height: 2px; /* Thickness of the line */
     background: rgba(255, 0, 0, 0.8); /* Match the Sold Out color */
-    transform: rotate(-15deg) translateY(-50%); /* Align with text */
+    transform: rotate(-15deg) translateY(-50%); /* Align with the text */
     z-index: 5; /* Slightly below the Sold Out text */
 }
 

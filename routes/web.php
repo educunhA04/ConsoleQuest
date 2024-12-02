@@ -17,7 +17,7 @@ use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminController;
-
+use Illuminate\Http\Request;
 
 
 /*
@@ -86,7 +86,24 @@ Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLoginForm')->name('login');
     Route::post('/login', 'authenticate')->name('login.authenticate');
     Route::get('/logout', 'logout')->name('logout');
+    Route::get('password/reset', 'showLinkRequestForm')->name('password.request');
+    Route::post('password/email', 'sendResetLinkEmail')->name('password.email');
+
 });
+Route::get('/reset-password/{token}', function (string $token) {
+    return view('auth.reset-password', ['token' => $token]);
+})->middleware('guest')->name('password.reset');
+Route::post('/forgot-password', function (Request $request) {
+    $request->validate(['email' => 'required|email']);
+ 
+    $status = Password::sendResetLink(
+        $request->only('email')
+    );
+ 
+    return $status === Password::RESET_LINK_SENT
+                ? back()->with(['status' => __($status)])
+                : back()->withErrors(['email' => __($status)]);
+})->middleware('guest')->name('password.email');
 //admin
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');

@@ -21,8 +21,10 @@
     @endif
 
     <label>
-        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+    <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+    <a href="{{ route('password.request') }}" class="recover-password">Recover Password</a>
     </label>
+
 
     <button type="submit">
         Login

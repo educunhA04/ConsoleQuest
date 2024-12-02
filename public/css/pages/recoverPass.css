@@ -1,0 +1,73 @@
+.password-recovery-container {
+    max-width: 400px;
+    margin: 3rem auto;
+    padding: 1.25rem;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.password-recovery-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #003366;
+}
+
+#password-recovery-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#password-recovery-form label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+#password-recovery-form input {
+    padding: 0.75rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#password-recovery-form input:focus {
+    border-color: #003366;
+    outline: none;
+}
+
+#password-recovery-form button {
+    padding: 0.75rem;
+    background-color: #003366;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#password-recovery-form button:hover {
+    background-color: #00509e;
+}
+
+#password-recovery-form .error {
+    color: #d9534f;
+    font-size: 0.875rem;
+    margin-top: -0.5rem;
+}
+
+
+
+#password-recovery-form  a {
+    margin-top: 1rem;
+    color: #003366;
+    text-decoration: none;
+}
+
+#password-recovery-form  a:hover {
+    text-decoration: underline;
+}

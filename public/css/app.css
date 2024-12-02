@@ -1,12 +1,27 @@
 @import './pages/home.css';
 @import './pages/profile.css';
 
-body {
-    background-color: #ffffff;
-    color: #003366; /* Dark Blue */
+html, body {
+  height: 100%; 
+  margin: 0; 
 }
 
-/* Main Header */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+main {
+  flex: 1; 
+  padding: 1rem; 
+}
+body {
+    background-color: #ffffff;
+    color: #003366;
+}
+
+
 header {
   background-color: #003366;
   color: white;
@@ -25,7 +40,6 @@ header {
     justify-content: space-between;
 }
 
-/* Logo */
 header h1 a {
   color: white;
   text-decoration: none;
@@ -34,9 +48,8 @@ header h1 a {
 }
 
 
-/* Navigation Bar */
 .main-nav {
-  background-color: #5274a2; /* Azul escuro */
+  background-color: #5274a2; 
   color: white;
   display: flex;
   justify-content: center;
@@ -61,14 +74,13 @@ header h1 a {
 
 .main-nav a:not(:last-child)::after {
   content: "|"; 
-  color: white; /* Cor do separador */
+  color: white;
   margin-left: 2rem;
   margin-right: 2rem;
   font-size: 1.2rem;
 
 }
 
-/* User Actions */
 .user-actions .icon {
     font-size: 1.2rem;
     color: white;
@@ -80,7 +92,6 @@ header h1 a {
     color: #94b9f1;
 }
 
-/* Links, Forms, and Buttons */
 a {
     color: #ffffff;
 }
@@ -91,13 +102,13 @@ input[type=password]:focus {
     border-color: #003366;
 }
 
-/* Footer */
 footer {
   background-color: #003366;
   color: white;
   padding: 1.2rem 1.8rem;
   text-align: center;
   margin-top: 1.2rem;
+  width: 100%; 
 }
 
 .footer-links {
@@ -123,7 +134,6 @@ footer p {
   font-size: 0.9rem;
 }
 
-/* Responsiveness */
 @media (max-width: 70em) {
     #cards {
         grid-template-columns: repeat(2, 1fr);

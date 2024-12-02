@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\View\View;
-
+use Illuminate\Support\Str;
 use App\Models\User;
+use App\Models\PasswordResetToken;
 
 class RegisterController extends Controller
 {
@@ -78,6 +79,12 @@ class RegisterController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
+        ]);
+        $token = Str::random(60);  
+        PasswordResetToken::create([
+            'email' => $request->email,
+            'token' => $token,
+            'created_at' => now(),
         ]);
 
         $credentials = $request->only('email', 'password');
