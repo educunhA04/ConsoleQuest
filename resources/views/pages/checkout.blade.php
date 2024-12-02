@@ -8,7 +8,7 @@
     <div class="checkout-items">
         @foreach ($cartItems as $cartItem)
         <div class="checkout-item">
-            <img src="{{ $cartItem->product->image }}" alt="{{ $cartItem->product->name }}" class="checkout-item-image">
+            <img src="{{'storage/' . $cartItem->product->image }}" alt="{{ $cartItem->product->name }}" class="checkout-item-image">
             <div class="checkout-item-details">
                 <h4>{{ $cartItem->product->name }}</h4>
                 <p>Quantidade: {{ $cartItem->quantity }}</p>
