@@ -139,3 +139,42 @@ footer p {
         grid-template-columns: 1fr;
     }
 }
+
+/* Center the form and give it a clean look */
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style each form group */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Style the labels */
+.form-group label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #555;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Style the input fields */
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Style the textarea */
+textarea.form-control {
+  resize: none;
+}
