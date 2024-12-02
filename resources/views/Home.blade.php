@@ -29,9 +29,18 @@
             <a href="{{ route('product.show', ['id' => $product->id]) }}" class="product-link">
                 <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="product-image">
                 <div class="product-name">{{ $product->name }}</div>
-                <div class="product-price">${{ number_format($product->price, 2) }}</div>
+                <div class="product-price">
+                    @if ($product->discount_percent > 0)
+                        <span class="original-price">${{ number_format($product->price, 2) }}</span>
+                        <span class="discounted-price">${{ number_format($product->price - ($product->price * $product->discount_percent / 100), 2) }}</span>
+                    @else
+                        ${{ number_format($product->price, 2) }}
+                    @endif
+                </div>
+                @if ($product->quantity == 0)
+                    <div class="sold-out">Sold Out</div>
+                @endif
             </a>
-
 
         </div>
         @endforeach

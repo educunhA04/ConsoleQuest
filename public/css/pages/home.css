@@ -9,6 +9,8 @@
 
 /* Product Container */
 .product-container {
+    position: relative;
+    overflow: hidden;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -110,6 +112,52 @@
 
 @media (max-width: 480px) {
     .product-grid {
-        grid-template-columns: 1fr; /* 1 coluna para mobile */
+        grid-template-columns: 1fr; 
     }
 }
+.product-price {
+    font-size: 1rem; 
+    font-weight: bold;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #888;
+    margin-right: 0.5rem; 
+    font-size: 0.9rem; 
+}
+
+.discounted-price {
+    color: #e63946;
+    font-size: 1.1rem; 
+}
+
+.sold-out {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: rotate(-15deg) translateY(-50%); /* Adds a diagonal line */
+    text-align: center;
+    font-size: 1.25rem; /* Larger for prominence */
+    font-weight: bold;
+    color: white;
+    background: rgba(255, 0, 0, 0.8); /* Semi-transparent red background */
+    padding: 0.5rem 0;
+    z-index: 10; /* Ensure it's above other content */
+    text-transform: uppercase;
+    pointer-events: none; /* Prevent interaction */
+}
+
+.product-container.sold-out-container::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px; /* Thickness of the line */
+    background: rgba(255, 0, 0, 0.8); /* Match the Sold Out color */
+    transform: rotate(-15deg) translateY(-50%); /* Align with text */
+    z-index: 5; /* Slightly below the Sold Out text */
+}
+
