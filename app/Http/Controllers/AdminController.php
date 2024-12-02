@@ -13,6 +13,7 @@ use App\Models\NotificationUser;
 use App\Models\User;
 use App\Models\Wishlist;
 use App\Models\Product;
+use App\Models\ShoppingCart;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -106,7 +107,7 @@ class AdminController extends Controller
         $product = Product::findOrFail($request->product_id);
         if($product->quantity == 0 && $validated['quantity']> 0){
             $notification = new Notification();
-            $notification->description = "Product " . $validated['name'] . " available" ;
+            $notification->description = "Product in wishlist" . $validated['name'] . " available" ;
             $notification->viewed = FALSE;
             $notification->date = Now();
             $notification->save(); 
@@ -114,6 +115,20 @@ class AdminController extends Controller
             foreach ($wishlistUsers as $wishlist) {
                 NotificationUser::create([
                     'user_id' => $wishlist->user_id,
+                    'notification_id' => $notification->id,
+                ]);
+            }
+        }
+        if($product->price != $validated['price']){
+            $notification = new Notification();
+            $notification->description = "Product in Shopping Cart" . $validated['name'] . " price change, now " .  $validated['price'] . "$";
+            $notification->viewed = FALSE;
+            $notification->date = Now();
+            $notification->save(); 
+            $cartUsers = ShoppingCart::where('product_id', $product->id)->get();
+            foreach ($cartUsers as $cart) {
+                NotificationUser::create([
+                    'user_id' => $cart->user_id,
                     'notification_id' => $notification->id,
                 ]);
             }
