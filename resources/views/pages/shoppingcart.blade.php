@@ -8,7 +8,7 @@
     <div class="cart-grid">
         @foreach ($cartItems as $cartItem)
         <div class="cart-item-container">
-            <img src="{{ $cartItem->product->image }}" alt="{{ $cartItem->product->name }}" class="cart-item-image">
+            <img src="{{ asset('storage/' . $cartItem->product->image) }}" alt="{{ $cartItem->product->name }}" class="cart-item-image">
             <h4 class="cart-item-name">{{ $cartItem->product->name }}</h4>
             <p class="cart-item-price">Preço Unitário: €{{ number_format($cartItem->product->price, 2) }}</p>
             <p class="cart-item-quantity">Quantidade: {{ $cartItem->quantity }}</p>
