@@ -342,35 +342,8 @@ CREATE TRIGGER trg_own_review_modification
 BEFORE UPDATE OR DELETE ON Review
 FOR EACH ROW EXECUTE PROCEDURE enforce_own_review_modification();
 
--- trigger10
-CREATE OR REPLACE FUNCTION enforce_user_related_notifications() RETURNS TRIGGER AS $$
-BEGIN
-    IF NEW.user_id != current_setting('app.current_user_id')::int THEN
-        RAISE EXCEPTION 'A user can only receive notifications related to their own actions or orders';
-    END IF;
-    RETURN NEW;
-END
-$$ LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS trg_user_related_notifications ON Notification;
-CREATE TRIGGER trg_user_related_notifications
-BEFORE INSERT ON Notification
-FOR EACH ROW EXECUTE PROCEDURE enforce_user_related_notifications();
 
--- trigger11
-CREATE OR REPLACE FUNCTION restrict_out_of_stock_wishlist_addition() RETURNS TRIGGER AS $$
-BEGIN
-    IF (SELECT quantity FROM Product WHERE id = NEW.product_id) <= 0 THEN
-        RAISE EXCEPTION 'This product is out of stock and cannot be added to the wishlist';
-    END IF;
-    RETURN NEW;
-END
-$$ LANGUAGE plpgsql;
-
-DROP TRIGGER IF EXISTS trg_out_of_stock_wishlist_addition ON Wishlist;
-CREATE TRIGGER trg_out_of_stock_wishlist_addition
-BEFORE INSERT ON Wishlist
-FOR EACH ROW EXECUTE PROCEDURE restrict_out_of_stock_wishlist_addition();
 
 
 INSERT INTO Category (id, type) VALUES

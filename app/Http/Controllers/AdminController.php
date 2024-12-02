@@ -8,7 +8,10 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Admin;
+use App\Models\Notification;
+use App\Models\NotificationUser;
 use App\Models\User;
+use App\Models\Wishlist;
 use App\Models\Product;
 use Illuminate\Support\Facades\Hash;
 
@@ -101,7 +104,20 @@ class AdminController extends Controller
             'discount.min' => 'The discount must be at least 0.',
         ]);
         $product = Product::findOrFail($request->product_id);
-
+        if($product->quantity == 0 && $validated['quantity']> 0){
+            $notification = new Notification();
+            $notification->description = "Product " . $validated['name'] . " available" ;
+            $notification->viewed = FALSE;
+            $notification->date = Now();
+            $notification->save(); 
+            $wishlistUsers = Wishlist::where('product_id', $product->id)->get();
+            foreach ($wishlistUsers as $wishlist) {
+                NotificationUser::create([
+                    'user_id' => $wishlist->user_id,
+                    'notification_id' => $notification->id,
+                ]);
+            }
+        }
         $product->name = $validated['name'];
         $product->category_id = $validated['category_id'];
         $product->description = $validated['description'];

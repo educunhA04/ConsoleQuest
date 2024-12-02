@@ -24,13 +24,13 @@
     @elseif (isset($products))
         <h2>Products:</h2>
         
-        <div class="product-list">
+        <div class="admin-product-list">
             @foreach ($products as $product)
-            <div class="product-container">
+            <div class="admin-product-container-dashboard">
             
-            <a href="{{ route('admin.viewProduct', ['id' => $product->id]) }}" class="product-link">
-                <img src="{{ asset('storage/' . $product->image) }}"alt="{{ $product->name }}" class="product-image">
-                <div class="product-name">{{ $product->name }}</div>
+            <a href="{{ route('admin.viewProduct', ['id' => $product->id]) }}" class="admin-product-link">
+                <img src="{{ asset('storage/' . $product->image) }}"alt="{{ $product->name }}" class="admin-product-image">
+                <div class="admin-product-name">{{ $product->name }}</div>
             </a>
 
 

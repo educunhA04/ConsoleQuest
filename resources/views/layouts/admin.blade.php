@@ -35,6 +35,7 @@
         <script type="text/javascript" src="{{ url('js/app.js') }}" defer></script>
     </head>
     <body>
+    <div class="page-container">
         <!-- Header -->
         <header class="main-header">
             <div class="header-content">
@@ -81,5 +82,6 @@
             </div>
             <p>&copy; {{ date('Y') }} Console Quest. All rights reserved.</p>
         </footer>
+    </div>    
     </body>
 </html>

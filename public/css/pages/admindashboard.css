@@ -111,3 +111,57 @@
 .admin-button-link:hover {
     background-color: #0056b3;
 }
+.admin-product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Align items to the start of the row */
+    gap: 2%; /* Add spacing between items */
+    padding: 2%; /* Padding around the container */
+}
+
+.admin-product-container-dashboard {
+    flex: 0 1 20%; /* Ensure items are evenly distributed and responsive */
+    aspect-ratio: 3 / 4; /* Maintain a consistent aspect ratio */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: hsl(0, 0%, 96%);
+    border: 0.1em solid hsl(0, 0%, 85%);
+    border-radius: 0.5em;
+    padding: 1em;
+    box-shadow: 0 0.2em 0.5em hsl(0, 0%, 75%);
+    transition: transform 0.3s ease;
+    margin-bottom: 2rem;
+}
+
+.admin-product-container-dashboard:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.admin-product-link {
+    text-decoration: none;
+    color: hsl(0, 0%, 20%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+    height: 100%;
+    width: 100%;
+}
+
+.admin-product-image {
+    width: 100%; /* Make image fill available width */
+    height: 80%; /* Make it occupy 80% of container height */
+    flex-shrink: 0;
+    border-radius: 0.5em;
+    object-fit: contain; /* Preserve image proportions */
+}
+
+.admin-product-name {
+    font-size: 1em;
+    font-weight: 600;
+    text-align: center;
+    color: hsl(0, 0%, 30%);
+    margin-top: auto;
+}
