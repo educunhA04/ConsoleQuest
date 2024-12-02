@@ -85,21 +85,36 @@ class AdminController extends Controller
 
         return redirect('/admin/dashboard/users')->with('success', 'Profile updated successfully!');
     }
-    public function changeProduct(Request $request): View  
+
+    public function changeProduct(Request $request)  
     {
-    $validated = $request->validate([
-        'quantity' => 'required|integer|min:0', 
-        'discount' => 'nullable|numeric|min:0|max:100',  
-    ]);
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'category_id' => 'required|integer',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'quantity' => 'required|integer|min:0',
+            'discount' => 'nullable|numeric|min:0|max:100',
+        ], [
+            'name.required' => 'The product name is required.',
+            'price.numeric' => 'The price must be a valid number.',
+            'discount.min' => 'The discount must be at least 0.',
+        ]);
+        $product = Product::findOrFail($request->product_id);
 
-    $product = Product::findOrFail($request->product_id);
-    $product->quantity = $validated['quantity'];
-    $product->discount_percent = $validated['discount'];
-    $product->save();
+        $product->name = $validated['name'];
+        $product->category_id = $validated['category_id'];
+        $product->description = $validated['description'];
+        $product->price = $validated['price'];
+        $product->quantity = $validated['quantity'];
+        $product->discount_percent = $validated['discount'] ?? 0; 
 
-    return view('pages.admin/viewProduct', compact('product'));
+        $product->save();
+
+        return redirect('/admin/dashboard/products')->with('success', 'Product created successfully!');
 
     }
+
     public function createUserShow()
     {
         return view('pages.admin/createUser');  
