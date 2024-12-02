@@ -81,7 +81,7 @@ class AdminController extends Controller
         $user->username = $validated['username'];
         $user->email = $validated['email'];
 
-        if (!empty($request->password)) {
+        if (!empty($validated['password'])) {
             $user->password = Hash::make($validated['password']);
         }
 
@@ -107,7 +107,7 @@ class AdminController extends Controller
         $product = Product::findOrFail($request->product_id);
         if($product->quantity == 0 && $validated['quantity']> 0){
             $notification = new Notification();
-            $notification->description = "Product in wishlist" . $validated['name'] . " available" ;
+            $notification->description = "Product in wishlist " . $validated['name'] . " available" ;
             $notification->viewed = FALSE;
             $notification->date = Now();
             $notification->save(); 
@@ -120,16 +120,16 @@ class AdminController extends Controller
             }
         }
         if($product->price != $validated['price']){
-            $notification = new Notification();
-            $notification->description = "Product in Shopping Cart" . $validated['name'] . " price change, now " .  $validated['price'] . "$";
-            $notification->viewed = FALSE;
-            $notification->date = Now();
-            $notification->save(); 
+            $notificationcart = new Notification();
+            $notificationcart->description = "Product in Shopping Cart" . $validated['name'] . " price changed, now " .  $validated['price'] . "$";
+            $notificationcart->viewed = FALSE;
+            $notificationcart->date = Now();
+            $notificationcart->save(); 
             $cartUsers = ShoppingCart::where('product_id', $product->id)->get();
             foreach ($cartUsers as $cart) {
                 NotificationUser::create([
                     'user_id' => $cart->user_id,
-                    'notification_id' => $notification->id,
+                    'notification_id' => $notificationcart->id,
                 ]);
             }
         }
