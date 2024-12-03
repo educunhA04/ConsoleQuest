@@ -14,15 +14,26 @@
             <div class="rating">
                 ★★★★☆ <!-- You can replace this with dynamic ratings if needed -->
             </div>
-            <img src="{{ $product->image }}"  alt="{{ $product->name }}" class="product-image"> <!-- Product image -->
+            <img src="{{ asset('storage/' . $product->image) }}"  alt="{{ $product->name }}" class="product-image"> <!-- Product image -->
         </div>
 
         <div class="product-details">
-            <span class="wishlist-icon">♡</span>
+            <form action="{{ route('wishlist.add') }}" method="POST" class="add-to-wishlist-form">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <button class="wishlist-icon">♡</button>
+            </form>
             <div class="price">{{ number_format($product->price, 2) }} €</div> <!-- Product price -->
             <p class="description">{{ $product->description }}</p> <!-- Product description -->
-            <button class="add-to-cart-btn">ADICIONAR AO CARRINHO</button>
+            <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <input type="hidden" name="quantity" value="1"> 
+                    <button class="add-to-cart-btn">ADICIONAR AO CARRINHO</button>
+            </form>
+            
         </div>
+
         
         <div class="reviews">
             <h3>Reviews 3.2/5 ★</h3>
