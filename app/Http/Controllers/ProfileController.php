@@ -7,20 +7,28 @@ use App\Models\User;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash; 
+use App\Models\NotificationUser;
+use App\Models\Notification;
 
 
 class ProfileController extends Controller
 {
     public function profile()
-    {
-        $userId = auth()->id();
+{
+    $userId = auth()->id();
 
-        // Encontre os pedidos do usuário
-        $orders = Order::where('user_id', $userId)->get();
+    // Fetch user's orders
+    $orders = Order::where('user_id', $userId)->get();
 
-        // Retorne a view com os dados do perfil e dos pedidos
-        return view('Profile', compact('orders'));
-    }
+    // Fetch user's notifications
+    $notifications = NotificationUser::where('user_id', $userId)
+        ->with('notification')
+        ->get()
+        ->pluck('notification');
+
+    // Pass both orders and notifications to the view
+    return view('Profile', compact('orders', 'notifications'));
+}
 
     public function edit()
     {
