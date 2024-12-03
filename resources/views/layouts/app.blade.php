@@ -77,6 +77,8 @@
                 <a href="{{ url('/aboutus') }}">About Us</a>
                 <a href="{{ url('/terms') }}">Terms and Conditions</a>
                 <a href="{{ url('/faqs') }}">FAQs</a>
+                <a href="{{ url('/help') }}">Help</a>
+
             </div>
             <p>&copy; {{ date('Y') }} Console Quest. All rights reserved.</p>
         </footer>
