@@ -7,11 +7,71 @@
 
     <div class="orders-container">
         @foreach ($orders as $order)
-        <div class="order-block">
+        <!-- Each order block -->
+        <div class="order-block" 
+            data-tracking="{{ $order->tracking_number }}" 
+            data-date="{{ $order->buy_date }}" 
+            data-status="{{ ucfirst($order->status) }}" 
+            data-total="{{ $order->products->sum(function($item) { return $item->quantity * $item->product->price; }) }}" 
+            data-products='@json($order->products->map(function($item) { return ['name' => $item->product->name, 'quantity' => $item->quantity, 'price' => $item->product->price]; }))' 
+            onclick="openOrderDetailsFromElement(this)">
             <p><strong>Tracking ID:</strong> {{ $order->tracking_number }}</p>
             <p><strong>Date:</strong> {{ $order->buy_date }}</p>
             <p><strong>Status:</strong> {{ ucfirst($order->status) }}</p>
         </div>
+
         @endforeach
     </div>
+
+    <!-- Modal Popup -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeOrderDetails()">&times;</span>
+            <h2>Order Details</h2>
+            <p><strong>Tracking ID:</strong> <span id="modalTrackingId"></span></p>
+            <p><strong>Date:</strong> <span id="modalDate"></span></p>
+            <p><strong>Status:</strong> <span id="modalStatus"></span></p>
+            <p><strong>Total:</strong> <span id="modalTotal"></span></p>
+            <p><strong>Products:</strong></p>
+            <ul id="modalProducts"></ul>
+        </div>
+    </div>
 </div>
+
+<script>
+    function openOrderDetailsFromElement(element) {
+        // Lê os atributos data-* do elemento clicado
+        const trackingId = element.getAttribute('data-tracking');
+        const date = element.getAttribute('data-date');
+        const status = element.getAttribute('data-status');
+        const total = parseFloat(element.getAttribute('data-total')).toFixed(2);
+        const products = JSON.parse(element.getAttribute('data-products'));
+
+        // Chama a função para exibir o modal com os detalhes
+        openOrderDetails(trackingId, date, status, total, products);
+    }
+    function openOrderDetails(trackingId, date, status, total, products) {
+        // Update modal content dynamically
+        document.getElementById('modalTrackingId').textContent = trackingId;
+        document.getElementById('modalDate').textContent = date;
+        document.getElementById('modalStatus').textContent = status;
+        document.getElementById('modalTotal').textContent = `€${parseFloat(total).toFixed(2)}`;
+
+        // Clear and update the products list
+        const productsList = document.getElementById('modalProducts');
+        productsList.innerHTML = ''; // Clear previous list
+        products.forEach(product => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${product.name} - Quantity: ${product.quantity} - Price: €${parseFloat(product.price).toFixed(2)}`;
+            productsList.appendChild(listItem);
+        });
+
+        // Display the modal
+        document.getElementById('orderModal').style.display = 'block';
+    }
+
+    function closeOrderDetails() {
+        // Hide the modal
+        document.getElementById('orderModal').style.display = 'none';
+    }
+</script>

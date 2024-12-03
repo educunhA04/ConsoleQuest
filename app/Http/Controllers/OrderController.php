@@ -32,8 +32,17 @@ class OrderController extends Controller
 
         // Retorne os dados do pedido como JSON
         return response()->json([
-            'order' => $order,
-            'orderProducts' => $orderProducts
+            'tracking_number' => $order->tracking_number,
+            'buy_date' => $order->buy_date->format('Y-m-d'),
+            'status' => ucfirst($order->status),
+            'total' => $orderProducts->sum(function($item) { return $item->quantity * $item->price; }),
+            'products' => $orderProducts->map(function($item) {
+                return [
+                    'name' => $item->product->name,
+                    'quantity' => $item->quantity,
+                    'price' => $item->price
+                ];
+            })
         ]);
     }
 }
