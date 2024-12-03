@@ -23,6 +23,11 @@ class Notification extends Model
         return $this->hasMany(NotificationUser::class, 'notification_id');
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'notification_user', 'notification_id', 'user_id');
+    }
+
     public function scopeUnviewed($query)
     {
         return $query->where('viewed', false);

@@ -16,6 +16,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 
@@ -80,6 +81,13 @@ Route::controller(OrderController::class)->group(function () {
     Route::get('/orders', 'index')->name('orders.index');
     Route::get('/orders/{orderId}', 'show')->name('orders.show');
 });
+
+//Notification
+Route::controller(NotificationController::class)->group(function () {
+    Route::get('/notifications', 'index')->name('notifications.index');
+    Route::get('/notifications/{id}', 'show')->name('notifications.show');
+});
+
 
 // Authentication
 Route::controller(LoginController::class)->group(function () {

@@ -15,6 +15,8 @@
                 <div class="detail-row"><strong>Email:</strong> {{ Auth::user()->email }}</div>
             </div>
 
+            @include('partials/notifications', ['notifications' => $notifications])
+
             <!-- Include Orders Section -->
             @include('partials/orders')
         </div>
