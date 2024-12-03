@@ -18,6 +18,8 @@
     <link href="{{ url('css/pages/login.css') }}" rel="stylesheet">
     <link href="{{ url('css/pages/register.css') }}" rel="stylesheet">
     <link href="{{ url('css/pages/recoverPass.css') }}" rel="stylesheet">
+    <link href="{{ url('css/pages/resetpass.css') }}" rel="stylesheet">
+
 
     <!-- Font Awesome (for icons) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">

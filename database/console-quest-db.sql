@@ -68,7 +68,8 @@ CREATE TABLE "User" (
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
     name TEXT NOT NULL,
-    email TEXT UNIQUE NOT NULL
+    email TEXT UNIQUE NOT NULL,
+    remember_token VARCHAR(255)
 );
 CREATE TABLE Admin (
     id SERIAL  PRIMARY KEY,
