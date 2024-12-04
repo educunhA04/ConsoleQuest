@@ -6,7 +6,7 @@
     <h2>My Orders</h2>
 
     <div class="orders-container">
-        @foreach ($orders as $order)
+        @foreach ($orders->sortByDesc('tracking_number') as $order)
         <!-- Each order block -->
         <div class="order-block" 
             data-tracking="{{ $order->tracking_number }}" 
@@ -14,12 +14,12 @@
             data-status="{{ ucfirst($order->status) }}" 
             data-total="{{ $order->products->sum(function($item) { return $item->quantity * $item->product->price; }) }}" 
             data-products='@json($order->products->map(function($item) { return ['name' => $item->product->name, 'quantity' => $item->quantity, 'price' => $item->product->price]; }))' 
+            data-images='@json($order->products->map(function($item) { return asset('storage/' . $item->product->image); }))'
             onclick="openOrderDetailsFromElement(this)">
             <p><strong>Tracking ID:</strong> {{ $order->tracking_number }}</p>
             <p><strong>Date:</strong> {{ $order->buy_date }}</p>
             <p><strong>Status:</strong> {{ ucfirst($order->status) }}</p>
         </div>
-
         @endforeach
     </div>
 
@@ -46,11 +46,13 @@
         const status = element.getAttribute('data-status');
         const total = parseFloat(element.getAttribute('data-total')).toFixed(2);
         const products = JSON.parse(element.getAttribute('data-products'));
+        const images = JSON.parse(element.getAttribute('data-images'));
 
         // Chama a função para exibir o modal com os detalhes
-        openOrderDetails(trackingId, date, status, total, products);
+        openOrderDetails(trackingId, date, status, total, products, images);
     }
-    function openOrderDetails(trackingId, date, status, total, products) {
+
+    function openOrderDetails(trackingId, date, status, total, products, images) {
         // Update modal content dynamically
         document.getElementById('modalTrackingId').textContent = trackingId;
         document.getElementById('modalDate').textContent = date;
@@ -60,15 +62,28 @@
         // Clear and update the products list
         const productsList = document.getElementById('modalProducts');
         productsList.innerHTML = ''; // Clear previous list
-        products.forEach(product => {
+        products.forEach((product, index) => {
             const listItem = document.createElement('li');
-            listItem.textContent = `${product.name} - Quantity: ${product.quantity} - Price: €${parseFloat(product.price).toFixed(2)}`;
+            const img = document.createElement('img');
+            img.src = images[index];
+            img.alt = product.name;
+            img.style.width = '50px';
+            img.style.height = '50px';
+            img.style.marginRight = '10px';
+            listItem.appendChild(img);
+
+            // Calculate total value for this product
+            const totalValue = parseFloat(product.quantity * product.price).toFixed(2);
+
+            // Add product details with total value
+            listItem.appendChild(document.createTextNode(`${product.name} - Quantity: ${product.quantity} - Price: €${parseFloat(product.price).toFixed(2)} - Total: €${totalValue}`));
             productsList.appendChild(listItem);
         });
 
         // Display the modal
         document.getElementById('orderModal').style.display = 'block';
     }
+
 
     function closeOrderDetails() {
         // Hide the modal

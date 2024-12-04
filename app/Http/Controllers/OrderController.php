@@ -40,7 +40,7 @@ class OrderController extends Controller
                 return [
                     'name' => $item->product->name,
                     'quantity' => $item->quantity,
-                    'price' => $item->price
+                    'price' => $item->product->price,
                 ];
             })
         ]);

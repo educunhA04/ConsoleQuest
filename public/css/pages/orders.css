@@ -1,5 +1,5 @@
 .orders-container {
-    max-height: 300px;
+    max-height: 200px; /* Ajuste a altura para acomodar dois pedidos */
     overflow-y: auto;
     border: 1px solid #ddd;
     padding: 10px;
@@ -13,13 +13,24 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #fff;
-    cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 .order-block:hover {
     background-color: #f1f1f1;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-block p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.orders-section h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
 }
 
 .modal {
