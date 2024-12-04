@@ -17,6 +17,7 @@ use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 
 use App\Models\User;
@@ -61,6 +62,18 @@ Route::controller(ShoppingCartController::class)->group(function () {
     Route::post('/cart/clear', 'clear')->name('cart.clear');
     Route::get('/cart/checkout', 'checkout')->name('cart.checkout');
 });
+
+
+// Review
+Route::middleware(['auth'])->group(function () {
+    Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::put('/reviews/{id}', [ReviewController::class, 'update'])->name('reviews.update');
+    Route::delete('/reviews/{id}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+});
+
+Route::get('/products/{id}/reviews', [ReviewController::class, 'index'])->name('reviews.index');
+
+
 
 // Wishlist
 Route::controller(WishlistController::class)->group(function () {

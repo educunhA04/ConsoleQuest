@@ -91,7 +91,7 @@
 .icon {
     font-size: 18px; /* Adjust icon size */
     color: #fff; /* Icon color */
-    background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background for better visibility */
+    background-color: transparent;
     border-radius: 5%; /* Circular icon background */
     padding: 5px;
     cursor: pointer;

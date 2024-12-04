@@ -189,3 +189,46 @@ textarea.form-control {
   resize: none;
 }
 
+.logout-link {
+  color: white;
+  background-color: #295f94; /* Cor de fundo */
+  padding: 10px 20px; /* Tamanho do botão */
+  border-radius: 5px; /* Borda arredondada */
+  text-decoration: none; /* Remove sublinhado */
+  font-weight: bold;
+  font-size: 1rem; /* Tamanho do texto */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transição suave */
+  display: inline-block;
+}
+
+.logout-link:hover {
+  background-color: #002244; /* Cor de fundo ao passar o mouse */
+   /* Leve crescimento ao passar o mouse */
+}
+
+
+.logout-link i {
+  margin-right: 8px; /* Espaçamento entre ícone e texto */
+}
+
+/* Estilo base para links de autenticação */
+.auth-link {
+  color: white;
+  background-color: #003366; /* Cor de fundo */
+  text-decoration: none; /* Remove sublinhado */
+  font-weight: bold;
+  font-size: 1.1rem; /* Tamanho do texto */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transição suave */
+  display: inline-block;
+  margin: 0 5px; /* Espaçamento horizontal */
+}
+
+
+
+.auth-link.sign-in::after {
+  content: '|'; /* Adiciona a barra */
+  font-weight: bold; /* Negrito */
+  margin-right: 0.4rem;
+  margin-left: 0.9rem;
+  color: white; /* Cor da barra */
+}

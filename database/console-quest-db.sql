@@ -328,20 +328,6 @@ CREATE TRIGGER trg_single_review_per_product
 BEFORE INSERT ON Review
 FOR EACH ROW EXECUTE PROCEDURE enforce_single_review_per_product();
 
--- trigger09
-CREATE OR REPLACE FUNCTION enforce_own_review_modification() RETURNS TRIGGER AS $$
-BEGIN
-    IF OLD.user_id != current_setting('app.current_user_id')::int THEN
-        RAISE EXCEPTION 'A user can only edit or delete their own reviews';
-    END IF;
-    RETURN NEW;
-END
-$$ LANGUAGE plpgsql;
-
-DROP TRIGGER IF EXISTS trg_own_review_modification ON Review;
-CREATE TRIGGER trg_own_review_modification
-BEFORE UPDATE OR DELETE ON Review
-FOR EACH ROW EXECUTE PROCEDURE enforce_own_review_modification();
 
 
 
