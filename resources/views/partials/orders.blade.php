@@ -33,7 +33,7 @@
             <p><strong>Status:</strong> <span id="modalStatus"></span></p>
             <p><strong>Total:</strong> <span id="modalTotal"></span></p>
             <p><strong>Products:</strong></p>
-            <ul id="modalProducts"></ul>
+            <ul id="modalProducts" class="product-list"></ul> <!-- Corrigido -->
         </div>
     </div>
 </div>

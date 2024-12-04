@@ -67,3 +67,14 @@
     color: black;
     text-decoration: none;
 }
+
+.product-list {
+    list-style-type: none; /* Remove os pontos da lista */
+    padding: 0;
+}
+
+.product-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
