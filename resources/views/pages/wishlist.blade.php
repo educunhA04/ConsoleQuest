@@ -18,7 +18,10 @@
                 </form>
                 <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
                     @csrf
+                    <input type="hidden" name="product_id" value="{{ $wishlistItem->product->id }}">
+                    <input type="hidden" name="quantity" value="1"> 
                     <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    </button>
                 </form>
             </div>
         </div>
