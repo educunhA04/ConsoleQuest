@@ -18,6 +18,8 @@
     <link href="{{ url('css/pages/login.css') }}" rel="stylesheet">
     <link href="{{ url('css/pages/register.css') }}" rel="stylesheet">
     <link href="{{ url('css/pages/recoverPass.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/pages/search.css') }}">
+
 
     <!-- Font Awesome (for icons) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -48,9 +50,10 @@
                     <a href="{{ url('/shoppingcart') }}" class="icon"><i class="fas fa-shopping-cart"></i></a>
                     @if (Auth::check())
                         <a href="{{ url('/profile') }}" class="icon"><i class="fas fa-user"></i></a>
-                        <a href="{{ url('/logout') }}">Logout</a>
+                        <a href="{{ url('/logout') }}" class="logout-link">Logout</a>
                     @else
-                        <a href="{{ url('/login') }}">Sign In</a> | <a href="{{ url('/register') }}">Sign Up</a>
+                    <a href="{{ url('/login') }}" class="auth-link sign-in">Sign In</a><a href="{{ url('/register') }}" class="auth-link sign-up">Sign Up</a>
+
                     @endif
                 </div>
             </div>
