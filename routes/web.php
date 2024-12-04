@@ -66,6 +66,7 @@ Route::controller(ShoppingCartController::class)->group(function () {
 Route::controller(WishlistController::class)->group(function () {
     Route::get('/wishlist', 'show')->name('wishlist.show');
     Route::post('/wishlist/add', 'add')->name('wishlist.add');
+    Route::delete('/wishlist/{id}', 'remove')->name('wishlist.remove');
 });
 
 // Profile

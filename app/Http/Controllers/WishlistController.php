@@ -27,6 +27,16 @@ class WishlistController extends Controller
              ->get();
         return view('pages/wishlist',['wishlistItems' => $wishlistItems]); 
     }
+
+    public function remove(Request $request, $id)
+    {
+        $wishlistItem = Wishlist::findOrFail($id);
+        $wishlistItem->delete();
+
+        return redirect()->back()->with('success', 'Item removed from wishlist.');
+    }
+    
+    
     public function add(Request $request)
     {
         if (!auth()->check()) {
@@ -51,9 +61,9 @@ class WishlistController extends Controller
     }
     
     
-    
 
     return redirect()->back()->with('success', 'Item added to cart successfully.');
     }   
+    
 
 }
