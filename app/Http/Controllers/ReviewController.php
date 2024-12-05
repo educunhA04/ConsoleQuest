@@ -71,8 +71,10 @@ class ReviewController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('product.show', $review->product_id)
-               ->with('success', 'Avaliação atualizada com sucesso!');
+        return response()->json([
+            'success' => true,
+            'review' => $review,
+        ]);
     }
 
 

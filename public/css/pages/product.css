@@ -170,6 +170,7 @@ body {
 
 
 .submit-btn, .delete-btn, .edit-btn {
+    margin-top: 10px;
     background-color: #003268;
     color: #fff;
     border: none;
@@ -250,6 +251,31 @@ body {
 .edit-form textarea {
     resize: vertical;
 }
+
+.star-rating {
+    display: flex;
+    gap: 5px;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #ccc; /* Cor padrão das estrelas */
+}
+
+.star-rating .star {
+    transition: color 0.2s ease; /* Suaviza a mudança de cor */
+}
+
+.star-rating .star.selected {
+    color: #f5c518; /* Cor ao clicar */
+}
+
+
+textarea {
+    width: 100%;
+    height: 80px;
+    resize: none;
+    margin-top: 10px;
+}
+
 
 /* Rodapé */
 .footer {

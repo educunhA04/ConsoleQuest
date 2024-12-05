@@ -46,6 +46,7 @@
                 <div class="average-rating">
                     <strong>Média:</strong> {{ number_format($product->reviews->avg('rating'), 1) }}/5 ★
                 </div>
+                {{-- Exibição das avaliações --}}
                 @foreach($product->reviews as $review)
                 <div class="review" id="review-{{ $review->id }}" data-is-owner="{{ $review->user_id === auth()->id() ? 'true' : 'false' }}">
                     <strong>{{ $review->user->name }}</strong> {{ $review->rating }}/5 ★
@@ -61,15 +62,18 @@
                         <button class="edit-btn" onclick="showEditForm({{ $review->id }})" style="display: none;">Editar</button>
                     @endif
 
-                    {{-- Formulário de edição --}}
+                    {{-- Formulário de edição com estrelas --}}
                     @if ($review->user_id === auth()->id())
                         <form action="{{ route('reviews.update', $review->id) }}" method="POST" class="edit-form" style="display: none;">
                             @csrf
                             @method('PUT')
-                            <div>
-                                <label for="rating-{{ $review->id }}">Avaliação:</label>
-                                <input type="number" id="rating-{{ $review->id }}" name="rating" value="{{ $review->rating }}" min="0" max="5" required>
+                            <div class="star-rating">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <span class="star {{ $i <= $review->rating ? 'selected' : '' }}" data-value="{{ $i }}">&#9733;</span>
+                                @endfor
                             </div>
+                            <input type="hidden" name="rating" id="rating-input-{{ $review->id }}" value="{{ $review->rating }}">
+
                             <div>
                                 <label for="description-{{ $review->id }}">Descrição:</label>
                                 <textarea id="description-{{ $review->id }}" name="description" required>{{ $review->description }}</textarea>
@@ -89,19 +93,26 @@
                 @if(!$existingReview)
                     {{-- Formulário para adicionar nova avaliação --}}
                     <div class="review-form">
-                        <h4>Adicionar sua avaliação:</h4>
-                        <form action="{{ route('reviews.store') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-                            <div>
-                                <label for="rating">Avaliação:</label>
-                                <input type="number" id="rating" name="rating" min="0" max="5" required>
-                            </div>
-                            <div>
-                                <label for="description">Descrição:</label>
-                                <textarea id="description" name="description" required></textarea>
-                            </div>
-                            <button type="submit" class="submit-btn">Enviar Avaliação</button>
+                    <h4>Adicionar sua avaliação:</h4>
+                    <form action="{{ route('reviews.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <input type="hidden" name="rating" id="rating-input" value="0"> <!-- Valor da avaliação -->
+
+                        <div class="star-rating">
+                            <span class="star" data-value="1">&#9733;</span>
+                            <span class="star" data-value="2">&#9733;</span>
+                            <span class="star" data-value="3">&#9733;</span>
+                            <span class="star" data-value="4">&#9733;</span>
+                            <span class="star" data-value="5">&#9733;</span>
+                        </div>
+
+                        <div>
+                            <label for="description">Descrição:</label>
+                            <textarea id="description" name="description" required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Enviar Avaliação</button>
                         </form>
                     </div>
                 @else
