@@ -47,37 +47,38 @@
                     <strong>Média:</strong> {{ number_format($product->reviews->avg('rating'), 1) }}/5 ★
                 </div>
                 @foreach($product->reviews as $review)
-                <div class="review" id="review-{{ $review->id }}">
+                <div class="review" id="review-{{ $review->id }}" data-is-owner="{{ $review->user_id === auth()->id() ? 'true' : 'false' }}">
                     <strong>{{ $review->user->name }}</strong> {{ $review->rating }}/5 ★
                     <p>{{ $review->description }}</p>
 
                     {{-- Botões de Editar/Excluir --}}
-                    <form action="{{ route('reviews.destroy', $review->id) }}" method="POST" class="inline-form">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="delete-btn" style="display: none;">Excluir</button>
-                    </form>
-                    <button class="edit-btn" onclick="showEditForm({{ $review->id }})" style="display: none;">Editar</button>
-                    
+                    @if ($review->user_id === auth()->id())
+                        <form action="{{ route('reviews.destroy', $review->id) }}" method="POST" class="inline-form">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="delete-btn" style="display: none;">Excluir</button>
+                        </form>
+                        <button class="edit-btn" onclick="showEditForm({{ $review->id }})" style="display: none;">Editar</button>
+                    @endif
+
                     {{-- Formulário de edição --}}
-                    <form action="{{ route('reviews.update', $review->id) }}" method="POST" class="edit-form" style="display: none;">
-                        @csrf
-                        @method('PUT')
-                        <div>
-                            <label for="rating-{{ $review->id }}">Avaliação:</label>
-                            <input type="number" id="rating-{{ $review->id }}" name="rating" value="{{ $review->rating }}" min="0" max="5" required>
-                        </div>
-                        <div>
-                            <label for="description-{{ $review->id }}">Descrição:</label>
-                            <textarea id="description-{{ $review->id }}" name="description" required>{{ $review->description }}</textarea>
-                        </div>
-                        <button type="submit" class="save-btn">Salvar</button>
-                        <button type="button" class="cancel-btn" onclick="hideEditForm({{ $review->id }})">Cancelar</button>
-                    </form>
+                    @if ($review->user_id === auth()->id())
+                        <form action="{{ route('reviews.update', $review->id) }}" method="POST" class="edit-form" style="display: none;">
+                            @csrf
+                            @method('PUT')
+                            <div>
+                                <label for="rating-{{ $review->id }}">Avaliação:</label>
+                                <input type="number" id="rating-{{ $review->id }}" name="rating" value="{{ $review->rating }}" min="0" max="5" required>
+                            </div>
+                            <div>
+                                <label for="description-{{ $review->id }}">Descrição:</label>
+                                <textarea id="description-{{ $review->id }}" name="description" required>{{ $review->description }}</textarea>
+                            </div>
+                            <button type="submit" class="save-btn">Salvar</button>
+                            <button type="button" class="cancel-btn" onclick="hideEditForm({{ $review->id }})">Cancelar</button>
+                        </form>
+                    @endif
                 </div>
-
-
-
                 @endforeach
 
             @endif

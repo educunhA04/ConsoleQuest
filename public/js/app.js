@@ -4,22 +4,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
   reviews.forEach(review => {
       review.addEventListener('click', function () {
-          // Verifica se o formulário de edição está visível
-          const editForm = review.querySelector('.edit-form');
-          if (editForm && editForm.style.display === 'block') {
-              // Se o formulário de edição estiver visível, não mostra os botões
-              return;
-          }
+        const isOwner = review.dataset.isOwner === 'true';
 
-          // Esconde botões em todas as outras reviews
-          reviews.forEach(r => {
-              const buttons = r.querySelectorAll('.edit-btn, .delete-btn');
-              buttons.forEach(btn => btn.style.display = 'none');
-          });
+        if (!isOwner) {
+            return; // Não faz nada se o usuário não for o dono da review
+        }
+
+        // Verifica se o formulário de edição está visível
+        const editForm = review.querySelector('.edit-form');
+        if (editForm && editForm.style.display === 'block') {
+        // Se o formulário de edição estiver visível, não mostra os botões
+            return;
+        }
+
+        // Esconde botões em todas as outras reviews
+        reviews.forEach(r => {
+            const buttons = r.querySelectorAll('.edit-btn, .delete-btn');
+            buttons.forEach(btn => btn.style.display = 'none');
+        });
 
           // Exibe os botões da review clicada
-          const buttons = this.querySelectorAll('.edit-btn, .delete-btn');
-          buttons.forEach(btn => btn.style.display = 'inline-block');
+        const buttons = this.querySelectorAll('.edit-btn, .delete-btn');
+        buttons.forEach(btn => btn.style.display = 'inline-block');
       });
   });
 

@@ -56,32 +56,39 @@ class ReviewController extends Controller
     public function update(Request $request, $id)
     {
         $review = Review::where('id', $id)
-                        ->where('user_id', auth()->id())
-                        ->firstOrFail();
+            ->where('user_id', auth()->id())
+            ->firstOrFail();
 
+        // Valida os dados de entrada
         $request->validate([
             'rating' => 'required|integer|min:0|max:5',
             'description' => 'required|string|max:500',
         ]);
 
+        // Atualiza a review
         $review->update([
             'rating' => $request->rating,
             'description' => $request->description,
         ]);
 
-        return back()->with('success', 'Avaliação atualizada com sucesso!');
+        return redirect()->route('product.show', $review->product_id)
+               ->with('success', 'Avaliação atualizada com sucesso!');
     }
 
 
     public function destroy($id)
     {
-        $review = Review::where('id', $id)
-                        ->where('user_id', auth()->id())
-                        ->firstOrFail();
-
-        $review->delete();
-
-        return back()->with('success', 'Avaliação excluída com sucesso!');
+        try {
+            $review = Review::where('id', $id)
+                            ->where('user_id', auth()->id())
+                            ->firstOrFail();
+    
+            $review->delete();
+    
+            return back()->with('success', 'Avaliação excluída com sucesso!');
+        } catch (ModelNotFoundException $e) {
+            return back()->with('error', 'Não tem permissão para excluir esta avaliação.');
+        }
     }
 
 }
