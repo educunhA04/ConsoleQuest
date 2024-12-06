@@ -52,12 +52,30 @@ function openOrderDetails(trackingId, date, status, total, products, images, pro
         // Add the link to the list item
         listItem.appendChild(link);
     
-        // Add other product details outside the link
+       // Create a container for the product details
+        const detailsContainer = document.createElement('div');
+        detailsContainer.style.display = 'flex';
+        detailsContainer.style.flexDirection = 'column';
+        detailsContainer.style.marginLeft = '10px'; // Space after link
+    
+        // Add product quantity
+        const quantitySpan = document.createElement('span');
+        quantitySpan.textContent = `Quantity: ${product.quantity}`;
+        detailsContainer.appendChild(quantitySpan);
+    
+        // Add product price
+        const priceSpan = document.createElement('span');
+        priceSpan.textContent = `Price: €${parseFloat(product.price).toFixed(2)}`;
+        detailsContainer.appendChild(priceSpan);
+    
+        // Calculate and add total value
         const totalValue = parseFloat(product.quantity * product.price).toFixed(2);
-        const details = document.createElement('span');
-        details.textContent = ` - Quantity: ${product.quantity} - Price: €${parseFloat(product.price).toFixed(2)} - Total: €${totalValue}`;
-        details.style.marginLeft = '10px'; // Space after link
-        listItem.appendChild(details);
+        const totalSpan = document.createElement('span');
+        totalSpan.textContent = `Total: €${totalValue}`;
+        detailsContainer.appendChild(totalSpan);
+    
+        // Add the details container to the list item
+        listItem.appendChild(detailsContainer);
     
         // Add the list item to the products list
         productsList.appendChild(listItem);
