@@ -19,12 +19,15 @@
     <link href="{{ url('css/pages/register.css') }}" rel="stylesheet">
     <link href="{{ url('css/pages/recoverPass.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/pages/search.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/orders.css') }}">
+
 
 
     <!-- Font Awesome (for icons) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <!-- Scripts -->
+    <script src="{{ asset('js/order.js') }}" defer></script>
     <script type="text/javascript" src="{{ url('js/app.js') }}" defer></script>
 </head>
 <body>
@@ -80,6 +83,7 @@
                 <a href="{{ url('/aboutus') }}">About Us</a>
                 <a href="{{ url('/terms') }}">Terms and Conditions</a>
                 <a href="{{ url('/faqs') }}">FAQs</a>
+                <a href="{{ url('/help') }}">Help</a>
             </div>
             <p>&copy; {{ date('Y') }} Console Quest. All rights reserved.</p>
         </footer>

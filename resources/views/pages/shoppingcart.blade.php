@@ -8,8 +8,10 @@
     <div class="cart-grid">
         @foreach ($cartItems as $cartItem)
         <div class="cart-item-container">
-            <img src="{{ asset('storage/' . $cartItem->product->image) }}" alt="{{ $cartItem->product->name }}" class="cart-item-image">
-            <h4 class="cart-item-name">{{ $cartItem->product->name }}</h4>
+            <a href="{{ route('product.show', $cartItem->product->id) }}" class="product-link">
+                <img src="{{ asset('storage/' . $cartItem->product->image) }}" alt="{{ $cartItem->product->name }}" class="cart-item-image">
+                <h4 class="cart-item-name">{{ $cartItem->product->name }}</h4>
+            </a>
             <p class="cart-item-price">Preço Unitário: €{{ number_format($cartItem->product->price, 2) }}</p>
             <p class="cart-item-quantity">Quantidade: {{ $cartItem->quantity }}</p>
             <p><strong>Total do Produto:</strong> €{{ number_format($cartItem->quantity * $cartItem->product->price, 2) }}</p>
@@ -45,9 +47,5 @@
         </form>
         <a href="{{ route('cart.checkout') }}" class="checkout">Continuar</a>
     </div>
-        <div class="cart-checkout">
-        <a href="{{ route('cart.checkout') }}" class="checkout-btn">Continuar</a>
-    </div>
-
 </div>
 @endsection
