@@ -4,34 +4,39 @@
 <link rel="stylesheet" href="{{ asset('css/pages/shoppingcart.css') }}">
 
 <div class="cart-container">
+    
     <div class="cart-header">As tuas compras</div>
     <div class="cart-grid">
-        @foreach ($cartItems as $cartItem)
-        <div class="cart-item-container">
-            <a href="{{ route('product.show', $cartItem->product->id) }}" class="product-link">
-                <img src="{{ asset('storage/' . $cartItem->product->image) }}" alt="{{ $cartItem->product->name }}" class="cart-item-image">
-                <h4 class="cart-item-name">{{ $cartItem->product->name }}</h4>
-            </a>
-            <p class="cart-item-price">Preço Unitário: €{{ number_format($cartItem->product->price, 2) }}</p>
-            <p class="cart-item-quantity">Quantidade: {{ $cartItem->quantity }}</p>
-            <p><strong>Total do Produto:</strong> €{{ number_format($cartItem->quantity * $cartItem->product->price, 2) }}</p>
-            <div class="cart-item-actions">
-                <!-- Atualizar Quantidade -->
-                <form method="POST" action="{{ route('cart.update') }}">
-                    @csrf
-                    <input type="hidden" name="cart_item_id" value="{{ $cartItem->id }}">
-                    <input type="number" name="quantity" value="{{ $cartItem->quantity }}" min="1" style="width: 50px;">
-                    <button type="submit">Atualizar</button>
-                </form>
-                <!-- Remover Produto -->
-                <form method="POST" action="{{ route('cart.remove') }}">
-                    @csrf
-                    <input type="hidden" name="cart_item_id" value="{{ $cartItem->id }}">
-                    <button type="submit">Remover</button>
-                </form>
+        @if ($cartItems->isEmpty())
+            <p>Your shopping cart is empty!</p>
+        @else
+            @foreach ($cartItems as $cartItem)
+            <div class="cart-item-container">
+                <a href="{{ route('product.show', $cartItem->product->id) }}" class="product-link">
+                    <img src="{{ asset('storage/' . $cartItem->product->image) }}" alt="{{ $cartItem->product->name }}" class="cart-item-image">
+                    <h4 class="cart-item-name">{{ $cartItem->product->name }}</h4>
+                </a>
+                <p class="cart-item-price">Preço Unitário: €{{ number_format($cartItem->product->price, 2) }}</p>
+                <p class="cart-item-quantity">Quantidade: {{ $cartItem->quantity }}</p>
+                <p><strong>Total do Produto:</strong> €{{ number_format($cartItem->quantity * $cartItem->product->price, 2) }}</p>
+                <div class="cart-item-actions">
+                    <!-- Atualizar Quantidade -->
+                    <form method="POST" action="{{ route('cart.update') }}">
+                        @csrf
+                        <input type="hidden" name="cart_item_id" value="{{ $cartItem->id }}">
+                        <input type="number" name="quantity" value="{{ $cartItem->quantity }}" min="1" style="width: 50px;">
+                        <button type="submit">Atualizar</button>
+                    </form>
+                    <!-- Remover Produto -->
+                    <form method="POST" action="{{ route('cart.remove') }}">
+                        @csrf
+                        <input type="hidden" name="cart_item_id" value="{{ $cartItem->id }}">
+                        <button type="submit">Remover</button>
+                    </form>
+                </div>
             </div>
-        </div>
-        @endforeach
+            @endforeach
+        @endif
     </div>
 
     <!-- Resumo -->
