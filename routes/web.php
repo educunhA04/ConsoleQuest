@@ -103,7 +103,7 @@ Route::controller(OrderController::class)->group(function () {
 });
 //report
 Route::controller(ReportController::class)->group(function () {
-    Route::post('/report', 'report')->name('reviews.report');
+    Route::post('/report/{id}', 'report')->name('reviews.report');
 });
 // Authentication
 Route::controller(LoginController::class)->group(function () {

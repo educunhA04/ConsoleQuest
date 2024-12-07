@@ -164,7 +164,7 @@ CREATE TABLE Report (
     reason TEXT NOT NULL,
     description TEXT,
     FOREIGN KEY (review_id) REFERENCES Review(id) ON UPDATE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES "User"(id) ON UPDATE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES "User"(id) ON UPDATE CASCADE
 );
 
 CREATE TABLE Notification (
