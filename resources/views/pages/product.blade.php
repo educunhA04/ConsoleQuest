@@ -12,8 +12,29 @@
         <div class="product-info">
             <h1 class="product-name">{{ $product->name }}</h1> <!-- Product name -->
             <div class="rating">
-                ★★★★☆ <!-- You can replace this with dynamic ratings if needed -->
+                @php
+                    $fullStars = floor($product->reviews->avg('rating'));
+                    $halfStar = ($product->reviews->avg('rating') - $fullStars) >= 0.5;
+                    $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0);
+                @endphp
+
+                {{-- Display full stars --}}
+                @for ($i = 0; $i < $fullStars; $i++)
+                    ★
+                @endfor
+
+                {{-- Display half star --}}
+                @if ($halfStar)
+                    ☆
+                @endif
+
+                {{-- Display empty stars --}}
+                @for ($i = 0; $i < $emptyStars; $i++)
+                    ☆
+                @endfor
+
             </div>
+
             <img src="{{ asset('storage/' . $product->image) }}"  alt="{{ $product->name }}" class="product-image"> <!-- Product image -->
         </div>
 
@@ -59,7 +80,10 @@
                             <button type="submit" class="delete-btn" style="display: none;">Excluir</button>
                         </form>
                         <button class="edit-btn" onclick="showEditForm({{ $review->id }})" style="display: none;">Editar</button>
+
                     @endif
+                    <button class="report-btn" style="display: none;" onclick="showReportForm({{ $review->id }})">Report</button>
+
 
                     {{-- Formulário de edição --}}
                     @if ($review->user_id === auth()->id())
@@ -78,6 +102,20 @@
                             <button type="button" class="cancel-btn" onclick="hideEditForm({{ $review->id }})">Cancelar</button>
                         </form>
                     @endif
+                    @if ($review->user_id !== auth()->id())
+
+                      <form action="{{ route('reviews.report', $review->id) }}" method="POST" class="report-form" style="display: none;">
+                        @csrf
+                        <h4>Report Review</h4>
+                        <label for="reason-{{ $review->id }}">Reason:</label>
+                        <input type="text" id="reason-{{ $review->id }}" name="reason" required>
+                        <label for="description-{{ $review->id }}">Description:</label>
+                        <textarea id="description-{{ $review->id }}" name="description"></textarea>
+                        <button type="submit" class="submit-report-btn">Submit Report</button>
+                        <button type="button" class="cancel-report-btn">Cancel</button>
+                    </form>
+                    @endif
+
                 </div>
                 @endforeach
 

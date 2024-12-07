@@ -264,6 +264,76 @@ body {
     }
 }
 
+/* Botão de report */
+.report-btn {
+    background-color: #003268;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.report-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Formulário de report */
+.report-form {
+    padding: 15px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+}
+
+.report-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+
+.report-form input, .report-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.report-form input:focus, .report-form textarea:focus {
+    border-color: #0056b3;
+    outline: none;
+}
+
+.report-form textarea {
+    resize: vertical;
+}
+
+.report-form .submit-report-btn, .report-form .cancel-report-btn {
+    background-color: #003268;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 14px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.report-form .submit-report-btn:hover, .report-form .cancel-report-btn:hover {
+    background-color: #0056b3;
+}
 
 /* Responsividade */
 @media (max-width: 768px) {

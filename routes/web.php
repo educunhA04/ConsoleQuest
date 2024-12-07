@@ -18,6 +18,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Http\Request;
 
 use App\Models\User;
@@ -100,7 +101,10 @@ Route::controller(OrderController::class)->group(function () {
     Route::get('/orders', 'index')->name('orders.index');
     Route::get('/orders/{orderId}', 'show')->name('orders.show');
 });
-
+//report
+Route::controller(ReportController::class)->group(function () {
+    Route::post('/report', 'report')->name('reviews.report');
+});
 // Authentication
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLoginForm')->name('login');

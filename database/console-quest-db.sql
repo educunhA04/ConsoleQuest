@@ -161,12 +161,10 @@ CREATE TABLE Report (
     id SERIAL  PRIMARY KEY,
     review_id INT NOT NULL ,
     user_id INT NOT NULL ,
-    admin_id INT NOT NULL,
     reason TEXT NOT NULL,
     description TEXT,
     FOREIGN KEY (review_id) REFERENCES Review(id) ON UPDATE CASCADE,
     FOREIGN KEY (user_id) REFERENCES "User"(id) ON UPDATE CASCADE,
-    FOREIGN KEY (admin_id) REFERENCES Admin(id) ON UPDATE CASCADE
 );
 
 CREATE TABLE Notification (
