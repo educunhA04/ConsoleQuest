@@ -164,6 +164,9 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::post('/store-user', [AdminController::class, 'storeUser'])->name('storeUser');
     Route::post('/store-product', [AdminController::class, 'storeProduct'])->name('storeProduct');
 
+    Route::get('/users/{userId}/purchase-history', [AdminController::class, 'viewUserPurchaseHistory'])
+         ->name('users.purchaseHistory');
+
 });
 
 Route::controller(RegisterController::class)->group(function () {
