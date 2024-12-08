@@ -25,17 +25,20 @@ class AdminController extends Controller
         $users = User::orderBy('id')->get();
         return view('pages.admin/dashboard',['users' => $users]);
     }
+
     public function showProducts(): View
     {
 
         $products = Product::orderBy('id')->get();
         return view('pages.admin/dashboard',['products' => $products]);
     }
+
     public function viewUser(Request $request): View
     {
-        $user = User::findOrFail($request->input('user_id')); 
+        $user = User::with(['orders.orderProducts.product'])->findOrFail($request->input('user_id')); 
         return view('pages.admin/viewUser', ['user' => $user]);
     }
+
     public function viewProduct($id)
     {
     $product = Product::findOrFail($id); 
@@ -227,6 +230,12 @@ class AdminController extends Controller
     return redirect('/admin/dashboard/products')->with('success', 'Product created successfully!');
     }
 
+    public function viewUserPurchaseHistory($userId)
+    {
+        $user = User::with(['orders.products'])->findOrFail($userId);
+
+        return view('pages.admin.viewUserPurchaseHistory', compact('user'));
+    }
 
    
 }

@@ -28,6 +28,13 @@ class Product extends Model
         return $this->hasMany(Review::class, 'product_id', 'id');
     }
 
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'order_product', 'product_id', 'order_id')
+                    ->withPivot('quantity');
+    }
+
+
 }
 
 

@@ -28,6 +28,10 @@
                         <input type="hidden" name="user_id" value="{{ $user->id }}">
                         <button type="submit" class="edit-button">Edit Profile</button>
         </form>
+        <form action="{{ route('admin.users.purchaseHistory', $user->id) }}" method="GET">
+            <button type="submit" class="view-purchase-history-button">View Purchase History</button>
+        </form>
+
     </div>
     
 </div>

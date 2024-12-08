@@ -80,6 +80,8 @@
     color: white;
 }
 
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .user-list {
@@ -165,3 +167,4 @@
     color: hsl(0, 0%, 30%);
     margin-top: auto;
 }
+

@@ -9,8 +9,6 @@ class OrderProduct extends Model
 {
     use HasFactory;
 
-    use HasFactory;
-
     protected $table = 'order_product'; // Nome da tabela
     protected $primaryKey = 'id'; // Chave primária
     public $timestamps = false; // Para created_at e updated_at
@@ -21,19 +19,15 @@ class OrderProduct extends Model
         'quantity',
     ];
 
-    /**
-     * Relacionamento com Order
-     */
     public function order()
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class, 'order_id', 'id');
     }
 
-    /**
-     * Relacionamento com Product
-     */
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
+
+
 }
