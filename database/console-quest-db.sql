@@ -48,9 +48,9 @@ DROP FUNCTION IF EXISTS restrict_address_change_for_shipped_orders CASCADE;
 -----------------------------------------
 
 CREATE TYPE categories AS ENUM(
-  'consoles', 
-  'video games', 
-  'controllers'
+  'Consoles', 
+  'Video Games', 
+  'Controllers'
 );
 
 CREATE TYPE order_status AS ENUM(
@@ -332,9 +332,9 @@ FOR EACH ROW EXECUTE PROCEDURE enforce_single_review_per_product();
 
 
 INSERT INTO Category (id, type) VALUES
-    (1, 'consoles'),
-    (2, 'video games'),
-    (3, 'controllers');
+    (1, 'Consoles'),
+    (2, 'Video Games'),
+    (3, 'Controllers');
 
 INSERT INTO Product (id, category_id, name, image, description, quantity, price, discount_percent) VALUES
     (1, 1, 'PlayStation 5', '/dbimages/pg5.jpg', 'Next-gen gaming console', 50, 499.99, 10),

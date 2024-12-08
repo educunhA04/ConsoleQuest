@@ -1,40 +1,16 @@
-/* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
-
-.navbar {
-    background-color: #1c3d72;
-    color: white;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navbar a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-}
-
 .breadcrumb {
-    padding: 10px 20px;
+    margin: 20px 0;
     font-size: 14px;
-    color: #555;
-    background-color: #e6e6e6;
 }
 
+.breadcrumb a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
 /* Ajustes na página de produtos para usar Grid */
 .product-page {
     display: grid;

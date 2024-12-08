@@ -440,9 +440,9 @@ FOR EACH ROW EXECUTE PROCEDURE restrict_address_change_for_shipped_orders();
 
 -- Populate Category table
 INSERT INTO Category (id, type) VALUES
-    (1, 'consoles'),
-    (2, 'video games'),
-    (3, 'controllers');
+    (1, 'Consoles'),
+    (2, 'Video Games'),
+    (3, 'Controllers');
 
 -- Populate Product table
 INSERT INTO Product (id, category_id, name, image, description, quantity, price, discount_percent) VALUES

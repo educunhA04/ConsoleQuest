@@ -61,38 +61,8 @@
                 </div>
             </div>
         </header>
-
-        <!-- Navigation Bar -->
-
-        <nav class="main-nav">
-            <a href="{{ route('home') }}">Home</a>
-            <a href="{{ route('home.controllers') }}">Controllers</a>
-            <a href="{{ route('home.games') }}">Games</a>
-            <a href="{{ route('home.consoles') }}">Consoles</a>
-        </nav>
-
-        <div class="filters-section">
-    <form id="filterForm" method="POST" action="{{ url('/home/filter') }}">
-        @csrf
-
-        <!-- Price Range -->
-        <label for="min_price">Min Price</label>
-        <input type="number" name="min_price" id="min_price" value="{{ request('min_price') }}">
-
-        <label for="max_price">Max Price</label>
-        <input type="number" name="max_price" id="max_price" value="{{ request('max_price') }}">
-
-        <!-- Discount Checkbox -->
-        <label for="discount_only">
-            <input type="checkbox" name="discount_only" id="discount_only" {{ request('discount_only') ? 'checked' : '' }}>
-            Only items with discounts
-        </label>
-
-        <!-- Submit Button -->
-        <button type="submit">Apply Filters</button>
-        </form>
-    </div>
-
+        @yield('navigation')
+        @yield('filters')
         <!-- Main Content -->
         <main>
             <section id="content">
@@ -111,5 +81,8 @@
             <p>&copy; {{ date('Y') }} Console Quest. All rights reserved.</p>
         </footer>
     </div>
+
+    @yield('scripts')
+
 </body>
 </html>

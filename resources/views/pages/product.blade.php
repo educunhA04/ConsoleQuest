@@ -6,8 +6,19 @@
 <body>
     @section('content')
     <div class="breadcrumb">
-        Home / {{ $product->category->type ?? 'Categoria Desconhecida' }} / {{ $product->name }} <!-- Dynamically show category and product name -->
+        <a href="{{ route('home') }}">Home</a> / 
+        @php
+            $categoryRoute = match($product->category->type) {
+                'Controllers' => route('home.controllers'),
+                'Video Games' => route('home.games'),
+                'Consoles' => route('home.consoles'),
+                default => '#'
+            };
+        @endphp
+        <a href="{{ $categoryRoute }}">{{ $product->category->type ?? 'Categoria Desconhecida' }}</a> / 
+        {{ $product->name }} <!-- Dynamically show category and product name -->
     </div>
+
     <div class="product-page">
         <div class="product-info">
             <h1 class="product-name">{{ $product->name }}</h1> <!-- Product name -->
