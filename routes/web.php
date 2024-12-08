@@ -43,6 +43,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/controllers', 'showControllers')->name('home.controllers');
     Route::get('/games', 'showGames')->name('home.games');
     Route::get('/consoles', 'showConsoles')->name('home.consoles');
+    Route::post('/home/filter', [HomeController::class, 'index'])->name('home.filter');
 });
 
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('home.aboutus');

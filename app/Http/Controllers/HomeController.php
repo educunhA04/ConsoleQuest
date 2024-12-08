@@ -48,26 +48,44 @@ class HomeController extends Controller
     }
 
     public function index(Request $request)
-    {
-        // Captura a query
-        $query = $request->input('query', '');
-        $sanitizedQuery = strtolower(trim($query)); // Converte para minúsculas e remove espaços extras
-        $queryNoSpaces = str_replace(' ', '', $sanitizedQuery); // Remove todos os espaços
+{
+    $query = $request->input('query', '');
+    $sanitizedQuery = strtolower(trim($query));
+    $queryNoSpaces = str_replace(' ', '', $sanitizedQuery);
 
-        $products = Product::query();
+    $products = Product::query();
 
-        if ($sanitizedQuery) {
-            $products = $products->whereRaw('LOWER(REPLACE(name, \' \', \'\')) LIKE ?', ["%{$queryNoSpaces}%"])
-                ->orWhereRaw('LOWER(REPLACE(description, \' \', \'\')) LIKE ?', ["%{$queryNoSpaces}%"])
-                ->orWhereHas('category', function ($q) use ($queryNoSpaces) {
-                    $q->whereRaw('LOWER(REPLACE(type::TEXT, \' \', \'\')) LIKE ?', ["%{$queryNoSpaces}%"]);
-                });
-        }
-
-        // Pega os resultados
-        $products = $products->get();
-
-        // Retorna a view com os produtos
-        return view('Home', compact('products', 'query'));
+    // Apply search filter
+    if ($sanitizedQuery) {
+        $products->whereRaw('LOWER(REPLACE(name, \' \', \'\')) LIKE ?', ["%{$queryNoSpaces}%"])
+            ->orWhereRaw('LOWER(REPLACE(description, \' \', \'\')) LIKE ?', ["%{$queryNoSpaces}%"])
+            ->orWhereHas('category', function ($q) use ($queryNoSpaces) {
+                $q->whereRaw('LOWER(REPLACE(type::TEXT, \' \', \'\')) LIKE ?', ["%{$queryNoSpaces}%"]);
+            });
     }
+
+    // Apply price range filters
+    if ($request->filled('min_price')) {
+        $products->where('price', '>=', $request->input('min_price'));
+    }
+
+    if ($request->filled('max_price')) {
+        $products->where('price', '<=', $request->input('max_price'));
+    }
+
+    // Apply discount filter
+    if ($request->boolean('discount_only')) {
+        $products->where('discount_percent', '>', 0);
+    }
+
+    $products = $products->get();
+
+    if ($request->ajax()) {
+        // Return partial view for AJAX
+        $html = view('partials.products', compact('products'))->render();
+        return response()->json(['html' => $html]);
+    }
+
+    return view('Home', compact('products', 'query'));
+}
 }
