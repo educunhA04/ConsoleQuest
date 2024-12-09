@@ -20,6 +20,12 @@ class Order extends Model
         'buy_date',
     ];
 
+    protected $casts = [
+        'buy_date' => 'datetime',
+        'estimated_delivery_date' => 'datetime',
+    ];
+    
+
     // Definição de constantes para status do pedido
     const STATUS_PROCESSING = 'processing';
     const STATUS_SHIPPED = 'shipped';
@@ -36,16 +42,9 @@ class Order extends Model
     /**
      * Relacionamento com OrderProduct
      */
-
-
-    public function orderProducts()
-    {
-        return $this->hasMany(OrderProduct::class, 'order_id', 'id');
-    }
-
     public function products()
     {
-        return $this->hasMany(OrderProduct::class);return $this->hasManyThrough(
+        return $this->hasManyThrough(
             Product::class,
             OrderProduct::class,
             'order_id',      // Foreign key on OrderProduct table
@@ -53,6 +52,23 @@ class Order extends Model
             'id',            // Local key on Order table
             'product_id'     // Local key on OrderProduct table
         );
+    }
+
+
+    /**
+     * Relationship with the User model
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Relationship with OrderProduct model
+     */
+    public function orderProducts()
+    {
+        return $this->hasMany(OrderProduct::class);
     }
 
 }

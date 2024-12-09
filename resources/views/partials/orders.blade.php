@@ -11,12 +11,21 @@
                 data-tracking="{{ $order->tracking_number }}" 
                 data-date="{{ $order->buy_date }}" 
                 data-status="{{ ucfirst($order->status) }}" 
-                data-total="{{ $order->products->sum(function($item) { return $item->quantity * $item->product->price; }) }}" 
-                data-products='@json($order->products->map(function($item) { return ['name' => $item->product->name, 'quantity' => $item->quantity, 'price' => $item->product->price]; }))' 
-                data-images='@json($order->products->map(function($item) { return asset('storage/' . $item->product->image); }))'
+                data-total="{{ $order->products->sum(fn($item) => optional($item->product)->price * $item->quantity) }}" 
+                data-products='@json($order->products->map(function($item) { 
+                    return [
+                        'name' => optional($item->product)->name ?? 'Unknown Product', 
+                        'quantity' => $item->quantity, 
+                        'price' => optional($item->product)->price ?? 0
+                    ]; 
+                }))'
+                data-images='@json($order->products->map(function($item) { 
+                    return optional($item->product)->image ? asset("storage/" . $item->product->image) : null; 
+                }))'
                 data-product-page='@json($order->products->map(function($item) { 
-                    return ['url' => route("product.show", $item->product->id)]; 
-                }))' onclick="openOrderDetailsFromElement(this)">
+                    return ['url' => optional($item->product)->id ? route("product.show", $item->product->id) : "#"]; 
+                }))'
+                onclick="openOrderDetailsFromElement(this)">
                 <p><strong>Tracking ID:</strong> {{ $order->tracking_number }}</p>
                 <p><strong>Date:</strong> {{ $order->buy_date }}</p>
                 <p><strong>Status:</strong> {{ ucfirst($order->status) }}</p>

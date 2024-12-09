@@ -1,0 +1,107 @@
+/* Admin Orders Page Styles */
+.admin-orders-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.admin-order-block {
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.admin-order-block:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    transform: scale(1.03);
+}
+
+.admin-order-block p {
+    margin: 0;
+    font-size: 14px;
+    color: #444;
+}
+
+.admin-orders-section h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Modal Styles for Admin Orders */
+.admin-order-modal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.admin-order-modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 30px;
+    border: none;
+    width: 60%;
+    max-width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.admin-modal-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.admin-modal-close:hover {
+    color: #333;
+}
+
+/* Product List in Modal */
+.admin-product-list {
+    margin-top: 15px;
+    list-style: none;
+    padding: 0;
+}
+
+.admin-product-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    gap: 10px;
+}
+
+.admin-product-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+}
+
+.admin-product-item span {
+    font-size: 14px;
+    color: #555;
+}
