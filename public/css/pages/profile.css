@@ -172,3 +172,36 @@
         gap: 10px; /* Reduce spacing between buttons */
     }
 }
+
+.input-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.tooltip-icon {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    color: #fff; /* Adjust color as needed */
+    font-weight: bold;
+}
+  
+.tooltip-icon::after {
+    content: attr(data-tooltip);
+    display: none;
+    position: absolute;
+    top: 100%; /* Adjust the positioning */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    white-space: nowrap;
+    z-index: 1;
+}
+  
+.tooltip-icon:hover::after {
+    display: block;
+}
