@@ -20,7 +20,10 @@
     @endif
 
     <label for="email">E-Mail Address</label>
-    <input id="email" type="email" name="email" value="{{ old('email') }}" required>
+    <div class="input-container">
+      <input id="email" type="email" name="email" value="{{ old('email') }}" required>
+      <span class="tooltip-icon" data-tooltip="Enter a valid email address (e.g., example@example.com)">?</span>
+    </div>
     @if ($errors->has('email'))
       <span class="error">
           {{ $errors->first('email') }}
@@ -28,7 +31,10 @@
     @endif
 
     <label for="password">Password</label>
-    <input id="password" type="password" name="password" required>
+    <div class="input-container">
+      <input id="password" type="password" name="password" required>
+      <span class="tooltip-icon" data-tooltip="Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, and a number.">?</span>
+    </div>
     @if ($errors->has('password'))
       <span class="error">
           {{ $errors->first('password') }}
@@ -36,8 +42,10 @@
     @endif
 
     <label for="password-confirm">Confirm Password</label>
-    <input id="password-confirm" type="password" name="password_confirmation" required>
-
+    <div class="input-container">
+      <input id="password-confirm" type="password" name="password_confirmation" required>
+      <span class="tooltip-icon" data-tooltip="Ensure your password confirmation matches the password.">?</span>
+    </div>
     <button type="submit">
       Register
     </button>
