@@ -98,15 +98,11 @@ Route::controller(CheckoutController::class)->group(function () {
 });
 
 //Order
-Route::controller(OrderController::class)->group(function () {
-    Route::get('/orders', 'index')->name('orders.index');
-    Route::get('/orders/{orderId}', 'show')->name('orders.show'); Route::post('/orders/{orderId}/cancel', [OrderController::class, 'cancelOrder']);
-});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{orderId}', [OrderController::class, 'show'])->name('orders.show');
-    Route::post('/orders/{orderId}/cancel', [OrderController::class, 'cancelOrder']);
+    Route::post('/orders/{orderId}/cancel', [OrderController::class, 'cancelOrder'])->name('orders.cancel');
 });
 
 //report
