@@ -2,49 +2,26 @@
     <h2>My Orders</h2>
 
     <div class="orders-container">
-        @if ($orders->isEmpty())
-            <p>You don't have any orders to display yet</p>
-        @else
-            @foreach ($orders->sortByDesc('tracking_number') as $order)
-            <!-- Each order block -->
-            <div class="order-block" 
-                data-tracking="{{ $order->tracking_number }}" 
-                data-date="{{ $order->buy_date }}" 
-                data-status="{{ ucfirst($order->status) }}" 
-                data-total="{{ $order->products->sum(fn($item) => optional($item->product)->price * $item->quantity) }}" 
-                data-products='@json($order->products->map(function($item) { 
-                    return [
-                        'name' => optional($item->product)->name ?? 'Unknown Product', 
-                        'quantity' => $item->quantity, 
-                        'price' => optional($item->product)->price ?? 0
-                    ]; 
-                }))'
-                data-images='@json($order->products->map(function($item) { 
-                    return optional($item->product)->image ? asset("storage/" . $item->product->image) : null; 
-                }))'
-                data-product-page='@json($order->products->map(function($item) { 
-                    return ['url' => optional($item->product)->id ? route("product.show", $item->product->id) : "#"]; 
-                }))'
-                onclick="openOrderDetailsFromElement(this)">
-                <p><strong>Tracking ID:</strong> {{ $order->tracking_number }}</p>
-                <p><strong>Date:</strong> {{ $order->buy_date }}</p>
-                <p><strong>Status:</strong> {{ ucfirst($order->status) }}</p>
-            </div>
-            @endforeach
-        @endif
-    </div>
+    @foreach ($orders as $order)
+        <div class="order-block">
+            <p><strong>Tracking ID:</strong> {{ $order->tracking_number }}</p>
+            <p><strong>Date:</strong> {{ $order->buy_date }}</p>
+            <p><strong>Status:</strong> <span id="status-{{ $order->id }}">{{ ucfirst($order->status) }}</span></p>
+            @if ($order->status === 'processing')
+                <button class="cancel-order-btn" onclick="confirmCancelOrder({{ $order->id }})">Cancel Order</button>
+            @endif
+        </div>
+    @endforeach
+</div>
 
-    <!-- Modal Popup -->
-    <div id="orderModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeOrderDetails()">&times;</span>
-            <h2>Order Details</h2>
-            <p><strong>Tracking ID:</strong> <span id="modalTrackingId"></span></p>
-            <p><strong>Date:</strong> <span id="modalDate"></span></p>
-            <p><strong>Status:</strong> <span id="modalStatus"></span></p>
-            <p><strong>Total:</strong> <span id="modalTotal"></span></p>
-            <p><strong>Products:</strong></p>
-            <ul id="modalProducts" class="product-list"></ul> 
+<!-- Confirmation Modal -->
+<div id="confirmationModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3>Are you sure you want to cancel this order?</h3>
+        <div>
+            <button class="confirm-btn" id="confirmCancel" onclick="">Yes</button>
+            <button class="cancel-btn" onclick="closeModal()">No</button>
         </div>
     </div>
 </div>

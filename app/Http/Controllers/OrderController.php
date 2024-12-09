@@ -13,11 +13,9 @@ class OrderController extends Controller
     {
         $userId = auth()->id();
 
-        // Encontre os pedidos do usuário
-        $orders = Order::where('user_id', $userId)->get();
+        $orders = Order::where('user_id', auth()->id())->with('products.product')->get();
 
-        // Retorne a view com os dados dos pedidos
-        return view('partials.orders', compact('orders'));
+        
     }
 
     public function show($orderId)
@@ -45,4 +43,40 @@ class OrderController extends Controller
             })
         ]);
     }
+
+    public function cancelOrder(Request $request, $orderId)
+    {
+        // Retrieve the order by ID
+        $order = Order::find($orderId);
+
+        // Check if the order exists
+        if (!$order) {
+            return response()->json(['error' => 'Order not found'], 404);
+        }
+
+        // Check if the order belongs to the authenticated user
+        if ($order->user_id !== auth()->id()) {
+            return response()->json(['error' => 'Unauthorized action'], 403);
+        }
+
+        // Check if the order status allows cancellation
+        if ($order->status !== 'processing') {
+            return response()->json(['error' => 'Order cannot be cancelled at this stage'], 400);
+        }
+
+        // Update the order status to 'cancelled'
+        $order->status = 'cancelled';
+        $order->save();
+
+        // Restore product stock if necessary
+        foreach ($order->products as $product) {
+            $product->quantity += $product->pivot->quantity;
+            $product->save();
+        }
+
+        // Return success message
+        return response()->json(['success' => true, 'message' => 'Order cancelada com sucesso!']);
+    }
+
+
 }

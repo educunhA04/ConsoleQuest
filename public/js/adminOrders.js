@@ -13,6 +13,7 @@ function openOrderDetailsFromElementAdmin(element) {
     document.getElementById('modalTrackingId').textContent = trackingId;
     document.getElementById('modalDate').textContent = date;
     document.getElementById('modalStatus').textContent = status;
+    document.getElementById('modalTotal').textContent = `€${total}`;
 
     const productsList = document.getElementById('modalProducts');
     productsList.innerHTML = ''; // Clear previous list
@@ -29,6 +30,17 @@ function openOrderDetailsFromElementAdmin(element) {
         productsList.appendChild(listItem);
     });
 
+    // Add cancel button if order is processing
+    const modalFooter = document.getElementById('modalFooter');
+    modalFooter.innerHTML = ''; // Clear previous buttons
+    if (status.toLowerCase() === 'processing') {
+        const cancelButton = document.createElement('button');
+        cancelButton.className = 'cancel-order-btn';
+        cancelButton.textContent = 'Cancel Order';
+        cancelButton.onclick = () => cancelOrder(trackingId);
+        modalFooter.appendChild(cancelButton);
+    }
+
     // Display the modal
     document.getElementById('orderModal').style.display = 'block';
 }
@@ -44,3 +56,27 @@ document.addEventListener('DOMContentLoaded', () => {
         element.addEventListener('click', () => openOrderDetailsFromElementAdmin(element));
     });
 });
+
+function cancelOrder(orderId) {
+    if (confirm('Are you sure you want to cancel this order?')) {
+        fetch(`/orders/${orderId}/cancel`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        }).then(response => {
+            if (response.ok) {
+                alert('Order cancelled successfully.');
+                window.location.reload();
+            } else {
+                response.json().then(data => {
+                    alert(data.error || 'An error occurred while cancelling the order.');
+                });
+            }
+        }).catch(error => {
+            alert('An unexpected error occurred.');
+            console.error(error);
+        });
+    }
+}

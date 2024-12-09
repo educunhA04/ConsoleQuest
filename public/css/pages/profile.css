@@ -114,39 +114,65 @@
 
 /* Style for the button container */
 .profile-buttons {
+    margin-top: 2px;
     display: flex;
-    gap: 15px; /* Space between buttons */
-    margin-top: 20px;
+    gap: 10px; /* Space between buttons */
+    position: absolute; /* Use absolute positioning */
+    bottom: 20px; /* Push to the bottom of the container */
+    left: 20px; /* Push to the right of the container */
+    justify-content: flex-end; /* Align buttons to the right */
+}
+
+/* Style for the button container */
+.profile-buttons {
+    margin-top: 2px;
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    position: absolute; /* Use absolute positioning */
+    bottom: 20px; /* Push to the bottom of the container */
+    left: 20px; /* Push to the left of the container */
+    justify-content: flex-end; /* Align buttons to the right */
 }
 
 /* General button style */
 .profile-buttons .button {
-    padding: 10px 20px;
-    font-size: 1em;
-    border: none;
+    padding: 8px 15px; /* Compact padding */
+    font-size: 0.9em; /* Slightly smaller font size */
+    border: 2px solid transparent; /* Set initial border width */
     border-radius: 5px;
-    background-color: #003366;
+    background-color: #003366; /* Default blue background */
     cursor: pointer;
     text-decoration: none; /* Remove underline for links styled as buttons */
     text-align: center;
-    color: white; /* Text color */
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    color: white; /* White text */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transition only background color and text color */
+    white-space: nowrap; /* Prevent text wrapping */
 }
+
 .profile-buttons .button:hover {
     background-color: white;
-    border: 1px solid #003366;
+    border-color: #003366; /* Change border color without affecting size */
     color: #003366; 
 }
+
 /* Logout button style */
 .profile-buttons .button:first-child {
     background-color: #ff5555; /* Red for logout */
+    border: 2px solid transparent; /* Match initial border width */
 }
 .profile-buttons .button:first-child:hover {
     color: #ff5555; 
     background-color: white;
-    border: 1px solid #ff5555;
-
+    border-color: #ff5555; /* Change border color without affecting size */
 }
+
+/* Ensure profile container has relative positioning for absolute buttons */
+.profile-container {
+    position: relative;
+    padding-bottom: 70px; /* Space for buttons at the bottom */
+}
+
+
 .admin-profile-form .save-button {
     background-color: #003366;
     color: white;
@@ -167,9 +193,16 @@
     border: 2px solid #003366;
 }
 @media (max-width: 600px) {
+    
+
     .profile-buttons {
-        flex-direction: column; /* Stack buttons vertically */
-        gap: 10px; /* Reduce spacing between buttons */
+        position: static; /* Remove absolute positioning on small screens */
+        justify-content: center; /* Center align buttons */
+        margin-top: 20px; /* Add margin to separate from content */
+    }
+
+    .profile-buttons .button {
+        width: 100%; /* Full width buttons for smaller screens */
     }
 }
 

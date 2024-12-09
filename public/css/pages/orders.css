@@ -129,3 +129,22 @@
     background-color: #f8f9fa; /* Slightly off-white for admin pages */
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow for admin */
 }
+
+/* Cancel Order Button */
+.cancel-order-btn {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #ff4d4f; /* Red for cancellation */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.2s ease;
+}
+
+.cancel-order-btn:hover {
+    background-color: #d9363e; /* Darker red on hover */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
