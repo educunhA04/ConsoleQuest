@@ -145,29 +145,40 @@ Route::post('/reset-password', function (Request $request) {
 })->middleware('guest')->name('password.update');
 
 //admin
+// Admin Authentication Routes
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
     Route::post('/login', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
     Route::post('/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
 });
+
+// Admin Routes (Authenticated)
 Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
     Route::get('/dashboard/users', [AdminController::class, 'show'])->name('dashboard.users');
-    Route::post('/dashboard/users', [AdminController::class, 'showFiltredUsers'])->name('dashboard.users.filtred');
+    Route::post('/dashboard/users', [AdminController::class, 'showFiltredUsers'])->name('dashboard.users.filtered');
     Route::get('/dashboard/products', [AdminController::class, 'showProducts'])->name('dashboard.products');
+
+    
     Route::post('/view-user', [AdminController::class, 'viewUser'])->name('viewUser');
     Route::get('/view-product/{id}', [AdminController::class, 'viewProduct'])->name('viewProduct');
-    Route::post('/change-user', [AdminController::class, 'changeUser'])->name('changeUser');
+
+    
+    Route::post('/change-user', [AdminController::class, 'changeUser'])->name('user.change');
     Route::post('/change-product', [AdminController::class, 'changeProduct'])->name('changeProduct');
+    Route::get('/create-user', [AdminController::class, 'createUserShow'])->name('user.create');
+    Route::post('/store-user', [AdminController::class, 'storeUser'])->name('user.store');
     Route::post('/update-profile', [AdminController::class, 'update'])->name('updateProfile');
     Route::get('/create-user', [AdminController::class, 'createUserShow'])->name('createUser');
     Route::get('/create_product', [AdminController::class, 'createProductShow'])->name('createProduct');
-    Route::post('/store-user', [AdminController::class, 'storeUser'])->name('storeUser');
+    
     Route::post('/store-product', [AdminController::class, 'storeProduct'])->name('storeProduct');
 
-    Route::get('/users/{userId}/purchase-history', [AdminController::class, 'viewUserPurchaseHistory'])
-         ->name('users.purchaseHistory');
 
+    // User Orders Management
+    Route::get('/user/{id}/orders', [AdminController::class, 'viewUserOrders'])->name('user.orders'); // View all orders for a user
+    Route::get('/orders/{orderId}', [AdminController::class, 'viewOrderDetails'])->name('order.details'); // View specific order details
 });
+
 
 Route::controller(RegisterController::class)->group(function () {
     Route::get('/register', 'showRegistrationForm')->name('register');

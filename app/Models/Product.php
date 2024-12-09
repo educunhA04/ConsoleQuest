@@ -28,11 +28,11 @@ class Product extends Model
         return $this->hasMany(Review::class, 'product_id', 'id');
     }
 
-    public function orders()
+    public function orderProducts()
     {
-        return $this->belongsToMany(Order::class, 'order_product', 'product_id', 'order_id')
-                    ->withPivot('quantity');
+        return $this->hasMany(OrderProduct::class);
     }
+
 
 
 }
