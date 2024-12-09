@@ -120,6 +120,7 @@
 }
 
 .tooltip-icon {
+    display: inline-block;
     position: absolute;
     top: -0.75rem; /* Ajuste para mover o ícone para cima */
     right: -0.75rem; /* Ajuste para mover o ícone para a direita */
@@ -136,6 +137,7 @@
 }
 
 .tooltip-icon:hover::after {
+    display: block;
     content: attr(data-tooltip);
     position: absolute;
     top: -1.5rem;

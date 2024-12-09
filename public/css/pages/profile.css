@@ -173,35 +173,103 @@
     }
 }
 
-.input-container {
-    display: flex;
-    align-items: center;
-    position: relative;
+
+/* Edit profile */
+
+#profile-form {
+    max-width: 25rem; 
+    margin: 3rem auto; 
+    padding: 1.25rem; 
+    background-color: #f9f9f9;
+    border: 0.063rem solid #ddd; 
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1); 
 }
 
-.tooltip-icon {
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-    color: #fff; /* Adjust color as needed */
+
+#profile-form input[type="text"],
+#profile-form input[type="email"],
+#profile-form input[type="password"] {
+    width: 95%;
+    padding: 0.625rem; 
+    margin-bottom: 0.938rem; 
+    border: 0.063rem solid #ccc; 
+    border-radius: 0.25rem; 
+    font-size: 0.875rem;
+}
+
+#profile-form input[type="text"]:focus,
+#profile-form input[type="password"]:focus {
+    border-color: #003366;
+    outline: none;
+    box-shadow: 0 0 0.25rem rgba(0, 123, 255, 0.5);
+}
+
+#profile-form button {
+    display: block;
+    width: 100%;
+    padding: 0.625rem 0.938rem; 
+    background-color: #fff;
+    color: #003366;
+    border: 0.125rem solid #003366; 
+    border-radius: 0.25rem; 
+    font-size: 1rem; 
     font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
-  
-.tooltip-icon::after {
-    content: attr(data-tooltip);
-    display: none;
-    position: absolute;
-    top: 100%; /* Adjust the positioning */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #333;
+
+#profile-form button:hover {
+    background-color: #003366;
     color: #fff;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
-    white-space: nowrap;
-    z-index: 1;
+
 }
-  
-.tooltip-icon:hover::after {
+
+#profile-form a.button-outline {
+    display: block;
+    text-align: center;
+    padding: 0.625rem 0.938rem; 
+    margin-top: 0.625rem; 
+    background-color: transparent;
+    color: #003366;
+    border: 0.125rem solid #003366; 
+    border-radius: 0.25rem;
+    font-size: 1rem;    
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#profile-form a.button-outline:hover {
+    background-color: #003366;
+    color: #fff;
+}
+
+#profile-form label input[type="checkbox"] {
+    margin-right: 0.313rem; 
+}
+
+#profile-form label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    font-size: 0.875rem; 
+    font-weight: 600;
+    color: #333;
+}
+
+#profile-form .error {
+    color: #d9534f;
+    font-size: 0.75rem; 
+    margin-top: -0.625rem; 
+    margin-bottom: 0.938rem; 
     display: block;
 }
+
+#profile-form .success {
+    color: #28a745;
+    font-size: 0.875rem; 
+    text-align: center;
+    margin-top: 1.25rem;
+}
+

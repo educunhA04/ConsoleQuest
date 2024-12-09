@@ -29,25 +29,38 @@
         <!-- Campo NIF -->
         <div class="form-group">
             <label for="NIF">NIF:</label>
-            <input type="text" name="NIF" id="NIF" required>
+            <div class="checkout-input-container">
+                <input type="text" name="NIF" id="NIF" required>
+                <span class="checkout-tooltip-icon" data-tooltip="O NIF deve conter 9 dígitos numéricos.">?</span>
+            </div>
         </div>
 
         <!-- Informações do Cartão de Crédito -->
+        
         <div class="form-group">
             <label for="credit_card_number">Número do Cartão:</label>
-            <input type="text" name="credit_card_number" id="credit_card_number" required>
+            <div class="checkout-input-container">
+                <input type="text" name="credit_card_number" id="credit_card_number" required>
+                <span class="checkout-tooltip-icon" data-tooltip="O número do cartão deve conter 16 dígitos numéricos.">?</span>
+            </div>
         </div>
 
         <div class="form-group">
             <label for="credit_card_exp_date">Data de Validade:</label>
-            <input type="date" name="credit_card_exp_date" id="credit_card_exp_date" required>
+            <div class="checkout-input-container">
+                <input type="date" name="credit_card_exp_date" id="credit_card_exp_date" required>
+                <span class="checkout-tooltip-icon" data-tooltip="Insira a data de validade no formato MM/AAAA.">?</span>
+            </div>
         </div>
 
+    
         <div class="form-group">
             <label for="credit_card_cvv">CVV:</label>
-            <input type="text" name="credit_card_cvv" id="credit_card_cvv" required>
-         </div>
-        
+            <div class="checkout-input-container">
+                <input type="text" name="credit_card_cvv" id="credit_card_cvv" required>
+                <span class="checkout-tooltip-icon" data-tooltip="O CVV deve conter 3 dígitos numéricos.">?</span>
+            </div>
+        </div>
 
         <!-- Botão para Finalizar -->
         <button type="submit" class="checkout-btn">Finalizar Compra</button>

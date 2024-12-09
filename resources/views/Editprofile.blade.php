@@ -8,7 +8,7 @@
         </div>
         <div class="profile-content">
             <!-- Edit Profile Form -->
-            <form action="{{ url('/updateprofile') }}" method="POST" class="profile-form">
+            <form action="{{ url('/updateprofile') }}" method="POST" id="profile-form">
                 @csrf
 
                
