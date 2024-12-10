@@ -38,54 +38,45 @@
 
     @elseif (isset($reports))
         <h2>Reports:</h2>
-            <div class="report-list">
-                <table>
-                    <thead>
+        <div class="report-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>User</th>
+                        <th>Reason</th>
+                        <th>Description</th>
+                        <th>Review</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($reports as $report)
                         <tr>
-                            <th>ID</th>
-                            <th>User</th>
-                            <th>Reason</th>
-                            <th>Description</th>
-                            <th>Review</th>
-                            <th>Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($reports as $report)
-                            <tr>
-                                <td>{{ $report->id }}</td>
-                                <td>{{ $report->user->name }} ({{ $report->user->email }})</td>
-                                <td>{{ $report->reason }}</td>
-                                <td>{{ $report->description }}</td>
-                                <td>
-                                    {{$report->review->description}}
-                                      
-                                </td>
-                                <td>{{ $report->created_at }}</td>
-                                <td>
-                                    <!-- Mark as Resolved -->
-                                    <form action="{{ route('admin.deleteReport', ['id' => $report->id]) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="button-link-danger">Delete Report</button>
-                                    </form>
-
-                                    <!-- Delete Review -->
-                                    @if ($report->review)
+                            <td>{{ $report->id }}</td>
+                            <td>{{ $report->user->name }} ({{ $report->user->email }})</td>
+                            <td>{{ $report->reason }}</td>
+                            <td>{{ $report->description }}</td>
+                            <td>{{ $report->review->description }}</td>
+                            <td class="actions-cell">
+                                <form action="{{ route('admin.deleteReport', ['id' => $report->id]) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="button-link-danger">Delete Report</button>
+                                </form>
+                                @if ($report->review)
                                     <form action="{{ route('admin.reviews.destroy', ['id' => $report->review->id]) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="button-link-danger">Delete Review</button>
                                     </form>
-
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
         @endif
 </div>
 @endsection

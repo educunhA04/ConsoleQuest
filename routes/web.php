@@ -171,7 +171,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::get('/view-product/{id}', [AdminController::class, 'viewProduct'])->name('viewProduct');
     
     Route::post('/change-user', [AdminController::class, 'changeUser'])->name('user.change');
-    Route::post('/change-product', [AdminController::class, 'changeProduct'])->name('product.change');
+    Route::post('/change-product', [AdminController::class, 'changeProduct'])->name('changeProduct');
     Route::get('/create-user', [AdminController::class, 'createUserShow'])->name('user.create');
     Route::post('/store-user', [AdminController::class, 'storeUser'])->name('user.store');
     Route::post('/update-profile', [AdminController::class, 'update'])->name('updateProfile');
