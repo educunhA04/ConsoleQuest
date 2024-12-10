@@ -18,6 +18,10 @@ use App\Models\Product;
 use App\Models\ShoppingCart;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Models\Report;
+use App\Models\Review;
+
+
 
 class AdminController extends Controller
 {
@@ -253,5 +257,65 @@ class AdminController extends Controller
             ]),
         ]);
     }
+
+    public function showReports()
+    {
+        // Fetch all user reports with pagination
+        $reports = Report::with('user', 'review')
+            ->orderBy('id', 'desc')
+            ->paginate(10); // Adjust the pagination as needed
+
+        // Return the reports view
+        return view('pages.admin.dashboard', compact('reports'));
+    }
+
+    public function handleReport($id)
+    {
+        try {
+            $report = Report::findOrFail($id);
+            $report->delete();
+
+            return redirect()->route('admin.dashboard.reports')->with('success', 'Report marked as resolved.');
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('admin.dashboard.reports')->with('error', 'Report not found.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.dashboard.reports')->with('error', 'An unexpected error occurred.');
+        }
+    }
+
+
+    public function deleteReview($id)
+    {
+        $review = Review::find($id);
+
+        if (!$review) {
+            return redirect()->back()->with('error', 'Review not found.');
+        }
+
+        // Delete associated reports
+        Report::where('review_id', $id)->delete();
+
+        // Delete the review
+        $review->delete();
+
+        return redirect()->route('admin.dashboard.reports')->with('success', 'Review and associated reports deleted successfully.');
+    }
+
+    public function deleteReport($id)
+    {
+        // Find the report by ID
+        $report = Report::find($id);
+
+        // Check if the report exists
+        if (!$report) {
+            return redirect()->back()->with('error', 'Report not found.');
+        }
+
+        // Delete the report
+        $report->delete();
+
+        return redirect()->route('admin.dashboard.reports')->with('success', 'Report deleted successfully.');
+    }
+
 
 }

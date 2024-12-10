@@ -1,6 +1,6 @@
-DROP SCHEMA IF EXISTS rabeira CASCADE;
-CREATE SCHEMA IF NOT EXISTS rabeira;
-SET search_path TO rabeira;
+DROP SCHEMA IF EXISTS lbaw24151 CASCADE;
+CREATE SCHEMA IF NOT EXISTS lbaw24151;
+SET search_path TO lbaw24151;
 
 
 -----------------------------------------
