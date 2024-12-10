@@ -15,7 +15,13 @@ html, body {
 main {
   flex: 1; 
   padding: 1rem; 
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400; 
+  font-size: 1rem;
+  line-height: 1.6; 
+
 }
+
 body {
     background-color: #ffffff;
     color: #003366;
@@ -25,11 +31,12 @@ body {
 header {
   background-color: #003366;
   color: white;
-  padding: 0.9rem 1.8rem;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1);
+  
 
 }
 
@@ -40,11 +47,31 @@ header {
     justify-content: space-between;
 }
 
+header h1 {
+  margin: 0; 
+  display: flex;
+  align-items: center;
+}
+
 header h1 a {
   color: white;
   text-decoration: none;
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: bold;
+  display: inline-block;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+header h1, header a {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700; 
+}
+
+h1, h2, h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
 
@@ -63,7 +90,8 @@ header h1 a {
   color:white;
   text-decoration: none;
   font-size: 1.2rem;
-  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500; 
   transition: color 0.3s ease;
   position: relative;
 }
@@ -81,16 +109,29 @@ header h1 a {
 
 }
 
-.user-actions .icon {
-    font-size: 1.2rem;
-    color: white;
-    margin: 0 0.3rem;
-    transition: color 0.3s ease;
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.user-actions .icon:hover {
-    color: #94b9f1;
+.user-actions .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #fff;
 }
+
+.user-actions .icon img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
 
 a {
     color: #ffffff;
@@ -108,7 +149,9 @@ footer {
   padding: 1.2rem 1.8rem;
   text-align: center;
   margin-top: 1.2rem;
-  width: 100%; 
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300; /* Light para ser discreto */
+  font-size: 0.9rem;
 }
 
 .footer-links {
@@ -189,27 +232,7 @@ textarea.form-control {
   resize: none;
 }
 
-.logout-link {
-  color: white;
-  background-color: #295f94; /* Cor de fundo */
-  padding: 10px 20px; /* Tamanho do botão */
-  border-radius: 5px; /* Borda arredondada */
-  text-decoration: none; /* Remove sublinhado */
-  font-weight: bold;
-  font-size: 1rem; /* Tamanho do texto */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Transição suave */
-  display: inline-block;
-}
 
-.logout-link:hover {
-  background-color: #002244; /* Cor de fundo ao passar o mouse */
-   /* Leve crescimento ao passar o mouse */
-}
-
-
-.logout-link i {
-  margin-right: 8px; /* Espaçamento entre ícone e texto */
-}
 
 /* Estilo base para links de autenticação */
 .auth-link {
@@ -218,19 +241,30 @@ textarea.form-control {
   text-decoration: none; /* Remove sublinhado */
   font-weight: bold;
   font-size: 1.1rem; /* Tamanho do texto */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Transição suave */
-  display: inline-block;
-  margin: 0 5px; /* Espaçamento horizontal */
+  display: inline-block; /* Para controle de layout */
+  padding: 0.2rem 0.2rem; /* Espaçamento interno para tornar clicável */
+  text-align: center; /* Centraliza o texto */
+  margin: 0; /* Remove margens padrão */
 }
 
 
+.auth-link.sign-up {
+  margin-right: 0rem; /* Remove espaçamento desnecessário à esquerda */
+}
 
-.auth-link.sign-in::after {
-  content: '|'; /* Adiciona a barra */
-  font-weight: bold; /* Negrito */
-  margin-right: 0.4rem;
-  margin-left: 0.9rem;
-  color: white; /* Cor da barra */
+/* Alinhamento geral */
+.auth-links-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  gap: 0; 
+}
+
+button, .auth-link {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600; /* Semibold para destacar ações importantes */
+  font-size: 1rem;
+  text-transform: uppercase; /* Deixa o botão mais chamativo */
 }
 
 
@@ -275,5 +309,3 @@ textarea.form-control {
 .filters-section button:hover {
   background-color: #23507e;
 }
-
-

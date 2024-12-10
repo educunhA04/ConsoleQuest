@@ -19,6 +19,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
 
 use App\Models\User;
@@ -97,8 +98,14 @@ Route::controller(CheckoutController::class)->group(function () {
     Route::post('/checkout/finalize', 'finalize')->name('checkout.finalize');
 });
 
-//Order
+//Notification
+Route::controller(NotificationController::class)->group(function () {
+    Route::get('/notifications', 'index')->name('notifications.index');
+    Route::get('/notifications/{id}', 'show')->name('notifications.show');
+});
 
+
+//Order
 Route::middleware(['auth'])->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{orderId}', [OrderController::class, 'show'])->name('orders.show');
@@ -109,6 +116,7 @@ Route::middleware(['auth'])->group(function () {
 Route::controller(ReportController::class)->group(function () {
     Route::post('/report/{id}', 'report')->name('reviews.report');
 });
+
 // Authentication
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLoginForm')->name('login');
@@ -149,6 +157,7 @@ Route::post('/reset-password', function (Request $request) {
 
 //admin
 // Admin Authentication Routes
+// Admin Authentication Routes
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
     Route::post('/login', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
@@ -157,14 +166,16 @@ Route::prefix('admin')->group(function () {
 
 // Admin Routes (Authenticated)
 Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
+    // Dashboard
     Route::get('/dashboard/users', [AdminController::class, 'show'])->name('dashboard.users');
     Route::post('/dashboard/users', [AdminController::class, 'showFiltredUsers'])->name('dashboard.users.filtered');
     Route::get('/dashboard/products', [AdminController::class, 'showProducts'])->name('dashboard.products');
+    Route::get('/dashboard/reports', [AdminController::class, 'showReports'])->name('dashboard.reports');
 
-    
+
+    // View and Manage Users and Products
     Route::post('/view-user', [AdminController::class, 'viewUser'])->name('viewUser');
     Route::get('/view-product/{id}', [AdminController::class, 'viewProduct'])->name('viewProduct');
-
     
     Route::post('/change-user', [AdminController::class, 'changeUser'])->name('user.change');
     Route::post('/change-product', [AdminController::class, 'changeProduct'])->name('changeProduct');
@@ -173,14 +184,22 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::post('/update-profile', [AdminController::class, 'update'])->name('updateProfile');
     Route::get('/create-user', [AdminController::class, 'createUserShow'])->name('createUser');
     Route::get('/create_product', [AdminController::class, 'createProductShow'])->name('createProduct');
-    Route::post('/store-user', [AdminController::class, 'storeUser'])->name('storeUser');
     Route::post('/store-product', [AdminController::class, 'storeProduct'])->name('storeProduct');
 
-
     // User Orders Management
-    Route::get('/user/{id}/orders', [AdminController::class, 'viewUserOrders'])->name('user.orders'); // View all orders for a user
-    Route::get('/orders/{orderId}', [AdminController::class, 'viewOrderDetails'])->name('order.details'); // View specific order details
+    Route::get('/user/{id}/orders', [AdminController::class, 'viewUserOrders'])->name('user.orders');
+    Route::get('/orders/{orderId}', [AdminController::class, 'viewOrderDetails'])->name('order.details');
+
+    // Reports Management
+    Route::put('/reports/{id}/handle', [AdminController::class, 'handleReport'])->name('handleReport');
+    Route::delete('/reports/{id}', [AdminController::class, 'deleteReport'])->name('deleteReport');
+
+    // Reviews
+    Route::get('/review/{id}', [AdminController::class, 'viewReview'])->name('viewReview');
+    Route::delete('/reviews/{id}', [AdminController::class, 'deleteReview'])->name('reviews.destroy');
+
 });
+
 
 
 Route::controller(RegisterController::class)->group(function () {

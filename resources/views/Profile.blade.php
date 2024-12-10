@@ -15,6 +15,13 @@
                 <div class="detail-row"><strong>Email:</strong> {{ Auth::user()->email }}</div>
             </div>
 
+            @if(isset($notifications))
+                @include('partials/notifications', ['notifications' => $notifications])
+            @else
+                <p>No notifications available.</p>
+            @endif
+
+
             <!-- Include Orders Section -->
             @include('partials/orders')
         </div>
