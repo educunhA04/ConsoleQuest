@@ -375,3 +375,5 @@ SELECT SETVAL('Product_id_seq', (SELECT MAX(id) FROM Product));
 SELECT SETVAL('"Order_id_seq"', (SELECT MAX(id) FROM "Order"));
 SELECT SETVAL('Transaction_id_seq', (SELECT MAX(id) FROM Transaction));
 SELECT SETVAL('Order_Product_id_seq', (SELECT MAX(id) FROM Order_Product));
+SELECT SETVAL('Notification_id_seq', (SELECT MAX(id) FROM Notification));
+SELECT SETVAL('Notification_User_id_seq', (SELECT MAX(id) FROM Notification_User));
