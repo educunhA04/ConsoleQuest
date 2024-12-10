@@ -1,6 +1,6 @@
-DROP SCHEMA IF EXISTS lbaw24151 CASCADE;
-CREATE SCHEMA IF NOT EXISTS lbaw24151;
-SET search_path TO lbaw24151;
+DROP SCHEMA IF EXISTS rabeira CASCADE;
+CREATE SCHEMA IF NOT EXISTS rabeira;
+SET search_path TO rabeira;
 
 
 -----------------------------------------
@@ -56,7 +56,8 @@ CREATE TYPE categories AS ENUM(
 CREATE TYPE order_status AS ENUM(
   'processing', 
   'shipped', 
-  'delivered'
+  'delivered',
+  'cancelled'
 );
 
 -----------------------------------------
