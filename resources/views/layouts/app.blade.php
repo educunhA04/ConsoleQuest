@@ -49,16 +49,27 @@
 
                 <!-- Right Section (User Actions) -->
                 <div class="user-actions">
-                    <a href="{{ url('/wishlist') }}" class="icon"><i class="fas fa-heart"></i></a>
-                    <a href="{{ url('/shoppingcart') }}" class="icon"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="{{ url('/wishlist') }}" class="icon">
+                        <i class="fas fa-heart"></i>
+                    </a>
+                    <a href="{{ url('/shoppingcart') }}" class="icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
                     @if (Auth::check())
-                        <a href="{{ url('/profile') }}" class="icon"><i class="fas fa-user"></i></a>
+                        <a href="{{ url('/profile') }}" class="icon">
+                            @if (Auth::user()->image)
+                                <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="User Image">
+                            @else
+                                <i class="fas fa-user"></i>
+                            @endif
+                        </a>
                         <a href="{{ url('/logout') }}" class="logout-link">Logout</a>
                     @else
-                    <a href="{{ url('/login') }}" class="auth-link sign-in">Sign In</a><a href="{{ url('/register') }}" class="auth-link sign-up">Sign Up</a>
-
+                        <a href="{{ url('/login') }}" class="auth-link sign-in">Sign In</a>
+                        <a href="{{ url('/register') }}" class="auth-link sign-up">Sign Up</a>
                     @endif
                 </div>
+
             </div>
         </header>
         @yield('navigation')
