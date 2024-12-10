@@ -1,6 +1,6 @@
-DROP SCHEMA IF EXISTS lbaw24151 CASCADE;
-CREATE SCHEMA IF NOT EXISTS lbaw24151;
-SET search_path TO lbaw24151;
+DROP SCHEMA IF EXISTS rabeira CASCADE;
+CREATE SCHEMA IF NOT EXISTS rabeira;
+SET search_path TO rabeira;
 
 
 -----------------------------------------
@@ -366,19 +366,32 @@ INSERT INTO Admin (id, name, email, password) VALUES
 
 INSERT INTO "Order" (id, user_id, tracking_number, status, buy_date, estimated_delivery_date) VALUES
     (1, 1, 'TRK123456', 'processing', '2024-01-01', '2024-01-05'),
-    (2, 1, 'TRK654321', 'shipped', '2024-01-02', '2024-01-06');
+    (2, 1, 'TRK654321', 'shipped', '2024-01-02', '2024-01-06'),
+    (3, 1, 'TRK654323', 'shipped', '2024-01-03', '2024-01-05');
 
 INSERT INTO Transaction (id, user_id, order_id, code, price, NIF, credit_card_number, credit_card_exp_date, credit_card_cvv) VALUES
     (1, 1, 1, 'TXN1001', 499.99, '123456789', '4111111111111111', '2025-12-31', '123'),
-    (2, 1, 2, 'TXN1002', 59.99, '987654321', '4111111111111112', '2026-12-31', '456');
+    (2, 1, 2, 'TXN1002', 59.99, '987654321', '4111111111111112', '2026-12-31', '456'),
+    (3, 1, 3, 'TXN1003', 59.99, '987654321', '4111111111111112', '2026-12-31', '456');
 
 INSERT INTO Order_Product (id, order_id, product_id,quantity) VALUES
     (1, 1, 1 ,1),
     (2, 1, 2 ,1),
-    (3, 2, 3, 1);
+    (3, 2, 3, 1),
+    (4, 3, 3, 1);
     
 INSERT INTO "password_reset_tokens" (email, token, created_at) 
 VALUES ('rafa@gmail.com', '5f4e7fdc19c37882511ab68f1ff3cfd3', NOW());
+
+-- Populate Notification table
+INSERT INTO Notification (id, description, viewed, date) VALUES
+    (1, 'Your order has been shipped!', FALSE, '2024-01-02'),
+    (2, 'New product added to your wishlist!', TRUE, '2024-01-03');
+
+-- Populate Notification_User table
+INSERT INTO Notification_User (id, user_id, notification_id) VALUES
+    (1, 1, 1),
+    (2, 1, 2);
 
 SELECT SETVAL('"User_id_seq"', (SELECT MAX(id) FROM "User"));
 SELECT SETVAL('Admin_id_seq', (SELECT MAX(id) FROM Admin));

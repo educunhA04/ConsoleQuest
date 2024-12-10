@@ -18,21 +18,21 @@ INSERT INTO Product (id, category_id, name, image, description, quantity, price,
     (2, 2, 'Cyberpunk 2077', 'cyberpunk.jpg', 'Open-world RPG game', 100, 59.99, 20),
     (3, 3, 'DualSense Controller', 'dualsense.jpg', 'PS5 Wireless Controller', 200, 69.99, 15);
 
--- Populate Order table first to satisfy foreign keys in Transaction and Order_Product
 INSERT INTO "Order" (id, user_id, tracking_number, status, buy_date, estimated_delivery_date) VALUES
     (1, 1, 'TRK123456', 'processing', '2024-01-01', '2024-01-05'),
-    (2, 2, 'TRK654321', 'shipped', '2024-01-02', '2024-01-06');
+    (2, 1, 'TRK654321', 'shipped', '2024-01-02', '2024-01-06'),
+    (3, 1, 'TRK654323', 'shipped', '2024-01-03', '2024-01-05');
 
--- Populate Transaction table
 INSERT INTO Transaction (id, user_id, order_id, code, price, NIF, credit_card_number, credit_card_exp_date, credit_card_cvv) VALUES
     (1, 1, 1, 'TXN1001', 499.99, '123456789', '4111111111111111', '2025-12-31', '123'),
-    (2, 2, 2, 'TXN1002', 59.99, '987654321', '4111111111111112', '2026-12-31', '456');
+    (2, 1, 2, 'TXN1002', 59.99, '987654321', '4111111111111112', '2026-12-31', '456'),
+    (3, 1, 3, 'TXN1003', 59.99, '987654321', '4111111111111112', '2026-12-31', '456');
 
--- Populate Order_Product table
-INSERT INTO Order_Product (id, order_id, product_id) VALUES
-    (1, 1, 1),
-    (2, 1, 2),
-    (3, 2, 3);
+INSERT INTO Order_Product (id, order_id, product_id,quantity) VALUES
+    (1, 1, 1 ,1),
+    (2, 1, 2 ,1),
+    (3, 2, 3, 1),
+    (4, 3, 3, 1);
 
 -- Populate Wishlist table
 INSERT INTO Wishlist (id, user_id, product_id) VALUES
