@@ -70,7 +70,9 @@ CREATE TABLE "User" (
     password TEXT NOT NULL,
     name TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
-    remember_token VARCHAR(255)
+    remember_token VARCHAR(255),
+    image TEXT,
+    blocked BOOLEAN DEFAULT FALSE
 );
 CREATE TABLE Admin (
     id SERIAL  PRIMARY KEY,
@@ -344,8 +346,8 @@ INSERT INTO Product (id, category_id, name, image, description, quantity, price,
     (4, 2, 'League of Legnds', '/dbimages/LOL.jpeg', 'Virgin game', 10, 9.99, 0),
     (5, 3, 'DualSense Controller', '/dbimages/dualsense.jpg', 'PS5 Wireless Controller', 200, 69.99, 15);
 
-INSERT INTO "User" (id, username, password, name, email) VALUES
-    (1, 'Lopez', '$2y$10$AyqmTcuuDudCvz5A.MrEcuQ0eFsS0vY4vuW3tYFeRnlOB6ZtbF.ay', 'Rafael Augusto', 'rafa@gmail.com');
+INSERT INTO "User" (id, username, password, name, email, image ,blocked) VALUES
+    (1, 'Lopez', '$2y$10$AyqmTcuuDudCvz5A.MrEcuQ0eFsS0vY4vuW3tYFeRnlOB6ZtbF.ay', 'Rafael Augusto', 'rafa@gmail.com','/userimages/lopez.jpeg', FALSE);
    
 INSERT INTO Admin (id, name, email, password) VALUES
     (1,'rabeira' ,'admin@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'); 
@@ -373,3 +375,5 @@ SELECT SETVAL('Product_id_seq', (SELECT MAX(id) FROM Product));
 SELECT SETVAL('"Order_id_seq"', (SELECT MAX(id) FROM "Order"));
 SELECT SETVAL('Transaction_id_seq', (SELECT MAX(id) FROM Transaction));
 SELECT SETVAL('Order_Product_id_seq', (SELECT MAX(id) FROM Order_Product));
+SELECT SETVAL('Notification_id_seq', (SELECT MAX(id) FROM Notification));
+SELECT SETVAL('Notification_User_id_seq', (SELECT MAX(id) FROM Notification_User));

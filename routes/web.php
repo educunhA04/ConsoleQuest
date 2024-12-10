@@ -19,6 +19,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
 
 use App\Models\User;
@@ -97,8 +98,14 @@ Route::controller(CheckoutController::class)->group(function () {
     Route::post('/checkout/finalize', 'finalize')->name('checkout.finalize');
 });
 
-//Order
+//Notification
+Route::controller(NotificationController::class)->group(function () {
+    Route::get('/notifications', 'index')->name('notifications.index');
+    Route::get('/notifications/{id}', 'show')->name('notifications.show');
+});
 
+
+//Order
 Route::middleware(['auth'])->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{orderId}', [OrderController::class, 'show'])->name('orders.show');
