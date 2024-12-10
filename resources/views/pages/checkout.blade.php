@@ -30,7 +30,7 @@
         <div class="form-group">
             <label for="NIF">NIF:</label>
             <div class="checkout-input-container">
-                <input type="text" name="NIF" id="NIF" required>
+                <input type="text" name="NIF" id="NIF">
                 <span class="checkout-tooltip-icon" data-tooltip="O NIF deve conter 9 dígitos numéricos.">?</span>
             </div>
         </div>

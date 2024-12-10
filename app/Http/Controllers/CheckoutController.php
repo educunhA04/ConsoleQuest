@@ -54,7 +54,7 @@ class CheckoutController extends Controller
             return $cartItem->quantity * $cartItem->product->price;
         });
         $validated = $request->validate([
-            'NIF' => 'string|max:15',
+            'NIF' => 'nullable|digits:9',
             'credit_card_number' => 'required|digits:16',
             'credit_card_exp_date' => 'required|date|after:today',
             'credit_card_cvv' => 'required|digits:3',
