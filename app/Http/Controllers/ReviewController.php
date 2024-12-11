@@ -75,20 +75,45 @@ class ReviewController extends Controller
                ->with('success', 'Avaliação atualizada com sucesso!');
     }
 
-
     public function destroy($id)
     {
         try {
-            $review = Review::where('id', $id)
-                            ->where('user_id', auth()->id())
-                            ->firstOrFail();
+            $review = Review::findOrFail($id);
     
+            // Check if the user is the owner or an admin
+            if ($review->user_id !== auth()->id() && !auth()->user()->is_admin) {
+                return back()->with('error', 'You do not have permission to delete this review.');
+            }
+    
+            // Delete the review
             $review->delete();
     
-            return back()->with('success', 'Avaliação excluída com sucesso!');
+            // Optionally, delete associated reports
+            Report::where('review_id', $id)->delete();
+    
+            return back()->with('success', 'Review deleted successfully!');
         } catch (ModelNotFoundException $e) {
-            return back()->with('error', 'Não tem permissão para excluir esta avaliação.');
+            return back()->with('error', 'Review not found.');
         }
     }
+    
+
+    public function adminDestroy($id)
+    {
+        try {
+            $review = Review::findOrFail($id);
+
+            // Delete the review
+            $review->delete();
+
+            // Optionally, delete associated reports
+            Report::where('review_id', $id)->delete();
+
+            return redirect()->route('admin.dashboard.reports')->with('success', 'Review deleted successfully!');
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('admin.dashboard.reports')->with('error', 'Review not found.');
+        }
+    }
+
 
 }

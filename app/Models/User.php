@@ -30,7 +30,10 @@ class User extends Authenticatable
         'email',
         'password',
         'username',
+        'image', 
+        'blocked',
     ];
+    
 
     /**
      * The attributes that should be hidden for serialization.
@@ -63,6 +66,11 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function notifications()
+    {
+        return $this->belongsToMany(Notification::class, 'notification_user', 'user_id', 'notification_id');
     }
 
     

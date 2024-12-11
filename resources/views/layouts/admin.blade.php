@@ -26,6 +26,8 @@
 
         <!-- Font Awesome (for icons) -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+
 
         <!-- Global Scripts -->
         <script type="text/javascript" src="{{ url('js/app.js') }}" defer></script>
@@ -57,6 +59,7 @@
             <nav class="main-nav">
                 <a href="{{ route('admin.dashboard.users') }}">Users</a>
                 <a href="{{ route('admin.dashboard.products') }}">Products</a>
+                <a href="{{ route('admin.dashboard.reports') }}">Reports</a>
             </nav>
 
             <!-- Main Content -->
