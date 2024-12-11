@@ -1,7 +1,8 @@
 /* General Styles for Orders Section */
 .orders-container {
-    max-height: 400px; /* Consistent height for visibility */
+    max-height: 20rem; /* Consistent height for visibility */
     overflow-y: auto;
+
     border: 1px solid #e0e0e0;
     padding: 20px;
     border-radius: 12px;

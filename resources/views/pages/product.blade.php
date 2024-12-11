@@ -45,22 +45,22 @@
         </div>
 
         <div class="product-details">
-            <form action="{{ route('wishlist.add') }}" method="POST" class="add-to-wishlist-form">
+            <div class="price-and-heart">
+                <div class="price">{{ number_format($product->price, 2) }} €</div> <!-- Product price -->
+                <form action="{{ route('wishlist.add') }}" method="POST" class="add-to-wishlist-form">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <button class="wishlist-icon">♡</button>
-            </form>
-            <div class="price">{{ number_format($product->price, 2) }} €</div> <!-- Product price -->
+                    <button id="wishlist-heart" class="fas fa-heart"></button>
+                </form>
+            </div>
             <p class="description">{{ $product->description }}</p> <!-- Product description -->
             <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <input type="hidden" name="quantity" value="1"> 
-                    <button class="add-to-cart-btn">ADICIONAR AO CARRINHO</button>
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                <input type="hidden" name="quantity" value="1"> 
+                <button class="add-to-cart-btn">ADICIONAR AO CARRINHO</button>
             </form>
-            
         </div>
-
         
         <div class="reviews">
             <h3>Reviews</h3>

@@ -36,14 +36,6 @@
     margin-bottom: 10px;
 }
 
-.rating {
-    margin-bottom: 20px;
-}
-
-.rating span {
-    font-size: 20px;
-    color: #f39c12;
-}
 
 /* Imagem do produto com altura fixada */
 .product-image {
@@ -65,10 +57,11 @@
 
 /* Preço do produto */
 .price {
-    font-size: 28px;
+    font-size: 1.5rem;
     font-weight: bold;
     color: #1c3d72;
-    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
 }
 
 /* Descrição do produto */
@@ -85,6 +78,30 @@
     float: right;
     cursor: pointer;
 }
+
+/* Wrapper for Price and Heart */
+.price-and-heart {
+    display: flex;
+    align-items: center; /* Vertically align items */
+    justify-content: space-between; /* Add space between price and heart */
+    gap: 1rem; /* Add spacing between the price and heart */
+    width: 100%; /* Ensure the wrapper spans the full width */
+}
+
+/* Heart Button Styling */
+#wishlist-heart {
+    font-size: 1.5rem;
+    color: #1c3d72;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    outline: none;
+    margin-bottom: 0.5rem;
+    margin-top: 1.2rem;
+    margin-right: 1rem;
+}
+
 
 /* Botão de adicionar ao carrinho */
 .add-to-cart-btn {
@@ -103,129 +120,127 @@
     background-color: #145292;
 }
 
-/* reviews */
+/* Reviews Section */
 .reviews {
-    margin-top: 20px;
-    padding: 15px;
+    margin-top: 1rem;
+    padding: 1.5rem;
     border-top: 1px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 8px;
 }
 
+.reviews h3 {
+    font-size: 1.5em; 
+}
+
+.reviews p {
+    font-size: 1em; 
+}
+
+.average-rating {
+    font-size: 1em; 
+}
+
+
+/* Individual Review Card */
 .review {
     border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+.review:hover {
+    box-shadow: 0 0.6rem 1.2rem rgba(0, 0, 0, 0.15);
 }
 
 .review strong {
-    font-size: 1.1em;
+    font-size: 1.2rem;
+    color: #003366; /* Highlight for names */
 }
 
-.review-form {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    background-color: #fff;
-    border-radius: 5px;
-}
-
-.review-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.review-form input, .review-form textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-
-.submit-btn, .delete-btn, .edit-btn {
+/* Buttons */
+.submit-btn, .delete-btn, .edit-btn, .save-btn, .cancel-btn {
     background-color: #003268;
     color: #fff;
     border: none;
-    padding: 10px 15px;
+    padding: 0.8rem 1.2rem;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 5px;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.submit-btn:hover, .delete-btn:hover, .edit-btn:hover {
+.submit-btn:hover, .delete-btn:hover, .edit-btn:hover, .save-btn:hover, .cancel-btn:hover {
     background-color: #0056b3;
 }
 
-.review .inline-form, .review .edit-btn {
-    display: inline-block; /* Alinha os botões lado a lado */
-    margin: 0 5px; /* Adiciona espaçamento entre os botões */
+.submit-btn:active, .delete-btn:active, .edit-btn:active, .save-btn:active, .cancel-btn:active {
+    transform: scale(0.98);
 }
 
+/* Inline Buttons */
 .review .inline-form {
-    vertical-align: middle; /* Alinha verticalmente com outros elementos */
+    display: inline-block;
+    margin: 0 5px;
+    vertical-align: middle;
 }
 
-.review .edit-btn {
-    vertical-align: middle; /* Alinha verticalmente com outros elementos */
-}
-
-/* form da review edit*/
-
-.edit-form {
-    padding: 15px;
+/* Review Form Container */
+.review-form, .edit-form {
+    margin-top: 2rem;
+    padding: 1.5rem;
     border: 1px solid #ddd;
     background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
 }
 
-.edit-form label {
+.review-form label, .edit-form label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
     font-weight: bold;
-    font-size: 14px;
     color: #333;
+    font-size: 1rem;
 }
 
-.edit-form input, .edit-form textarea {
+/* Inputs and Textareas */
+.review-form input[type="number"], 
+.review-form textarea, 
+.edit-form input, 
+.edit-form textarea {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 14px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
     background-color: #f9f9f9;
-    transition: border-color 0.3s ease-in-out;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.edit-form input:focus, .edit-form textarea:focus {
-    border-color: #0056b3;
+.review-form input:focus, 
+.review-form textarea:focus, 
+.edit-form input:focus, 
+.edit-form textarea:focus {
+    border-color: #003366;
+    box-shadow: 0 0 0.4rem rgba(0, 51, 102, 0.2);
     outline: none;
 }
 
-.edit-form .save-btn, .edit-form .cancel-btn {
-    background-color: #003268;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-    font-size: 14px;
-    transition: background-color 0.3s ease-in-out;
-}
 
-.edit-form .save-btn:hover, .edit-form .cancel-btn:hover {
-    background-color: #0056b3;
-}
-
+/* Specific Styling for Editable Textareas */
 .edit-form textarea {
     resize: vertical;
 }
+
 
 
 /* Botão de report */
@@ -303,6 +318,25 @@
 @media (max-width: 768px) {
     .product-page {
         grid-template-columns: repeat(2, 1fr); /* 2 colunas para tablets */
+    }
+
+    .reviews {
+        padding: 1rem;
+    }
+
+    .review-form {
+        padding: 1rem;
+    }
+
+    .review-form input, .review-form textarea {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+    }
+
+    .review-form button {
+        width: 100%; /* Botão ocupa toda a largura em telas menores */
+        font-size: 0.9rem;
+        padding: 0.6rem;
     }
 }
 

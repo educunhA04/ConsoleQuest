@@ -19,7 +19,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReportController;
-use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\NotificationsController;
 use Illuminate\Http\Request;
 
 use App\Models\User;
