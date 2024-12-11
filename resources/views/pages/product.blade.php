@@ -1,9 +1,4 @@
 @extends('layouts.app')
-<head>
-    <title>Console Quest - {{ $product->name }}</title> <!-- Use the product name for the title -->
-    <link rel="stylesheet" href="{{ asset('css/pages/product.css') }}">
-</head>
-<body>
     @section('content')
     <div class="breadcrumb">
         <a href="{{ route('home') }}">Home</a> / 
@@ -174,5 +169,4 @@
 
 
 
-</body>
 

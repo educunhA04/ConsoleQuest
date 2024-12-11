@@ -227,18 +227,6 @@
     resize: vertical;
 }
 
-/* Rodapé */
-.footer {
-    background-color: #f1f1f1;
-    .product-page {
-        grid-template-columns: repeat(2, 1fr); /* 2 colunas para tablets */
-    }
-
-    .review .review-content {
-        flex-direction: column; /* Alinha os elementos verticalmente em telas menores */
-        gap: 5px; /* Reduz espaço entre a nota e o texto */
-    }
-}
 
 /* Botão de report */
 .report-btn {

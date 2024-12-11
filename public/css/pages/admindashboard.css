@@ -25,6 +25,87 @@
     margin-top: 30px;
 }
 
+/* Search Bar */
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 2rem; /* Borda arredondada */
+    padding: 0.2em 0.8em; /* Espaçamento interno */
+    flex: 1;
+    margin: 0 5%;
+    max-width: 30%; /* Ajustável conforme necessário */
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1); /* Sombra para destacar */
+    border: 0.1rem solid #ddd; /* Contorno sutil */
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
+}
+
+.search-container:hover {
+    box-shadow: 0 0.6rem 1.2rem rgba(0, 0, 0, 0.15);
+    border-color: #003366; /* Destaca o contorno ao passar o mouse */
+}
+
+.search-container input[type="text"] {
+    border: none;
+    outline: none;
+    padding: 0.8em 1.2em; /* Mais espaçamento interno */
+    font-size: 1rem;
+    flex: 1;
+    color: #333; /* Cor do texto */
+    background-color: transparent;
+    border-radius: 2rem;
+}
+
+.search-container input[type="text"]::placeholder {
+    color: #aaa; /* Placeholder mais claro */
+    font-style: italic;
+}
+
+.search-container button {
+    position: absolute;
+    right: 1rem; /* Alinha o botão à direita */
+    top: 50%; /* Centraliza verticalmente */
+    transform: translateY(-50%);
+    background-color: #003366;
+    color: white;
+    border: none;
+    padding: 0.5em 1em; /* Aumenta o botão */
+    border-radius: 1.5rem; /* Botão arredondado */
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold; /* Destaca o texto */
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1); /* Adiciona sombra */
+}
+
+.search-container button:hover {
+    background-color: #002244;
+}
+
+.auth-link {
+    color: white;
+    background-color: #003366; /* Fundo padrão */
+    text-decoration: none; /* Remove sublinhado */
+    font-weight: bold;
+    font-size: 1.1rem; /* Tamanho do texto */
+    display: inline-block; /* Para controle de layout */
+    padding: 0.5rem 1rem; /* Espaçamento interno */
+    border-radius: 5px; /* Bordas arredondadas */
+    margin: 0 0.5rem; /* Espaçamento lateral */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transições suaves */
+}
+
+/* Hover para links de autenticação */
+.auth-link:hover {
+    background-color: #002244;
+    color: #ffcc00; /* Destaque ao passar o mouse */
+}
+
+/* Estilo específico para o logout, se necessário */
+.auth-link.logout-link {
+    font-size: 1.1rem;
+}
+
 /* User List */
 .user-list {
     display: grid;

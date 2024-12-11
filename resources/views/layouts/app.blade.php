@@ -19,12 +19,17 @@
     <link href="{{ url('css/pages/register.css') }}" rel="stylesheet">
     <link href="{{ url('css/pages/recoverPass.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/pages/search.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/product.css') }}">
+
     <link rel="stylesheet" href="{{ asset('css/pages/orders.css') }}">
 
 
 
     <!-- Font Awesome (for icons) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 
     <!-- Scripts -->
     <script src="{{ asset('js/order.js') }}" defer></script>
@@ -63,9 +68,10 @@
                                 <i class="fas fa-user"></i>
                             @endif
                         </a>
-                        <a href="{{ url('/logout') }}" class="logout-link">Logout</a>
+                        <a href="{{ url('/logout') }}" class="auth-link log-out">Log Out</a>
                     @else
                         <a href="{{ url('/login') }}" class="auth-link sign-in">Sign In</a>
+                        <a class="auth-link bar">|</a>
                         <a href="{{ url('/register') }}" class="auth-link sign-up">Sign Up</a>
                     @endif
                 </div>

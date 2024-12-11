@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const filterForm = document.getElementById("filterForm");
     const searchForm = document.getElementById("searchForm"); // Assuming this is your existing search bar form.
 
+
     filterForm.addEventListener("change", (e) => {
         e.preventDefault();
 

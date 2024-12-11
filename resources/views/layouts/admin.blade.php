@@ -27,6 +27,9 @@
         <!-- Font Awesome (for icons) -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 
 
         <!-- Global Scripts -->
@@ -51,7 +54,7 @@
 
                     <!-- Right Section (User Actions) -->
                     <div class="user-actions">
-                        <a href="{{ url('/logout') }}">Logout</a>
+                        <a href="{{ url('/logout') }}" class="auth-link logout-link">Log Out</a>
                     </div>
                 </div>
             </header>

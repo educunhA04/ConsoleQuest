@@ -72,16 +72,31 @@
     background-color: #ff0000; /* Vermelho para "Excluído de Promoção" */
 }
 
-/* Icon container styling */
 .icon-container {
-    position: absolute;
-    top: 10px;
-    right: 10px;
     display: flex;
-    gap: 5px; /* Space between icons */
-    opacity: 0; /* Hidden by default */
-    transition: opacity 0.3s ease; /* Smooth fade-in effect */
+    gap: 0.2rem; /* Spacing between icons */
+    justify-content: right;
+    align-items: center;
 }
+
+.icon-container button {
+    background-color: transparent;
+    border: none; 
+    font-size: 1.5rem;
+    cursor: pointer; 
+    transition: color 0.3s ease; 
+}
+
+/* Default State for Heart Icon */
+.icon-container .fa-heart {
+    color: #003366;
+}
+
+/* Shopping Cart Icon */
+.icon-container .fa-shopping-cart {
+    color: #003366;
+}
+
 
 .product-container:hover .icon-container {
     opacity: 1; /* Icons become visible */
@@ -98,10 +113,6 @@
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
-/* Hover effect for icons */
-.icon:hover {
-    transform: scale(1.2); /* Slightly enlarge icons */
-}
 
 
 
