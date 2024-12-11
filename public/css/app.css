@@ -130,6 +130,12 @@ h1, h2, h3 {
   color: #fff;
 }
 
+.user-actions .icon:hover {
+  color: #dadada;
+}
+
+
+
 .user-actions .icon img {
   width: 3rem;
   height: 3rem;
@@ -258,7 +264,6 @@ textarea.form-control {
   margin-right: 0rem; /* Remove espaçamento desnecessário à esquerda */
 }
 
-/* Alinhamento geral */
 .auth-links-container {
   display: flex;
   align-items: center;
@@ -271,6 +276,10 @@ button, .auth-link {
   font-weight: 600; /* Semibold para destacar ações importantes */
   font-size: 1rem;
   text-transform: uppercase; /* Deixa o botão mais chamativo */
+}
+
+.auth-link:hover {
+  color: #dadada;
 }
 
 

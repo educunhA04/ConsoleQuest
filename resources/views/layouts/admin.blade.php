@@ -63,7 +63,6 @@
                 <a href="{{ route('admin.dashboard.users') }}">Users</a>
                 <a href="{{ route('admin.dashboard.products') }}">Products</a>
                 <a href="{{ route('admin.dashboard.reports') }}">Reports</a>
-                <a href="{{ route('admin.dashboard.reports') }}">Reports</a>
             </nav>
 
             <!-- Main Content -->

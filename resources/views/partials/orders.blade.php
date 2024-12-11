@@ -10,7 +10,7 @@
                 <div 
                     class="order-block" 
                     data-tracking="{{ $order->tracking_number }}" 
-                    data-date="{{ $order->buy_date }}" 
+                    data-date="{{ $order->buy_date->format('Y-m-d')}}" 
                     data-status="{{ ucfirst($order->status) }}" 
                     data-total="{{ $order->products->sum(function($item) { return $item->quantity * $item->product->price; }) }}" 
                     data-products='@json($order->products->map(function($item) { return ['name' => $item->product->name, 'quantity' => $item->quantity, 'price' => $item->product->price]; }))' 
@@ -21,7 +21,7 @@
                     onclick="openOrderDetailsFromElement(this)"
                 >
                     <p><strong>Tracking ID:</strong> {{ $order->tracking_number }}</p>
-                    <p><strong>Date:</strong> {{ $order->buy_date }}</p>
+                    <p><strong>Date:</strong> {{ $order->buy_date->format('Y-m-d') }}</p>
                     <p><strong>Status:</strong> <span id="status-{{ $order->id }}">{{ ucfirst($order->status) }}</span></p>
                     @if ($order->status === 'processing')
                     <form action="{{ route('orders.cancel', ['orderId' => $order->id]) }}" method="POST" style="display:inline;">
