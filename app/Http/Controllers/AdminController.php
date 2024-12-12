@@ -354,7 +354,28 @@ class AdminController extends Controller
         ]);
         return view('pages.admin/viewUser', ['user' => $user]);
     }
-    
+    public function deleteUser(Request $request)
+    {
+        // Validate the user ID
+        $request->validate([
+            'user_id' => 'required|exists:User,id',
+        ]);
+
+        // Find and delete the user
+        $user = User::find($request->user_id);
+        if ($user) {
+            $user->name = 'Anonymous' . $user->id;
+            $user->username = 'anonymous'. $user->id;
+            $user->email = 'anonymous' . $user->id . '@anonymous.com';
+            $user->image = null; // Remove the profile picture
+            $user->blocked = true; // Block the user
+
+            $user->save();
+            return redirect('/admin/dashboard/users')->with('success', 'User deleted successfully.');
+        }
+
+        return redirect()->back()->with('error', 'User not found.');
+    }
 
 
 }
