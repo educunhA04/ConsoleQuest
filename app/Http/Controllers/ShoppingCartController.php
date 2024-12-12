@@ -37,33 +37,42 @@ class ShoppingCartController extends Controller
      * Adicionar item ao carrinho.
      */
     public function add(Request $request)
-    {
-        if (!auth()->check()) {
-            return redirect()->route('login')->with('error', 'Você precisa estar logado para adicionar itens ao carrinho.');
-        }
-        $validated = $request->validate([
-            'product_id' => 'required|integer|exists:product,id',
-            'quantity' => 'required|integer|min:1',
+{
+    if (!auth()->check()) {
+        return response()->json([
+            'error' => 'Você precisa estar logado para adicionar itens ao carrinho.'
+        ], 401);
+    }
+
+    $validated = $request->validate([
+        'product_id' => 'required|integer|exists:product,id',
+        'quantity' => 'required|integer|min:1',
+    ]);
+
+    $userId = auth()->id();
+
+    $cartItem = ShoppingCart::where('user_id', $userId)
+                            ->where('product_id', $validated['product_id'])
+                            ->first();
+
+    if ($cartItem) {
+        $cartItem->increment('quantity', $validated['quantity']);
+        return response()->json([
+            'message' => 'Item quantity updated in cart successfully.',
+            'cart_item' => $cartItem
+        ], 200);
+    } else {
+        ShoppingCart::create([
+            'user_id' => $userId,
+            'product_id' => $validated['product_id'],
+            'quantity' => $validated['quantity'],
         ]);
 
-        $userId = auth()->id();
-
-        $cartItem = ShoppingCart::where('user_id', $userId)
-                                ->where('product_id', $validated['product_id'])
-                                ->first();
-
-        if ($cartItem) {
-            $cartItem->increment('quantity', $validated['quantity']);
-        } else {
-            ShoppingCart::create([
-                'user_id' => $userId,
-                'product_id' => $validated['product_id'],
-                'quantity' => $validated['quantity'],
-            ]);
-        }
-
-        return redirect()->back()->with('success', 'Item added to cart successfully.');
-    }  
+        return response()->json([
+            'message' => 'Item added to cart successfully.'
+        ], 201);
+    }
+    }
 
 
     /**

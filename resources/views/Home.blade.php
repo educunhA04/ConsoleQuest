@@ -9,7 +9,10 @@
 </nav>
 
 @endsection
-
+<script>
+    const wishlistAddUrl = "{{ route('wishlist.add') }}";
+    const cartAddUrl = "{{ route('cart.add') }}";
+</script>
 @section('filters')
 <div class="filters-section" id="filtersSection" style="display: none;">
     <form id="filterForm" method="POST" action="{{ url('/home/filter') }}">
@@ -42,26 +45,25 @@
     @if ($products->isEmpty())
         <p>No products found matching your search.</p>
     @else
-    <div class="product-grid">
-        @foreach ($products as $product)
-        <div class="product-container">
-            <div class="icon-container">
-                <form action="{{ route('wishlist.add') }}" method="POST" class="add-to-wishlist-form">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <button 
-                        type="submit" 
-                        class="fas fa-heart fav-icon " 
-                        aria-label="Add to wishlist">
-                    </button>
-                </form>
-                <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <input type="hidden" name="quantity" value="1"> 
-                    <button type="submit" class="fas fa-shopping-cart cart-icon" aria-label="Add to cart"></button>
-                </form>
-            </div>
+            <div class="product-grid">
+                @foreach ($products as $product)
+                <div class="product-container">
+                <div class="icon-container">
+            <!-- Add to Wishlist Button -->
+                <button 
+                    class="fas fa-heart fav-icon" 
+                    aria-label="Add to wishlist"
+                    onclick="addToWishlist({{ $product->id }})">
+                </button>
+
+                <!-- Add to Cart Button -->
+                <button 
+                    class="fas fa-shopping-cart cart-icon" 
+                    aria-label="Add to cart"
+                    onclick="addToCart({{ $product->id }}, 1)">
+                </button>
+        </div>
+
             <a href="{{ route('product.show', ['id' => $product->id]) }}" class="product-link">
                 <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="product-image">
                 <div class="product-name">{{ $product->name }}</div>
