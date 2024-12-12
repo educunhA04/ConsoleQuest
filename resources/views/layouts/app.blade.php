@@ -11,7 +11,6 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ url('css/milligram.min.css') }}" rel="stylesheet">
     <link href="{{ url('css/app.css') }}" rel="stylesheet">
     <link href="{{ url('css/home.css') }}" rel="stylesheet">
     <link href="{{ url('css/search.css') }}" rel="stylesheet">
@@ -20,7 +19,6 @@
     <link href="{{ url('css/pages/recoverPass.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/pages/search.css') }}">
     <link rel="stylesheet" href="{{ asset('css/pages/product.css') }}">
-
     <link rel="stylesheet" href="{{ asset('css/pages/orders.css') }}">
 
 

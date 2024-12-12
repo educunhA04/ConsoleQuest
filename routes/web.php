@@ -198,6 +198,9 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::get('/review/{id}', [AdminController::class, 'viewReview'])->name('viewReview');
     Route::delete('/reviews/{id}', [AdminController::class, 'deleteReview'])->name('reviews.destroy');
 
+    Route::Put('/orders/{id}', [AdminController::class, 'updateStatus'])->name('orders.updateStatus');
+
+
 });
 
 

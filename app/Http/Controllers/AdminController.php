@@ -111,32 +111,40 @@ class AdminController extends Controller
             'discount.min' => 'The discount must be at least 0.',
         ]);
         $product = Product::findOrFail($request->product_id);
-        if($product->quantity == 0 && $validated['quantity']> 0){
-            $notification = new Notification();
-            $notification->description = "Product in wishlist " . $validated['name'] . " available" ;
-            $notification->viewed = FALSE;
-            $notification->date = Now();
-            $notification->save(); 
-            $wishlistUsers = Wishlist::where('product_id', $product->id)->get();
-            foreach ($wishlistUsers as $wishlist) {
-                NotificationUser::create([
-                    'user_id' => $wishlist->user_id,
-                    'notification_id' => $notification->id,
-                ]);
+        if ($product->quantity == 0 && $validated['quantity'] > 0) {
+            $wishlistUsers = Wishlist::where('product_id', $product->id)->pluck('user_id');
+            
+            if ($wishlistUsers->isNotEmpty()) { 
+                $notification = new Notification();
+                $notification->description = "Product in wishlist '{$validated['name']}' is now available.";
+                $notification->viewed = false;
+                $notification->date = now();
+                $notification->save(); 
+    
+                foreach ($wishlistUsers as $userId) {
+                    NotificationUser::create([
+                        'user_id' => $userId,
+                        'notification_id' => $notification->id,
+                    ]);
+                }
             }
         }
-        if($product->price != $validated['price']){
-            $notificationcart = new Notification();
-            $notificationcart->description = "Product in Shopping Cart" . $validated['name'] . " price changed, now " .  $validated['price'] . "$";
-            $notificationcart->viewed = FALSE;
-            $notificationcart->date = Now();
-            $notificationcart->save(); 
-            $cartUsers = ShoppingCart::where('product_id', $product->id)->get();
-            foreach ($cartUsers as $cart) {
-                NotificationUser::create([
-                    'user_id' => $cart->user_id,
-                    'notification_id' => $notificationcart->id,
-                ]);
+        if ($product->price != $validated['price']) {
+            $cartUsers = ShoppingCart::where('product_id', $product->id)->pluck('user_id');
+    
+            if ($cartUsers->isNotEmpty()) {
+                $notificationCart = new Notification();
+                $notificationCart->description = "Product '{$validated['name']}' price changed, now {$validated['price']}€.";
+                $notificationCart->viewed = false;
+                $notificationCart->date = now();
+                $notificationCart->save();
+    
+                foreach ($cartUsers as $userId) {
+                    NotificationUser::create([
+                        'user_id' => $userId,
+                        'notification_id' => $notificationCart->id,
+                    ]);
+                }
             }
         }
         $product->name = $validated['name'];
@@ -316,6 +324,33 @@ class AdminController extends Controller
 
         return redirect()->route('admin.dashboard.reports')->with('success', 'Report deleted successfully.');
     }
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|string|in:processing,shipped,delivered,cancelled',
+            'user_id' => 'required|integer|exists:User,id',
+        ]);
+    
+        $order = Order::find($id);
+    
+        if (!$order) {
+            return redirect()->back()->with('error', 'Order not found.');
+        }
+        $old_status = $order->status;
+        $order->status = $request->input('status');
+        $order->save();
+        $notification = new Notification();
+        $notification->description = "Order status changed from  " . $old_status . " to " . $order->status ;
+        $notification->viewed = FALSE;
+        $notification->date = Now();
+        $notification->save(); 
+        NotificationUser::create([
+            'user_id' => $request->user_id,
+            'notification_id' => $notification->id,
+        ]);
+        return redirect()->route('admin.dashboard.users')->with('success', 'order status changed successfully.');
+    }
+    
 
 
 }

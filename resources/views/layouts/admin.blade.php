@@ -11,7 +11,6 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Global Styles -->
-        <link href="{{ url('css/milligram.min.css') }}" rel="stylesheet">
         <link href="{{ url('css/app.css') }}" rel="stylesheet">
         <link href="{{ url('css/home.css') }}" rel="stylesheet">
         <link href="{{ url('css/search.css') }}" rel="stylesheet">
@@ -20,6 +19,8 @@
         <link href="{{ url('css/pages/adminproduct.css') }}" rel="stylesheet">
         <link href="{{ url('css/pages/admincreate.css') }}" rel="stylesheet">
         <link href="{{ url('css/pages/login.css') }}" rel="stylesheet">
+        <link href="{{ url('css/pages/orders.css') }}" rel="stylesheet">
+
 
         <!-- Page-Specific Styles -->
         @yield('styles')
