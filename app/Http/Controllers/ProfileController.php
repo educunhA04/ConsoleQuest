@@ -82,4 +82,23 @@ class ProfileController extends Controller
 
         return redirect('/profile')->with('success', 'Profile updated successfully!');
     }
+
+    public function deleteAccount()
+    {
+        $user = Auth::user();
+
+        // Update the user's details to anonymize them
+        $user->name = 'Anonymous';
+        $user->username = 'anonymous';
+        $user->email = 'anonymous@anonymous.com';
+        $user->image = null; // Remove the profile picture
+
+        $user->save();
+
+        // Optionally log the user out after anonymizing
+        Auth::logout();
+
+        // Redirect to a page confirming the deletion, such as the home page
+        return redirect('/')->with('success', 'Your account has been deleted and anonymized.');
+    }
 }

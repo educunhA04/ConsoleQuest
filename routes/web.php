@@ -90,7 +90,9 @@ Route::controller(ProfileController::class)->group(function () {
     Route::get('/profile', 'profile')->name('profile.show');
     Route::get('/editprofile', 'edit')->name('profile.edit');
     Route::post('/updateprofile', 'update')->name('profile.update');
+    Route::delete('/deleteaccount', 'deleteAccount')->name('deleteAccount');
 });
+
 
 // Checkout
 Route::controller(CheckoutController::class)->group(function () {
