@@ -43,6 +43,7 @@ class ProfileController extends Controller
             'username' => 'required|string|max:50|unique:User,username,' . Auth::id(),
             'email' => 'required|string|email|max:75|unique:User,email,' . Auth::id(),
             'password' => 'nullable|string|min:8|confirmed|regex:/[A-Z]/|regex:/[0-9]/',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Profile image validation
         ], [
             // Custom error messages for the password
             'password.min' => 'The password must be at least 8 characters long.',
@@ -50,6 +51,10 @@ class ProfileController extends Controller
             'password.regex' => 'The password must include at least one uppercase letter and one number.',
             'username.unique' => 'The username has already been taken.',
             'email.unique' => 'The email has already been taken.',
+            'image.image' => 'The profile picture must be an image.',
+            'image.mimes' => 'The profile picture must be a file of type: jpeg, png, jpg.',
+            'image.max' => 'The profile picture must not exceed 2MB.',
+
         ]);
 
         // Update the user's information
@@ -61,6 +66,16 @@ class ProfileController extends Controller
         // Update the password only if a new one is provided
         if (!empty($validated['password'])) {
             $user->password = Hash::make($validated['password']);
+        }
+        if ($request->hasFile('image')) {
+            // Delete the old profile image if it exists
+            if ($user->image && file_exists(public_path('storage/' . $user->image))) {
+                unlink(public_path('storage/' . $user->image));
+            }
+    
+            // Store the new image
+            $imagePath = $request->file('image')->store('userimages', 'public');
+            $user->image = $imagePath;
         }
 
         $user->save();

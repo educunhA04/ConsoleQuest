@@ -50,6 +50,13 @@ class RegisterController extends Controller
                 'max:250',
                 'unique:"User"'
             ],
+            'image' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png',
+                'max:2048', // Max file size in KB (2MB)
+            ],
+
         ];
 
         $messages = [
@@ -61,24 +68,27 @@ class RegisterController extends Controller
             'username.unique' => 'The username has already been taken.',
             'email.required' => 'The email field is required.',
             'email.email' => 'The email must be a valid email address.',
-            'email.unique' => 'The email has already an account associated with it.'
+            'email.unique' => 'The email has already an account associated with it.',
+            'image.image' => 'The profile picture must be an image.',
+            'image.mimes' => 'The profile picture must be a file of type: jpg, jpeg, png.',
+            'image.max' => 'The profile picture may not be greater than 2MB.',
         ];
 
-
-        $request->validate([
-            'username' => 'required|string|max:250|unique:"User"',
-            'name' => 'required|string|max:250',
-            'email' => 'required|email|max:250|unique:"User"',
-        ]);
-
-
         $validated = $request->validate($rules, $messages);
+
+        $profilePicturePath = null;
+
+        // Handle profile picture upload
+        if ($request->hasFile('image')) {
+            $profilePicturePath = $request->file('image')->store('userimages', 'public');
+        }
 
         User::create([
             'username' => $request->username,
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'image' => $profilePicturePath,
         ]);
         $token = Str::random(60);  
         PasswordResetToken::create([

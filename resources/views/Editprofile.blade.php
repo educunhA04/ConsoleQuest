@@ -8,8 +8,7 @@
         </div>
         <div class="profile-content">
             <!-- Edit Profile Form -->
-            <form action="{{ url('/updateprofile') }}" method="POST" id="profile-form">
-                @csrf
+            <form action="{{ url('/updateprofile') }}" method="POST" enctype="multipart/form-data" id="profile-form">                @csrf
 
                
                 <div class="form-group">
@@ -61,6 +60,16 @@
                         <span class="tooltip-icon" data-tooltip="Ensure your password confirmation matches the password.">?</span>
                     </div>
                     @error('password_confirmation')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                
+                <div class="form-group">
+                    <label for="profile_picture">Profile Picture</label>
+                    <div class="input-container">
+                        <input type="file" id="image" name="image" class="form-control" accept="image/*">
+                    </div>
+                    @error('image')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
