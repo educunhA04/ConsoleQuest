@@ -206,6 +206,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
 });
 
 
+Route::delete('/admin/user/delete', [AdminController::class, 'deleteUser'])->name('admin.user.delete');
 
 Route::controller(RegisterController::class)->group(function () {
     Route::get('/register', 'showRegistrationForm')->name('register');
