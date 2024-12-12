@@ -336,8 +336,12 @@ class AdminController extends Controller
         if (!$order) {
             return redirect()->back()->with('error', 'Order not found.');
         }
+        $user = User::findOrFail($request->user_id);
         $old_status = $order->status;
         $order->status = $request->input('status');
+        if ($old_status == $order->status) {
+            return view('pages.admin/viewUser', ['user' => $user]);
+        }
         $order->save();
         $notification = new Notification();
         $notification->description = "Order status changed from  " . $old_status . " to " . $order->status ;
@@ -348,7 +352,7 @@ class AdminController extends Controller
             'user_id' => $request->user_id,
             'notification_id' => $notification->id,
         ]);
-        return redirect()->route('admin.dashboard.users')->with('success', 'order status changed successfully.');
+        return view('pages.admin/viewUser', ['user' => $user]);
     }
     
 
