@@ -28,7 +28,6 @@
                     </div>
                 </div>
                 <div class="notifications-section">
-                    <h2>Notifications</h2>
                     @include('partials/notifications', ['notifications' => $notifications])
                 </div>
             </div>

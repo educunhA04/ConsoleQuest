@@ -37,5 +37,25 @@ class NotificationController extends Controller
             'notification' => $notification
         ]);
     }
+
+    public function markAsViewed($notificationId)
+    {
+        try {
+            // Find the notification by its ID
+            $notification = Notification::findOrFail($notificationId);
+    
+            // Mark it as viewed
+            $notification->viewed = true;
+            $notification->save();
+    
+            return response()->json(['message' => 'Notification marked as viewed'], 200);
+        } catch (\Exception $e) {
+            // Log and return error if something goes wrong
+            \Log::error("Error marking notification as viewed: " . $e->getMessage());
+            return response()->json(['error' => 'Failed to update notification'], 500);
+        }
+    }
+    
+
 }
 

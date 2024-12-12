@@ -19,7 +19,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReportController;
-use App\Http\Controllers\NotificationsController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
 
 use App\Models\User;
@@ -104,7 +104,9 @@ Route::controller(CheckoutController::class)->group(function () {
 Route::controller(NotificationController::class)->group(function () {
     Route::get('/notifications', 'index')->name('notifications.index');
     Route::get('/notifications/{id}', 'show')->name('notifications.show');
+    Route::post('/notifications/{notification}/view', 'markAsViewed')->name('notifications.view');
 });
+
 
 
 //Order

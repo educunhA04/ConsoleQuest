@@ -32,6 +32,8 @@
     <!-- Scripts -->
     <script src="{{ asset('js/order.js') }}" defer></script>
     <script type="text/javascript" src="{{ url('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/notifications.js') }}" defer></script>
+
 </head>
 <body>
     <div class="page-container">
