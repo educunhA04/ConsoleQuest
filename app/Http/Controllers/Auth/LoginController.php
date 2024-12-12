@@ -18,17 +18,17 @@ class LoginController extends Controller
      * Display a login form.
      */
     public function showLoginForm()
-{
-    if (Auth::guard('web')->check()) {
-        return redirect('/home');
-    } 
-    elseif (Auth::guard('admin')->check()) {
-        return redirect('/admin/dashboard/users'); 
-    } 
-    else {
-        return view('auth.login');
+    {
+        if (Auth::guard('web')->check()) {
+            return redirect('/home');
+        } 
+        elseif (Auth::guard('admin')->check()) {
+            return redirect('/admin/dashboard/users'); 
+        } 
+        else {
+            return view('auth.login');
+        }
     }
-}
     public function showLinkRequestForm()
     {
         if (Auth::guard('web')->check()) {
@@ -78,6 +78,13 @@ class LoginController extends Controller
 
     // Attempt to authenticate with the credentials
     if (Auth::attempt($credentials, $request->filled('remember'))) {
+        $user = Auth::user();
+
+        if ($user->blocked) {
+            Auth::logout();
+            return back()->withErrors(['login' => 'Your account has been blocked. Please contact support.']);
+        }
+
         $request->session()->regenerate();
         return redirect()->route('home'); // Redirect to desired route
     }

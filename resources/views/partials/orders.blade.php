@@ -18,22 +18,20 @@
                     data-product-page='@json($order->products->map(function($item) { 
                         return ['url' => route("product.show", $item->product->id)]; 
                     }))' 
-                    onclick="openOrderDetailsFromElement(this)"
-                >
+                    onclick="openOrderDetailsFromElement(this)">
                     <p><strong>Tracking ID:</strong> {{ $order->tracking_number }}</p>
                     <p><strong>Date:</strong> {{ $order->buy_date->format('Y-m-d') }}</p>
                     <p><strong>Status:</strong> <span id="status-{{ $order->id }}">{{ ucfirst($order->status) }}</span></p>
                     @if ($order->status === 'processing')
                     <form action="{{ route('orders.cancel', ['orderId' => $order->id]) }}" method="POST" style="display:inline;">
+                        @csrf
 
-    @csrf
+                        <input type="hidden" name="order_id" value="{{ $order->id }}">
+                        <button type="submit" class="cancel-order-btn" onclick="event.stopPropagation();">
+                            Cancel Order
+                        </button>
 
-    <input type="hidden" name="order_id" value="{{ $order->id }}">
-    <button type="submit" class="cancel-order-btn" onclick="event.stopPropagation();">
-        Cancel Order
-    </button>
-
-</form>
+                    </form>
 
                     @endif
                 </div>

@@ -88,10 +88,11 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         // Update the user's details to anonymize them
-        $user->name = 'Anonymous';
-        $user->username = 'anonymous';
-        $user->email = 'anonymous@anonymous.com';
+        $user->name = 'Anonymous' . $user->id;
+        $user->username = 'anonymous'. $user->id;
+        $user->email = 'anonymous' . $user->id . '@anonymous.com';
         $user->image = null; // Remove the profile picture
+        $user->blocked = true; // Block the user
 
         $user->save();
 
