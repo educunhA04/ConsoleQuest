@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<form method="POST" action="{{ route('register') }} " id = "register-form">
+<form method="POST" action="{{ route('register') }} " enctype="multipart/form-data" id = "register-form">
     {{ csrf_field() }}
 
     <label for="username">Username</label>
@@ -46,6 +46,14 @@
       <input id="password-confirm" type="password" name="password_confirmation" required>
       <span class="tooltip-icon" data-tooltip="Ensure your password confirmation matches the password.">?</span>
     </div>
+
+    <label for="image">Profile Picture (Optional)</label>
+    <input id="image" type="file" name="image" accept="image/*">
+    @if ($errors->has('image'))
+      <span class="error">
+          {{ $errors->first('image') }}
+      </span>
+    @endif
     <button type="submit">
       Register
     </button>
