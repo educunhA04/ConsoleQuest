@@ -244,3 +244,7 @@
     border-color: #1c3d72;
     box-shadow: 0 0 4px rgba(28, 61, 114, 0.4);
 }
+
+.alert-danger {
+    color: rgb(163, 0, 0);
+}
