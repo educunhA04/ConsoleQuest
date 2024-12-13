@@ -23,6 +23,28 @@
     <div class="checkout-summary">
         <h3>Total a Pagar: €{{ number_format($totalPrice, 2) }}</h3>
     </div>
+
+    @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     <form method="POST" action="{{ route('checkout.finalize') }}">
         @csrf
 
@@ -65,6 +87,9 @@
         <!-- Botão para Finalizar -->
         <button type="submit" class="checkout-btn">Finalizar Compra</button>
     </form>
+
+  
+
 
     
 

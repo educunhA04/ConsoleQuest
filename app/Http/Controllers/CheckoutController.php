@@ -53,12 +53,38 @@ class CheckoutController extends Controller
         $totalPrice = $cartItems->sum(function ($cartItem) {
             return $cartItem->quantity * $cartItem->product->price;
         });
-        $validated = $request->validate([
-            'NIF' => 'nullable|digits:9',
-            'credit_card_number' => 'required|digits:16',
-            'credit_card_exp_date' => 'required|date|after:today',
-            'credit_card_cvv' => 'required|digits:3',
-        ]);
+        $rules = [
+            'NIF' => [
+                'digits:9',
+            ],
+            'credit_card_number' => [
+                'required',
+                'digits:16',
+            ],
+            'credit_card_exp_date' => [
+                ['required', 
+                'date', 
+                'after:today'],
+            ],
+            'credit_card_cvv' => [
+                'required',
+                'digits:3',
+            ],
+
+        ];
+
+        $messages = [
+            'NIF.digits' => 'O NIF deve conter 9 dígitos numéricos.',
+            'credit_card_number.required' => 'O campo do número do cartão é obrigatório.',
+            'credit_card_number.digits' => 'O número do cartão deve conter 16 dígitos numéricos.',
+            'credit_card_exp_date.required' => 'O campo de data de validade é obrigatório.',
+            'credit_card_exp_date.date' => 'Insira a data de validade no formato MM/DD/AAAA.',
+            'credit_card_exp_date.after' => 'Parece que o seu cartão de crédito expirou.',
+            'credit_card_cvv.required' => 'O campo CVV é obrigatório.',
+            'credit_card_cvv.digits' => 'O CVV deve conter 3 dígitos numéricos.',
+        ];
+
+        $validated = $request->validate($rules, $messages);
     
         $order = Order::create([
             'user_id' => $user->id,
@@ -73,7 +99,7 @@ class CheckoutController extends Controller
             'order_id' => $order->id, 
             'code' => uniqid('TXN_'),
             'price' => $totalPrice,
-            'nif' => $validated['NIF'],
+            'NIF' => $validated['NIF'],
             'credit_card_number' => $validated['credit_card_number'], 
             'credit_card_exp_date' => $validated['credit_card_exp_date'], 
             'credit_card_cvv' => $validated['credit_card_cvv'], 
