@@ -179,6 +179,9 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::post('/view-user', [AdminController::class, 'viewUser'])->name('viewUser');
     Route::get('/view-product/{id}', [AdminController::class, 'viewProduct'])->name('viewProduct');
     
+    Route::post('/block-user/{id}', [AdminController::class, 'blockUser'])->name('user.block');
+    Route::post('/unblock-user/{id}', [AdminController::class, 'unblockUser'])->name('user.unblock');
+
     Route::post('/change-user', [AdminController::class, 'changeUser'])->name('user.change');
     Route::post('/change-product', [AdminController::class, 'changeProduct'])->name('changeProduct');
     Route::get('/create-user', [AdminController::class, 'createUserShow'])->name('user.create');

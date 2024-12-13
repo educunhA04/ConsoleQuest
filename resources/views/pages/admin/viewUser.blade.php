@@ -19,6 +19,19 @@
         <div class="profile-content">
             <div class="profile-details">
                 <h2>Profile Information</h2>
+                @if ($user->username !== 'anonymous' . $user->id)
+                    @if ($user->blocked == 0)
+                    <form action="{{ route('admin.user.block', ['id' => $user->id]) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Bloquear</button>
+                    </form>
+                    @else
+                    <form action="{{ route('admin.user.unblock', ['id' => $user->id]) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-success">Desbloquear</button>
+                    </form>
+                    @endif
+                @endif
                 <div class="detail-row"><strong>Name:</strong> {{ $user->name }}</div>
                 <div class="detail-row"><strong>Username:</strong> {{ $user->username }}</div>
                 <div class="detail-row"><strong>Email:</strong> {{ $user->email }}</div>
