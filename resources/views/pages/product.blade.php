@@ -47,19 +47,19 @@
         <div class="product-details">
             <div class="price-and-heart">
                 <div class="price">{{ number_format($product->price, 2) }} €</div> <!-- Product price -->
-                <form action="{{ route('wishlist.add') }}" method="POST" class="add-to-wishlist-form">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <button id="wishlist-heart" class="fas fa-heart"></button>
-                </form>
-            </div>
+                <button 
+                id = "wishlist-heart"
+                    class="fas fa-heart fav-icon" 
+                    aria-label="Add to wishlist"
+                    onclick="addToWishlist({{ $product->id }})">
+                </button>
             <p class="description">{{ $product->description }}</p> <!-- Product description -->
-            <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
-                @csrf
-                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                <input type="hidden" name="quantity" value="1"> 
-                <button class="add-to-cart-btn">ADICIONAR AO CARRINHO</button>
-            </form>
+            <button 
+                    class="add-to-cart-btn"
+                    aria-label="Add to cart"
+                    onclick="addToCart({{ $product->id }}, 1)">
+            </button>
+
         </div>
         
         <div class="reviews">

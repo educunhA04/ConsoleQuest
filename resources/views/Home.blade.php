@@ -46,21 +46,18 @@
         @foreach ($products as $product)
         <div class="product-container">
             <div class="icon-container">
-                <form action="{{ route('wishlist.add') }}" method="POST" class="add-to-wishlist-form">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <button 
-                        type="submit" 
-                        class="fas fa-heart fav-icon " 
-                        aria-label="Add to wishlist">
-                    </button>
-                </form>
-                <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <input type="hidden" name="quantity" value="1"> 
-                    <button type="submit" class="fas fa-shopping-cart cart-icon" aria-label="Add to cart"></button>
-                </form>
+            <button 
+                    class="fas fa-heart fav-icon" 
+                    aria-label="Add to wishlist"
+                    onclick="addToWishlist({{ $product->id }})">
+                </button>
+
+                <button 
+                    class="fas fa-shopping-cart cart-icon" 
+                    aria-label="Add to cart"
+                    onclick="addToCart({{ $product->id }}, 1)">
+                </button>
+
             </div>
             <a href="{{ route('product.show', ['id' => $product->id]) }}" class="product-link">
                 <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="product-image">

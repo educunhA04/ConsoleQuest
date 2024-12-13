@@ -39,31 +39,48 @@ class WishlistController extends Controller
     
     public function add(Request $request)
     {
+        // Ensure the user is authenticated
         if (!auth()->check()) {
-            return redirect()->route('login')->with('error', 'Você precisa estar logado para adicionar itens á wishlist.');
+            return response()->json([
+                'error' => 'You must be logged in to add items to your wishlist.'
+            ], 401);
         }
-        
-        $validated = $request->validate([
-            'product_id' => 'required|integer|exists:product,id',
-        ]);
-
-        $userId = auth()->id();
-        $wishlistItem = Wishlist::where('user_id', $userId)
-                                ->where('product_id', $validated['product_id'])
-                                ->first();
-
-        if ($wishlistItem) {
-            return redirect()->back()->with('info', 'Item já está na sua wishlist.');
-        } else {
+    
+        try {
+            // Validate request
+            $validated = $request->validate([
+                'product_id' => 'required|integer|exists:product,id',
+            ]);
+    
+            $userId = auth()->id();
+    
+            // Check if the product is already in the wishlist
+            $wishlistItem = Wishlist::where('user_id', $userId)
+                                    ->where('product_id', $validated['product_id'])
+                                    ->first();
+    
+            if ($wishlistItem) {
+                return response()->json([
+                    'info' => 'Item already exists in your wishlist.'
+                ], 200);
+            }
+    
+            // Add item to the wishlist if it's not already there
             Wishlist::create([
                 'user_id' => $userId,
                 'product_id' => $validated['product_id'],
-                ]);
-        }
+            ]);
     
-
-        return redirect()->back()->with('success', 'Item added to cart successfully.');
-    }   
+            return response()->json([
+                'message' => 'Item added to wishlist successfully.'
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'An unexpected error occurred.',
+                'details' => $e->getMessage()
+            ], 500);
+        }
+    }
     
 
 }
