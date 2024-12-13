@@ -178,3 +178,22 @@
     z-index: 5; /* Slightly below the Sold Out text */
 }
 
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    gap: 10px;
+}
+
+.pagination a{
+    color: #003366;
+    text-decoration: none;
+    font-weight: bold; 
+
+}
+
+.pagination span {
+    color: #003366; 
+}
+

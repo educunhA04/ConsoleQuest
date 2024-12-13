@@ -43,10 +43,10 @@
         <p>No products found matching your search.</p>
     @else
     <div class="product-grid">
-        @foreach ($products as $product)
+    @foreach ($products as $product)
         <div class="product-container">
             <div class="icon-container">
-            <button 
+                <button 
                     class="fas fa-heart fav-icon" 
                     aria-label="Add to wishlist"
                     onclick="addToWishlist({{ $product->id }})">
@@ -57,7 +57,6 @@
                     aria-label="Add to cart"
                     onclick="addToCart({{ $product->id }}, 1)">
                 </button>
-
             </div>
             <a href="{{ route('product.show', ['id' => $product->id]) }}" class="product-link">
                 <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="product-image">
@@ -74,10 +73,14 @@
                     <div class="sold-out">Sold Out</div>
                 @endif
             </a>
-
         </div>
-        @endforeach
-    </div>
+    @endforeach
+</div>
+
+<div class="pagination">
+    {{ $products->links() }}
+</div>
+
 
 
     @endif

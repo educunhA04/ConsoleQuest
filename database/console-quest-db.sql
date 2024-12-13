@@ -344,7 +344,23 @@ INSERT INTO Product (id, category_id, name, image, description, quantity, price,
     (2, 2, 'EA FC 25', '/dbimages/eafc25.jpg', 'Cancer game', 100, 59.99, 20),
     (3, 2, 'Fifa Street', '/dbimages/fifastreet.jpg', 'Goat game', 100, 19.99, 0),
     (4, 2, 'League of Legends', '/dbimages/LOL.jpeg', 'Virgin game', 10, 9.99, 0),
-    (5, 3, 'DualSense Controller', '/dbimages/dualsense.jpg', 'PS5 Wireless Controller', 200, 69.99, 15);
+    (5, 3, 'DualSense Controller', '/dbimages/dualsense.jpg', 'PS5 Wireless Controller', 200, 69.99, 15),
+    (6, 1, 'Xbox Series X', '/dbimages/xboxseriesx.jpg', 'Powerful next-gen console', 40, 499.99, 5),
+    (7, 2, 'The Legend of Zelda: Breath of the Wild', '/dbimages/zelda_botw.jpg', 'Award-winning adventure game', 60, 59.99, 10),
+    (8, 2, 'Mario Kart 8 Deluxe', '/dbimages/mariokart8.jpg', 'Fun racing game', 80, 49.99, 5),
+    (9, 1, 'Nintendo Switch OLED', '/dbimages/switch_oled.jpg', 'Hybrid console with OLED screen', 70, 349.99, 0),
+    (10, 3, 'Nintendo Switch Pro Controller', '/dbimages/switch_pro_controller.jpg', 'Wireless controller for Switch', 120, 69.99, 10),
+    (11, 2, 'Elden Ring', '/dbimages/eldenring.jpg', 'Open-world action RPG', 50, 59.99, 15),
+    (12, 2, 'God of War Ragnarok', '/dbimages/gow_ragnarok.jpg', 'Action-packed Norse mythology game', 40, 69.99, 10),
+    (13, 1, 'Steam Deck', '/dbimages/steamdeck.jpg', 'Portable gaming PC', 30, 399.99, 5),
+    (14, 3, 'Razer Wolverine V2', '/dbimages/razer_wolverine.jpg', 'Advanced controller for Xbox/PC', 50, 99.99, 10),
+    (15, 2, 'Cyberpunk 2077', '/dbimages/cyberpunk2077.jpg', 'Futuristic action RPG', 100, 39.99, 20),
+    (16, 2, 'Horizon Forbidden West', '/dbimages/horizon_fw.jpg', 'Post-apocalyptic open-world game', 60, 59.99, 15),
+    (17, 3, 'Xbox Elite Series 2', '/dbimages/xbox_elite2.jpg', 'Premium wireless Xbox controller', 70, 179.99, 20),
+    (18, 2, 'Spider-Man: Miles Morales', '/dbimages/spiderman_mm.jpg', 'Superhero action game', 90, 49.99, 10),
+    (19, 2, 'Resident Evil 4 Remake', '/dbimages/re4_remake.jpg', 'Horror survival game', 80, 59.99, 10),
+    (20, 1, 'PlayStation 4 Slim', '/dbimages/ps4_slim.jpg', 'Compact version of PS4', 30, 299.99, 0),
+    (21, 2, 'Assassins creed IV Black Flag', '/dbimages/assassins_creed_4_black_flag.jpg', 'Assassins ps4 game', 80, 29.99, 10);
 
 INSERT INTO "User" (id, username, password, name, email, image ,blocked) VALUES
     (1, 'Lopez', '$2y$10$AyqmTcuuDudCvz5A.MrEcuQ0eFsS0vY4vuW3tYFeRnlOB6ZtbF.ay', 'Rafael Augusto', 'rafa@gmail.com','/userimages/lopez.jpeg', FALSE);

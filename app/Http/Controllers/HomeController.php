@@ -8,17 +8,13 @@ use App\Models\Product;
 
 class HomeController extends Controller
 {
-    /**
-     * Display the home page with a list of products (if needed).
-     */
+    
     public function show(): View
     {
-        // Fetch all the products
-        $products = Product::class::orderBy('id')->get();
+        $products = Product::orderBy('id')->paginate(10);
 
         return view('Home', ['products' => $products]);
     }
-
     public function aboutus(): View
     {
         return view('pages.aboutus');
@@ -31,19 +27,22 @@ class HomeController extends Controller
     
     public function showControllers(): View
     {
-        $products = Product::where('category_id', 3)->orderBy('id')->get();
+        $products = Product::where('category_id', 3)->orderBy('id')->paginate(10);
+
         return view('Home', ['products' => $products]);
     }
 
     public function showGames(): View
     {
-        $products = Product::where('category_id', 2)->orderBy('id')->get();
+        $products = Product::where('category_id', 2)->orderBy('id')->paginate(10);
+
         return view('Home', ['products' => $products]);
     }
 
     public function showConsoles(): View
     {
-        $products = Product::where('category_id', 1)->orderBy('id')->get();
+        $products = Product::where('category_id', 1)->orderBy('id')->paginate(10);
+
         return view('Home', ['products' => $products]);
     }
 
