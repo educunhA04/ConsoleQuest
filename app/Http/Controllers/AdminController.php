@@ -377,5 +377,30 @@ class AdminController extends Controller
         return redirect()->back()->with('error', 'User not found.');
     }
 
+    public function blockUser(Request $request, $id)
+    {
+        // Find the user by ID
+        $user = User::find($id);
+        if ($user) {
+            $user->blocked = true; // Block the user
+            $user->save();
+            
+            return redirect('/admin/dashboard/users')->with('success', 'User blocked successfully.');
+        }
 
+        return redirect()->back()->with('error', 'User not found.');
+    }
+    public function unblockUser(Request $request, $id)
+    {
+        // Find the user by ID
+        $user = User::find($id);
+        if ($user) {
+            $user->blocked = false; // Block the user
+            $user->save();
+            
+            return redirect('/admin/dashboard/users')->with('success', 'User blocked successfully.');
+        }
+
+        return redirect()->back()->with('error', 'User not found.');
+    }
 }
