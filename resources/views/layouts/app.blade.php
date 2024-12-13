@@ -33,6 +33,10 @@
     <script src="{{ asset('js/order.js') }}" defer></script>
     <script src="{{ asset('js/wishlist_cart.js') }}" defer></script>
     <script type="text/javascript" src="{{ url('js/app.js') }}" defer></script>
+    <script>
+    const wishlistAddUrl = "{{ route('wishlist.add') }}";
+    const cartAddUrl = "{{ route('cart.add') }}";
+    </script>
 </head>
 <body>
     <div class="page-container">

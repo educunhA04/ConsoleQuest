@@ -9,10 +9,7 @@
 </nav>
 
 @endsection
-<script>
-    const wishlistAddUrl = "{{ route('wishlist.add') }}";
-    const cartAddUrl = "{{ route('cart.add') }}";
-</script>
+
 @section('filters')
 <div class="filters-section" id="filtersSection" style="display: none;">
     <form id="filterForm" method="POST" action="{{ url('/home/filter') }}">
