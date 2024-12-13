@@ -177,7 +177,9 @@
     transform: rotate(-15deg) translateY(-50%); /* Align with the text */
     z-index: 5; /* Slightly below the Sold Out text */
 }
-
+.product-link{
+    text-decoration: none;
+}
 .pagination {
     display: flex;
     justify-content: center;
