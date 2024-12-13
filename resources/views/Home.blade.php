@@ -32,7 +32,6 @@
         <button type="submit">Apply Filters</button>
     </form>
 </div>
-<button id="toggleFiltersButton">Show Filters</button>
 @endsection
 
 
@@ -93,10 +92,10 @@
         var filtersSection = document.getElementById('filtersSection');
         if (filtersSection.style.display === 'none') {
             filtersSection.style.display = 'block';
-            this.textContent = 'Hide Filters';
+            
         } else {
             filtersSection.style.display = 'none';
-            this.textContent = 'Show Filters';
+
         }
     });
 </script>

@@ -51,6 +51,9 @@
                         <button type="submit"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
+                <button id="toggleFiltersButton" class="filter-toggle">
+                    <i class="fas fa-filter"></i>
+                </button>
 
                 <!-- Right Section (User Actions) -->
                 <div class="user-actions">

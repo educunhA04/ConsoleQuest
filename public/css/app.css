@@ -324,3 +324,30 @@ button, .auth-link {
 .filters-section button:hover {
   background-color: #23507e;
 }
+
+.filter-toggle {
+  background: #003366;
+  border: 0px;
+  border-radius: 20px;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  transition: all 0.3s ease;
+}
+
+.filter-toggle i {
+  font-size: 1.2em;
+  color:#FFFFFF;
+}
+
+.filter-toggle:hover {
+  background: #014a94; 
+}
+
+.filter-toggle i:hover {
+  color: #fff;
+}
