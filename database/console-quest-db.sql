@@ -363,7 +363,7 @@ INSERT INTO Product (id, category_id, name, image, description, quantity, price,
     (21, 2, 'Assassins creed IV Black Flag', '/dbimages/assassins_creed_4_black_flag.jpg', 'Assassins ps4 game', 80, 29.99, 10);
 
 INSERT INTO "User" (id, username, password, name, email, image ,blocked) VALUES
-    (1, 'Lopez', '$2y$10$AyqmTcuuDudCvz5A.MrEcuQ0eFsS0vY4vuW3tYFeRnlOB6ZtbF.ay', 'Rafael Augusto', 'rafa@gmail.com','/userimages/lopez.jpeg', FALSE);
+    (1, 'Lopez', '$2y$10$AyqmTcuuDudCvz5A.MrEcuQ0eFsS0vY4vuW3tYFeRnlOB6ZtbF.ay', 'Rafael Augusto', 'rafa@gmail.com','userimages/lopez.jpeg', FALSE);
    
 INSERT INTO Admin (id, name, email, password) VALUES
     (1,'rabeira' ,'admin@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'); 

@@ -62,10 +62,21 @@
         <div class="form-group">
             <label for="credit_card_exp_date">Data de Validade:</label>
             <div class="checkout-input-container">
-                <input type="date" name="credit_card_exp_date" id="credit_card_exp_date" required>
+                <input 
+                    type="text" 
+                    name="credit_card_exp_date" 
+                    id="credit_card_exp_date" 
+                    placeholder="MM/AAAA" 
+                    required 
+                    maxlength="7" 
+                    pattern="^(0[1-9]|1[0-2])\/\d{4}$" 
+                    title="Insira a data no formato MM/AAAA."
+                >
                 <span class="checkout-tooltip-icon" data-tooltip="Insira a data de validade no formato MM/AAAA.">?</span>
             </div>
         </div>
+
+
 
     
         <div class="form-group">
@@ -84,4 +95,27 @@
 
    
 </div>
+<script>
+document.getElementById('credit_card_exp_date').addEventListener('input', function (event) {
+    let input = event.target.value;
+
+    // Remove any non-numeric characters except "/"
+    input = input.replace(/[^0-9\/]/g, '');
+
+    // Automatically insert "/" after the second character
+    if (input.length === 2 && !input.includes('/')) {
+        input = input + '/';
+    }
+
+    // Limit to MM/AAAA format (7 characters max)
+    if (input.length > 7) {
+        input = input.slice(0, 7);
+    }
+
+    // Update the input field value
+    event.target.value = input;
+});
+</script>
+
 @endsection
+

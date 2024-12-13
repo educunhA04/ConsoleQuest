@@ -65,7 +65,17 @@ class CheckoutController extends Controller
             'credit_card_exp_date' => [
                 ['required', 
                 'date', 
-                'after:today'],
+                'after:today',
+                'regex:/^(0[1-9]|1[0-2])\/[0-9]{4}$/',
+                function ($attribute, $value, $fail) {
+                    [$month, $year] = explode('/', $value);
+                    $currentYear = now()->year;
+                    $currentMonth = now()->month;
+            
+                    if ($year < $currentYear || ($year == $currentYear && $month < $currentMonth)) {
+                        $fail('Parece que o seu cartão de crédito expirou.');
+                    }
+                },],
             ],
             'credit_card_cvv' => [
                 'required',
@@ -87,6 +97,8 @@ class CheckoutController extends Controller
 
         $validated = $request->validate($rules, $messages);
     
+        $creditCardExpDate = \Carbon\Carbon::createFromFormat('m/Y', $validated['credit_card_exp_date'])->startOfMonth()->format('Y-m-d');
+
         $order = Order::create([
             'user_id' => $user->id,
             'tracking_number' => uniqid('ORD_'),
@@ -97,13 +109,13 @@ class CheckoutController extends Controller
     
         $transaction = Transaction::create([
             'user_id' => $user->id,
-            'order_id' => $order->id, 
+            'order_id' => $order->id,
             'code' => uniqid('TXN_'),
             'price' => $totalPrice,
             'nif' => $validated['NIF'],
-            'credit_card_number' => $validated['credit_card_number'], 
-            'credit_card_exp_date' => $validated['credit_card_exp_date'], 
-            'credit_card_cvv' => $validated['credit_card_cvv'], 
+            'credit_card_number' => $validated['credit_card_number'],
+            'credit_card_exp_date' => $creditCardExpDate, 
+            'credit_card_cvv' => $validated['credit_card_cvv'],
         ]);
      
         foreach ($cartItems as $cartItem) {
