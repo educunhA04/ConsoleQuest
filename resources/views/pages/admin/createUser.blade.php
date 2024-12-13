@@ -4,7 +4,7 @@
     <div class="admin-create-form-container">
         <h1>Create New User</h1>
         
-        <form action="{{ route('admin.storeUser') }}" method="POST" class="admin-create-form">
+        <form action="{{ route('admin.user.store') }}" method="POST" class="admin-create-form">
             @csrf
             @if ($errors->any())
                 <div class="alert alert-danger">

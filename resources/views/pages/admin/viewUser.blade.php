@@ -45,7 +45,12 @@
                 @endif
             </div>
 
-            @include('partials.ordersAdmin')
+            {{-- Apenas incluir a secção de encomendas se o utilizador tiver encomendas associadas --}}
+            @if (isset($user->orders) && $user->orders->count() > 0)
+                @include('partials.ordersAdmin')
+            @else
+                <p style="text-align: center; margin-top: 20px;">This user has no orders.</p>
+            @endif
 
             <form action="{{ route('admin.user.change') }}" method="POST" class="admin-edit-profile">
                 @csrf
@@ -53,7 +58,6 @@
                 <button type="submit" class="edit-button">Edit Profile</button>
             </form>
 
-            
         </div>
     </div>
 </div>
