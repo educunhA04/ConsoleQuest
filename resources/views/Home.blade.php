@@ -77,8 +77,8 @@
     @endforeach
 </div>
 
-<div class="pagination">
-    {{ $products->links() }}
+<div class="d-flex justify-content-center">
+        {{ $products->links('pagination::bootstrap-5') }}
 </div>
 
 
