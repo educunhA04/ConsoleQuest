@@ -29,7 +29,7 @@
         Only Discounted Items
     </label>
 
-    <button type="submit">Apply Filters</button>
+    <button type="submit" >Apply Filters</button>
 </form>
 
 </div>
