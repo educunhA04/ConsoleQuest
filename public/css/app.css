@@ -44,7 +44,6 @@ header {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
 }
 
 header h1 {
@@ -107,12 +106,6 @@ h1, h2, h3 {
   margin-right: 2rem;
   font-size: 1.2rem;
 
-}
-
-.user-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
 }
 
 .user-actions {
@@ -282,20 +275,17 @@ button, .auth-link {
 
 .filters-section {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 10px;
   background-color: #f5f5f5;
   padding: 10px 15px;
   margin-bottom: 15px;
   box-shadow: 0 0.1rem 0.3rem #5274a2;
+  flex-wrap: nowrap;
 }
 
-.filters-section label {
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
-}
+
 
 .filters-section input[type="number"] {
   width: 80px;
@@ -316,8 +306,38 @@ button, .auth-link {
   padding: 5px 10px;
   cursor: pointer;
   transition: background-color 0.2s;
+  margin-left: 1.5em;
 }
 
 .filters-section button:hover {
   background-color: #23507e;
+}
+
+
+.filter-toggle {
+  background: #003366;
+  border: 0px;
+  border-radius: 20px;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  transition: all 0.3s ease;
+  margin-right: auto;
+}
+
+.filter-toggle i {
+  font-size: 1.2em;
+  color:#FFFFFF;
+}
+
+.filter-toggle:hover {
+  background: #014a94; 
+}
+
+.filter-toggle i:hover {
+  color: #fff;
 }

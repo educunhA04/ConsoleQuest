@@ -51,12 +51,15 @@
 
                 <!-- Search Bar -->
                 <div class="search-container">
-                    <form id="searchForm" method="POST" action="{{ url('/home') }}">
+                    <form id="searchForm" method="GET" action="{{ url('/filtered') }}">
                         @csrf
                         <input type="text" name="query" id="query" value="{{ $query ?? '' }}" placeholder="Search...">
                         <button type="submit"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
+                <button id="toggleFiltersButton" class="filter-toggle">
+                    <i class="fas fa-filter"></i>
+                </button>
 
                 <!-- Right Section (User Actions) -->
                 <div class="user-actions">
