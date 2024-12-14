@@ -82,7 +82,7 @@ class HomeController extends Controller
     }
 
     // Get the filtered products
-    $products = $products->get();
+    $products = $products->orderBy('id')->paginate(10);
 
     // Return the view
     return view('Home', compact('products', 'query'));
