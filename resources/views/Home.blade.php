@@ -12,25 +12,26 @@
 
 @section('filters')
 <div class="filters-section" id="filtersSection" style="display: none;">
-    <form id="filterForm" method="POST" action="{{ url('/home/filter') }}">
-        @csrf
+<form id="filterForm" method="GET" action="{{ url('/filtered') }}">
+    <!-- Search Query (optional, persists during filtering) -->
+    <input type="hidden" name="query" value="{{ request('query') }}">
 
-        <!-- Price Range -->
-        <label for="min_price">Min Price</label>
-        <input type="number" name="min_price" id="min_price" value="{{ request('min_price') }}">
+    <!-- Price Range -->
+    <label for="min_price">Min Price:</label>
+    <input type="number" name="min_price" id="min_price" value="{{ request('min_price') }}">
 
-        <label for="max_price">Max Price</label>
-        <input type="number" name="max_price" id="max_price" value="{{ request('max_price') }}">
+    <label for="max_price">Max Price:</label>
+    <input type="number" name="max_price" id="max_price" value="{{ request('max_price') }}">
 
-        <!-- Discount Checkbox -->
-        <label for="discount_only">
-            <input type="checkbox" name="discount_only" id="discount_only" {{ request('discount_only') ? 'checked' : '' }}>
-            Only items with discounts
-        </label>
+    <!-- Discount Filter -->
+    <label>
+        <input type="checkbox" name="discount_only" value="1" {{ request('discount_only') ? 'checked' : '' }}>
+        Only Discounted Items
+    </label>
 
-        <!-- Submit Button -->
-        <button type="submit">Apply Filters</button>
-    </form>
+    <button type="submit">Apply Filters</button>
+</form>
+
 </div>
 @endsection
 

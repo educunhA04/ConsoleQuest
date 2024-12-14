@@ -45,7 +45,7 @@
 
                 <!-- Search Bar -->
                 <div class="search-container">
-                    <form id="searchForm" method="POST" action="{{ url('/home') }}">
+                    <form id="searchForm" method="GET" action="{{ url('/filtered') }}">
                         @csrf
                         <input type="text" name="query" id="query" value="{{ $query ?? '' }}" placeholder="Search...">
                         <button type="submit"><i class="fas fa-search"></i></button>

@@ -49,19 +49,23 @@ class HomeController extends Controller
 
     public function index(Request $request)
 {
-    $query = $request->input('query', '');
+    // Get search query
+    $query = $request->input('query', ''); // Search query from the search bar
     $sanitizedQuery = strtolower(trim($query));
     $queryNoSpaces = str_replace(' ', '', $sanitizedQuery);
 
+    // Start building the query
     $products = Product::query();
 
     // Apply search filter
     if ($sanitizedQuery) {
-        $products->whereRaw('LOWER(REPLACE(name, \' \', \'\')) LIKE ?', ["%{$queryNoSpaces}%"])
-            ->orWhereRaw('LOWER(REPLACE(description, \' \', \'\')) LIKE ?', ["%{$queryNoSpaces}%"])
-            ->orWhereHas('category', function ($q) use ($queryNoSpaces) {
-                $q->whereRaw('LOWER(REPLACE(type::TEXT, \' \', \'\')) LIKE ?', ["%{$queryNoSpaces}%"]);
-            });
+        $products->where(function ($subQuery) use ($queryNoSpaces) {
+            $subQuery->whereRaw('LOWER(REPLACE(name, \' \', \'\')) LIKE ?', ["%{$queryNoSpaces}%"])
+                ->orWhereRaw('LOWER(REPLACE(description, \' \', \'\')) LIKE ?', ["%{$queryNoSpaces}%"])
+                ->orWhereHas('category', function ($q) use ($queryNoSpaces) {
+                    $q->whereRaw('LOWER(REPLACE(type::TEXT, \' \', \'\')) LIKE ?', ["%{$queryNoSpaces}%"]);
+                });
+        });
     }
 
     // Apply price range filters
@@ -78,14 +82,12 @@ class HomeController extends Controller
         $products->where('discount_percent', '>', 0);
     }
 
+    // Get the filtered products
     $products = $products->get();
 
-    if ($request->ajax()) {
-        // Return partial view for AJAX
-        $html = view('partials.products', compact('products'))->render();
-        return response()->json(['html' => $html]);
-    }
-
+    // Return the view
     return view('Home', compact('products', 'query'));
 }
+
+
 }
