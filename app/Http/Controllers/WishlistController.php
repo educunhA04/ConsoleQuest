@@ -20,9 +20,12 @@ class WishlistController extends Controller
 
     public function show()
     {
+        if (!auth()->check()) {
+            return redirect()->route('login'); 
+        }
         $userId = auth()->id();
      
-         $wishlistItems = Wishlist::with('product') 
+        $wishlistItems = Wishlist::with('product') 
              ->where('user_id', $userId)
              ->get();
         return view('pages/wishlist',['wishlistItems' => $wishlistItems]); 

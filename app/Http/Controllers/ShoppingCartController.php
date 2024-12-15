@@ -15,27 +15,24 @@ class ShoppingCartController extends Controller
      * @return View
      */
     public function show()
-    {
-        // Obtenha o ID do usuário autenticado
+    {   
+        if (!auth()->check()) {
+            return redirect()->route('login'); 
+        }
         $userId = auth()->id();
 
-        // Busque os itens do carrinho do usuário, incluindo os detalhes dos produtos
         $cartItems = ShoppingCart::with('product')
             ->where('user_id', $userId)
             ->get();
 
-        // Calcule o preço total do carrinho
         $totalPrice = $cartItems->sum(function ($cartItem) {
             return $cartItem->quantity * $cartItem->product->price;
         });
 
-        // Retorne a view do carrinho
         return view('pages.shoppingcart', compact('cartItems', 'totalPrice'));
     }
 
-    /**
-     * Adicionar item ao carrinho.
-     */
+
     public function add(Request $request)
     {
         if (!auth()->check()) {
