@@ -50,7 +50,6 @@
             @csrf
             <button class="clear-cart" type="submit">Limpar Carrinho</button>
         </form>
-        <a href="{{ route('cart.checkout') }}" class="checkout">Continuar</a>
     </div>
     <div class="cart-checkout">
         <a href="{{ route('cart.checkout') }}" class="checkout-btn">Continuar</a>
