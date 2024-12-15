@@ -8,7 +8,7 @@
 }
 
 .profile-container {
-    max-width: 1200px;
+    max-width: 80%;
     width: 100%;
     background: #fff;
     border-radius: 8px;
@@ -71,10 +71,8 @@
 }
 
 .profile-picture img {
-    width: 80px;
-    height: 80px;
+    max-width: 200px; /* Aumente o valor conforme necessário */
     border-radius: 50%;
-    object-fit: cover;
 }
 
 /* Right Section (Orders) */

@@ -23,16 +23,10 @@
                     <p><strong>Date:</strong> {{ $order->buy_date->format('Y-m-d') }}</p>
                     <p><strong>Status:</strong> <span id="status-{{ $order->id }}">{{ ucfirst($order->status) }}</span></p>
                     @if ($order->status === 'processing')
-                    <form action="{{ route('orders.cancel', ['orderId' => $order->id]) }}" method="POST" style="display:inline;">
-                        @csrf
-
-                        <input type="hidden" name="order_id" value="{{ $order->id }}">
-                        <button type="submit" class="cancel-order-btn" onclick="event.stopPropagation();">
-                            Cancel Order
-                        </button>
-
-                    </form>
-
+                    <button class="button cancel-order-btn" onclick="openCancelOrderModal(event, {{ $order->id }})" 
+                        style="background-color: #ff4d4d; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
+                        Cancel Order
+                    </button>
                     @endif
                 </div>
             @endforeach
@@ -54,14 +48,20 @@
     </div>
 </div>
 
-<!-- Cancel Confirmation Modal -->
-<div id="confirmationModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h3>Are you sure you want to cancel this order?</h3>
-        <div>
-            <button class="confirm-btn" id="confirmCancel">Yes</button>
-            <button class="cancel-btn" onclick="closeModal()">No</button>
-        </div>
+<!-- Cancel Order Modal -->
+<div id="cancelOrderModal" class="modal" style="display: none;">
+    <div class="modal-content" style="background: white; padding: 20px; border-radius: 8px; width: 300px; margin: 100px auto; text-align: center; position: relative;">
+        <h3 style="margin-bottom: 20px; color: #ff4d4d;">Cancel Order</h3>
+        <p style="margin-bottom: 20px;">Are you sure you want to cancel this order? This action is irreversible.</p>
+        <form id="cancelOrderForm" method="POST">
+            @csrf
+            @method('POST')
+            <button type="submit" class="button" style="background-color: #ff4d4d; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">Confirm</button>
+            <button type="button" class="button cancel-button" onclick="closeCancelOrderModal()" 
+                style="background-color: #ccc; color: black; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-left: 10px;">
+                Cancel
+            </button>
+        </form>
     </div>
 </div>
+
