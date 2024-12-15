@@ -6,25 +6,26 @@
         <!-- Header Section -->
         <div class="profile-header" style="display: flex; justify-content: space-between; align-items: center;">
             <h1 id="myprofile">My Profile</h1>
-            <button class="button delete-button" onclick="openModal()" 
+            <button class="button delete-button" onclick="openDeleteModal()" 
                 style="background-color: #ff4d4d; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
                 Delete Account
             </button>
         </div>
 
         <!-- Main Content Section -->
-        <div class="profile-content">
+        <div class="profile-content" style="display: flex; justify-content: space-between;">
             <!-- Left Section -->
-            <div class="left-section">
-                <div class="profile-details">
-                    <div class="profile-picture">
-                        <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="Profile Picture">
-                    </div>
-                    <div class="profile-info">
+            <div class="left-section" style="flex: 1;">
+                <div class="profile-details" style="display: flex; justify-content: space-between; align-items: center;">
+                    
+                    <div class="profile-info" style="flex: 1;">
                         <h2>Profile Information</h2>
                         <div class="detail-row"><strong>Name:</strong> {{ Auth::user()->name }}</div>
                         <div class="detail-row"><strong>Username:</strong> {{ Auth::user()->username }}</div>
                         <div class="detail-row"><strong>Email:</strong> {{ Auth::user()->email }}</div>
+                    </div>
+                    <div class="profile-picture" style="margin-left: 20px;">
+                        <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="Profile Picture">
                     </div>
                 </div>
                 <div class="notifications-section">
@@ -53,7 +54,7 @@
             @csrf
             @method('DELETE')
             <button type="submit" class="button" style="background-color: #ff4d4d; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">Confirm</button>
-            <button type="button" class="button cancel-button" onclick="closeModal()" 
+            <button type="button" class="button cancel-button" onclick="closeDeleteModal()" 
                 style="background-color: #ccc; color: black; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-left: 10px;">
                 Cancel
             </button>
@@ -61,16 +62,19 @@
     </div>
 </div>
 
+
 <script>
-    // Function to open the modal
-    function openModal() {
+    // Function to open the delete account modal
+    function openDeleteModal() {
         document.getElementById('deleteModal').style.display = 'block';
     }
 
-    // Function to close the modal
-    function closeModal() {
+    // Function to close the delete account modal
+    function closeDeleteModal() {
         document.getElementById('deleteModal').style.display = 'none';
     }
+
+    
 </script>
 
 @endsection

@@ -90,3 +90,14 @@ function closeOrderDetails() {
     // Hide the modal
     document.getElementById('orderModal').style.display = 'none';
 }
+
+function openCancelOrderModal(event, orderId) {
+    event.stopPropagation(); // Prevent the parent click event
+    document.getElementById('cancelOrderForm').action = '/orders/' + orderId + '/cancel';
+    document.getElementById('cancelOrderModal').style.display = 'block';
+}
+
+// Function to close the cancel order modal
+function closeCancelOrderModal() {
+    document.getElementById('cancelOrderModal').style.display = 'none';
+}
