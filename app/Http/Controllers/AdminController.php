@@ -102,11 +102,13 @@ class AdminController extends Controller
             'name' => 'required|string|max:255',
             'category_id' => 'required|integer',
             'description' => 'required|string',
+            'type' => 'required|string',
             'price' => 'required|numeric|min:0',
             'quantity' => 'required|integer|min:0',
             'discount' => 'nullable|numeric|min:0|max:100',
         ], [
             'name.required' => 'The product name is required.',
+            'type.required' => 'The product type is required.',
             'price.numeric' => 'The price must be a valid number.',
             'discount.min' => 'The discount must be at least 0.',
         ]);
@@ -151,6 +153,7 @@ class AdminController extends Controller
         $product->category_id = $validated['category_id'];
         $product->description = $validated['description'];
         $product->price = $validated['price'];
+        $product->type = $validated['type'];
         $product->quantity = $validated['quantity'];
         $product->discount_percent = $validated['discount'] ?? 0; 
 
@@ -210,17 +213,18 @@ class AdminController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'category_id' => 'required|integer|exists:category,id',
+            'category_id' => 'required|integer',
             'description' => 'required|string',
+            'type' => 'required|string',
             'price' => 'required|numeric|min:0',
             'quantity' => 'required|integer|min:0',
             'discount' => 'nullable|numeric|min:0|max:100',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
             'name.required' => 'The product name is required.',
+            'type.required' => 'The product type is required.',
             'price.numeric' => 'The price must be a valid number.',
             'discount.min' => 'The discount must be at least 0.',
-            'image.mimes' => 'The image must be a file of type: jpeg, png, jpg, gif.',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     
     
@@ -230,6 +234,7 @@ class AdminController extends Controller
     $product->description = $validated['description'];
     $product->price = $validated['price'];
     $product->quantity = $validated['quantity'];
+    $product->type = $validated['type'];
     $product->discount_percent = $validated['discount'] ?? 0; 
     
     if ($request->hasFile('image')) {

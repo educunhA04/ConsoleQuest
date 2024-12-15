@@ -16,7 +16,11 @@
                     <option value="2">Video Games</option>
                     <option value="3">Controllers</option>
 
-            </select>
+            </select>   
+
+            <label for="type">Type</label>
+            <input type="text" id="type" name="type" required>
+
 
             <label for="description">Description</label>
             <textarea id="description" name="description" required></textarea>

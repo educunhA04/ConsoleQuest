@@ -33,7 +33,14 @@
                 </select>
             </div>
 
-            
+           <div class="form-group">
+                <label for="type">Type</label>
+                <input type="text" id="type" name="type" class="form-control" value="{{ old('quantity', $product->type) }}"  required>
+                @error('quantity')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
             <div class="form-group">
 
                 <label for="description">Description</label>
