@@ -43,7 +43,7 @@
     <button type="submit" class="btn btn-primary">
         Login
     </button>
-    <a class="btn btn-outline-secondary" href="{{ route('register') }}">Register</a>
+    <a class="button button-outline" href="{{ route('register') }}">Register</a>
 
     @if (session('success'))
         <p class="success">
