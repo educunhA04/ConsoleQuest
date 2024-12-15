@@ -19,6 +19,7 @@ DROP TABLE IF EXISTS "Order" CASCADE;
 DROP TABLE IF EXISTS Shopping_Cart CASCADE;
 DROP TABLE IF EXISTS Wishlist CASCADE;
 DROP TABLE IF EXISTS Admin;
+DROP TABLE IF EXISTS "Type" CASCADE;
 DROP TABLE IF EXISTS Product CASCADE;
 DROP TABLE IF EXISTS Category CASCADE;
 DROP TABLE IF EXISTS "User" CASCADE;
@@ -84,18 +85,23 @@ CREATE TABLE Category (
     id SERIAL PRIMARY KEY,
     type categories NOT NULL 
 );
-
+CREATE TABLE "Type"(
+    id SERIAL PRIMARY KEY,
+    name TEXT UNIQUE NOT NULL 
+);
 CREATE TABLE Product (
     id SERIAL PRIMARY KEY,
     category_id INT NOT NULL ,
     name TEXT NOT NULL,
     image TEXT,
-    type TEXT NOT NULL,
+    type_id INT NOT NULL,
     description TEXT,
     quantity INT CHECK (quantity >= 0),
     price NUMERIC(10, 2) NOT NULL CHECK (price >= 0),
     discount_percent NUMERIC(5, 2) CHECK (discount_percent >= 0 AND discount_percent <= 100),
-    FOREIGN KEY (category_id) REFERENCES Category(id) ON UPDATE CASCADE
+    FOREIGN KEY (category_id) REFERENCES Category(id) ON UPDATE CASCADE,
+    FOREIGN KEY (type_id) REFERENCES "Type"(id) ON UPDATE CASCADE
+
 );
 
 CREATE TABLE Wishlist (
@@ -340,29 +346,45 @@ INSERT INTO Category (id, type) VALUES
     (2, 'Video Games'),
     (3, 'Controllers');
 
-INSERT INTO Product (id, category_id, name, image, type, description, quantity, price, discount_percent) VALUES
-    (1, 1, 'PlayStation 5', '/dbimages/pg5.jpg', 'PS5 Console', 'Next-gen gaming console', 50, 499.99, 10),
-    (2, 2, 'EA FC 25', '/dbimages/eafc25.jpg', 'Football', 'Cancer game', 100, 59.99, 20),
-    (3, 2, 'Fifa Street', '/dbimages/fifastreet.jpg', 'Football', 'Goat game', 100, 19.99, 0),
-    (4, 2, 'League of Legends', '/dbimages/LOL.jpeg', 'MOBA', 'Virgin game', 10, 9.99, 0),
-    (5, 3, 'DualSense Controller', '/dbimages/dualsense.jpg', 'PS5 Controller', 'PS5 Wireless Controller', 200, 69.99, 15),
-    (6, 1, 'Xbox Series X', '/dbimages/xboxseriesx.jpg', 'Xbox Console', 'Powerful next-gen console', 40, 499.99, 5),
-    (7, 2, 'The Legend of Zelda: Breath of the Wild', '/dbimages/zelda_botw.jpg', 'Adventure RPG', 'Award-winning adventure game', 60, 59.99, 10),
-    (8, 2, 'Mario Kart 8 Deluxe', '/dbimages/mariokart8.jpg', 'Racing', 'Fun racing game', 80, 49.99, 5),
-    (9, 1, 'Nintendo Switch OLED', '/dbimages/switch_oled.jpg', 'Nintendo Console', 'Hybrid console with OLED screen', 70, 349.99, 0),
-    (10, 3, 'Nintendo Switch Pro Controller', '/dbimages/switch_pro_controller.jpg', 'Nintendo Controller', 'Wireless controller for Switch', 120, 69.99, 10),
-    (11, 2, 'Elden Ring', '/dbimages/eldenring.jpg', 'Action RPG', 'Open-world action RPG', 50, 59.99, 15),
-    (12, 2, 'God of War Ragnarok', '/dbimages/gow_ragnarok.jpg', 'Action Adventure', 'Action-packed Norse mythology game', 40, 69.99, 10),
-    (13, 1, 'Steam Deck', '/dbimages/steamdeck.jpg', 'Portable Console', 'Portable gaming PC', 30, 399.99, 5),
-    (14, 3, 'Razer Wolverine V2', '/dbimages/razer_wolverine.jpg', 'Xbox Controller', 'Advanced controller for Xbox/PC', 50, 99.99, 10),
-    (15, 2, 'Cyberpunk 2077', '/dbimages/cyberpunk2077.jpg', 'Futuristic RPG', 'Futuristic action RPG', 100, 39.99, 20),
-    (16, 2, 'Horizon Forbidden West', '/dbimages/horizon_fw.jpg', 'Action RPG', 'Post-apocalyptic open-world game', 60, 59.99, 15),
-    (17, 3, 'Xbox Elite Series 2', '/dbimages/xbox_elite2.jpg', 'Xbox Controller', 'Premium wireless Xbox controller', 70, 179.99, 20),
-    (18, 2, 'Spider-Man: Miles Morales', '/dbimages/spiderman_mm.jpg', 'Action Adventure', 'Superhero action game', 90, 49.99, 10),
-    (19, 2, 'Resident Evil 4 Remake', '/dbimages/re4_remake.jpg', 'Horror RPG', 'Horror survival game', 80, 59.99, 10),
-    (20, 1, 'PlayStation 4 Slim', '/dbimages/ps4_slim.jpg', 'PS4 Console', 'Compact version of PS4', 30, 299.99, 0),
-    (21, 2, 'Assassins Creed IV Black Flag', '/dbimages/assassins_creed_4_black_flag.jpg', 'Action Adventure', 'Assassins PS4 game', 80, 29.99, 10),
-    (22, 2, 'Fornite', '/dbimages/fortnite.jpg', 'Battle Royal', 'I EDGE TO THIS GAME', 280, 20.00, 0);
+INSERT INTO "Type" (id, name) VALUES 
+    (1, 'PS5 Console'),
+    (2, 'Football'),
+    (3, 'MOBA'),
+    (4, 'PS5 Wireless Controller'),
+    (5, 'Xbox Console'),
+    (6, 'Adventure RPG'),
+    (7, 'Racing'),
+    (8, 'Nintendo Console'),
+    (9, 'Nintendo Controller'),
+    (10, 'Action RPG'),
+    (11, 'Action Adventure'),
+    (12, 'Horror RPG'),
+    (13, 'Battle Royal');
+
+INSERT INTO Product (id, category_id, name, image, type_id , description, quantity, price, discount_percent) VALUES
+    (1, 1, 'PlayStation 5', '/dbimages/pg5.jpg', 1, 'Next-gen gaming console', 50, 499.99, 10),
+    (2, 2, 'EA FC 25', '/dbimages/eafc25.jpg', 2, 'Cancer game', 100, 59.99, 20),
+    (3, 2, 'Fifa Street', '/dbimages/fifastreet.jpg', 2, 'Goat game', 100, 19.99, 0),
+    (4, 2, 'League of Legends', '/dbimages/LOL.jpeg', 3, 'Virgin game', 10, 9.99, 0),
+    (5, 3, 'DualSense Controller', '/dbimages/dualsense.jpg', 4, 'PS5 Wireless Controller', 200, 69.99, 15),
+    (6, 1, 'Xbox Series X', '/dbimages/xboxseriesx.jpg', 5, 'Powerful next-gen console', 40, 499.99, 5),
+    (7, 2, 'The Legend of Zelda: Breath of the Wild', '/dbimages/zelda_botw.jpg', 6, 'Award-winning adventure game', 60, 59.99, 10),
+    (8, 2, 'Mario Kart 8 Deluxe', '/dbimages/mariokart8.jpg', 7, 'Fun racing game', 80, 49.99, 5),
+    (9, 1, 'Nintendo Switch OLED', '/dbimages/switch_oled.jpg', 8, 'Hybrid console with OLED screen', 70, 349.99, 0),
+    (10, 3, 'Nintendo Switch Pro Controller', '/dbimages/switch_pro_controller.jpg', 9, 'Wireless controller for Switch', 120, 69.99, 10),
+    (11, 2, 'Elden Ring', '/dbimages/eldenring.jpg', 10, 'Open-world action RPG', 50, 59.99, 15),
+    (12, 2, 'God of War Ragnarok', '/dbimages/gow_ragnarok.jpg', 11, 'Action-packed Norse mythology game', 40, 69.99, 10),
+    (13, 1, 'Steam Deck', '/dbimages/steamdeck.jpg', 1, 'Portable gaming PC', 30, 399.99, 5),
+    (14, 3, 'Razer Wolverine V2', '/dbimages/razer_wolverine.jpg', 5, 'Advanced controller for Xbox/PC', 50, 99.99, 10),
+    (15, 2, 'Cyberpunk 2077', '/dbimages/cyberpunk2077.jpg', 10, 'Futuristic action RPG', 100, 39.99, 20),
+    (16, 2, 'Horizon Forbidden West', '/dbimages/horizon_fw.jpg', 10, 'Post-apocalyptic open-world game', 60, 59.99, 15),
+    (17, 3, 'Xbox Elite Series 2', '/dbimages/xbox_elite2.jpg', 5, 'Premium wireless Xbox controller', 70, 179.99, 20),
+    (18, 2, 'Spider-Man: Miles Morales', '/dbimages/spiderman_mm.jpg', 11, 'Superhero action game', 90, 49.99, 10),
+    (19, 2, 'Resident Evil 4 Remake', '/dbimages/re4_remake.jpg', 12, 'Horror survival game', 80, 59.99, 10),
+    (20, 1, 'PlayStation 4 Slim', '/dbimages/ps4_slim.jpg', 1, 'Compact version of PS4', 30, 299.99, 0),
+    (21, 2, 'Assassins Creed IV Black Flag', '/dbimages/assassins_creed_4_black_flag.jpg', 11, 'Assassins PS4 game', 80, 29.99, 10),
+    (22, 2, 'Fornite', '/dbimages/fortnite.jpg', 13, 'I EDGE TO THIS GAME', 280, 20.00, 0);
+
 
 
 
@@ -391,6 +413,7 @@ VALUES ('rafa@gmail.com', '5f4e7fdc19c37882511ab68f1ff3cfd3', NOW());
 SELECT SETVAL('"User_id_seq"', (SELECT MAX(id) FROM "User"));
 SELECT SETVAL('Admin_id_seq', (SELECT MAX(id) FROM Admin));
 SELECT SETVAL('Category_id_seq', (SELECT MAX(id) FROM Category));
+SELECT SETVAL('"Type_id_seq"', (SELECT MAX(id) FROM "Type"));
 SELECT SETVAL('Product_id_seq', (SELECT MAX(id) FROM Product));
 SELECT SETVAL('"Order_id_seq"', (SELECT MAX(id) FROM "Order"));
 SELECT SETVAL('Transaction_id_seq', (SELECT MAX(id) FROM Transaction));

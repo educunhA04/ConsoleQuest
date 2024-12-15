@@ -33,13 +33,14 @@
                 </select>
             </div>
 
-           <div class="form-group">
+            <div class="form-group">
                 <label for="type">Type</label>
-                <input type="text" id="type" name="type" class="form-control" value="{{ old('quantity', $product->type) }}"  required>
-                @error('quantity')
+                <input type="text" id="type" name="type" class="form-control" value="{{ old('type', $product->type ? $product->type->name : '') }}" required>
+                @error('type')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
+
 
             <div class="form-group">
 

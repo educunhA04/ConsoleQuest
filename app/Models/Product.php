@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;  // Corrected the typo here
 use App\Models\Category;
+use App\Models\Type;
+
 
 class Product extends Model
 {
@@ -33,7 +35,10 @@ class Product extends Model
     {
         return $this->hasMany(OrderProduct::class);
     }
-
+    public function type()
+    {
+        return $this->belongsTo(Type::class, 'type_id');
+    }
 
 
 }
