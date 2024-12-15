@@ -19,7 +19,15 @@
             </select>   
 
             <label for="type">Type</label>
-            <input type="text" id="type" name="type" required>
+            <select id="type" name="type_id"  required>
+                <option value="">Select a Type</option>
+                @foreach($types as $type)
+                    <option value="{{ $type->id }}" {{ old('type_id') == $type->id ? 'selected' : '' }}>
+                        {{ $type->name }}
+                    </option>
+                @endforeach
+            </select>
+
 
 
             <label for="description">Description</label>
