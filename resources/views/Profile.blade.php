@@ -28,6 +28,8 @@
                         <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="Profile Picture">
                     </div>
                 </div>
+                <h2>Your Notifications</h2>
+
                 <div class="notifications-section">
                     @include('partials/notifications', ['notifications' => $notifications])
                 </div>

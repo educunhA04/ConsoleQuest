@@ -46,10 +46,13 @@
 
 .profile-details,
 .notifications-section {
+    max-height: 20rem; /* Consistent height for visibility */
     padding: 1.5rem;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #f9f9f9;
+    overflow-y: auto;
+    
 }
 
 .profile-details h2,
@@ -133,6 +136,7 @@
 }
 
 /* Notifications */
+
 .notification-item {
     padding: 10px;
     margin-bottom: 10px;
