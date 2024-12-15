@@ -56,6 +56,7 @@ class CheckoutController extends Controller
         
         $rules = [
             'NIF' => [
+                'nullable',
                 'digits:9',
             ],
             'credit_card_number' => [
