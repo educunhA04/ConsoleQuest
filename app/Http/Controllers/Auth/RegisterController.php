@@ -83,7 +83,7 @@ class RegisterController extends Controller
             $profilePicturePath = $request->file('image')->store('userimages', 'public');
         }
 
-        User::create([
+        $user = User::create([
             'username' => $request->username,
             'name' => $request->name,
             'email' => $request->email,
@@ -100,7 +100,49 @@ class RegisterController extends Controller
         $credentials = $request->only('email', 'password');
         Auth::attempt($credentials);
         $request->session()->regenerate();
+
+        $this->migrateSessionCartToDatabase($user);
+
+    
         return redirect()->route('home')
             ->withSuccess('You have successfully registered & logged in!');
+    }
+
+
+    /**
+     * Migrate session cart items to the database cart for a user.
+     */
+    private function migrateSessionCartToDatabase($user)
+    {
+        $sessionCart = session('cart', []);
+
+        foreach ($sessionCart as $item) {
+            // Check if product exists in the database
+            $product = \App\Models\Product::find($item['product_id']);
+            if (!$product) {
+                continue; // Skip if the product no longer exists
+            }
+
+            // Check if the product is already in the user's cart
+            $existingCartItem = \App\Models\ShoppingCart::where('user_id', $user->id)
+                ->where('product_id', $item['product_id'])
+                ->first();
+
+            if ($existingCartItem) {
+                // Update quantity if the product is already in the cart
+                $existingCartItem->quantity += $item['quantity'];
+                $existingCartItem->save();
+            } else {
+                // Add a new cart item
+                \App\Models\ShoppingCart::create([
+                    'user_id' => $user->id,
+                    'product_id' => $item['product_id'],
+                    'quantity' => $item['quantity'],
+                ]);
+            }
+        }
+
+        // Clear the session cart after migration
+        session()->forget('cart');
     }
 }

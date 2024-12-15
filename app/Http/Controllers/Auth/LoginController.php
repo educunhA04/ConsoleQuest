@@ -79,16 +79,36 @@ class LoginController extends Controller
     // Attempt to authenticate with the credentials
     if (Auth::attempt($credentials, $request->filled('remember'))) {
         $user = Auth::user();
-
+    
         if ($user->blocked) {
             Auth::logout();
             return back()->withErrors(['login' => 'Your account has been blocked. Please contact support.']);
         }
-
+    
         $request->session()->regenerate();
-        return redirect()->route('home'); // Redirect to desired route
+    
+        // Mesclar itens do carrinho
+        $sessionCart = session('cart', []);
+        foreach ($sessionCart as $productId => $item) {
+            $cartItem = \App\Models\ShoppingCart::where('user_id', $user->id)
+                ->where('product_id', $productId)
+                ->first();
+    
+            if ($cartItem) {
+                $cartItem->increment('quantity', $item['quantity']);
+            } else {
+                \App\Models\ShoppingCart::create([
+                    'user_id' => $user->id,
+                    'product_id' => $productId,
+                    'quantity' => $item['quantity'],
+                ]);
+            }
+        }
+        session()->forget('cart'); // Limpar o carrinho da sessão
+    
+        return redirect()->route('home'); // Redirecionar o usuário
     }
-
+    
     // Return back with an error if authentication fails
     return back()->withErrors([
         'login' => 'The provided credentials do not match our records.',

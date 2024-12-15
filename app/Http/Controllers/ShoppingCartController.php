@@ -15,61 +15,92 @@ class ShoppingCartController extends Controller
      * @return View
      */
     public function show()
-    {   
-        if (!auth()->check()) {
-            return redirect()->route('login'); 
+    {
+        if (auth()->check()) {
+            $userId = auth()->id();
+        
+            $cartItems = ShoppingCart::with('product')
+                ->where('user_id', $userId)
+                ->get();
+        
+            $totalPrice = $cartItems->sum(function ($cartItem) {
+                return $cartItem->quantity * $cartItem->product->price;
+            });
+        
+            return view('pages.shoppingcart', compact('cartItems', 'totalPrice'));
         }
-        $userId = auth()->id();
-
-        $cartItems = ShoppingCart::with('product')
-            ->where('user_id', $userId)
-            ->get();
-
-        $totalPrice = $cartItems->sum(function ($cartItem) {
-            return $cartItem->quantity * $cartItem->product->price;
-        });
-
-        return view('pages.shoppingcart', compact('cartItems', 'totalPrice'));
+        else {
+            $sessionCart = session('cart', []);
+            $cartItems = collect($sessionCart)->map(function ($item) {
+                $product = \App\Models\Product::find($item['product_id']);
+                return [
+                    'product' => $product,
+                    'quantity' => $item['quantity'],
+                    'price' => $product ? $product->price * $item['quantity'] : 0
+                ];
+            });
+    
+            $totalPrice = $cartItems->sum('price');
+    
+            return view('pages.shoppingcart', compact('cartItems', 'totalPrice'));
+        }
     }
+    
 
 
     public function add(Request $request)
     {
-        if (!auth()->check()) {
-            return response()->json([
-                'error' => 'Você precisa estar logado para adicionar itens ao carrinho.'
-            ], 401);
-        }
-    
         $validated = $request->validate([
             'product_id' => 'required|integer|exists:product,id',
             'quantity' => 'required|integer|min:1',
         ]);
-    
-        $userId = auth()->id();
-    
-        $cartItem = ShoppingCart::where('user_id', $userId)
-                                ->where('product_id', $validated['product_id'])
-                                ->first();
-    
-        if ($cartItem) {
-            $cartItem->increment('quantity', $validated['quantity']);
-            return response()->json([
-                'message' => 'Item quantity updated in cart successfully.',
-                'cart_item' => $cartItem
-            ], 200);
+
+        if (auth()->check()) {
+            $userId = auth()->id();
+
+            $cartItem = ShoppingCart::where('user_id', $userId)
+                ->where('product_id', $validated['product_id'])
+                ->first();
+
+            if ($cartItem) {
+                $cartItem->increment('quantity', $validated['quantity']);
+                return response()->json([
+                    'message' => 'Item quantity updated in cart successfully.',
+                    'cart_item' => $cartItem
+                ], 200);
+            } else {
+                ShoppingCart::create([
+                    'user_id' => $userId,
+                    'product_id' => $validated['product_id'],
+                    'quantity' => $validated['quantity'],
+                ]);
+
+                return response()->json([
+                    'message' => 'Item added to cart successfully.'
+                ], 201);
+            }
         } else {
-            ShoppingCart::create([
-                'user_id' => $userId,
-                'product_id' => $validated['product_id'],
-                'quantity' => $validated['quantity'],
-            ]);
-    
+            // Armazenar na sessão se o usuário não estiver autenticado
+            $cart = session()->get('cart', []);
+
+            if (isset($cart[$validated['product_id']])) {
+                $cart[$validated['product_id']]['quantity'] += $validated['quantity'];
+            } else {
+                $cart[$validated['product_id']] = [
+                    'product_id' => $validated['product_id'],
+                    'quantity' => $validated['quantity']
+                ];
+            }
+
+            session()->put('cart', $cart);
+
             return response()->json([
-                'message' => 'Item added to cart successfully.'
+                'message' => 'Item added to cart successfully.',
+                'cart' => $cart
             ], 201);
         }
-        }
+    }
+
     
 
 
