@@ -5,7 +5,7 @@ function openOrderDetailsFromElementAdmin(element) {
     const status = element.getAttribute('data-status');
     const total = parseFloat(element.getAttribute('data-total')).toFixed(2);
     const products = JSON.parse(element.getAttribute('data-products'));
-
+    const orderId = JSON.parse(element.getAttribute('data-id'));
     // Log data for debugging
     console.log({ trackingId, date, status, total, products });
 
@@ -13,7 +13,8 @@ function openOrderDetailsFromElementAdmin(element) {
     document.getElementById('modalTrackingId').textContent = trackingId;
     document.getElementById('modalDate').textContent = date;
     document.getElementById('modalStatus').textContent = status;
-
+    const form = document.querySelector('#orderModal form');
+    form.action = `/admin/orders/${orderId}`;
     const productsList = document.getElementById('modalProducts');
     productsList.innerHTML = ''; // Clear previous list
 

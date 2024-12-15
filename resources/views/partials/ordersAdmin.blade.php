@@ -4,7 +4,7 @@
                     @if ($user->orders->isEmpty())
                         <p>This user doesn't have any orders to display yet.</p>
                     @else
-                        @foreach ($user->orders as $order)
+                        @foreach ($user->orders->sortByDesc('tracking_number') as $order)
                             @php
                                 $orderData = [
                                     'trackingId' => $order->tracking_number,
@@ -21,12 +21,14 @@
                                     })->toArray(),
                                 ];
                             @endphp
-                            <div class="order-block" 
-                                data-tracking="{{ $order->tracking_number }}" 
-                                data-date="{{ $order->buy_date->format('Y-m-d') }}" 
-                                data-status="{{ ucfirst($order->status) }}" 
-                                data-total="{{ $orderData['total'] }}" 
-                                data-products='@json($orderData['products'])'>
+                            <div class="order-block"
+                                data-id="{{ $order->id }}"
+                                data-tracking="{{ $order->tracking_number }}"
+                                data-date="{{ $order->buy_date->format('Y-m-d') }}"
+                                data-status="{{ ucfirst($order->status) }}"
+                                data-total="{{ $orderData['total'] }}"
+                                data-products='@json($orderData['products'])'
+                                >
                                 <p><strong>Tracking ID:</strong> {{ $order->tracking_number }}</p>
                                 <p><strong>Status:</strong> {{ ucfirst($order->status) }}</p>
                                
@@ -43,7 +45,7 @@
         <p><strong>Tracking ID:</strong> <span id="modalTrackingId"></span></p>
         <p><strong>Date:</strong> <span id="modalDate"></span></p>
         <p><strong>Status:</strong> <span id="modalStatus"></span></p>
-        <form action="{{ route('admin.orders.updateStatus', ['id' => $order->id]) }}" method="POST" style="display: inline;">
+        <form  id="orderModal" method="POST" style="display: inline;">
                                   @csrf
             @method('PUT') <!-- Use PUT or PATCH for updates -->
             <select name="status" class="status-dropdown">
