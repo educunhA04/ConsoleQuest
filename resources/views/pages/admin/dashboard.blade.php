@@ -36,6 +36,23 @@
         </div>
         <a href="{{ route('admin.createProduct') }}" class="admin-button-link">New Product</a>
 
+<a href="#" class="admin-button-link" onclick="openTypeModal()">New Type</a>
+
+<div class="typeModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeTypeModal()">&times;</span>
+        <h2>Add New Type</h2>
+        <form id="typeForm" action="/add-type" method="POST">
+            @csrf
+            <label for="name">Type Name</label>
+            <input type="text" id="name" name="name" required>
+            <button type="submit" class="btn-submit">Add Type</button>
+        </form>
+    </div>
+</div>
+
+
+
     @elseif (isset($reports))
         <h2>Reports:</h2>
         <div class="report-list">
