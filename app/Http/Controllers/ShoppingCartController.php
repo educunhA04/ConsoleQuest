@@ -120,19 +120,26 @@ class ShoppingCartController extends Controller
         return redirect()->back()->with('success', 'Quantidade atualizada com sucesso.');
     }
 
-    /**
-     * Remover um item do carrinho.
-     */
     public function remove(Request $request)
     {
-        $validated = $request->validate([
-            'cart_item_id' => 'required|exists:shopping_cart,id',
-        ]);
-
-        ShoppingCart::findOrFail($validated['cart_item_id'])->delete();
-
-        return redirect()->back()->with('success', 'Produto removido do carrinho.');
+        if (Auth::check()) {
+            // For logged-in users, remove the item from the database (your shopping cart table)
+            $cartItem = ShoppingCart::find($request->cart_item_id);
+            if ($cartItem) {
+                $cartItem->delete();
+            }
+        } else {
+            // For unauthenticated users, remove the item from the session
+            $cart = session('cart', []);
+            $cart = collect($cart)->filter(function ($item) use ($request) {
+                return $item['product_id'] != $request->cart_item_id;
+            })->values()->all();
+            session(['cart' => $cart]);
+        }
+    
+        return redirect()->back()->with('success', 'Item removido com sucesso.');
     }
+    
 
     /**
      * Limpar o carrinho de compras do usuário.
