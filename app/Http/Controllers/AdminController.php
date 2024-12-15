@@ -20,6 +20,7 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Report;
 use App\Models\Review;
+use App\Models\PasswordResetToken;
 
 
 
@@ -369,6 +370,9 @@ class AdminController extends Controller
         // Find and delete the user
         $user = User::find($request->user_id);
         if ($user) {
+
+            PasswordResetToken::where('email', $user->email)->delete();
+
             $user->name = 'Anonymous' . $user->id;
             $user->username = 'anonymous'. $user->id;
             $user->email = 'anonymous' . $user->id . '@anonymous.com';

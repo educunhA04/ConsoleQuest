@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash; 
 use App\Models\NotificationUser;
 use App\Models\Notification;
+use App\Models\PasswordResetToken;
 
 
 class ProfileController extends Controller
@@ -86,6 +87,8 @@ class ProfileController extends Controller
     public function deleteAccount()
     {
         $user = Auth::user();
+
+        PasswordResetToken::where('email', $user->email)->delete();
 
         // Update the user's details to anonymize them
         $user->name = 'Anonymous' . $user->id;
