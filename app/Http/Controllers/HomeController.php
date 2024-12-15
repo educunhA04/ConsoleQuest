@@ -71,7 +71,6 @@ class HomeController extends Controller
     if ($request->filled('min_price')) {
         $products->where('price', '>=', $request->input('min_price'));
     }
-
     if ($request->filled('max_price')) {
         $products->where('price', '<=', $request->input('max_price'));
     }
@@ -81,8 +80,13 @@ class HomeController extends Controller
         $products->where('discount_percent', '>', 0);
     }
 
-    // Get the filtered products
-    $products = $products->orderBy('id')->paginate(10);
+    $products = $products->orderBy('id')->paginate(10)
+    ->appends([
+        'query' => $request->input('query'),
+        'min_price' => $request->input('min_price'),
+        'max_price' => $request->input('max_price'),
+        'discount_only' => $request->input('discount_only'),
+    ]);
 
     // Return the view
     return view('Home', compact('products', 'query'));
