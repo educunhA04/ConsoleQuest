@@ -19,12 +19,12 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Remove from Wishlist</button>
                     </form>
-                    <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{ $wishlistItem->product->id }}">
-                        <input type="hidden" name="quantity" value="1"> 
-                        <button type="submit" class="btn btn-primary">Add to Cart</button>
-                    </form>
+                    <button 
+                    class="btn btn-primary"
+                    aria-label="Add to cart"
+                    onclick="addToCart({{ $wishlistItem->id }}, 1)">
+                    Add to Cart
+                 </button>
                 </div>
             </div>
         @endforeach
