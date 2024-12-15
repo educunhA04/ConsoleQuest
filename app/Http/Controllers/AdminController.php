@@ -21,6 +21,8 @@ use App\Models\OrderProduct;
 use App\Models\Report;
 use App\Models\Review;
 use App\Models\PasswordResetToken;
+use App\Models\Type;
+
 
 
 
@@ -46,7 +48,8 @@ class AdminController extends Controller
     public function viewProduct($id)
     {
     $product = Product::findOrFail($id); 
-    return view('pages.admin/viewProduct', compact('product'));
+    $types = Type::all(); 
+    return view('pages.admin/viewProduct', compact('product','types'));
     }
 
     public function changeUser(Request $request): View
@@ -101,18 +104,20 @@ class AdminController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'category_id' => 'required|integer',
+            'category_id' => 'required|integer|exists:category,id',
+            'type_id' => 'required|integer|exists:Type,id', 
             'description' => 'required|string',
-            'type' => 'required|string',
             'price' => 'required|numeric|min:0',
             'quantity' => 'required|integer|min:0',
             'discount' => 'nullable|numeric|min:0|max:100',
         ], [
             'name.required' => 'The product name is required.',
-            'type.required' => 'The product type is required.',
+            'type_id.required' => 'The product type is required.',
+            'type_id.exists' => 'The selected type does not exist.',
             'price.numeric' => 'The price must be a valid number.',
             'discount.min' => 'The discount must be at least 0.',
         ]);
+        
         $product = Product::findOrFail($request->product_id);
         if ($product->quantity == 0 && $validated['quantity'] > 0) {
             $wishlistUsers = Wishlist::where('product_id', $product->id)->pluck('user_id');
@@ -154,7 +159,7 @@ class AdminController extends Controller
         $product->category_id = $validated['category_id'];
         $product->description = $validated['description'];
         $product->price = $validated['price'];
-        $product->type = $validated['type'];
+        $product->type_id = $validated['type_id'];
         $product->quantity = $validated['quantity'];
         $product->discount_percent = $validated['discount'] ?? 0; 
 

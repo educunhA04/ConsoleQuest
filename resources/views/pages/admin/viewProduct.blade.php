@@ -34,11 +34,18 @@
             </div>
 
             <div class="form-group">
-                <label for="type">Type</label>
-                <input type="text" id="type" name="type" class="form-control" value="{{ old('type', $product->type ? $product->type->name : '') }}" required>
-                @error('type')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
+                    <label for="type">Type</label>
+                    <select id="type" name="type_id" class="form-control" required>
+                        <option value="">Select a Type</option>
+                        @foreach($types as $type)
+                            <option value="{{ $type->id }}" {{ (old('type_id', $product->type_id) == $type->id) ? 'selected' : '' }}>
+                                {{ $type->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('type_id')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
             </div>
 
 
