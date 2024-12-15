@@ -42,7 +42,7 @@
     <div class="modal-content">
         <span class="close" onclick="closeTypeModal()">&times;</span>
         <h2>Add New Type</h2>
-        <form id="typeForm" action="/add-type" method="POST">
+        <form id="typeForm" action="/admin/addType" method="POST">
             @csrf
             <label for="name">Type Name</label>
             <input type="text" id="name" name="name" required>

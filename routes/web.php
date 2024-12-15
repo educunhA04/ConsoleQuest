@@ -207,6 +207,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
 
     Route::Put('/orders/{id}', [AdminController::class, 'updateStatus'])->name('orders.updateStatus');
 
+    //Type
+    Route::post('/addType', [AdminController::class, 'addType'])->name('addType');
 
 });
 

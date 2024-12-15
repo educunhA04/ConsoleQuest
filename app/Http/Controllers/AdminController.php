@@ -419,4 +419,23 @@ class AdminController extends Controller
 
         return redirect()->back()->with('error', 'User not found.');
     }
+    public function addType(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:Type,name',
+        ], [
+            'name.required' => 'The type name is required.',
+            'name.unique' => 'This type name already exists.',
+        ]);
+
+        try {
+            Type::create([
+                'name' => $validated['name'],
+            ]);
+    
+            return back()->with('success', 'Type added successfully!');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Failed to create type.']);
+        }
+    }
 }
