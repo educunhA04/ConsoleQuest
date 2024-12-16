@@ -2,10 +2,10 @@
 
 @section('navigation')
 <nav class="main-nav">
-    <a href="{{ route('home') }}">Home</a>
-    <a href="{{ route('home.controllers') }}">Controllers</a>
-    <a href="{{ route('home.games') }}">Games</a>
-    <a href="{{ route('home.consoles') }}">Consoles</a>
+    <a href="{{ url('/filtered') }}?query=Home">Home</a>
+    <a href="{{ url('/filtered') }}?query=Controllers">Controllers</a>
+    <a href="{{ url('/filtered') }}?query=Games">Games</a>
+    <a href="{{ url('/filtered') }}?query=Consoles">Consoles</a>
 </nav>
 
 @endsection
