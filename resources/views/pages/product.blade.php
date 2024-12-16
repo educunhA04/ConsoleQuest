@@ -17,6 +17,8 @@
     <div class="product-page">
         <div class="product-info">
             <h1 class="product-name">{{ $product->name }}</h1> <!-- Product name -->
+            <h2 class="type">{{ $product->type->name }}</h2> 
+
             <div class="rating">
                 @php
                     $fullStars = floor($product->reviews->avg('rating'));
@@ -53,6 +55,7 @@
                     aria-label="Add to wishlist"
                     onclick="addToWishlist({{ $product->id }})">
                 </button>
+
             <p class="description">{{ $product->description }}</p> <!-- Product description -->
             <button 
                     class="add-to-cart-btn"
