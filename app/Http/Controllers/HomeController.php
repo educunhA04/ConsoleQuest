@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Product;
+use App\Models\Type;
 
 class HomeController extends Controller
 {
@@ -12,6 +13,7 @@ class HomeController extends Controller
     public function show(): View
     {
         $products = Product::orderBy('id')->paginate(10);
+        $types = Type::all();
 
         return view('Home', ['products' => $products]);
     }
@@ -48,10 +50,13 @@ class HomeController extends Controller
 
     public function index(Request $request)
 {
+    $types = Type::all();
+    
     // Get search query
     $query = $request->input('query', ''); // Search query from the search bar
     $sanitizedQuery = strtolower(trim($query));
     $queryNoSpaces = str_replace(' ', '', $sanitizedQuery);
+
 
     // Start building the query
     $products = Product::query();
@@ -80,17 +85,25 @@ class HomeController extends Controller
         $products->where('discount_percent', '>', 0);
     }
 
-    $products = $products->orderBy('id')->paginate(10)
-    ->appends([
-        'query' => $request->input('query'),
-        'min_price' => $request->input('min_price'),
-        'max_price' => $request->input('max_price'),
-        'discount_only' => $request->input('discount_only'),
-    ]);
+    // Apply type filter
+    if ($request->filled('type_id')) {
+        $products->where('type_id', $request->input('type_id'));
+    }
 
-    // Return the view
-    return view('Home', compact('products', 'query'));
+    // Paginate the results and append filters
+    $products = $products->orderBy('id')->paginate(10)
+        ->appends([
+            'query' => $request->input('query'),
+            'min_price' => $request->input('min_price'),
+            'max_price' => $request->input('max_price'),
+            'discount_only' => $request->input('discount_only'),
+            'type_id' => $request->input('type_id'),
+        ]);
+
+    // Pass $types to the view
+    return view('Home', compact('products', 'query', 'types'));
 }
+
 
 
 }

@@ -12,28 +12,50 @@
 
 @section('filters')
 <div class="filters-section" id="filtersSection" style="display: none;">
-<form id="filterForm" method="GET" action="{{ url('/filtered') }}">
-    <!-- Search Query (optional, persists during filtering) -->
-    <input type="hidden" name="query" value="{{ request('query') }}">
+    <form id="filterForm" method="GET" action="{{ url('/filtered') }}">
+        <!-- Search Query (optional, persists during filtering) -->
+        <input type="hidden" name="query" value="{{ request('query') }}">
 
-    <!-- Price Range -->
-    <label for="min_price">Min Price:</label>
-    <input type="number" name="min_price" id="min_price" value="{{ request('min_price') }}">
+        <!-- Price Range -->
+        <label for="min_price">Min Price:</label>
+        <input type="number" name="min_price" id="min_price" value="{{ request('min_price') }}">
 
-    <label for="max_price">Max Price:</label>
-    <input type="number" name="max_price" id="max_price" value="{{ request('max_price') }}">
+        <label for="max_price">Max Price:</label>
+        <input type="number" name="max_price" id="max_price" value="{{ request('max_price') }}">
 
-    <!-- Discount Filter -->
-    <label>
-        <input type="checkbox" name="discount_only" value="1" {{ request('discount_only') ? 'checked' : '' }}>
+        <!-- Discount Filter -->
+        <label>
         Only Discounted Items
-    </label>
+            <input type="checkbox" name="discount_only" value="1" {{ request('discount_only') ? 'checked' : '' }}>
+            
+        </label>
 
-    <button type="submit" >Apply Filters</button>
-</form>
+        <!-- Type Filter Dropdown (Hardcoded) -->
+        <label for="type_id">Type:</label>
+        <select name="type_id" id="type_id">
+            <option value="">All Types</option>
+            <option value="1" {{ request('type_id') == 1 ? 'selected' : '' }}>PS5 Console</option>
+            <option value="2" {{ request('type_id') == 2 ? 'selected' : '' }}>Football</option>
+            <option value="3" {{ request('type_id') == 3 ? 'selected' : '' }}>MOBA</option>
+            <option value="4" {{ request('type_id') == 4 ? 'selected' : '' }}>PS5 Wireless Controller</option>
+            <option value="5" {{ request('type_id') == 5 ? 'selected' : '' }}>Xbox Console</option>
+            <option value="6" {{ request('type_id') == 6 ? 'selected' : '' }}>Adventure RPG</option>
+            <option value="7" {{ request('type_id') == 7 ? 'selected' : '' }}>Racing</option>
+            <option value="8" {{ request('type_id') == 8 ? 'selected' : '' }}>Nintendo Console</option>
+            <option value="9" {{ request('type_id') == 9 ? 'selected' : '' }}>Nintendo Controller</option>
+            <option value="10" {{ request('type_id') == 10 ? 'selected' : '' }}>Action RPG</option>
+            <option value="11" {{ request('type_id') == 11 ? 'selected' : '' }}>Action Adventure</option>
+            <option value="12" {{ request('type_id') == 12 ? 'selected' : '' }}>Horror RPG</option>
+            <option value="13" {{ request('type_id') == 13 ? 'selected' : '' }}>Battle Royal</option>
+        </select>
 
+        <!-- Submit Button -->
+        <button type="submit">Apply Filters</button>
+    </form>
 </div>
 @endsection
+
+
 
 
 @section('content')
