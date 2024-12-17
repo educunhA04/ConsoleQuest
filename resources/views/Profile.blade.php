@@ -23,6 +23,7 @@
                         <div class="detail-row"><strong>Name:</strong> {{ Auth::user()->name }}</div>
                         <div class="detail-row"><strong>Username:</strong> {{ Auth::user()->username }}</div>
                         <div class="detail-row"><strong>Email:</strong> {{ Auth::user()->email }}</div>
+                        <div class="detail-row"><strong>Shipping Address:</strong> {{ Auth::user()->shipping_address }}</div>
                     </div>
                     <div class="profile-picture" style="margin-left: 20px;">
                         <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="Profile Picture">

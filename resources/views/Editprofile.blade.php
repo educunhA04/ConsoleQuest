@@ -53,6 +53,14 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="shipping_address">Shipping Address</label>
+                            <textarea id="shipping_address" name="shipping_address" class="form-control" rows="1">{{ old('shipping_address', Auth::user()->shipping_address) }}</textarea>
+                            @error('shipping_address')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
                             <label for="password_confirmation">Confirm New Password</label>
                             <div class="input-container">
                                 <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
