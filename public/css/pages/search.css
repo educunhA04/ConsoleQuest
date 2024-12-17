@@ -1,6 +1,7 @@
 /* Search Bar */
 .search-container {
     display: flex;
+    container: center;
     align-items: center;
     background-color: white;
     border-radius: 2rem;

@@ -159,6 +159,141 @@
     color: #003366;
 }
 
+.edit-profile-page {
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    padding: 1rem;
+}
+
+.edit-profile-container {
+    max-width: 80%;
+    width: 100%;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin: 1rem;
+}
+
+.edit-profile-header {
+    margin-bottom: 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1rem;
+}
+
+.edit-profile-header h1 {
+    font-size: 2rem;
+    color: #333;
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.edit-profile-content {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.edit-profile-picture {
+    flex: 0 0 14rem;
+    text-align: center;
+    width: 14rem;
+    height: 14rem;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.edit-profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.edit-profile-details {
+    max-height: 20rem;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    overflow-y: auto;
+}
+
+.edit-profile-details h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.edit-profile-buttons {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.edit-profile-buttons .button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    background-color: #003366;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-transform: uppercase;
+}
+
+.edit-profile-buttons .button:hover {
+    background-color: white;
+    color: #003366;
+    border-color: #003366;
+}
+
+.edit-profile-buttons .button:first-child {
+    background-color: #ff5555;
+}
+
+.edit-profile-buttons .button:first-child:hover {
+    background-color: white;
+    color: #ff5555;
+    border-color: #ff5555;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .edit-profile-container {
+        padding: 1.5rem;
+    }
+
+    .edit-profile-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .edit-profile-buttons .button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .edit-profile-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .edit-profile-container {
+        padding: 1rem;
+    }
+
+    .edit-profile-buttons .button {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+
 @media (max-width: 768px) {
     .profile-content {
         flex-direction: column;

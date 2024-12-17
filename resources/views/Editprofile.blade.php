@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="profile-page">
-    <div class="profile-container">
-        <div class="profile-header">
+<div class="edit-profile-page">
+    <div class="edit-profile-container">
+        <div class="edit-profile-header">
             <h1>Edit Profile</h1>
         </div>
-        <div class="profile-content">
+        <div class="edit-profile-content">
             <!-- Edit Profile Form -->
             <form action="{{ url('/updateprofile') }}" method="POST" enctype="multipart/form-data" id="profile-form">                @csrf
 
