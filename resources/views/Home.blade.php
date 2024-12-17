@@ -2,7 +2,7 @@
 
 @section('navigation')
 <nav class="main-nav">
-    <a href="{{ url('/filtered') }}?query=Home">Home</a>
+    <a href="{{ url(route('home')) }}?query=Home">Home</a>
     <a href="{{ url('/filtered') }}?query=Controllers">Controllers</a>
     <a href="{{ url('/filtered') }}?query=Games">Games</a>
     <a href="{{ url('/filtered') }}?query=Consoles">Consoles</a>
