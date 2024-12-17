@@ -130,6 +130,7 @@ CREATE TABLE "Order" (
     status order_status NOT NULL,
     buy_date DATE NOT NULL,
     estimated_delivery_date DATE NOT NULL,
+    shipping_address TEXT,
     FOREIGN KEY (user_id) REFERENCES "User"(id) ON UPDATE CASCADE
 );
 
@@ -143,6 +144,7 @@ CREATE TABLE Transaction (
     credit_card_number TEXT NOT NULL,
     credit_card_exp_date DATE NOT NULL,
     credit_card_cvv TEXT NOT NULL,
+    shipping_address TEXT,
     FOREIGN KEY (user_id) REFERENCES "User"(id) ON UPDATE CASCADE,
     FOREIGN KEY (order_id) REFERENCES "Order"(id) ON UPDATE CASCADE
 );
@@ -398,9 +400,9 @@ INSERT INTO "Order" (id, user_id, tracking_number, status, buy_date, estimated_d
     (1, 1, 'TRK123456', 'processing', '2024-01-01', '2024-01-05'),
     (2, 1, 'TRK654321', 'shipped', '2024-01-02', '2024-01-06');
 
-INSERT INTO Transaction (id, user_id, order_id, code, price, NIF, credit_card_number, credit_card_exp_date, credit_card_cvv) VALUES
-    (1, 1, 1, 'TXN1001', 499.99, '123456789', '4111111111111111', '2025-12-31', '123'),
-    (2, 1, 2, 'TXN1002', 59.99, '987654321', '4111111111111112', '2026-12-31', '456');
+INSERT INTO Transaction (id, user_id, order_id, code, price, NIF, credit_card_number, credit_card_exp_date, credit_card_cvv, shipping_address) VALUES
+    (1, 1, 1, 'TXN1001', 499.99, '123456789', '4111111111111111', '2025-12-31', '123', 'topxuxa'),
+    (2, 1, 2, 'TXN1002', 59.99, '987654321', '4111111111111112', '2026-12-31', '456', 'topxuxa2');
 
 INSERT INTO Order_Product (id, order_id, product_id,quantity) VALUES
     (1, 1, 1 ,1),

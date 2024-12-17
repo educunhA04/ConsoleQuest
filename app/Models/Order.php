@@ -18,6 +18,7 @@ class Order extends Model
         'status',
         'estimated_delivery_date',
         'buy_date',
+        'shipping_address',
     ];
 
     protected $casts = [

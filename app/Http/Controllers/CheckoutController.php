@@ -82,6 +82,11 @@ class CheckoutController extends Controller
                 'required',
                 'digits:3',
             ],
+            'shipping_address' => [
+                'required',
+                'string',
+                'max:255',
+            ],
 
         ];
 
@@ -94,6 +99,10 @@ class CheckoutController extends Controller
             'credit_card_exp_date.after' => 'Parece que o seu cartão de crédito expirou.',
             'credit_card_cvv.required' => 'O campo CVV é obrigatório.',
             'credit_card_cvv.digits' => 'O CVV deve conter 3 dígitos numéricos.',
+            'shipping_address.required' => 'O endereço de envio é obrigatório.',
+            'shipping_address.string' => 'O endereço de envio deve ser um texto válido.',
+            'shipping_address.max' => 'O endereço de envio não pode exceder 255 caracteres.',
+
         ];
 
         $validated = $request->validate($rules, $messages);
@@ -105,6 +114,7 @@ class CheckoutController extends Controller
             'tracking_number' => uniqid('ORD_'),
             'status' => Order::STATUS_PROCESSING,
             'estimated_delivery_date' => now()->addDays(7),
+            'shipping_address' => $request->input('shipping_address'),
             'buy_date' => now(),
         ]);
     
@@ -117,6 +127,7 @@ class CheckoutController extends Controller
             'credit_card_number' => $validated['credit_card_number'],
             'credit_card_exp_date' => $creditCardExpDate, 
             'credit_card_cvv' => $validated['credit_card_cvv'],
+            'shipping_address' => $request->input('shipping_address'),
         ]);
      
         foreach ($cartItems as $cartItem) {

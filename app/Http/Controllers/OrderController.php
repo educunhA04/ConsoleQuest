@@ -30,6 +30,7 @@ class OrderController extends Controller
 
         // Retorne os dados do pedido como JSON
         return response()->json([
+            'shipping_address' => $order->shipping_address, // Adicione este campo
             'tracking_number' => $order->tracking_number,
             'buy_date' => $order->buy_date->format('Y-m-d'),
             'status' => ucfirst($order->status),

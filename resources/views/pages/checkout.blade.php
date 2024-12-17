@@ -39,6 +39,13 @@
 
     <form method="POST" action="{{ route('checkout.finalize') }}">
         @csrf
+        <!-- Campo Endereço de Envio -->
+        <div class="form-group">
+            <label for="shipping_address">Endereço de Envio:</label>
+            <div class="checkout-input-container">
+                <input type="text" id="shipping_address" name="shipping_address" class="checkout-input" required>
+            </div>
+        </div>
 
         <!-- Campo NIF -->
         <div class="form-group">

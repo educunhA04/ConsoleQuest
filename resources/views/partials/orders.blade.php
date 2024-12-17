@@ -22,6 +22,7 @@
                     <p><strong>Tracking ID:</strong> {{ $order->tracking_number }}</p>
                     <p><strong>Date:</strong> {{ $order->buy_date->format('Y-m-d') }}</p>
                     <p><strong>Status:</strong> <span id="status-{{ $order->id }}">{{ ucfirst($order->status) }}</span></p>
+                    <p><strong>Endereço de Envio:</strong> {{ $order->shipping_address }}</p>
                     @if ($order->status === 'processing')
                     <button class="button cancel-order-btn" onclick="openCancelOrderModal(event, {{ $order->id }})" 
                         style="background-color: #ff4d4d; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
