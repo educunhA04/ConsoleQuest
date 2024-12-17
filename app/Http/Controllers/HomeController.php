@@ -15,7 +15,7 @@ class HomeController extends Controller
         $products = Product::orderBy('id')->paginate(10);
         $types = Type::all();
 
-        return view('Home', ['products' => $products]);
+        return view('Home', compact('products', 'types'));
     }
     public function aboutus(): View
     {
