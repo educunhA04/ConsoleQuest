@@ -62,7 +62,7 @@ class HomeController extends Controller
     $products = Product::query();
 
     // Apply search filter
-    if ($sanitizedQuery) {
+    if ($sanitizedQuery && $sanitizedQuery !== 'home') {
         $products->where(function ($subQuery) use ($queryNoSpaces) {
             $subQuery->whereRaw('LOWER(REPLACE(name, \' \', \'\')) LIKE ?', ["%{$queryNoSpaces}%"])
                 ->orWhereRaw('LOWER(REPLACE(description, \' \', \'\')) LIKE ?', ["%{$queryNoSpaces}%"])
@@ -74,10 +74,17 @@ class HomeController extends Controller
 
     // Apply price range filters
     if ($request->filled('min_price')) {
-        $products->where('price', '>=', $request->input('min_price'));
+        $products->where(function ($q) use ($request) {
+            $q->where('price', '>=', $request->input('min_price'))
+                ->orWhereRaw('(price - (price * discount_percent / 100)) >= ?', [$request->input('min_price')]);
+        });
     }
+    
     if ($request->filled('max_price')) {
-        $products->where('price', '<=', $request->input('max_price'));
+        $products->where(function ($q) use ($request) {
+            $q->where('price', '<=', $request->input('max_price'))
+                ->orWhereRaw('(price - (price * discount_percent / 100)) <= ?', [$request->input('max_price')]);
+        });
     }
 
     // Apply discount filter
