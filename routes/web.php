@@ -185,7 +185,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::post('/block-user/{id}', [AdminController::class, 'blockUser'])->name('user.block');
     Route::post('/unblock-user/{id}', [AdminController::class, 'unblockUser'])->name('user.unblock');
     Route::post('/change-user', [AdminController::class, 'changeUser'])->name('user.change');
-    Route::post('/change-product', [AdminController::class, 'changeProduct'])->name('changeProduct');
+    Route::post('/change-product', [AdminController::class, 'changeProduct'])->name('changeProduct'); // é aqui que se há a notificaçao tmb
     Route::get('/create-user', [AdminController::class, 'createUserShow'])->name('user.create');
     Route::post('/store-user', [AdminController::class, 'storeUser'])->name('user.store');
     Route::post('/update-profile', [AdminController::class, 'update'])->name('updateProfile');

@@ -22,6 +22,8 @@ use App\Models\Report;
 use App\Models\Review;
 use App\Models\PasswordResetToken;
 use App\Models\Type;
+use App\Events\NotificationPusher;
+use Pusher\Pusher;
 
 
 
@@ -101,7 +103,7 @@ class AdminController extends Controller
     }
 
     public function changeProduct(Request $request)  
-    {
+    {   
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'category_id' => 'required|integer|exists:category,id',
@@ -164,6 +166,10 @@ class AdminController extends Controller
         $product->discount_percent = $validated['discount'] ?? 0; 
 
         $product->save();
+
+        foreach ($cartUsers as $userId) {
+            event(new NotificationPusher($notificationCart->id, $userId));
+        }
 
         return redirect('/admin/dashboard/products')->with('success', 'Product created successfully!');
 

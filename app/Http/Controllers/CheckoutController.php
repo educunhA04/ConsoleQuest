@@ -11,6 +11,8 @@ use App\Models\Product;
 use App\Models\ShoppingCart;
 use App\Models\Notification;
 use App\Models\NotificationUser;
+use App\Events\NotificationPusher;
+use Pusher\Pusher;
 
 class CheckoutController extends Controller
 {
@@ -148,6 +150,8 @@ class CheckoutController extends Controller
             'notification_id' => $notification->id,
         ]);
         ShoppingCart::where('user_id', $user->id)->delete();
+
+        event(new NotificationPusher($notification->id, $user->id));
     
         // Redirecione para uma página de confirmação
         return redirect()->route('home')->with('success', 'Compra finalizada com sucesso!');
