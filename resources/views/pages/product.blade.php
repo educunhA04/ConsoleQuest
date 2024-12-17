@@ -61,11 +61,12 @@
                     class="add-to-cart-btn"
                     aria-label="Add to cart"
                     onclick="addToCart({{ $product->id }}, 1)">
+                    Add to Cart
             </button>
-
         </div>
         
-        <div class="reviews">
+    </div>  
+    <div class="reviews">
             <h3>Reviews</h3>
 
             {{-- Exibição de Avaliações --}}
@@ -166,10 +167,4 @@
                 <p>Faça login para adicionar sua avaliação.</p>
             @endguest
         </div>
-    </div>
-
-    @endsection
-
-
-
-
+@endsection

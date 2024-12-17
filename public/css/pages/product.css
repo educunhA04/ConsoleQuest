@@ -14,19 +14,24 @@
 /* Ajustes na página de produtos para usar Grid */
 .product-page {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Colunas flexíveis */
-    gap: 20px; /* Espaçamento entre os produtos */
-    padding: 20px;
+    grid-template-columns: 2fr 3fr 3fr;
+    gap: 2rem;
+    padding: 2rem;
     background-color: white;
-    margin: 20px;
+    margin: auto;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Contêiner de informações do produto */
 .product-info {
     flex: 2;
-    padding-right: 20px;
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-right: 1.5rem; /* Espaço para a linha */
+    border-right: 2px solid #ddd;
 }
 
 /* Nome do produto */
@@ -40,35 +45,45 @@
 /* Imagem do produto com altura fixada */
 .product-image {
     width: 100%;
-    max-width: 300px;
-    height: 200px; /* Altura fixa */
+    max-width: 400px;
+    height: 300px; /* Altura fixa */
     object-fit: cover; /* Ajusta a imagem proporcionalmente */
     border: 1px solid #ddd;
     border-radius: 5px;
-    margin-bottom: 20px;
+    
 }
 
 /* Detalhes do produto */
 .product-details {
-    flex: 1;
-    border-left: 1px solid #ddd;
-    padding-left: 20px;
+    margin-top: 1.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position:relative;
+    padding: 1.5rem;
+    height: 300 px;
+    margin-right: 1em;
+    border-right: 2px solid #ddd;
 }
 
 /* Preço do produto */
 .price {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
     color: #1c3d72;
-    margin-bottom: 0.5rem;
-    margin-top: 1.5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
 }
 
 /* Descrição do produto */
 .description {
-    margin-bottom: 20px;
-    font-size: 14px;
+    font-size: 1em;
     color: #555;
+    margin-left: 0;
+    margin-top: 2em;
+    position: absolute;
 }
 
 /* Ícone de adicionar à lista de desejos */
@@ -82,38 +97,41 @@
 /* Wrapper for Price and Heart */
 .price-and-heart {
     display: flex;
-    align-items: center; /* Vertically align items */
-    justify-content: space-between; /* Add space between price and heart */
-    gap: 1rem; /* Add spacing between the price and heart */
-    width: 100%; /* Ensure the wrapper spans the full width */
+    flex-direction: column;
+    align-items: flex-start; 
+    margin-bottom: 1.5rem;
 }
 
 /* Heart Button Styling */
 #wishlist-heart {
+    position: absolute;
+    top: 0;
+    right: 0;
     font-size: 1.5rem;
     color: #1c3d72;
     background: none;
     border: none;
     cursor: pointer;
     transition: color 0.3s ease;
-    outline: none;
-    margin-bottom: 0.5rem;
-    margin-top: 1.2rem;
-    margin-right: 1rem;
+    margin-right: 1.5em;
 }
 
 
-/* Botão de adicionar ao carrinho */
+
 .add-to-cart-btn {
-    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
     background-color: #1c3d72;
     color: white;
-    padding: 10px 20px;
+    padding: 0.8rem 1.5rem;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
+    margin-right: 2.5em;
 }
 
 .add-to-cart-btn:hover {
@@ -139,6 +157,15 @@
 
 .average-rating {
     font-size: 1em; 
+}
+
+.type {
+    font-size: 1.2em;
+}
+
+.rating {
+    font-size: 1.5em;
+    margin-bottom: 1.2em;
 }
 
 
