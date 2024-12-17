@@ -40,6 +40,15 @@
                     @enderror
                 </div>
 
+
+                <div class="form-group">
+                    <label for="shipping_address">Shipping Address</label>
+                    <textarea id="shipping_address" name="shipping_address" class="form-control" rows="1">{{ old('shipping_address', Auth::user()->shipping_address) }}</textarea>
+                    @error('shipping_address')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 
                 <div class="form-group">
                     <label for="password">New Password (leave blank to keep current password)</label>

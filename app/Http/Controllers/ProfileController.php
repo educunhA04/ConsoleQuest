@@ -43,6 +43,7 @@ class ProfileController extends Controller
             'name' => 'required|string|max:50',
             'username' => 'required|string|max:50|unique:User,username,' . Auth::id(),
             'email' => 'required|string|email|max:75|unique:User,email,' . Auth::id(),
+            'shipping_address' => 'nullable|string|max:255',
             'password' => 'nullable|string|min:8|confirmed|regex:/[A-Z]/|regex:/[0-9]/',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Profile image validation
         ], [
@@ -52,6 +53,7 @@ class ProfileController extends Controller
             'password.regex' => 'The password must include at least one uppercase letter and one number.',
             'username.unique' => 'The username has already been taken.',
             'email.unique' => 'The email has already been taken.',
+            'shipping_address.max' => 'The shipping address must not exceed 255 characters.',
             'image.image' => 'The profile picture must be an image.',
             'image.mimes' => 'The profile picture must be a file of type: jpeg, png, jpg.',
             'image.max' => 'The profile picture must not exceed 2MB.',
@@ -63,13 +65,13 @@ class ProfileController extends Controller
         $user->name = $validated['name'];
         $user->username = $validated['username'];
         $user->email = $validated['email'];
+        $user->shipping_address = $validated['shipping_address'];
 
         // Update the password only if a new one is provided
         if (!empty($validated['password'])) {
             $user->password = Hash::make($validated['password']);
         }
         if ($request->hasFile('image')) {
-            // Delete the old profile image if it exists
             if ($user->image && file_exists(public_path('storage/' . $user->image))) {
                 unlink(public_path('storage/' . $user->image));
             }

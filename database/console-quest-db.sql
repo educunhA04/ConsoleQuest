@@ -71,6 +71,7 @@ CREATE TABLE "User" (
     password TEXT NOT NULL,
     name TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
+    shipping_address TEXT,
     remember_token VARCHAR(255),
     image TEXT,
     blocked BOOLEAN DEFAULT FALSE
