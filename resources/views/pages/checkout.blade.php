@@ -11,8 +11,8 @@
             <img src="{{ asset('storage/' . $cartItem->product->image) }}" alt="{{ $cartItem->product->name }}" class="checkout-item-image">
             <div class="checkout-item-details">
                 <h4>{{ $cartItem->product->name }}</h4>
-                <p>Quantidade: {{ $cartItem->quantity }}</p>
-                <p>Preço Unitário: €{{ number_format($cartItem->product->price, 2) }}</p>
+                <p>Quantity: {{ $cartItem->quantity }}</p>
+                <p>Price: €{{ number_format($cartItem->product->price, 2) }}</p>
                 <p><strong>Total: €{{ number_format($cartItem->quantity * $cartItem->product->price, 2) }}</strong></p>
             </div>
         </div>
@@ -39,15 +39,15 @@
 
     <form method="POST" action="{{ route('checkout.finalize') }}">
         @csrf
-        <!-- Campo Endereço de Envio -->
+        
         <div class="form-group">
             <label for="shipping_address">Endereço de Envio:</label>
             <div class="checkout-input-container">
-                <input type="text" id="shipping_address" name="shipping_address" class="checkout-input" required>
+                <input value='{{ Auth::user()->shipping_address }}' type="text" id="shipping_address" name="shipping_address" class="checkout-input" required>
             </div>
         </div>
 
-        <!-- Campo NIF -->
+       
         <div class="form-group">
             <label for="NIF">NIF:</label>
             <div class="checkout-input-container">
@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <!-- Informações do Cartão de Crédito -->
+        
         
         <div class="form-group">
             <label for="credit_card_number">Número do Cartão:</label>
@@ -94,7 +94,7 @@
             </div>
         </div>
 
-        <!-- Botão para Finalizar -->
+        
         <button type="submit" class="checkout-btn">Finalizar Compra</button>
     </form>
 
