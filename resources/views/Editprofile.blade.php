@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
 
 <div class="edit-profile-page">
@@ -6,11 +7,14 @@
         <div class="edit-profile-header">
             <h1>Edit Profile</h1>
         </div>
+
         <div class="edit-profile-content">
             <!-- Edit Profile Form -->
             <form action="{{ url('/updateprofile') }}" method="POST" enctype="multipart/form-data" id="profile-form">
                 @csrf
+
                 <div class="form-columns">
+                    <!-- First Column -->
                     <div class="form-column">
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -40,6 +44,7 @@
                         </div>
                     </div>
 
+                    <!-- Second Column -->
                     <div class="form-column">
                         <div class="form-group">
                             <label for="password">New Password</label>
@@ -83,6 +88,7 @@
                     </div>
                 </div>
 
+                <!-- Buttons -->
                 <div class="edit-profile-buttons">
                     <button type="submit" class="button save-button">Save Changes</button>
                     <a class="button cancel-button" href="{{ url('/profile') }}">Cancel</a>
@@ -90,6 +96,7 @@
             </form>
         </div>
 
+        <!-- Errors Section -->
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -101,4 +108,5 @@
         @endif
     </div>
 </div>
+
 @endsection
