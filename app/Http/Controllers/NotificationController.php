@@ -15,6 +15,7 @@ class NotificationController extends Controller
 
         $notifications = NotificationUser::where('user_id', $userId)
             ->with('notification') // Load the related Notification model
+            ->orderBy('notification_id', 'desc') 
             ->get()
             ->pluck('notification'); // Extract the notifications themselves
 
@@ -30,6 +31,7 @@ class NotificationController extends Controller
         $notification = NotificationUser::where('user_id', $userId)
             ->where('notification_id', $notificationId)
             ->with('notification') // Load the related Notification model
+            ->orderBy('notification_id', 'desc')
             ->firstOrFail()
             ->notification;
 
