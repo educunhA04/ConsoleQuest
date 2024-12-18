@@ -350,3 +350,56 @@ button, .auth-link {
       margin-right: 1rem;
   }
 }
+
+/* Notification container */
+.notification-container {
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+  align-items: center; /* Center content inside the container */
+}
+
+/* Notification styling */
+.notification {
+  padding: 15px 20px;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #fff;
+  background-color: #2e7d32; /* Darker green */
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInOut 3s ease-in-out forwards;
+  text-align: center; /* Center the text */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for better visibility */
+}
+
+/* Error Notification */
+.notification.error {
+  background-color: #d32f2f; /* Darker red for errors */
+}
+
+/* Animation for notifications */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}

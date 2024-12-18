@@ -1,4 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const notificationContainer = document.getElementById("notification-container");
+
+    // Function to create and display a notification
+    function showNotification(message, isError = false) {
+        const notification = document.createElement("div");
+        notification.className = "notification";
+        if (isError) {
+            notification.classList.add("error");
+        }
+        notification.textContent = message;
+
+        // Add the notification to the container
+        notificationContainer.appendChild(notification);
+
+        // Remove the notification after the animation ends
+        setTimeout(() => {
+            notificationContainer.removeChild(notification);
+        }, 3000); // Matches the animation duration (3s)
+    }
+
+    // Add to Wishlist function
     async function addToWishlist(productId) {
         try {
             console.log("Sending request to:", wishlistAddUrl);
@@ -11,29 +32,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: JSON.stringify({ product_id: productId })
             });
 
-            console.log('Response status:', response.status);
-
             const textResponse = await response.text();
             console.log('Raw server response:', textResponse);
 
             try {
                 const data = JSON.parse(textResponse);
-                console.log('Parsed data:', data);
                 if (response.ok) {
-                    alert(data.message || 'Added to wishlist successfully!');
+                    showNotification(data.message || 'Added to wishlist successfully!');
                 } else {
-                    alert(data.error || 'Failed to add to wishlist.');
+                    showNotification(data.error || 'Failed to add to wishlist.', true);
                 }
             } catch (parseError) {
                 console.error('JSON Parsing Error:', parseError, textResponse);
-                alert('Unexpected response from server.');
+                showNotification('Unexpected response from server.', true);
             }
         } catch (error) {
             console.error('Error with AJAX request:', error);
-            alert('An error occurred while adding to wishlist.');
+            showNotification('An error occurred while adding to wishlist.', true);
         }
     }
 
+    // Add to Cart function
     async function addToCart(productId, quantity) {
         try {
             console.log("Sending request to:", cartAddUrl);
@@ -46,26 +65,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: JSON.stringify({ product_id: productId, quantity })
             });
 
-            console.log('Response status:', response.status);
-
             const textResponse = await response.text();
             console.log('Raw server response:', textResponse);
 
             try {
                 const data = JSON.parse(textResponse);
-                console.log('Parsed data:', data);
                 if (response.ok) {
-                    alert(data.message || 'Added to cart successfully!');
+                    showNotification(data.message || 'Added to cart successfully!');
                 } else {
-                    alert(data.error || 'Failed to add to cart.');
+                    showNotification(data.error || 'Failed to add to cart.', true);
                 }
             } catch (parseError) {
                 console.error('JSON Parsing Error:', parseError, textResponse);
-                alert('Unexpected response from server.');
+                showNotification('Unexpected response from server.', true);
             }
         } catch (error) {
             console.error('Error with AJAX request:', error);
-            alert('An error occurred while adding to cart.');
+            showNotification('An error occurred while adding to cart.', true);
         }
     }
 

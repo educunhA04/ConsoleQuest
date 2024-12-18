@@ -44,6 +44,7 @@
 
 </head>
 <body>
+    <div id="notification-container" class="notification-container"></div>
     <div class="page-container">
         <!-- Header -->
         <header class="main-header">
