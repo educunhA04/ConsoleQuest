@@ -2,13 +2,13 @@
 
 @section('content')
 
-<div class="about-page">
-    <div class="about-header">
+<div class="static-page">
+    <div class="staticpage-header">
         <h1>About Console Quest</h1>
     </div>
-    <div class="about-content">
+    <div class="staticpage-content">
 
-        <div id="our-story" class="about-item">
+        <div class="staticpage-item">
             <h2>Our Story</h2>
             <p>
                 Console Quest was founded in 2024 with a passion for revolutionizing the gaming experience. 
@@ -18,7 +18,7 @@
             </p>
         </div>
 
-        <div id="our-goals" class="about-item">
+        <div class="staticpage-item">
             <h2>Our Goals</h2>
             <ul>
                 <li>To offer the widest variety of gaming consoles, games, and accessories at competitive prices.</li>
@@ -28,7 +28,7 @@
             </ul>
         </div>
 
-        <div id="contact-us" class="about-item">
+        <div class="staticpage-item">
             <h2>Contact Us</h2>
             <p>Have questions or need support? Feel free to reach out to us:</p>
             <ul>
@@ -38,7 +38,7 @@
             </ul>
         </div>
 
-        <div id="creators" class="about-item">
+        <div class="staticpage-item">
             <h2>Meet the Creators</h2>
             <p>
                 Console Quest is the brainchild of a passionate team of gamers and developers, led by founders 

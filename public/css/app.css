@@ -424,157 +424,9 @@ button, .auth-link {
 }
 
 
-
-.faqs-page {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Cabeçalho */
-.faqs-header {
-  text-align: center;
-  padding-bottom: 20px;
-  border-bottom: 2px solid #23507e;
-  margin-bottom: 30px;
-}
-
-.faqs-header h1 {
-  font-size: 2.5rem;
-  color: #23507e;
-  margin: 0;
-}
-
-.faqs-header p {
-  font-size: 1rem;
-  color: #555;
-}
-
-/* Conteúdo */
-.faqs-content section {
-  margin-bottom: 30px;
-}
-
-.faqs-content h2 {
-  font-size: 1.8rem;
-  color: #23507e;
-  margin-bottom: 10px;
-  border-left: 5px solid #23507e;
-  padding-left: 10px;
-}
-
-.faqs-content p {
-  font-size: 1rem;
-  line-height: 1.6;
-  margin: 10px 0;
-}
-
-.faqs-content ul {
-  margin: 10px 0;
-  padding-left: 20px;
-}
-
-.faqs-content ul li {
-  list-style-type: disc;
-  margin-bottom: 5px;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .faqs-header h1 {
-      font-size: 2rem;
-  }
-
-  .faqs-content h2 {
-      font-size: 1.5rem;
-  }
-
-  .faqs-content p, .faqs-content ul {
-      font-size: 0.95rem;
-  }
-}
-
-/*terms */
-
-
-.terms-container {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Cabeçalho */
-.terms-header {
-  text-align: center;
-  padding-bottom: 20px;
-  border-bottom: 2px solid #23507e;
-  margin-bottom: 30px;
-}
-
-.terms-header h1 {
-  font-size: 2.5rem;
-  color: #23507e;
-  margin: 0;
-}
-
-.terms-header p {
-  font-size: 1rem;
-  color: #555;
-}
-
-/* Conteúdo */
-.terms-content section {
-  margin-bottom: 30px;
-}
-
-.terms-content h2 {
-  font-size: 1.8rem;
-  color: #23507e;
-  margin-bottom: 10px;
-  border-left: 5px solid #23507e;
-  padding-left: 10px;
-}
-
-.terms-content p {
-  font-size: 1rem;
-  line-height: 1.6;
-  margin: 10px 0;
-}
-
-.terms-content ul {
-  margin: 10px 0;
-  padding-left: 20px;
-}
-
-.terms-content ul li {
-  list-style-type: disc;
-  margin-bottom: 5px;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .terms-header h1 {
-      font-size: 2rem;
-  }
-
-  .terms-content h2 {
-      font-size: 1.5rem;
-  }
-
-  .terms-content p, .terms-content ul {
-      font-size: 0.95rem;
-  }
-}
-
 /* About Us page*/
 
-.about-page {
+.static-page {
   max-width: 900px;
   margin: 40px auto;
   padding: 20px;
@@ -583,7 +435,7 @@ button, .auth-link {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.about-container {
+.staticpage-container {
   max-width: 900px;
   margin: 40px auto;
   padding: 20px;
@@ -593,30 +445,30 @@ button, .auth-link {
 }
 
 /* Cabeçalho */
-.about-header {
+.staticpage-header {
   text-align: center;
   padding-bottom: 20px;
   border-bottom: 2px solid #23507e;
   margin-bottom: 30px;
 }
 
-.about-header h1 {
+.staticpage-header h1 {
   font-size: 2.5rem;
   color: #23507e;
   margin: 0;
 }
 
-.about-header p {
+.staticpage-header p {
   font-size: 1rem;
   color: #555;
 }
 
 /* Conteúdo */
-.about-content section {
+.staticpage-content section {
   margin-bottom: 30px;
 }
 
-.about-content h2 {
+.staticpage-content h2 {
   font-size: 1.8rem;
   color: #23507e;
   margin-bottom: 10px;
@@ -624,33 +476,33 @@ button, .auth-link {
   padding-left: 10px;
 }
 
-.about-content p {
+.staticpage-content p {
   font-size: 1rem;
   line-height: 1.6;
   margin: 10px 0;
 }
 
-.about-content ul {
+.staticpage-content ul {
   margin: 10px 0;
   padding-left: 20px;
 }
 
-.about-content ul li {
+.staticpage-content ul li {
   list-style-type: disc;
   margin-bottom: 5px;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .about-header h1 {
+  .staticpage-header h1 {
       font-size: 2rem;
   }
 
-  .about-content h2 {
+  .staticpage-content h2 {
       font-size: 1.5rem;
   }
 
-  .about-content p, .about-content ul {
+  .staticpage-content p, .staticpage-content ul {
       font-size: 0.95rem;
   }
 }

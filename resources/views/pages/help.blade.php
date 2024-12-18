@@ -2,11 +2,12 @@
 
 @section('content')
 
-<div class="help">
-    <div class="help-container">
+<div class="static-page">
+    <div class="staticpage-header">
         <h1>HELP PAGE (?)</h1>
-
-        <section class="homepage-help">
+    </div>
+    <div class="staticpage-content">
+        <div class="staticpage-item">
             <h2>Homepage</h2>
             <p>
                 The homepage is the central hub of Console Quest. Here, you can browse featured products such as consoles, controllers, and games. 
@@ -36,9 +37,9 @@
                     <li>Manage your <strong>account settings</strong> or log out.</li>
                 </ul>
             </p>
-        </section>
+        </div>
         
-        <section class="profile-help">
+        <div class="staticpage-item">
             <h2>Profile Page</h2>
             <p>
                 The Profile Page allows users to manage their personal information and track their orders. Here's a breakdown of the key features:
@@ -57,9 +58,9 @@
             <p>
                 If you encounter any issues or need assistance, feel free to visit the <a href="help">Help Page</a> or contact our support team.
             </p>
-        </section>
+        </div>
 
-        <section class="product-details-help">
+        <div class="staticpage-item">
             <h2>Product Details Page</h2>
             <p>
                 The Product Details Page provides in-depth information about a specific product, helping you make informed purchase decisions. Here's what you can find:
@@ -82,9 +83,9 @@
             <p>
                 Scroll down to view related products or recommendations based on your browsing history.
             </p>
-        </section>
+        </div>
 
-        <section class="shopping-cart-help">
+        <div class="staticpage-item">
             <h2>Shopping Cart</h2>
             <p>
                 The Shopping Cart page is designed to provide an overview of the items you intend to purchase and streamline the checkout process. Here's a guide to the features:
@@ -123,9 +124,9 @@
             <p>
                 The Shopping Cart page is optimized to ensure a seamless shopping experience, with clear information and easy-to-use controls.
             </p>
-        </section>
+        </div>
 
-        <section class="checkout-help">
+        <div class="staticpage-item">
             <h2>Checkout</h2>
             <p>
                 The Checkout page is the final step in completing your purchase. Here’s a guide to help you navigate through it:
@@ -174,15 +175,10 @@
             <p>
                 The Checkout page is designed to provide a smooth and secure way to complete your purchase, ensuring that all your information is properly handled.
             </p>
-        </section>
-        <section class="contact-us">
+        </div>
+        <div class="staticpage-item">
             <h2>Contact Us</h2>
-            <p>Have questions or need support? Feel free to reach out to us:</p>
-            <ul>
-                <li>Email: consolequest@gmail.com </li>
-                <li>Phone: +1 123-456-7890 </li>
-                <li>Address: 123 Gaming Street, Console City, GA 30303 </li>
-            </ul>
+            <p>You can reach our support team via email at consolequest@gmail.com or through our <a href="{{ route('home.aboutus') }}">About Us</a> page.</p>
         </section>
 
 
