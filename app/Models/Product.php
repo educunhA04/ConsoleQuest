@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;  // Corrected the typo here
 use App\Models\Category;
 use App\Models\Type;
+use App\Models\Product_Images;
+
 
 
 class Product extends Model
@@ -39,7 +41,10 @@ class Product extends Model
     {
         return $this->belongsTo(Type::class, 'type_id');
     }
-
+    public function images()
+    {
+        return $this->hasMany(Product_Images::class, 'product_id', 'id');
+    }
 
 }
 

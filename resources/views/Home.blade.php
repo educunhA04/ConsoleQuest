@@ -73,8 +73,7 @@
                 </button>
             </div>
             <a href="{{ route('product.show', ['id' => $product->id]) }}" class="product-link">
-                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="product-image">
-                <div class="product-name">{{ $product->name }}</div>
+                <img src="{{ asset('storage/' . $product->images->first()->url) }}" alt="{{ $product->name }}" class="product-image">                <div class="product-name">{{ $product->name }}</div>
                 <div class="product-price">
                     @if ($product->discount_percent > 0)
                         <span class="original-price">${{ number_format($product->price, 2) }}</span>

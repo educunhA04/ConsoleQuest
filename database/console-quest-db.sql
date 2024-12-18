@@ -94,7 +94,6 @@ CREATE TABLE Product (
     id SERIAL PRIMARY KEY,
     category_id INT NOT NULL ,
     name TEXT NOT NULL,
-    image TEXT,
     type_id INT NOT NULL,
     description TEXT,
     quantity INT CHECK (quantity >= 0),
@@ -104,7 +103,12 @@ CREATE TABLE Product (
     FOREIGN KEY (type_id) REFERENCES "Type"(id) ON UPDATE CASCADE
 
 );
-
+CREATE TABLE Product_Images(
+    id SERIAL PRIMARY KEY,
+    url TEXT,
+    product_id INT NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES Product(id) ON UPDATE CASCADE
+);
 CREATE TABLE Wishlist (
     id SERIAL  PRIMARY KEY,
     user_id INT NOT NULL ,
@@ -364,31 +368,53 @@ INSERT INTO "Type" (id, name) VALUES
     (12, 'Horror RPG'),
     (13, 'Battle Royal');
 
-INSERT INTO Product (id, category_id, name, image, type_id , description, quantity, price, discount_percent) VALUES
-    (1, 1, 'PlayStation 5', '/dbimages/pg5.jpg', 1, 'Next-gen gaming console', 50, 499.99, 10),
-    (2, 2, 'EA FC 25', '/dbimages/eafc25.jpg', 2, 'Cancer game', 100, 59.99, 20),
-    (3, 2, 'Fifa Street', '/dbimages/fifastreet.jpg', 2, 'Goat game', 100, 19.99, 0),
-    (4, 2, 'League of Legends', '/dbimages/LOL.jpeg', 3, 'Virgin game', 10, 9.99, 0),
-    (5, 3, 'DualSense Controller', '/dbimages/dualsense.jpg', 4, 'PS5 Wireless Controller', 200, 69.99, 15),
-    (6, 1, 'Xbox Series X', '/dbimages/xboxseriesx.jpg', 5, 'Powerful next-gen console', 40, 499.99, 5),
-    (7, 2, 'The Legend of Zelda: Breath of the Wild', '/dbimages/zelda_botw.jpg', 6, 'Award-winning adventure game', 60, 59.99, 10),
-    (8, 2, 'Mario Kart 8 Deluxe', '/dbimages/mariokart8.jpg', 7, 'Fun racing game', 80, 49.99, 5),
-    (9, 1, 'Nintendo Switch OLED', '/dbimages/switch_oled.jpg', 8, 'Hybrid console with OLED screen', 70, 349.99, 0),
-    (10, 3, 'Nintendo Switch Pro Controller', '/dbimages/switch_pro_controller.jpg', 9, 'Wireless controller for Switch', 120, 69.99, 10),
-    (11, 2, 'Elden Ring', '/dbimages/eldenring.jpg', 10, 'Open-world action RPG', 50, 59.99, 15),
-    (12, 2, 'God of War Ragnarok', '/dbimages/gow_ragnarok.jpg', 11, 'Action-packed Norse mythology game', 40, 69.99, 10),
-    (13, 1, 'Steam Deck', '/dbimages/steamdeck.jpg', 1, 'Portable gaming PC', 30, 399.99, 5),
-    (14, 3, 'Razer Wolverine V2', '/dbimages/razer_wolverine.jpg', 5, 'Advanced controller for Xbox/PC', 50, 99.99, 10),
-    (15, 2, 'Cyberpunk 2077', '/dbimages/cyberpunk2077.jpg', 10, 'Futuristic action RPG', 100, 39.99, 20),
-    (16, 2, 'Horizon Forbidden West', '/dbimages/horizon_fw.jpg', 10, 'Post-apocalyptic open-world game', 60, 59.99, 15),
-    (17, 3, 'Xbox Elite Series 2', '/dbimages/xbox_elite2.jpg', 5, 'Premium wireless Xbox controller', 70, 179.99, 20),
-    (18, 2, 'Spider-Man: Miles Morales', '/dbimages/spiderman_mm.jpg', 11, 'Superhero action game', 90, 49.99, 10),
-    (19, 2, 'Resident Evil 4 Remake', '/dbimages/re4_remake.jpg', 12, 'Horror survival game', 80, 59.99, 10),
-    (20, 1, 'PlayStation 4 Slim', '/dbimages/ps4_slim.jpg', 1, 'Compact version of PS4', 30, 299.99, 0),
-    (21, 2, 'Assassins Creed IV Black Flag', '/dbimages/assassins_creed_4_black_flag.jpg', 11, 'Assassins PS4 game', 80, 29.99, 10),
-    (22, 2, 'Fornite', '/dbimages/fortnite.jpg', 13, 'I EDGE TO THIS GAME', 280, 20.00, 0);
+INSERT INTO Product (id, category_id, name, type_id, description, quantity, price, discount_percent) VALUES
+    (1, 1, 'PlayStation 5', 1, 'Next-gen gaming console', 50, 499.99, 10),
+    (2, 2, 'EA FC 25', 2, 'Cancer game', 100, 59.99, 20),
+    (3, 2, 'Fifa Street', 2, 'Goat game', 100, 19.99, 0),
+    (4, 2, 'League of Legends', 3, 'Virgin game', 10, 9.99, 0),
+    (5, 3, 'DualSense Controller', 4, 'PS5 Wireless Controller', 200, 69.99, 15),
+    (6, 1, 'Xbox Series X', 5, 'Powerful next-gen console', 40, 499.99, 5),
+    (7, 2, 'The Legend of Zelda: Breath of the Wild', 6, 'Award-winning adventure game', 60, 59.99, 10),
+    (8, 2, 'Mario Kart 8 Deluxe', 7, 'Fun racing game', 80, 49.99, 5),
+    (9, 1, 'Nintendo Switch OLED', 8, 'Hybrid console with OLED screen', 70, 349.99, 0),
+    (10, 3, 'Nintendo Switch Pro Controller', 9, 'Wireless controller for Switch', 120, 69.99, 10),
+    (11, 2, 'Elden Ring', 10, 'Open-world action RPG', 50, 59.99, 15),
+    (12, 2, 'God of War Ragnarok', 11, 'Action-packed Norse mythology game', 40, 69.99, 10),
+    (13, 1, 'Steam Deck', 1, 'Portable gaming PC', 30, 399.99, 5),
+    (14, 3, 'Razer Wolverine V2', 5, 'Advanced controller for Xbox/PC', 50, 99.99, 10),
+    (15, 2, 'Cyberpunk 2077', 10, 'Futuristic action RPG', 100, 39.99, 20),
+    (16, 2, 'Horizon Forbidden West', 10, 'Post-apocalyptic open-world game', 60, 59.99, 15),
+    (17, 3, 'Xbox Elite Series 2', 5, 'Premium wireless Xbox controller', 70, 179.99, 20),
+    (18, 2, 'Spider-Man: Miles Morales', 11, 'Superhero action game', 90, 49.99, 10),
+    (19, 2, 'Resident Evil 4 Remake', 12, 'Horror survival game', 80, 59.99, 10),
+    (20, 1, 'PlayStation 4 Slim', 1, 'Compact version of PS4', 30, 299.99, 0),
+    (21, 2, 'Assassins Creed IV Black Flag', 11, 'Assassins PS4 game', 80, 29.99, 10),
+    (22, 2, 'Fortnite', 13, 'Popular battle royale game', 280, 20.00, 0);
 
-
+INSERT INTO Product_Images (id,url, product_id) VALUES
+    (1,'/dbimages/pg5.jpg', 1),
+    (2,'/dbimages/eafc25.jpg', 2),
+    (3,'/dbimages/fifastreet.jpg', 3),
+    (4,'/dbimages/LOL.jpeg', 4),
+    (5,'/dbimages/dualsense.jpg', 5),
+    (6,'/dbimages/xboxseriesx.jpg', 6),
+    (7,'/dbimages/zelda_botw.jpg', 7),
+    (8,'/dbimages/mariokart8.jpg', 8),
+    (9,'/dbimages/switch_oled.jpg', 9),
+    (10,'/dbimages/switch_pro_controller.jpg', 10),
+    (11,'/dbimages/eldenring.jpg', 11),
+    (12,'/dbimages/gow_ragnarok.jpg', 12),
+    (13,'/dbimages/steamdeck.jpg', 13),
+    (14,'/dbimages/razer_wolverine.jpg', 14),
+    (15,'/dbimages/cyberpunk2077.jpg', 15),
+    (16,'/dbimages/horizon_fw.jpg', 16),
+    (17,'/dbimages/xbox_elite2.jpg', 17),
+    (18,'/dbimages/spiderman_mm.jpg', 18),
+    (19,'/dbimages/re4_remake.jpg', 19),
+    (20,'/dbimages/ps4_slim.jpg', 20),
+    (21,'/dbimages/assassins_creed_4_black_flag.jpg', 21),
+    (22,'/dbimages/fortnite.jpg', 22);
 
 
 INSERT INTO "User" (id, username, password, name, email, image ,blocked) VALUES
