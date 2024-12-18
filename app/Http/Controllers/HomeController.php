@@ -31,7 +31,10 @@ class HomeController extends Controller
     {
         return view('pages.faqs');
     }
-    
+    public function terms(): View
+    {
+        return view('pages.terms');
+    }
     public function showControllers(): View
     {
         $products = Product::where('category_id', 3)->orderBy('id')->paginate(10);

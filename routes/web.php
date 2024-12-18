@@ -51,6 +51,8 @@ Route::controller(HomeController::class)->group(function () {
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('home.aboutus');
 Route::get('/help', [HomeController::class, 'help'])->name('home.help');
 Route::get('/faqs', [HomeController::class, 'faqs'])->name('home.faqs');
+Route::get('/terms', [HomeController::class, 'terms'])->name('home.terms');
+
 
 
 // Product routes
