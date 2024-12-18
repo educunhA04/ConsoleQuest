@@ -49,19 +49,21 @@
         <header class="main-header">
             <div class="header-content">
                 <!-- Left Section (Logo) -->
-                <h1><a href="{{ url('/home') }}">Console Quest</a></h1>
+                <div class="header-title"><h1><a href="{{ url('/home') }}">Console Quest</a></h1></div>
 
-                <!-- Search Bar -->
-                <div class="search-container">
-                    <form id="searchForm" method="GET" action="{{ url('/filtered') }}">
-                        @csrf
-                        <input type="text" name="query" id="query" value="{{ $query ?? '' }}" placeholder="Search...">
-                        <button type="submit"><i class="fas fa-search"></i></button>
-                    </form>
+                <div class="search-wrapper">
+                    <button id="toggleFiltersButton" class="filter-toggle">
+                        <i class="fas fa-filter"></i>
+                    </button>
+                    <!-- Search Bar -->
+                    <div class="search-container">
+                        <form id="searchForm" method="GET" action="{{ url('/filtered') }}">
+                            @csrf
+                            <input type="text" name="query" id="query" value="{{ $query ?? '' }}" placeholder="Search...">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
                 </div>
-                <button id="toggleFiltersButton" class="filter-toggle">
-                    <i class="fas fa-filter"></i>
-                </button>
 
                 <!-- Right Section (User Actions) -->
                 <div class="user-actions">

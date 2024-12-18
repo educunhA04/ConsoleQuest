@@ -45,10 +45,10 @@
             <header class="main-header">
                 <div class="header-content">
                     <!-- Left Section (Logo) -->
-                    <h1><a href="{{ url('/admin/dashboard/users') }}">Console Quest</a></h1>
+                    <div class= "header-title"><h1><a href="{{ url('/admin/dashboard/users') }}">Console Quest</a></h1></div>
 
                     <!-- Search Section -->
-                    <div class="search-container">
+                    <div class="admin-search-container">
                         <form id="adminsearchForm" method="POST" action="{{ url('/admin/dashboard/users') }}">
                             @csrf
                             <input type="text" name="query" id="query" value="{{ $query ?? '' }}" placeholder="Search...">

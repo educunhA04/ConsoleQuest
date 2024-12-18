@@ -62,6 +62,16 @@ header h1 a {
   vertical-align: middle;
 }
 
+.header-title h1 a {
+  font-size: 2rem; 
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+}
+
 header h1, header a {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700; 
@@ -179,21 +189,6 @@ footer p {
   font-size: 0.9rem;
 }
 
-@media (max-width: 70em) {
-    #cards {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    main > header {
-        display: grid;
-        grid-template-columns: 1fr auto;
-    }
-}
-
-@media (max-width: 40em) {
-    #cards {
-        grid-template-columns: 1fr;
-    }
-}
 
 /* Center the form and give it a clean look */
 .form-container {
@@ -314,30 +309,44 @@ button, .auth-link {
 }
 
 
+/* Container para agrupar o filtro e a barra de pesquisa */
+.search-wrapper {
+  display: flex;
+  justify-content: center; /* Centraliza os elementos horizontalmente */
+  align-items: center; /* Alinha verticalmente */
+  gap: 0.5rem; /* Espaço entre o filtro e a barra de pesquisa */
+  width: 100%; /* Ocupa toda a largura do header */
+}
+
+/* Filtro */
 .filter-toggle {
   background: #003366;
-  border: 0px;
-  border-radius: 20px;
-  padding: 5px;
+  border: 1em;
+  border-radius: 40%;
+  padding: 0.6rem;
   cursor: pointer;
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: 35px;
-  height: 35px;
+  align-items: center;
+  width: 3rem; /* Largura fixa */
+  height: 3rem; /* Altura fixa */
   transition: all 0.3s ease;
-  margin-right: auto;
 }
 
 .filter-toggle i {
-  font-size: 1.2em;
-  color:#FFFFFF;
+  font-size: 1.2rem;
+  color: #ffffff;
 }
 
 .filter-toggle:hover {
-  background: #014a94; 
+  background-color: #5e80a1;
 }
 
-.filter-toggle i:hover {
-  color: #fff;
+@media (max-width: 768px) {
+  .header-title h1 a {
+      white-space: normal; /* Permite quebra de linha */
+      text-align: left; /* Centraliza o texto */
+      line-height: 1; /* Espaçamento entre as linhas */
+      margin-right: 1rem;
+  }
 }

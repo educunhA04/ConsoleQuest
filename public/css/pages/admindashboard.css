@@ -25,48 +25,45 @@
     margin-top: 30px;
 }
 
-/* Search Bar */
-.search-container {
+/* Admin Dashboard Search Bar */
+.admin-search-container {
     display: flex;
     align-items: center;
     background-color: white;
     border-radius: 2rem;
     padding: 0.2em 0.8em;
-    width: 30%; 
-    margin: 0 auto; 
+    width: 30%;
+    margin: 0 auto;
     box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
     border: 0.1rem solid #ddd;
     transition: box-shadow 0.3s ease, border-color 0.3s ease;
     position: relative;
 }
 
-.search-container:hover {
+.admin-search-container:hover {
     box-shadow: 0 0.6rem 1.2rem rgba(0, 0, 0, 0.15);
     border-color: #003366;
 }
 
-
-.search-container input[type="text"] {
+.admin-search-container input[type="text"] {
     border: none;
     outline: none;
-    padding: 0.8rem 1rem; 
+    padding: 0.8rem 1rem;
     font-size: 1rem;
     flex: 1;
-    color: #333; 
+    color: #333;
     background-color: transparent;
     border-radius: 2rem;
-    min-width: 0;
     box-sizing: border-box;
     width: 100%;
-   
 }
 
-.search-container input[type="text"]::placeholder {
-    color: #aaa; /* Placeholder color */
+.admin-search-container input[type="text"]::placeholder {
+    color: #aaa;
     font-style: italic;
 }
 
-.search-container button {
+.admin-search-container button {
     color: white;
     border: none;
     padding: 0.6rem 1rem;
@@ -78,40 +75,39 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    right: 1rem; 
-    top: 50%; 
+    right: 1rem;
+    top: 50%;
     transform: translateY(-50%);
     box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     background-color: #003366;
-    
 }
 
-.search-container button:hover {
+.admin-search-container button:hover {
     background-color: #002244;
 }
 
-
 @media (max-width: 768px) {
-    .search-container {
-        flex-direction: column;
-        gap: 1rem;
-        max-width: 100%;
-        padding: 1rem;
-
+    .admin-search-container {
+        width: 90%; 
+        margin: 0 auto;
+        padding: 0.2em 0.8em;
+        flex-direction: row;
+        gap: 0;
     }
 
-    .search-container input[type="text"] {
-        width: 100%;
+    .admin-search-container input[type="text"] {
+        padding: 0.8rem 1rem; /* Mantém a altura original */
+        font-size: 1rem;
     }
 
-    .search-container button {
-        width: 40%;
-        margin-left: 0; 
-        padding: 0.6rem 0.8rem; 
-        position: static; 
-        transform: none;
-    } 
+    .admin-search-container button {
+        padding: 0.6rem 1rem;
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 }
 
 
