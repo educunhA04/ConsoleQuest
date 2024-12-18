@@ -21,6 +21,8 @@ use App\Models\OrderProduct;
 use App\Models\Report;
 use App\Models\Review;
 use App\Models\PasswordResetToken;
+use App\Models\Product_Images;
+
 use App\Models\Type;
 use App\Events\NotificationPusher;
 use Pusher\Pusher;
@@ -223,25 +225,25 @@ class AdminController extends Controller
     return redirect('/admin/dashboard/users')->with('success', 'User created successfully!');
     }
     public function storeProduct(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'category_id' => 'required|integer',
-            'description' => 'required|string',
-            'type_id' => 'required|integer|exists:Type,id', 
-            'price' => 'required|numeric|min:0',
-            'quantity' => 'required|integer|min:0',
-            'discount' => 'nullable|numeric|min:0|max:100',
-        ], [
-            'name.required' => 'The product name is required.',
-            'type_id.required' => 'The product type is required.',
-            'type_id.exists' => 'The selected type does not exist.',
-            'price.numeric' => 'The price must be a valid number.',
-            'discount.min' => 'The discount must be at least 0.',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-    
-    
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'category_id' => 'required|integer',
+        'description' => 'required|string',
+        'type_id' => 'required|integer|exists:Type,id', 
+        'price' => 'required|numeric|min:0',
+        'quantity' => 'required|integer|min:0',
+        'discount' => 'nullable|numeric|min:0|max:100',
+        'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
+    ], [
+        'name.required' => 'The product name is required.',
+        'type_id.required' => 'The product type is required.',
+        'type_id.exists' => 'The selected type does not exist.',
+        'price.numeric' => 'The price must be a valid number.',
+        'discount.min' => 'The discount must be at least 0.',
+        'images.*.image' => 'Each file must be an image.',
+    ]);
+
     $product = new Product();
     $product->name = $validated['name'];
     $product->category_id = $validated['category_id'];
@@ -249,16 +251,23 @@ class AdminController extends Controller
     $product->price = $validated['price'];
     $product->quantity = $validated['quantity'];
     $product->type_id = $validated['type_id'];
-    $product->discount_percent = $validated['discount'] ?? 0; 
-    
-    if ($request->hasFile('image')) {
-            $product->image = $request->file('image')->store('dbimages', 'public');
-    }
-    
+    $product->discount_percent = $validated['discount'] ?? 0;
+
     $product->save();
 
-    return redirect('/admin/dashboard/products')->with('success', 'Product created successfully!');
+    if ($request->hasFile('images')) {
+        foreach ($request->file('images') as $image) {
+            $path = $image->store('dbimages', 'public'); 
+            Product_Images::create([
+                'product_id' => $product->id,
+                'url' => $path,
+            ]);
+        }
     }
+
+    return redirect('/admin/dashboard/products')->with('success', 'Product created successfully!');
+}
+
 
 
     public function viewUserOrders($userId): View

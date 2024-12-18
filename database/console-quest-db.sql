@@ -105,7 +105,7 @@ CREATE TABLE Product (
 );
 CREATE TABLE Product_Images(
     id SERIAL PRIMARY KEY,
-    url TEXT,
+    url  TEXT NOT NULL,
     product_id INT NOT NULL,
     FOREIGN KEY (product_id) REFERENCES Product(id) ON UPDATE CASCADE
 );

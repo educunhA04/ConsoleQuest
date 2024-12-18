@@ -42,8 +42,8 @@
             <label for="Discount">Discount</label>
             <input type="number" id="discount" name="discount" min="0" max = "100">
 
-            <label for="image">Image</label>
-            <input type="file" id="image" name="image" required>
+            <label for="images">Images</label>
+            <input type="file" id="images" name="images[]" multiple required>
 
             <button type="submit" class="admin-submit-btn">Create Product</button>
         </form>

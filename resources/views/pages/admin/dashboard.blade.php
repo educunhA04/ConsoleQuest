@@ -28,8 +28,8 @@
             @foreach ($products as $product)
                 <div class="admin-product-container-dashboard">
                     <a href="{{ route('admin.viewProduct', ['id' => $product->id]) }}" class="admin-product-link">
-                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="admin-product-image">
-                        <div class="admin-product-name">{{ $product->name }}</div>
+                    <img src="{{ asset('storage/' . $product->images->first()->url) }}" alt="{{ $product->name }}" class="admin-product-image">                
+                    <div class="admin-product-name">{{ $product->name }}</div>
                     </a>
                 </div>
             @endforeach
