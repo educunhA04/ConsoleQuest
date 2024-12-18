@@ -571,3 +571,86 @@ button, .auth-link {
       font-size: 0.95rem;
   }
 }
+
+/* About Us page*/
+
+.about-page {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabeçalho */
+.about-header {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #23507e;
+  margin-bottom: 30px;
+}
+
+.about-header h1 {
+  font-size: 2.5rem;
+  color: #23507e;
+  margin: 0;
+}
+
+.about-header p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Conteúdo */
+.about-content section {
+  margin-bottom: 30px;
+}
+
+.about-content h2 {
+  font-size: 1.8rem;
+  color: #23507e;
+  margin-bottom: 10px;
+  border-left: 5px solid #23507e;
+  padding-left: 10px;
+}
+
+.about-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.about-content ul {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.about-content ul li {
+  list-style-type: disc;
+  margin-bottom: 5px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .about-header h1 {
+      font-size: 2rem;
+  }
+
+  .about-content h2 {
+      font-size: 1.5rem;
+  }
+
+  .about-content p, .about-content ul {
+      font-size: 0.95rem;
+  }
+}
