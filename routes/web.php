@@ -49,8 +49,9 @@ Route::controller(HomeController::class)->group(function () {
 });
 
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('home.aboutus');
-
 Route::get('/help', [HomeController::class, 'help'])->name('home.help');
+Route::get('/faqs', [HomeController::class, 'faqs'])->name('home.faqs');
+
 
 // Product routes
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
