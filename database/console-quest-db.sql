@@ -414,7 +414,10 @@ INSERT INTO Product_Images (id,url, product_id) VALUES
     (19,'/dbimages/re4_remake.jpg', 19),
     (20,'/dbimages/ps4_slim.jpg', 20),
     (21,'/dbimages/assassins_creed_4_black_flag.jpg', 21),
-    (22,'/dbimages/fortnite.jpg', 22);
+    (22,'/dbimages/fortnite.jpg', 22),
+    (23,'/dbimages/fc-25-1.jpg', 2),
+    (24,'/dbimages/ea-fc25-3.jpg', 2);
+
 
 
 INSERT INTO "User" (id, username, password, name, email, image ,blocked) VALUES
@@ -444,6 +447,7 @@ SELECT SETVAL('Admin_id_seq', (SELECT MAX(id) FROM Admin));
 SELECT SETVAL('Category_id_seq', (SELECT MAX(id) FROM Category));
 SELECT SETVAL('"Type_id_seq"', (SELECT MAX(id) FROM "Type"));
 SELECT SETVAL('Product_id_seq', (SELECT MAX(id) FROM Product));
+SELECT SETVAL('Product_Images_id_seq', (SELECT MAX(id) FROM Product_Images));
 SELECT SETVAL('"Order_id_seq"', (SELECT MAX(id) FROM "Order"));
 SELECT SETVAL('Transaction_id_seq', (SELECT MAX(id) FROM Transaction));
 SELECT SETVAL('Order_Product_id_seq', (SELECT MAX(id) FROM Order_Product));
