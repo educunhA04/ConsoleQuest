@@ -418,10 +418,14 @@ INSERT INTO Product_Images (id,url, product_id) VALUES
     (23,'/dbimages/fc-25-1.jpg', 2),
     (24,'/dbimages/ea-fc25-3.jpg', 2),
     (25,'/dbimages/spider_mm_1.jpg', 18),
-    (26,'/dbimages/spiderman_mm_2.jpg', 18);
-
-
-
+    (26,'/dbimages/spiderman_mm_2.jpg', 18),
+    (27,'/dbimages/fortnite_1.jpg', 22),
+    (28,'/dbimages/fortnite_2.jpg', 22),
+    (29,'/dbimages/fifastreet_1.jpg', 3),
+    (30,'/dbimages/fifastreet_2.jpg', 3),
+    (31,'/dbimages/LOL_1.jpg', 4),
+    (32,'/dbimages/LOL_2.jpg', 4),
+    (33,'/dbimages/LOL_3.jpg', 4);
 
 
 INSERT INTO "User" (id, username, password, name, email, image ,blocked) VALUES
