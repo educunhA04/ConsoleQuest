@@ -43,7 +43,9 @@
 
             </div>
 
-            <img src="{{ asset('storage/' . $product->image) }}"  alt="{{ $product->name }}" class="product-image"> <!-- Product image -->
+            @foreach ($product->images as $image)
+                <img src="{{ asset('storage/' . $image->url) }}" alt="{{ $product->name }}" class="product-image">
+            @endforeach
         </div>
 
         <div class="product-details">
