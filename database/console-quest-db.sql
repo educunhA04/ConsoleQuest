@@ -416,7 +416,11 @@ INSERT INTO Product_Images (id,url, product_id) VALUES
     (21,'/dbimages/assassins_creed_4_black_flag.jpg', 21),
     (22,'/dbimages/fortnite.jpg', 22),
     (23,'/dbimages/fc-25-1.jpg', 2),
-    (24,'/dbimages/ea-fc25-3.jpg', 2);
+    (24,'/dbimages/ea-fc25-3.jpg', 2),
+    (25,'/dbimages/spider_mm_1.jpg', 18),
+    (26,'/dbimages/spiderman_mm_2.jpg', 18);
+
+
 
 
 
