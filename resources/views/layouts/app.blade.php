@@ -84,9 +84,11 @@
                         </a>
                         <a href="{{ url('/logout') }}" class="auth-link log-out">Log Out</a>
                     @else
-                        <a href="{{ url('/login') }}" class="auth-link sign-in">Sign In</a>
-                        <a class="auth-link bar">|</a>
-                        <a href="{{ url('/register') }}" class="auth-link sign-up">Sign Up</a>
+                        <div class = sign-in-up>
+                            <a href="{{ url('/login') }}" class="auth-link sign-in">Sign In</a>
+                            <a class="auth-link bar">|</a>
+                            <a href="{{ url('/register') }}" class="auth-link sign-up">Sign Up</a>
+                        </div>
                     @endif
                 </div>
 

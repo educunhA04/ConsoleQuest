@@ -230,42 +230,61 @@ textarea.form-control {
 }
 
 
+.sign-in-up {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: auto;
+  white-space: nowrap; /* Evita quebra de linha */
+}
 
-/* Estilo base para links de autenticação */
 .auth-link {
   color: white;
-  background-color: #003366; /* Cor de fundo */
-  text-decoration: none; /* Remove sublinhado */
+  background-color: #003366;
+  text-decoration: none;
   font-weight: bold;
-  font-size: 1.1rem; /* Tamanho do texto */
-  display: inline-block; /* Para controle de layout */
-  padding: 0.2rem 0.2rem; /* Espaçamento interno para tornar clicável */
-  text-align: center; /* Centraliza o texto */
-  margin: 0; /* Remove margens padrão */
+  font-size: 1.1rem;
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  text-align: center;
+  border-radius: 4px;
+  white-space: nowrap; /* Garante que o texto permaneça em uma linha */
+}
+
+.auth-link.bar {
+  background-color: transparent;
+  padding: 0;
+  color: white;
+  font-size: 1.1rem;
+  cursor: default;
+}
+
+.auth-link:hover {
+  background-color: #002244;
+  color: #dadada;
 }
 
 
 .auth-link.sign-up {
-  margin-right: 0rem; /* Remove espaçamento desnecessário à esquerda */
+  margin-right: 0rem;
 }
 
 .auth-links-container {
   display: flex;
   align-items: center;
-  justify-content: center; 
-  gap: 0; 
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 button, .auth-link {
   font-family: 'Poppins', sans-serif;
-  font-weight: 600; /* Semibold para destacar ações importantes */
+  font-weight: 600;
   font-size: 1rem;
-  text-transform: uppercase; /* Deixa o botão mais chamativo */
+  text-transform: uppercase;
 }
 
-.auth-link:hover {
-  color: #dadada;
-}
 
 
 .filters-section {
