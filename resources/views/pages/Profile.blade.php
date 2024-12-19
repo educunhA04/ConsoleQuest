@@ -56,7 +56,7 @@
 
         <!-- Buttons Section -->
         <div class="profile-buttons">
-            <a class="button" href="{{ url('/logout') }}">Logout</a>
+            <a class="button" href="{{ url('/logout') }}">Sign Out</a>
             <a class="button" href="{{ url('/editprofile') }}">Edit Profile</a>
         </div>
     </div>
