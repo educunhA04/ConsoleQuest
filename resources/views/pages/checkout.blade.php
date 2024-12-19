@@ -8,7 +8,7 @@
     <div class="checkout-items">
         @foreach ($cartItems as $cartItem)
         <div class="checkout-item">
-            <img src="{{ asset('storage/' . $cartItem->product->image) }}" alt="{{ $cartItem->product->name }}" class="checkout-item-image">
+            <img src="{{ asset('storage/' . $cartItem->product->images->first()->url) }}" alt="{{ $cartItem->product->name }}" class="checkout-item-image">
             <div class="checkout-item-details">
                 <h4>{{ $cartItem->product->name }}</h4>
                 <p>Quantity: {{ $cartItem->quantity }}</p>
@@ -43,9 +43,52 @@
         <div class="form-group">
             <label for="shipping_address">Endereço de Envio:</label>
             <div class="checkout-input-container">
-                <input value='{{ Auth::user()->shipping_address }}' type="text" id="shipping_address" name="shipping_address" class="checkout-input" required>
+                @php
+                $shippingAddress = Auth::user()->shippingAddress;
+                @endphp
+                <div class="form-row">
+                    <label for="address">Address:</label>
+                    <input 
+                        value="{{ $shippingAddress->address ?? '' }}" 
+                        type="text" 
+                        id="address" 
+                        name="address" 
+                        class="checkout-input" 
+                        required>
+                </div>
+                <div class="form-row">
+                    <label for="postal_code">Postal Code:</label>
+                    <input 
+                        value="{{ $shippingAddress->postal_code ?? '' }}" 
+                        type="text" 
+                        id="postal_code" 
+                        name="postal_code" 
+                        class="checkout-input" 
+                        required>
+                </div>
+                <div class="form-row">
+                    <label for="location">Location:</label>
+                    <input 
+                        value="{{ $shippingAddress->location ?? '' }}" 
+                        type="text" 
+                        id="location" 
+                        name="location" 
+                        class="checkout-input" 
+                        required>
+                </div>
+                <div class="form-row">
+                    <label for="country">Country:</label>
+                    <input 
+                        value="{{ $shippingAddress->country ?? '' }}" 
+                        type="text" 
+                        id="country" 
+                        name="country" 
+                        class="checkout-input" 
+                        required>
+                </div>
             </div>
         </div>
+
 
        
         <div class="form-group">

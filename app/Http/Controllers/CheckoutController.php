@@ -66,47 +66,62 @@ class CheckoutController extends Controller
                 'digits:16',
             ],
             'credit_card_exp_date' => [
-                ['required', 
-                'date', 
-                'after:today',
+                'required',
                 'regex:/^(0[1-9]|1[0-2])\/[0-9]{4}$/',
                 function ($attribute, $value, $fail) {
                     [$month, $year] = explode('/', $value);
                     $currentYear = now()->year;
                     $currentMonth = now()->month;
-            
+        
                     if ($year < $currentYear || ($year == $currentYear && $month < $currentMonth)) {
                         $fail('Parece que o seu cartão de crédito expirou.');
                     }
-                },],
+                },
             ],
             'credit_card_cvv' => [
                 'required',
                 'digits:3',
             ],
-            'shipping_address' => [
+            'address' => [
                 'required',
                 'string',
                 'max:255',
             ],
-
+            'postal_code' => [
+                'required',
+                'string',
+                'max:20',
+            ],
+            'location' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+            'country' => [
+                'required',
+                'string',
+                'max:100',
+            ],
         ];
-
+        
         $messages = [
             'NIF.digits' => 'O NIF deve conter 9 dígitos numéricos.',
             'credit_card_number.required' => 'O campo do número do cartão é obrigatório.',
             'credit_card_number.digits' => 'O número do cartão deve conter 16 dígitos numéricos.',
             'credit_card_exp_date.required' => 'O campo de data de validade é obrigatório.',
-            'credit_card_exp_date.date' => 'Insira a data de validade no formato MM/DD/AAAA.',
-            'credit_card_exp_date.after' => 'Parece que o seu cartão de crédito expirou.',
+            'credit_card_exp_date.regex' => 'A data de validade deve estar no formato MM/YYYY.',
             'credit_card_cvv.required' => 'O campo CVV é obrigatório.',
             'credit_card_cvv.digits' => 'O CVV deve conter 3 dígitos numéricos.',
-            'shipping_address.required' => 'O endereço de envio é obrigatório.',
-            'shipping_address.string' => 'O endereço de envio deve ser um texto válido.',
-            'shipping_address.max' => 'O endereço de envio não pode exceder 255 caracteres.',
-
+            'address.required' => 'O endereço é obrigatório.',
+            'address.max' => 'O endereço não pode exceder 255 caracteres.',
+            'postal_code.required' => 'O código postal é obrigatório.',
+            'postal_code.max' => 'O código postal não pode exceder 20 caracteres.',
+            'location.required' => 'A localidade é obrigatória.',
+            'location.max' => 'A localidade não pode exceder 255 caracteres.',
+            'country.required' => 'O país é obrigatório.',
+            'country.max' => 'O país não pode exceder 100 caracteres.',
         ];
-
+        
         $validated = $request->validate($rules, $messages);
     
         $creditCardExpDate = \Carbon\Carbon::createFromFormat('m/Y', $validated['credit_card_exp_date'])->startOfMonth()->format('Y-m-d');
@@ -116,8 +131,11 @@ class CheckoutController extends Controller
             'tracking_number' => uniqid('ORD_'),
             'status' => Order::STATUS_PROCESSING,
             'estimated_delivery_date' => now()->addDays(7),
-            'shipping_address' => $request->input('shipping_address'),
             'buy_date' => now(),
+            'postal_code'=> $request->input('postal_code'),
+            'address'=> $request->input('address'),
+            'location'=> $request->input('location'),
+            'country'=> $request->input('country'),
         ]);
     
         $transaction = Transaction::create([

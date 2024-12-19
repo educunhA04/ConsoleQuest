@@ -23,14 +23,22 @@
                         <div class="detail-row"><strong>Name:</strong> {{ Auth::user()->name }}</div>
                         <div class="detail-row"><strong>Username:</strong> {{ Auth::user()->username }}</div>
                         <div class="detail-row"><strong>Email:</strong> {{ Auth::user()->email }}</div>
-                        @foreach (Auth::user()->shippingAddresses as $address)
+                        @php
+                            $address = Auth::user()->shippingAddress; // Assuming a one-to-one relationship
+                        @endphp
+
+                        @if ($address)
                             <div class="detail-row">
                                 <strong>Address:</strong> {{ $address->address }}<br>
                                 <strong>Postal Code:</strong> {{ $address->postal_code }}<br>
                                 <strong>Location:</strong> {{ $address->location }}<br>
                                 <strong>Country:</strong> {{ $address->country }}
                             </div>
-                        @endforeach                   </div>
+                        @else
+                            <p>No shipping address available.</p>
+                        @endif
+                 
+                     </div>
                     <div class="profile-picture" style="margin-left: 20px;">
                         <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="Profile Picture">
                     </div>

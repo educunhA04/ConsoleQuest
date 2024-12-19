@@ -74,10 +74,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Notification::class, 'notification_user', 'user_id', 'notification_id');
     }
-    public function shippingAddresses()
+    public function shippingAddress()
     {
-        return $this->hasMany(ShippingAddress::class, 'user_id', 'id');
+        return $this->hasOne(ShippingAddress::class, 'user_id', 'id');
     }
+
 
     
 }
