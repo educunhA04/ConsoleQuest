@@ -71,16 +71,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Cenas do Pusher
-    const pusher = new Pusher('dd377fb9b05634e11fa2', {
-        cluster: 'eu',
-        encrypted: true
-    });
-
-    const channel = pusher.subscribe('Console-Quest');
-    channel.bind('notification-pusher', function(data) {
-        console.log(`New notification: ${data.message}`);
-    });
 });
 
 

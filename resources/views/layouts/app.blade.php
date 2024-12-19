@@ -37,11 +37,11 @@
     <script src="{{ asset('js/notifications.js') }}" defer></script>
     <script src="{{ asset('js/wishlist_cart.js') }}" defer></script>
     <script src="https://js.pusher.com/7.0/pusher.min.js" defer></script>
-    <script src="{{ asset('js/app.js') }}"></script>
     <script>
     const wishlistAddUrl = "{{ route('wishlist.add') }}";
     const cartAddUrl = "{{ route('cart.add') }}";
     </script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
 
 </head>

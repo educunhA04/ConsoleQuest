@@ -85,6 +85,32 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    const pusher = new Pusher('dd377fb9b05634e11fa2', {
+        cluster: 'eu',
+        encrypted: true,
+    });
+    
+    const channel = pusher.subscribe('Console-Quest');
+    channel.bind('notification-pusher', function (data) {
+        
+        showNotification(data.message);
+    
+        
+        const notificationList = document.querySelector('.notifications ul'); // Find the <ul> inside the notifications partial
+    
+        if (notificationList) {
+            const newNotification = document.createElement('li');
+            newNotification.classList.add('notification-item'); // Add CSS classes
+            newNotification.setAttribute('data-id', data.notification_id); // Set the data-id attribute
+            newNotification.innerHTML = `
+                <strong>${data.message}</strong>
+                <p>${new Date().toLocaleString()}</p>
+            `;
+    
+            notificationList.prepend(newNotification); // Add the new notification to the top
+        }
+    });
+    
     window.addToWishlist = addToWishlist;
     window.addToCart = addToCart;
 });
