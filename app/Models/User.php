@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use App\Models\ShippingAddress;
 
 // Added to define Eloquent relationships.
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -72,6 +73,10 @@ class User extends Authenticatable
     public function notifications()
     {
         return $this->belongsToMany(Notification::class, 'notification_user', 'user_id', 'notification_id');
+    }
+    public function shippingAddresses()
+    {
+        return $this->hasMany(ShippingAddress::class, 'user_id', 'id');
     }
 
     
