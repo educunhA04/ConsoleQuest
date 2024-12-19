@@ -28,10 +28,10 @@
         </div>
     </div>
 
-    <!-- Second column: Middle form -->
-    <div class="form-column-middle">
-        <form action="{{ route('admin.changeProduct') }}" method="POST" class="admin-product-form">
-            @csrf
+    <form action="{{ route('admin.changeProduct') }}" method="POST" class="admin-product-form">
+    @csrf
+            <div class="form-column-middle">
+        
             <input type="hidden" id="product_id" name="product_id" value="{{ $product->id }}">
 
             <!-- Editable Fields -->
@@ -74,13 +74,10 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-        </form>
     </div>
 
     <!-- Third column: Right form -->
     <div class="form-column-right">
-        <form action="{{ route('admin.changeProduct') }}" method="POST" class="admin-product-form">
-            @csrf
             <div class="form-group">
                 <label for="quantity">Quantity</label>
                 <input type="number" id="quantity" name="quantity" class="form-control" value="{{ old('quantity', $product->quantity) }}" min="0" required>
@@ -106,8 +103,10 @@
             </div>
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary update-button">Update Product</button>
-        </form>
     </div>
+    <button type="submit" class="btn btn-primary update-button">Update Product</button>
+    </form>
+
 </div>
 
 @endsection
