@@ -71,7 +71,6 @@ CREATE TABLE "User" (
     password TEXT NOT NULL,
     name TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
-    shipping_address TEXT,
     remember_token VARCHAR(255),
     image TEXT,
     blocked BOOLEAN DEFAULT FALSE
@@ -206,17 +205,10 @@ CREATE TABLE Shipping_Address (
     address TEXT NOT NULL,
     location TEXT NOT NULL,
     country TEXT NOT NULL,
-    is_primary BOOLEAN NOT NULL
+    user_id INT NOT NULL ,
+    FOREIGN KEY (user_id) REFERENCES "User"(id) ON UPDATE CASCADE
 );
 
-CREATE TABLE User_Shipping (
-    id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL ,
-    shipping_id INT NOT NULL ,
-    UNIQUE (user_id, shipping_id),
-    FOREIGN KEY (user_id) REFERENCES "User"(id) ON UPDATE CASCADE,
-    FOREIGN KEY (shipping_id) REFERENCES Shipping_Address(id) ON UPDATE CASCADE
-);
 
 CREATE TABLE password_reset_tokens (
     email VARCHAR(255) UNIQUE NOT NULL,
