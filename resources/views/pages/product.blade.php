@@ -1,18 +1,19 @@
 @extends('layouts.app')
     @section('content')
     <div class="breadcrumb">
-        <a href="{{ route('home') }}">Home</a> / 
+        <a href="{{ url(route('home')) }}?query=Home">Home</a> / 
         @php
-            $categoryRoute = match($product->category->type) {
-                'Controllers' => route('home.controllers'),
-                'Video Games' => route('home.games'),
-                'Consoles' => route('home.consoles'),
-                default => '#'
+            $queryParam = match($product->category->type) {
+                'Controllers' => 'Controllers',
+                'Video Games' => 'Games',
+                'Consoles' => 'Consoles',
+                default => 'Categoria Desconhecida',
             };
         @endphp
-        <a href="{{ $categoryRoute }}">{{ $product->category->type ?? 'Categoria Desconhecida' }}</a> / 
+        <a href="{{ url('/filtered') }}?query={{ $queryParam }}">{{ $product->category->type ?? 'Categoria Desconhecida' }}</a> / 
         {{ $product->name }} <!-- Dynamically show category and product name -->
     </div>
+
 
     <div class="product-page">
         <div class="product-info">

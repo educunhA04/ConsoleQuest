@@ -492,6 +492,67 @@ button, .auth-link {
   margin-bottom: 5px;
 }
 
+
+/*pagination*//* Specifically target the container and ensure it affects the structure */
+.d-flex.justify-content-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem !important;
+  margin-top: 2rem;
+}
+
+
+
+/* Ensure the pagination links retain their styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 1rem 0;
+  list-style: none;
+  gap: 0.5rem; /* Space between page numbers */
+  margin-left: 2rem;
+}
+
+.page-item {
+  margin: 0;
+}
+
+.page-item .page-link {
+  color: #2e3a57;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border-radius: 0.375rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  align-items: center;
+}
+
+.page-item .page-link:hover {
+  color: #ffffff;
+  background-color: #003366;
+  border-color: #003366;
+  text-decoration: none;
+}
+
+.page-item.active .page-link {
+  color: #ffffff;
+  background-color: #366fac;
+  border-color: #366fac;
+  cursor: default;
+}
+
+.page-item.disabled .page-link {
+  color: #aaa;
+  background-color: #f9f9f9;
+  border-color: #ddd;
+  pointer-events: none;
+}
+
+
 /* Responsividade */
 @media (max-width: 768px) {
   .staticpage-header h1 {

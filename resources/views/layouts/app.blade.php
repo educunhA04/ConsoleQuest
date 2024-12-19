@@ -84,7 +84,7 @@
                                 <i class="fas fa-user"></i>
                             @endif
                         </a>
-                        <a href="{{ url('/logout') }}" class="auth-link log-out">Sing Out</a>
+                        <a href="{{ url('/logout') }}" class="auth-link log-out">Sign Out</a>
                     @else
                         <div class = sign-in-up>
                             <a href="{{ url('/login') }}" class="auth-link sign-in">Sign In</a>

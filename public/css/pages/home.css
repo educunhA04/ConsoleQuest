@@ -180,6 +180,7 @@
 .product-link{
     text-decoration: none;
 }
+
 .pagination {
     display: flex;
     justify-content: center;
@@ -187,12 +188,14 @@
     margin: 20px 0;
     list-style-type: none;
     gap: 10px;
+    background-color: #fff;
 }
 
 .pagination a{
     color: #003366;
     text-decoration: none;
     font-weight: bold; 
+    background-color: #fff;
 
 }
 
