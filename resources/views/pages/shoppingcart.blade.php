@@ -16,8 +16,8 @@
 
                 <div class="cart-item-container">
                     <a href="{{ route('product.show', $product->id) }}" class="product-link">
-                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="cart-item-image">
-                        <h4 class="cart-item-name">{{ $product->name }}</h4>
+                    <img src="{{ asset('storage/' . $product->images->first()->url) }}" alt="{{ $product->name }}" class="product-image">                
+                    <h4 class="cart-item-name">{{ $product->name }}</h4>
                     </a>
                     <p class="cart-item-price">Preço Unitário: €{{ number_format($product->price, 2) }}</p>
                     <p class="cart-item-quantity">Quantidade: {{ is_array($cartItem) ? $cartItem['quantity'] : $cartItem->quantity }}</p>

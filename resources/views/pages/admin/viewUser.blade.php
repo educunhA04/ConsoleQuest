@@ -23,12 +23,12 @@
                     @if ($user->blocked == 0)
                     <form action="{{ route('admin.user.block', ['id' => $user->id]) }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-danger">Bloquear</button>
+                        <button type="submit" class="btn btn-danger">Block</button>
                     </form>
                     @else
                     <form action="{{ route('admin.user.unblock', ['id' => $user->id]) }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-success">Desbloquear</button>
+                        <button type="submit" class="btn btn-success">Unblock</button>
                     </form>
                     @endif
                 @endif

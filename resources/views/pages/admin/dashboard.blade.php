@@ -34,9 +34,10 @@
                 </div>
             @endforeach
         </div>
-        <a href="{{ route('admin.createProduct') }}" class="admin-button-link">New Product</a>
-
-<a href="#" class="admin-button-link" onclick="openTypeModal()">New Type</a>
+        <div class="action-buttons">
+            <a href="{{ route('admin.createProduct') }}" class="admin-button-link">New Product</a>
+            <a href="#" class="admin-button-link" onclick="openTypeModal()">New Type</a>
+        </div>
 
 <div class="typeModal">
     <div class="modal-content">

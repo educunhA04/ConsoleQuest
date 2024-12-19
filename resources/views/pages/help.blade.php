@@ -53,7 +53,7 @@
                         <li><strong>Status:</strong> The current status of the order (e.g., Processing, Shipped).</li>
                     </ul>
                 </li>
-                <li><strong>Logout:</strong> Click the <strong>Logout</strong> button to securely log out of your account.</li>
+                <li><strong>Sign Out:</strong> Click the <strong>Logout</strong> button to securely log out of your account.</li>
             </ul>
             <p>
                 If you encounter any issues or need assistance, feel free to visit the <a href="help">Help Page</a> or contact our support team.

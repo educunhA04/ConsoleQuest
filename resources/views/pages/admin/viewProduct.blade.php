@@ -2,32 +2,36 @@
 
 @section('content')
 <div class="admin-product-details">
-    <h1>Edit Product Details</h1>
-
+    <div class="admin-title-box">
+        <div class="admin-title-product">Edit Product Details</div>
+    </div>
+    
     <div class="admin-product-container">
-        <div class="admin-product-image">
-            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    @foreach ($product->images as $key => $image)
-                        <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
-                            <img src="{{ asset('storage/' . $image->url) }}" class="d-block w-100" alt="{{ $product->name }}">
-                        </div>
-                    @endforeach
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+    <!-- First column: Image -->
+    <div class="admin-product-image">
+        <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @foreach ($product->images as $key => $image)
+                    <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                        <img src="{{ asset('storage/' . $image->url) }}" class="d-block w-100" alt="{{ $product->name }}">
+                    </div>
+                @endforeach
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        
+    </div>
+
+    <!-- Second column: Middle form -->
+    <div class="form-column-middle">
         <form action="{{ route('admin.changeProduct') }}" method="POST" class="admin-product-form">
             @csrf
-            <!-- Hidden field for product ID -->
             <input type="hidden" id="product_id" name="product_id" value="{{ $product->id }}">
 
             <!-- Editable Fields -->
@@ -39,7 +43,6 @@
                 @enderror
             </div>
             
-
             <div class="form-group">
                 <label for="category_id">Category</label>
                 <select id="category_id" name="category_id" class="form-control" required>
@@ -50,30 +53,34 @@
             </div>
 
             <div class="form-group">
-                    <label for="type">Type</label>
-                    <select id="type" name="type_id" class="form-control" required>
-                        <option value="">Select a Type</option>
-                        @foreach($types as $type)
-                            <option value="{{ $type->id }}" {{ (old('type_id', $product->type_id) == $type->id) ? 'selected' : '' }}>
-                                {{ $type->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('type_id')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+                <label for="type">Type</label>
+                <select id="type" name="type_id" class="form-control" required>
+                    <option value="">Select a Type</option>
+                    @foreach($types as $type)
+                        <option value="{{ $type->id }}" {{ (old('type_id', $product->type_id) == $type->id) ? 'selected' : '' }}>
+                            {{ $type->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('type_id')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
-
             <div class="form-group">
-
                 <label for="description">Description</label>
                 <textarea id="description" name="description" class="form-control" rows="4" required>{{ old('description', $product->description) }}</textarea>
                 @error('description')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
+        </form>
+    </div>
 
+    <!-- Third column: Right form -->
+    <div class="form-column-right">
+        <form action="{{ route('admin.changeProduct') }}" method="POST" class="admin-product-form">
+            @csrf
             <div class="form-group">
                 <label for="quantity">Quantity</label>
                 <input type="number" id="quantity" name="quantity" class="form-control" value="{{ old('quantity', $product->quantity) }}" min="0" required>
@@ -97,10 +104,10 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary update-button">Update Product</button>
         </form>
     </div>
 </div>
+
 @endsection

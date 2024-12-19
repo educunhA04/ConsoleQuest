@@ -1,13 +1,27 @@
+.admin-title-product {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    color: #2e3a57;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
 .admin-product-details {
     width: 90%;
     margin: 0 auto;
     font-size: 1rem;
-    line-height: 1.5;
+    line-height: 1.6;
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 .admin-product-container {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 2fr 2fr;
     gap: 2rem;
     align-items: start;
     margin-top: 2rem;
@@ -17,6 +31,7 @@
     width: 100%;
     height: auto;
     border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .admin-product-info {
@@ -33,28 +48,84 @@
 }
 
 .admin-product-form label {
-    font-weight: bold;
+    font-weight: 600;
+    color: #333;
 }
 
-.admin-product-form input {
+.admin-product-form input,
+.admin-product-form select,
+.admin-product-form textarea {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.75rem;
     font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.25rem;
+    border: 1px solid #ddd;
+    border-radius: 0.375rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.admin-product-form input:focus,
+.admin-product-form select:focus,
+.admin-product-form textarea:focus {
+    border-color: #003366;
+    box-shadow: 0 0 4px rgba(0, 51, 102, 0.5);
+    outline: none;
 }
 
 .admin-product-form button.update-button {
-    align-self: flex-start;
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
+    font-weight: bold;
     background-color: #003366;
-    color: white;
+    color: #ffffff;
     border: none;
-    border-radius: 0.25rem;
+    border-radius: 0.375rem;
     cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .admin-product-form button.update-button:hover {
     background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.admin-product-image {
+    grid-column: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-column-left {
+    grid-column: 2;
+}
+
+.form-column-right {
+    grid-column: 3;
+}
+
+@media (max-width: 768px) {
+    .admin-product-container {
+        grid-template-columns: 1fr;
+    }
+
+    .form-column-left,
+    .form-column-middle,
+    .form-column-right {
+        grid-column: 1;
+    }
+
+    .admin-product-image {
+        margin-bottom: 1rem;
+    }
+
+    .admin-product-form button.update-button {
+        position: static;
+        margin-top: 1rem;
+        align-self: center;
+    }
 }

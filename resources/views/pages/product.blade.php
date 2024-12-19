@@ -87,11 +87,11 @@
 
             {{-- Exibição de Avaliações --}}
             @if($product->reviews->isEmpty())
-                <p>Este produto ainda não possui avaliações. Seja o primeiro a avaliar!</p>
+                <p>This product has no ratings yet. Be the first one to rate it!</p>
                 <p></p>
             @else
                 <div class="average-rating">
-                    <strong>Média:</strong> {{ number_format($product->reviews->avg('rating'), 1) }}/5 ★
+                    <strong>Average:</strong> {{ number_format($product->reviews->avg('rating'), 1) }}/5 ★
                 </div>
                 @foreach($product->reviews as $review)
                 <div class="review" id="review-{{ $review->id }}" data-is-owner="{{ $review->user_id === auth()->id() ? 'true' : 'false' }}">
@@ -103,9 +103,9 @@
                         <form action="{{ route('reviews.destroy', $review->id) }}" method="POST" class="inline-form">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="delete-btn" style="display: none;">Excluir</button>
+                            <button type="submit" class="delete-btn" style="display: none;">Delete</button>
                         </form>
-                        <button class="edit-btn" onclick="showEditForm({{ $review->id }})" style="display: none;">Editar</button>
+                        <button class="edit-btn" onclick="showEditForm({{ $review->id }})" style="display: none;">Edit</button>
 
                     @endif
                     <button class="report-btn" style="display: none;" onclick="showReportForm({{ $review->id }})">Report</button>
@@ -117,15 +117,15 @@
                             @csrf
                             @method('PUT')
                             <div>
-                                <label for="rating-{{ $review->id }}">Avaliação:</label>
+                                <label for="rating-{{ $review->id }}">Rating:</label>
                                 <input type="number" id="rating-{{ $review->id }}" name="rating" value="{{ $review->rating }}" min="0" max="5" required>
                             </div>
                             <div>
-                                <label for="description-{{ $review->id }}">Descrição:</label>
+                                <label for="description-{{ $review->id }}">Description:</label>
                                 <textarea id="description-{{ $review->id }}" name="description" required>{{ $review->description }}</textarea>
                             </div>
-                            <button type="submit" class="save-btn">Salvar</button>
-                            <button type="button" class="cancel-btn" onclick="hideEditForm({{ $review->id }})">Cancelar</button>
+                            <button type="submit" class="save-btn">Save</button>
+                            <button type="button" class="cancel-btn" onclick="hideEditForm({{ $review->id }})">Cancel</button>
                         </form>
                     @endif
                     @if ($review->user_id !== auth()->id())
@@ -153,26 +153,26 @@
                 @if(!$existingReview)
                     {{-- Formulário para adicionar nova avaliação --}}
                     <div class="review-form">
-                        <h4>Adicionar sua avaliação:</h4>
+                        <h4>Add your rating:</h4>
                         <form action="{{ route('reviews.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                             <div>
-                                <label for="rating">Avaliação:</label>
+                                <label for="rating">Rating:</label>
                                 <input type="number" id="rating" name="rating" min="0" max="5" required>
                             </div>
                             <div>
-                                <label for="description">Descrição:</label>
+                                <label for="description">Description:</label>
                                 <textarea id="description" name="description" required></textarea>
                             </div>
-                            <button type="submit" class="submit-btn">Enviar Avaliação</button>
+                            <button type="submit" class="submit-btn">Send Rating</button>
                         </form>
                     </div>
                 @else
-                    <p>Você já avaliou este produto. Edite ou exclua a avaliação existente.</p>
+                    <p>You already rated this product. Edit or delete your existing rating.</p>
                 @endif
             @else
-                <p>Você precisa comprar este produto antes de avaliá-lo.</p>
+                <p>You need to buy this product before rating it.</p>
             @endif
 
 
@@ -180,7 +180,7 @@
 
             {{-- Mensagem para usuários não autenticados --}}
             @guest
-                <p>Faça login para adicionar sua avaliação.</p>
+                <p>Please login to add your rating.</p>
             @endguest
         </div>
 @endsection

@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{ asset('css/pages/checkout.css') }}">
 
 <div class="checkout-container">
-    <h2>Finalizar Compra</h2>
+    <h2>Checkout</h2>
     <div class="checkout-items">
         @foreach ($cartItems as $cartItem)
         <div class="checkout-item">
@@ -21,7 +21,7 @@
 
     <!-- Resumo do Pedido -->
     <div class="checkout-summary">
-        <h3>Total a Pagar: €{{ number_format($totalPrice, 2) }}</h3>
+        <h3>Total amount: €{{ number_format($totalPrice, 2) }}</h3>
     </div>
 
     @if($errors->any())
