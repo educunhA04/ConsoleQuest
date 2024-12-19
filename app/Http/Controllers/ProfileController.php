@@ -37,54 +37,68 @@ class ProfileController extends Controller
     }
 
     public function update(Request $request)
-    {
-        // Validate the input
-        $validated = $request->validate([
-            'name' => 'required|string|max:50',
-            'username' => 'required|string|max:50|unique:User,username,' . Auth::id(),
-            'email' => 'required|string|email|max:75|unique:User,email,' . Auth::id(),
-            'shipping_address' => 'nullable|string|max:255',
-            'password' => 'nullable|string|min:8|confirmed|regex:/[A-Z]/|regex:/[0-9]/',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Profile image validation
-        ], [
-            // Custom error messages for the password
-            'password.min' => 'The password must be at least 8 characters long.',
-            'password.confirmed' => 'The password confirmation does not match.',
-            'password.regex' => 'The password must include at least one uppercase letter and one number.',
-            'username.unique' => 'The username has already been taken.',
-            'email.unique' => 'The email has already been taken.',
-            'shipping_address.max' => 'The shipping address must not exceed 255 characters.',
-            'image.image' => 'The profile picture must be an image.',
-            'image.mimes' => 'The profile picture must be a file of type: jpeg, png, jpg.',
-            'image.max' => 'The profile picture must not exceed 2MB.',
+{
+    // Validate the input
+    $validated = $request->validate([
+        'name' => 'required|string|max:50',
+        'username' => 'required|string|max:50|unique:User,username,' . Auth::id(),
+        'email' => 'required|string|email|max:75|unique:User,email,' . Auth::id(),
+        'address' => 'required|string|max:255',
+        'postal_code' => 'required|string|max:20',
+        'location' => 'required|string|max:100',
+        'country' => 'required|string|max:100',
+        'password' => 'nullable|string|min:8|confirmed|regex:/[A-Z]/|regex:/[0-9]/',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Profile image validation
+    ], [
+        // Custom error messages
+        'password.min' => 'The password must be at least 8 characters long.',
+        'password.confirmed' => 'The password confirmation does not match.',
+        'password.regex' => 'The password must include at least one uppercase letter and one number.',
+        'username.unique' => 'The username has already been taken.',
+        'email.unique' => 'The email has already been taken.',
+        'address.required' => 'The address field is required.',
+        'postal_code.required' => 'The postal code field is required.',
+        'location.required' => 'The location field is required.',
+        'country.required' => 'The country field is required.',
+        'image.image' => 'The profile picture must be an image.',
+        'image.mimes' => 'The profile picture must be a file of type: jpeg, png, jpg.',
+        'image.max' => 'The profile picture must not exceed 2MB.',
+    ]);
 
-        ]);
+    // Update the user's information
+    $user = Auth::user();
+    $user->name = $validated['name'];
+    $user->username = $validated['username'];
+    $user->email = $validated['email'];
 
-        // Update the user's information
-        $user = Auth::user();
-        $user->name = $validated['name'];
-        $user->username = $validated['username'];
-        $user->email = $validated['email'];
-        $user->shipping_address = $validated['shipping_address'];
-
-        // Update the password only if a new one is provided
-        if (!empty($validated['password'])) {
-            $user->password = Hash::make($validated['password']);
-        }
-        if ($request->hasFile('image')) {
-            if ($user->image && file_exists(public_path('storage/' . $user->image))) {
-                unlink(public_path('storage/' . $user->image));
-            }
-    
-            // Store the new image
-            $imagePath = $request->file('image')->store('userimages', 'public');
-            $user->image = $imagePath;
-        }
-
-        $user->save();
-
-        return redirect('/profile')->with('success', 'Profile updated successfully!');
+    // Update the password only if a new one is provided
+    if (!empty($validated['password'])) {
+        $user->password = Hash::make($validated['password']);
     }
+
+    // Handle profile image update
+    if ($request->hasFile('image')) {
+        if ($user->image && file_exists(public_path('storage/' . $user->image))) {
+            unlink(public_path('storage/' . $user->image));
+        }
+
+        // Store the new image
+        $imagePath = $request->file('image')->store('userimages', 'public');
+        $user->image = $imagePath;
+    }
+
+    $user->save();
+
+    // Update or create the shipping address
+    $shippingAddress = $user->shippingAddresses()->firstOrNew();
+    $shippingAddress->address = $validated['address'];
+    $shippingAddress->postal_code = $validated['postal_code'];
+    $shippingAddress->location = $validated['location'];
+    $shippingAddress->country = $validated['country'];
+    $shippingAddress->save();
+
+    return redirect('/profile')->with('success', 'Profile updated successfully!');
+}
 
     public function deleteAccount()
     {

@@ -9,8 +9,8 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $table = 'Order'; // Nome da tabela
-    public $timestamps = false; // Para created_at e updated_at
+    protected $table = 'Order'; // Table name
+    public $timestamps = false; // Disable created_at and updated_at timestamps
 
     protected $fillable = [
         'user_id',
@@ -18,51 +18,53 @@ class Order extends Model
         'status',
         'estimated_delivery_date',
         'buy_date',
-        'shipping_address',
+        'postal_code',
+        'address',
+        'location',
+        'country',
     ];
 
     protected $casts = [
         'buy_date' => 'datetime',
         'estimated_delivery_date' => 'datetime',
     ];
-    
 
-    // Definição de constantes para status do pedido
+    // Status constants
     const STATUS_PROCESSING = 'processing';
     const STATUS_SHIPPED = 'shipped';
     const STATUS_DELIVERED = 'delivered';
+    const STATUS_CANCELLED = 'cancelled';
 
-    /**
-     * Relacionamento com Transaction
-     */
-    public function transaction()
-    {
-        return $this->belongsTo(Transaction::class);
-    }
-
-    /**
-     * Relacionamento com OrderProduct
-     */
-    public function products()
-    {
-        return $this->hasMany(OrderProduct::class);
-    }
-
-
-    /**
-     * Relationship with the User model
-     */
+    
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * Relationship with OrderProduct model
-     */
+  
     public function orderProducts()
     {
         return $this->hasMany(OrderProduct::class);
     }
+    public function products()
+{
+    return $this->hasMany(OrderProduct::class, 'order_id');
+}
 
+  
+    public function getFullShippingAddressAttribute()
+    {
+        return "{$this->address}, {$this->postal_code}, {$this->location}, {$this->country}";
+    }
+
+
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class);
+    }
+
+    public function scopeStatus($query, $status)
+    {
+        return $query->where('status', $status);
+    }
 }

@@ -44,12 +44,61 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="shipping_address">Shipping Address</label>
-                            <textarea id="shipping_address" name="shipping_address" class="form-control" rows="1">{{ old('shipping_address', Auth::user()->shipping_address) }}</textarea>
-                            @error('shipping_address')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
+    <label for="address">Address</label>
+    <input 
+        type="text" 
+        id="address" 
+        name="address" 
+        class="form-control" 
+        value="{{ old('address', Auth::user()->shippingAddresses->first()->address) }}" 
+        required>
+    @error('address')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="form-group">
+    <label for="postal_code">Postal Code</label>
+    <input 
+        type="text" 
+        id="postal_code" 
+        name="postal_code" 
+        class="form-control" 
+        value="{{ old('postal_code', Auth::user()->shippingAddresses->first()->postal_code) }}" 
+        required>
+    @error('postal_code')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="form-group">
+    <label for="location">Location</label>
+    <input 
+        type="text" 
+        id="location" 
+        name="location" 
+        class="form-control" 
+        value="{{ old('location', Auth::user()->shippingAddresses->first()->location) }}" 
+        required>
+    @error('location')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="form-group">
+    <label for="country">Country</label>
+    <input 
+        type="text" 
+        id="country" 
+        name="country" 
+        class="form-control" 
+        value="{{ old('country', Auth::user()->shippingAddresses->first()->country) }}" 
+        required>
+    @error('country')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
                     </div>
 
                     <!-- Second Column -->

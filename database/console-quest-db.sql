@@ -126,15 +126,26 @@ CREATE TABLE Shopping_Cart (
     FOREIGN KEY (user_id) REFERENCES "User"(id) ON UPDATE CASCADE,
     FOREIGN KEY (product_id) REFERENCES Product(id) ON UPDATE CASCADE
 );
-
+CREATE TABLE Shipping_Address (
+    id SERIAL  PRIMARY KEY,
+    postal_code TEXT NOT NULL,
+    address TEXT NOT NULL,
+    location TEXT NOT NULL,
+    country TEXT NOT NULL,
+    user_id INT NOT NULL ,
+    FOREIGN KEY (user_id) REFERENCES "User"(id) ON UPDATE CASCADE
+);
 CREATE TABLE "Order" (
     id  SERIAL  PRIMARY KEY,
     user_id INT NOT NULL,
+    postal_code TEXT NOT NULL,
+    address TEXT NOT NULL,
+    location TEXT NOT NULL,
+    country TEXT NOT NULL,
     tracking_number TEXT UNIQUE NOT NULL,
     status order_status NOT NULL,
     buy_date DATE NOT NULL,
     estimated_delivery_date DATE NOT NULL,
-    shipping_address TEXT,
     FOREIGN KEY (user_id) REFERENCES "User"(id) ON UPDATE CASCADE
 );
 
@@ -199,15 +210,7 @@ CREATE TABLE Notification_User (
     FOREIGN KEY (notification_id) REFERENCES Notification(id) ON UPDATE CASCADE
 );
 
-CREATE TABLE Shipping_Address (
-    id SERIAL  PRIMARY KEY,
-    postal_code TEXT NOT NULL,
-    address TEXT NOT NULL,
-    location TEXT NOT NULL,
-    country TEXT NOT NULL,
-    user_id INT NOT NULL ,
-    FOREIGN KEY (user_id) REFERENCES "User"(id) ON UPDATE CASCADE
-);
+
 
 
 CREATE TABLE password_reset_tokens (
@@ -427,9 +430,9 @@ INSERT INTO Shipping_Address (id,postal_code, address, location, country, user_i
 INSERT INTO Admin (id, name, email, password) VALUES
     (1,'rabeira' ,'admin@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'); 
 
-INSERT INTO "Order" (id, user_id, tracking_number, status, buy_date, estimated_delivery_date) VALUES
-    (1, 1, 'TRK123456', 'processing', '2024-01-01', '2024-01-05'),
-    (2, 1, 'TRK654321', 'shipped', '2024-01-02', '2024-01-06');
+INSERT INTO "Order" (id, user_id,postal_code, address, location, country, tracking_number, status, buy_date, estimated_delivery_date) VALUES
+    (1, 1, '4630-234', 'Proença a nova', 'Faro', 'Portugal','TRK123456', 'processing', '2024-01-01', '2024-01-05'),
+    (2, 1, '4630-234', 'Proença a nova', 'Faro', 'Portugal','TRK654321', 'shipped', '2024-01-02', '2024-01-06');
 
 INSERT INTO Transaction (id, user_id, order_id, code, price, NIF, credit_card_number, credit_card_exp_date, credit_card_cvv, shipping_address) VALUES
     (1, 1, 1, 'TXN1001', 499.99, '123456789', '4111111111111111', '2025-12-31', '123', 'topxuxa'),

@@ -23,7 +23,6 @@
                         <div class="detail-row"><strong>Name:</strong> {{ Auth::user()->name }}</div>
                         <div class="detail-row"><strong>Username:</strong> {{ Auth::user()->username }}</div>
                         <div class="detail-row"><strong>Email:</strong> {{ Auth::user()->email }}</div>
-                        <div class="detail-row"><strong>Shipping Address:</strong></div>
                         @foreach (Auth::user()->shippingAddresses as $address)
                             <div class="detail-row">
                                 <strong>Address:</strong> {{ $address->address }}<br>
