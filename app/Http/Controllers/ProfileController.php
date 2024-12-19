@@ -90,7 +90,7 @@ class ProfileController extends Controller
     $user->save();
 
     // Update or create the shipping address
-    $shippingAddress = $user->shippingAddresses()->firstOrNew();
+    $shippingAddress = $user->shippingAddress()->firstOrNew();
     $shippingAddress->address = $validated['address'];
     $shippingAddress->postal_code = $validated['postal_code'];
     $shippingAddress->location = $validated['location'];

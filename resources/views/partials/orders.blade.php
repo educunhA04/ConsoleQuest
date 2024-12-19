@@ -17,9 +17,10 @@
                     data-products='@json($order->products ? $order->products->map(function($item) { 
                         return ['name' => $item->product->name, 'quantity' => $item->quantity, 'price' => $item->product->price]; 
                     }) : [])' 
-                    data-images='@json($order->products ? $order->products->map(function($item) { 
-                        return asset("storage/" . $item->product->image); 
-                    }) : [])'
+                    data-images='@json($order->products->map(function($item) { 
+                        return asset("storage/" . $item->product->images->first()->url); 
+                    }))'
+
                     data-product-page='@json($order->products ? $order->products->map(function($item) { 
                         return ['url' => route("product.show", $item->product->id)]; 
                     }) : [])' 
