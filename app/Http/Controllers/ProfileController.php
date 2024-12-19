@@ -23,7 +23,9 @@ class ProfileController extends Controller
 
     // Fetch user's notifications
     $notifications = NotificationUser::where('user_id', $userId)
-        ->with('notification')
+        ->with(['notification' => function ($query) {
+            $query->orderBy('id', 'desc');
+        }])
         ->get()
         ->pluck('notification');
 
