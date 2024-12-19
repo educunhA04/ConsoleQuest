@@ -9,18 +9,24 @@ use App\Models\NotificationUser;
 
 class NotificationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $userId = auth()->id();
 
+        // Fetch user's notifications
         $notifications = NotificationUser::where('user_id', $userId)
-            ->with('notification') // Load the related Notification model
-            ->orderBy('notification_id', 'desc') 
+            ->with('notification')
+            ->orderBy('notification_id', 'desc')
             ->get()
-            ->pluck('notification'); // Extract the notifications themselves
+            ->pluck('notification');
 
+        // If the request is an AJAX request, return only the notifications partial
+        if ($request->ajax()) {
+            return view('partials.notifications', compact('notifications'))->render();
+        }
+
+        // Otherwise, return a full response
         return view('partials.notifications', compact('notifications'));
-
     }
 
     public function show($notificationId)
@@ -30,7 +36,7 @@ class NotificationController extends Controller
         // Fetch the specific notification for the authenticated user through the pivot table
         $notification = NotificationUser::where('user_id', $userId)
             ->where('notification_id', $notificationId)
-            ->with('notification') // Load the related Notification model
+            ->with('notification') 
             ->orderBy('notification_id', 'desc')
             ->firstOrFail()
             ->notification;

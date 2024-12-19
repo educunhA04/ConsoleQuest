@@ -91,25 +91,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     const channel = pusher.subscribe('Console-Quest');
-    channel.bind('notification-pusher', function (data) {
-        
+    channel.bind('notification-pusher', async function (data) {
+        // Show the temporary notification
         showNotification(data.message);
     
-        
-        const notificationList = document.querySelector('.notifications ul'); // Find the <ul> inside the notifications partial
+        // Fetch the updated notifications from the server
+        try {
+            const response = await fetch('/notifications', {
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json',
+                },
+            });
     
-        if (notificationList) {
-            const newNotification = document.createElement('li');
-            newNotification.classList.add('notification-item'); // Add CSS classes
-            newNotification.setAttribute('data-id', data.notification_id); // Set the data-id attribute
-            newNotification.innerHTML = `
-                <strong>${data.message}</strong>
-                <p>${new Date().toLocaleString()}</p>
-            `;
+            if (response.ok) {
+                const html = await response.text();
     
-            notificationList.prepend(newNotification); // Add the new notification to the top
+                // Update the notifications-section in the DOM
+                const notificationsSection = document.querySelector('.notifications-section');
+                if (notificationsSection) {
+                    notificationsSection.innerHTML = html;
+                }
+            } else {
+                console.error('Failed to fetch updated notifications:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error fetching updated notifications:', error);
         }
     });
+    
     
     window.addToWishlist = addToWishlist;
     window.addToCart = addToCart;
