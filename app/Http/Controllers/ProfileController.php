@@ -28,12 +28,12 @@ class ProfileController extends Controller
         ->pluck('notification');
 
     // Pass both orders and notifications to the view
-    return view('Profile', compact('orders', 'notifications'));
+    return view('pages/Profile', compact('orders', 'notifications'));
 }
 
     public function edit()
     {
-        return view('Editprofile');
+        return view('pages/Editprofile');
     }
 
     public function update(Request $request)
