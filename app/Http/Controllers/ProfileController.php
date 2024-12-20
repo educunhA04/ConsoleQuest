@@ -18,10 +18,8 @@ class ProfileController extends Controller
 {
     $userId = auth()->id();
 
-    // Fetch user's orders
     $orders = Order::where('user_id', $userId)->get();
 
-    // Fetch user's notifications
     $notifications = NotificationUser::where('user_id', $userId)
         ->with(['notification' => function ($query) {
             $query->orderBy('id', 'desc');
@@ -29,7 +27,6 @@ class ProfileController extends Controller
         ->get()
         ->pluck('notification');
 
-    // Pass both orders and notifications to the view
     return view('pages/Profile', compact('orders', 'notifications'));
 }
 

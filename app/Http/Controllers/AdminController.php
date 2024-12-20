@@ -138,6 +138,7 @@ class AdminController extends Controller
                         'user_id' => $userId,
                         'notification_id' => $notification->id,
                     ]);
+                    event(new NotificationPusher($notification->id, $userId));
                 }
             }
         }
@@ -156,6 +157,7 @@ class AdminController extends Controller
                         'user_id' => $userId,
                         'notification_id' => $notificationCart->id,
                     ]);
+                    event(new NotificationPusher($notificationCart->id, $userId));
                 }
             }
         }
@@ -168,10 +170,6 @@ class AdminController extends Controller
         $product->discount_percent = $validated['discount'] ?? 0; 
 
         $product->save();
-
-        foreach ($cartUsers as $userId) {
-            event(new NotificationPusher($notificationCart->id, $userId));
-        }
 
         return redirect('/admin/dashboard/products')->with('success', 'Product created successfully!');
 

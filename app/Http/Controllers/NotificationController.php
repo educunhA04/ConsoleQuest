@@ -13,7 +13,7 @@ class NotificationController extends Controller
     {
         $userId = auth()->id();
 
-        // Fetch user's notifications
+
         $notifications = NotificationUser::where('user_id', $userId)
             ->with('notification')
             ->orderBy('notification_id', 'desc')
@@ -24,8 +24,6 @@ class NotificationController extends Controller
         if ($request->ajax()) {
             return view('partials.notifications', compact('notifications'))->render();
         }
-
-        // Otherwise, return a full response
         return view('partials.notifications', compact('notifications'));
     }
 
@@ -33,7 +31,6 @@ class NotificationController extends Controller
     {
         $userId = auth()->id();
 
-        // Fetch the specific notification for the authenticated user through the pivot table
         $notification = NotificationUser::where('user_id', $userId)
             ->where('notification_id', $notificationId)
             ->with('notification') 
@@ -49,16 +46,16 @@ class NotificationController extends Controller
     public function markAsViewed($notificationId)
     {
         try {
-            // Find the notification by its ID
+            
             $notification = Notification::findOrFail($notificationId);
     
-            // Mark it as viewed
+            // Mark as viewed
             $notification->viewed = true;
             $notification->save();
     
             return response()->json(['message' => 'Notification marked as viewed'], 200);
         } catch (\Exception $e) {
-            // Log and return error if something goes wrong
+
             \Log::error("Error marking notification as viewed: " . $e->getMessage());
             return response()->json(['error' => 'Failed to update notification'], 500);
         }

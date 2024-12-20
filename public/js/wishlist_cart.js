@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const channel = pusher.subscribe('Console-Quest');
     channel.bind('notification-pusher', async function (data) {
-        // Show the temporary notification
+        // Show the temporary notification (toast) naao sei porque é que se chama assim nao perguntem
         showNotification(data.message);
     
         // Fetch the updated notifications from the server
