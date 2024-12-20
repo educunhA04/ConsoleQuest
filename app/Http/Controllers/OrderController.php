@@ -13,7 +13,7 @@ class OrderController extends Controller
     {
         $userId = auth()->id();
 
-        $orders = Order::where('user_id', auth()->id())->with('products.product')->get();
+        $orders = Order::where('user_id', auth()->id())->orderBy('id','desc')->with('products.product')->SortByDesc('id')->get();
 
         
     }

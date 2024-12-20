@@ -18,7 +18,8 @@ class NotificationController extends Controller
             ->with('notification')
             ->orderBy('notification_id', 'desc')
             ->get()
-            ->pluck('notification');
+            ->pluck('notification')
+            ->sortByDesc('id');
 
         // If the request is an AJAX request, return only the notifications partial
         if ($request->ajax()) {
