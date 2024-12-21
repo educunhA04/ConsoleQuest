@@ -378,6 +378,8 @@ class AdminController extends Controller
             'user_id' => $request->user_id,
             'notification_id' => $notification->id,
         ]);
+        event(new NotificationPusher($notification->id, $user));
+
         return view('pages.admin/viewUser', ['user' => $user]);
     }
     public function deleteUser(Request $request)
