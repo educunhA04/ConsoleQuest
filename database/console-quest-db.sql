@@ -428,7 +428,7 @@ INSERT INTO "User" (id, username, password, name, email, image ,blocked) VALUES
 INSERT INTO Shipping_Address (id,postal_code, address, location, country, user_id) VALUES 
     (1,'4630-234', 'Proença a nova', 'Faro', 'Portugal', 1);
 INSERT INTO Admin (id, name, email, password) VALUES
-    (1,'rabeira' ,'admin@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'); 
+    (1,'Cristiano Ronaldo' ,'admin@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W'); 
 
 INSERT INTO "Order" (id, user_id,postal_code, address, location, country, tracking_number, status, buy_date, estimated_delivery_date) VALUES
     (1, 1, '4630-234', 'Proença a nova', 'Faro', 'Portugal','TRK123456', 'processing', '2024-01-01', '2024-01-05'),

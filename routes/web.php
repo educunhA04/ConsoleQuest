@@ -44,7 +44,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/controllers', 'showControllers')->name('home.controllers');
     Route::get('/games', 'showGames')->name('home.games');
     Route::get('/consoles', 'showConsoles')->name('home.consoles');
-    Route::get('/filtered', 'index')->name('home.index');
+    Route::get('/filtered', 'index')->name('home.filtered');
 
 });
 
@@ -84,10 +84,19 @@ Route::get('/products/{id}/reviews', [ReviewController::class, 'index'])->name('
 
 // Wishlist
 Route::controller(WishlistController::class)->group(function () {
-    Route::get('/wishlist', 'show')->name('wishlist.show');
-    Route::post('/wishlist/add', 'add')->name('wishlist.add');
-    Route::delete('/wishlist/{id}', 'remove')->name('wishlist.remove');
+    Route::get('/wishlist', 'show')
+        ->name('wishlist.show')
+        ->middleware('can:view,App\Models\Wishlist');
+
+    Route::post('/wishlist/add', 'add')
+        ->name('wishlist.add')
+        ->middleware('can:create,App\Models\Wishlist');
+
+    Route::delete('/wishlist/{id}', 'remove')
+        ->name('wishlist.remove')
+        ->middleware('can:delete,wishlist');
 });
+
 
 // Profile
 Route::controller(ProfileController::class)->group(function () {
