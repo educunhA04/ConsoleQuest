@@ -32,7 +32,6 @@
     margin-top: 8px;
     width: 100%;
     height: 300px;
-
     overflow: hidden;
     background-color: transparent;
     display: flex;
@@ -62,6 +61,7 @@
     display: block;
     background-color: transparent;
     border: none;
+    border-radius: 0%;
 }
 
 /* Para Imagens Muito Altas */
@@ -72,6 +72,7 @@
     display: block;
     background-color: transparent;
     border: none;
+    border-radius: 0%;
 }
 
 /* Product Name */
