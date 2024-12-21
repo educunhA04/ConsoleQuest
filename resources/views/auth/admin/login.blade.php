@@ -29,7 +29,7 @@
 
     <!-- Botão de Login -->
     <button type="submit">
-        Login
+        SIGN IN
     </button>
 
     <!-- Mensagens de Sucesso -->

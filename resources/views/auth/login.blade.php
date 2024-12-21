@@ -41,7 +41,7 @@
 
 
     <button type="submit" class="btn btn-primary">
-        Login
+        Sign In
     </button>
     <a class="button button-outline" href="{{ route('register') }}">Register</a>
 
