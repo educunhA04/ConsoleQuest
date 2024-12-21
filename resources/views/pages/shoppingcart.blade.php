@@ -25,9 +25,12 @@
                     <div class="cart-item-actions">
                         <form method="POST" action="{{ route('cart.update') }}">
                             @csrf
-                            <input type="hidden" name="cart_item_id" value="{{ is_array($cartItem) ? $cartItem['product']->id : $cartItem->id }}">
-                            <input type="number" name="quantity" value="{{ is_array($cartItem) ? $cartItem['quantity'] : $cartItem->quantity }}" min="1" style="width: 50px;">
-                            <button type="submit">Update</button>
+                            <div class="update-btn">
+                                <input type="hidden" name="cart_item_id" value="{{ is_array($cartItem) ? $cartItem['product']->id : $cartItem->id }}">
+                                <button type="submit">Update</button>
+                                <input type="number" name="quantity" value="{{ is_array($cartItem) ? $cartItem['quantity'] : $cartItem->quantity }}" min="1" style="width: 50px;">
+                            </div>
+                            
                         </form>
                         <form method="POST" action="{{ route('cart.remove') }}">
                             @csrf
