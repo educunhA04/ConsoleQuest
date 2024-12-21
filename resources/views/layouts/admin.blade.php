@@ -60,7 +60,7 @@
 
                     <!-- Right Section (User Actions) -->
                     <div class="user-actions">
-                        <a href="{{ url('/logout') }}" class="auth-link logout-link">Log Out</a>
+                        <a href="{{ url('/logout') }}" class="auth-link logout-link">Sign Out</a>
                     </div>
                 </div>
             </header>
