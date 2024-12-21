@@ -44,7 +44,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/controllers', 'showControllers')->name('home.controllers');
     Route::get('/games', 'showGames')->name('home.games');
     Route::get('/consoles', 'showConsoles')->name('home.consoles');
-    Route::get('/filtered', 'index')->name('home.index');
+    Route::get('/filtered', 'index')->name('home.filtered');
 
 });
 
