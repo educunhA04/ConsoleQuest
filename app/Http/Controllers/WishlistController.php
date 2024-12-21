@@ -20,9 +20,7 @@ class WishlistController extends Controller
 
     public function show()
     {
-        if (!auth()->check()) {
-            return redirect()->route('login'); 
-        }
+        $this->authorize('view', Wishlist::class);
         $userId = auth()->id();
      
         $wishlistItems = Wishlist::with('product') 
@@ -34,6 +32,7 @@ class WishlistController extends Controller
     public function remove(Request $request, $id)
     {
         $wishlistItem = Wishlist::findOrFail($id);
+        $this->authorize('delete', $wishlistItem);
         $wishlistItem->delete();
 
         return redirect()->back()->with('success', 'Item removed from wishlist.');
@@ -42,7 +41,7 @@ class WishlistController extends Controller
     
     public function add(Request $request)
     {
-        // Ensure the user is authenticated
+        $this->authorize('create', Wishlist::class);
         if (!auth()->check()) {
             return response()->json([
                 'error' => 'You must be logged in to add items to your wishlist.'
