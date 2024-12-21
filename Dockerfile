@@ -14,4 +14,5 @@ COPY .env.production /var/www/.env
 COPY docker_run.sh /docker_run.sh
 
 # Start command
+CMD php artisan storage:link
 CMD sh /docker_run.sh
