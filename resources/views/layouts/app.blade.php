@@ -46,6 +46,14 @@
 
 </head>
 <body>
+    
+    @if (Auth::check() && Auth::user()->blocked)
+        <script>
+            window.location.href = "{{ url('/logout') }}";
+        </script>
+    @endif
+
+
     <div id="notification-container" class="notification-container"></div>
     <div class="page-container">
         <!-- Header -->
