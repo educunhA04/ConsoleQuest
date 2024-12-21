@@ -135,6 +135,7 @@
                         </div>
                     </div>
                 </div>
+</div>
 
                 <!-- Buttons -->
                 <div class="edit-profile-buttons">
