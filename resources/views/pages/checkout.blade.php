@@ -94,7 +94,7 @@
         <div class="form-group">
             <label for="NIF">NIF:</label>
             <div class="checkout-input-container">
-                <input type="text" name="NIF" id="NIF">
+                <input type="text" name="NIF" id="NIF" placeholder = "123456789">
                 <span class="checkout-tooltip-icon" data-tooltip="O NIF deve conter 9 dígitos numéricos.">?</span>
             </div>
         </div>
@@ -104,7 +104,7 @@
         <div class="form-group">
             <label for="credit_card_number">Número do Cartão:</label>
             <div class="checkout-input-container">
-                <input type="text" name="credit_card_number" id="credit_card_number" required>
+                <input type="text" name="credit_card_number" id="credit_card_number" required placeholder = "1234123412341234">
                 <span class="checkout-tooltip-icon" data-tooltip="O número do cartão deve conter 16 dígitos numéricos.">?</span>
             </div>
         </div>
@@ -132,7 +132,7 @@
         <div class="form-group">
             <label for="credit_card_cvv">CVV:</label>
             <div class="checkout-input-container">
-                <input type="text" name="credit_card_cvv" id="credit_card_cvv" required>
+                <input type="text" name="credit_card_cvv" id="credit_card_cvv" required placeholder = "123">
                 <span class="checkout-tooltip-icon" data-tooltip="O CVV deve conter 3 dígitos numéricos.">?</span>
             </div>
         </div>
