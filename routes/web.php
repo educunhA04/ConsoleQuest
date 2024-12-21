@@ -92,9 +92,12 @@ Route::controller(WishlistController::class)->group(function () {
         ->name('wishlist.add')
         ->middleware('can:create,App\Models\Wishlist');
 
-    Route::delete('/wishlist/{id}', 'remove')
-        ->name('wishlist.remove')
-        ->middleware('can:delete,App\Models\Wishlist');
+        Route::delete('/wishlist/remove/{id}', [WishlistController::class, 'remove'])
+            ->name('wishlist.remove')
+            ->middleware('auth');
+
+    
+    
 });
 
 

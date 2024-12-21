@@ -15,7 +15,7 @@
                     <div class="product-price">${{ number_format($wishlistItem->product->price, 2) }}</div>
                 </a>
                 <div class="product-actions">
-                    <form action="{{ route('wishlist.remove', $wishlistItem->id) }}" method="POST">
+                <form action="{{ route('wishlist.remove', $wishlistItem->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Remove from Wishlist</button>
