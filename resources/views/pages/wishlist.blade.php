@@ -14,14 +14,14 @@
                     <div class="product-name">{{ $wishlistItem->product->name }}</div>
                     <div class="product-price">${{ number_format($wishlistItem->product->price, 2) }}</div>
                 </a>
-                <div class="product-actions">
+                <div class="product-actions-wishlist">
                 <form action="{{ route('wishlist.remove', $wishlistItem->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Remove from Wishlist</button>
+                        <button type="submit" class="wishlist-btn-danger">Remove from Wishlist</button>
                     </form>
                     <button 
-                    class="btn btn-primary"
+                    class="wishlist-btn-primary"
                     aria-label="Add to cart"
                     onclick="addToCart({{ $wishlistItem->product_id }}, 1)">
                     Add to Cart

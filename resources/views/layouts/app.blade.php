@@ -16,6 +16,7 @@
     <link href="{{ url('css/search.css') }}" rel="stylesheet">
     <link href="{{ url('css/pages/login.css') }}" rel="stylesheet">
     <link href="{{ url('css/pages/register.css') }}" rel="stylesheet">
+    <link href="{{ url('css/pages/wishlist.css') }}" rel="stylesheet">
     <link href="{{ url('css/pages/recoverPass.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/pages/search.css') }}">
     <link rel="stylesheet" href="{{ asset('css/pages/product.css') }}">
