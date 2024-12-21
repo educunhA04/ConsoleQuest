@@ -41,7 +41,7 @@
         @csrf
         
         <div class="form-group">
-            <label for="shipping_address">Endereço de Envio:</label>
+            <label for="shipping_address">Shipping Address:</label>
             <div class="checkout-input-container">
                 @php
                 $shippingAddress = Auth::user()->shippingAddress;
@@ -102,15 +102,15 @@
         
         
         <div class="form-group">
-            <label for="credit_card_number">Número do Cartão:</label>
+            <label for="credit_card_number">Card Number:</label>
             <div class="checkout-input-container">
                 <input type="text" name="credit_card_number" id="credit_card_number" required placeholder = "1234123412341234">
-                <span class="checkout-tooltip-icon" data-tooltip="O número do cartão deve conter 16 dígitos numéricos.">?</span>
+                <span class="checkout-tooltip-icon" data-tooltip="The card number must be 16 digits long.">?</span>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="credit_card_exp_date">Data de Validade:</label>
+            <label for="credit_card_exp_date">Expiration Date:</label>
             <div class="checkout-input-container">
                 <input 
                     type="text" 
@@ -120,9 +120,9 @@
                     required 
                     maxlength="7" 
                     pattern="^(0[1-9]|1[0-2])\/\d{4}$" 
-                    title="Insira a data no formato MM/AAAA."
+                    title="Please insert the date as MM/AAAA."
                 >
-                <span class="checkout-tooltip-icon" data-tooltip="Insira a data de validade no formato MM/AAAA.">?</span>
+                <span class="checkout-tooltip-icon" data-tooltip="Please insert the date as MM/AAAA.">?</span>
             </div>
         </div>
 
@@ -133,12 +133,12 @@
             <label for="credit_card_cvv">CVV:</label>
             <div class="checkout-input-container">
                 <input type="text" name="credit_card_cvv" id="credit_card_cvv" required placeholder = "123">
-                <span class="checkout-tooltip-icon" data-tooltip="O CVV deve conter 3 dígitos numéricos.">?</span>
+                <span class="checkout-tooltip-icon" data-tooltip="CVV must be 3 digits long.">?</span>
             </div>
         </div>
 
         
-        <button type="submit" class="checkout-btn">Finalizar Compra</button>
+        <button type="submit" class="checkout-btn">Confirm and Pay</button>
     </form>
 
     
