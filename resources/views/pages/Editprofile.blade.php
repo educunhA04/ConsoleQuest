@@ -51,7 +51,7 @@
                                 name="address" 
                                 class="form-control" 
                                 value="{{ old('address', Auth::user()->shippingAddress->address ?? '') }}" 
-                                required>
+                                >
                             @error('address')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -65,7 +65,7 @@
                                 name="postal_code" 
                                 class="form-control" 
                                 value="{{ old('postal_code', Auth::user()->shippingAddress->postal_code ?? '') }}" 
-                                required>
+                                >
                             @error('postal_code')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -79,7 +79,7 @@
                                 name="location" 
                                 class="form-control" 
                                 value="{{ old('location', Auth::user()->shippingAddress->location ?? '') }}" 
-                                required>
+                                >
                             @error('location')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -93,7 +93,7 @@
                                 name="country" 
                                 class="form-control" 
                                 value="{{ old('country', Auth::user()->shippingAddress->country ?? '') }}" 
-                                required>
+                                >
                             @error('country')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror

@@ -43,10 +43,10 @@ class ProfileController extends Controller
         'name' => 'required|string|max:50',
         'username' => 'required|string|max:50|unique:User,username,' . Auth::id(),
         'email' => 'required|string|email|max:75|unique:User,email,' . Auth::id(),
-        'address' => 'required|string|max:255',
-        'postal_code' => 'required|string|max:20',
-        'location' => 'required|string|max:100',
-        'country' => 'required|string|max:100',
+        'address' => 'max:255',
+        'postal_code' => 'max:20',
+        'location' => 'max:100',
+        'country' => 'max:100',
         'password' => 'nullable|string|min:8|confirmed|regex:/[A-Z]/|regex:/[0-9]/',
         'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Profile image validation
     ], [
@@ -56,10 +56,6 @@ class ProfileController extends Controller
         'password.regex' => 'The password must include at least one uppercase letter and one number.',
         'username.unique' => 'The username has already been taken.',
         'email.unique' => 'The email has already been taken.',
-        'address.required' => 'The address field is required.',
-        'postal_code.required' => 'The postal code field is required.',
-        'location.required' => 'The location field is required.',
-        'country.required' => 'The country field is required.',
         'image.image' => 'The profile picture must be an image.',
         'image.mimes' => 'The profile picture must be a file of type: jpeg, png, jpg.',
         'image.max' => 'The profile picture must not exceed 2MB.',
@@ -89,13 +85,16 @@ class ProfileController extends Controller
 
     $user->save();
 
-    // Update or create the shipping address
-    $shippingAddress = $user->shippingAddress()->firstOrNew();
-    $shippingAddress->address = $validated['address'];
-    $shippingAddress->postal_code = $validated['postal_code'];
-    $shippingAddress->location = $validated['location'];
-    $shippingAddress->country = $validated['country'];
-    $shippingAddress->save();
+    // Update or create the shipping address only if all fields are provided
+    if ($request->filled(['address', 'postal_code', 'location', 'country'])) {
+        $shippingAddress = $user->shippingAddress()->firstOrNew();
+        $shippingAddress->address = $validated['address'];
+        $shippingAddress->postal_code = $validated['postal_code'];
+        $shippingAddress->location = $validated['location'];
+        $shippingAddress->country = $validated['country'];
+        $shippingAddress->save();
+    }
+
 
     return redirect('/profile')->with('success', 'Profile updated successfully!');
 }
