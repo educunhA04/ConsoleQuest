@@ -164,6 +164,11 @@
         font-size: 1rem;
         padding: 8px 15px;
     }
+
+    .cart-item-actions {
+        flex-direction: column; /* Alinha verticalmente os elementos */
+        gap: 10px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -182,4 +187,6 @@
     .cart-item-actions button {
         width: 80%;
     }
+
+    
 }

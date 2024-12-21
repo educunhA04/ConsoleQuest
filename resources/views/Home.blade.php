@@ -74,7 +74,7 @@
             </div>
             <a href="{{ route('product.show', ['id' => $product->id]) }}" class="product-link">
                 <div class = "product-image-wrapper">
-                <img src="{{ asset('storage/' . $product->images->first()->url) }}" alt="{{ $product->name }}" class="product-image">
+                    <img src="{{ asset('storage/' . $product->images->first()->url) }}" alt="{{ $product->name }}" class="product-image">
                 </div>
                 <div class="product-name">{{ $product->name }}</div>
                 <div class="product-price">
