@@ -23,13 +23,14 @@
         <a href="{{ route('admin.createUser') }}" class="admin-button-link">New User</a>
 
     @elseif (isset($products))
-        <h2>Products:</h2>
         <div class="admin-product-list">
             @foreach ($products as $product)
                 <div class="admin-product-container-dashboard">
                     <a href="{{ route('admin.viewProduct', ['id' => $product->id]) }}" class="admin-product-link">
-                    <img src="{{ asset('storage/' . $product->images->first()->url) }}" alt="{{ $product->name }}" class="admin-product-image">                
-                    <div class="admin-product-name">{{ $product->name }}</div>
+                        <div class="admin-product-image-wrapper">
+                            <img src="{{ asset('storage/' . $product->images->first()->url) }}" alt="{{ $product->name }}" class="admin-products-image">                
+                        </div>
+                        <div class="admin-product-name">{{ $product->name }}</div>
                     </a>
                 </div>
             @endforeach

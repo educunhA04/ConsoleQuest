@@ -73,7 +73,9 @@
                 </button>
             </div>
             <a href="{{ route('product.show', ['id' => $product->id]) }}" class="product-link">
-                <img src="{{ asset('storage/' . $product->images->first()->url) }}" alt="{{ $product->name }}" class="product-image">                
+                <div class = "product-image-wrapper">
+                <img src="{{ asset('storage/' . $product->images->first()->url) }}" alt="{{ $product->name }}" class="product-image">
+                </div>
                 <div class="product-name">{{ $product->name }}</div>
                 <div class="product-price">
                     @if ($product->discount_percent > 0)
