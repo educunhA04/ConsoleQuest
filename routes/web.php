@@ -94,7 +94,7 @@ Route::controller(WishlistController::class)->group(function () {
 
     Route::delete('/wishlist/{id}', 'remove')
         ->name('wishlist.remove')
-        ->middleware('can:delete,wishlist');
+        ->middleware('can:delete,App\Models\Wishlist');
 });
 
 

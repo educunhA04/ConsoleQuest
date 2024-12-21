@@ -23,7 +23,7 @@
                     <button 
                     class="btn btn-primary"
                     aria-label="Add to cart"
-                    onclick="addToCart({{ $wishlistItem->id }}, 1)">
+                    onclick="addToCart({{ $wishlistItem->product_id }}, 1)">
                     Add to Cart
                  </button>
                 </div>
