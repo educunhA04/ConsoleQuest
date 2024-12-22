@@ -43,8 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     showNotification(data.error || 'Failed to add to wishlist.', true);
                 }
             } catch (parseError) {
-                console.error('JSON Parsing Error:', parseError, textResponse);
-                showNotification('Unexpected response from server.', true);
+                window.location.href = '/login';
             }
         } catch (error) {
             console.error('Error with AJAX request:', error);

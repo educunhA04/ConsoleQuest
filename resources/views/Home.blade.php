@@ -51,8 +51,6 @@
 
 
 @section('content')
-
-
     @if ($products->isEmpty())
         <p>No products found matching your search.</p>
     @else
@@ -105,12 +103,12 @@
 </button>
 <!-- Search Bar -->
 <div class="search-container">
-                        <form id="searchForm" method="GET" action="{{ url('/filtered') }}">
-                            @csrf
-                            <input type="text" name="query" id="query" value="{{ $query ?? '' }}" placeholder="Search...">
-                            <button type="submit"><i class="fas fa-search"></i></button>
-                        </form>
-                    </div>
+        <form id="searchForm" method="GET" action="{{ url('/filtered') }}">
+            @csrf
+            <input type="text" name="query" id="query" value="{{ $query ?? '' }}" placeholder="Search...">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+</div>
 
 @endsection
 @section('scripts')

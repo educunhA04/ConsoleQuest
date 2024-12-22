@@ -29,15 +29,15 @@ class WishlistController extends Controller
         return view('pages/wishlist',['wishlistItems' => $wishlistItems]); 
     }
 
-        public function remove(Request $request)
-        {
-            $wishlistItem = Wishlist::findOrFail($request->id); 
-            $this->authorize('delete', $wishlistItem); 
-            $wishlistItem->delete();
-        
-            return redirect()->back()->with('success', 'Item removed from wishlist.');
-        }
+    public function remove(Request $request)
+    {
+        $wishlistItem = Wishlist::findOrFail($request->id); 
+        $this->authorize('delete', $wishlistItem); 
+        $wishlistItem->delete();
     
+        return redirect()->back()->with('success', 'Item removed from wishlist.');
+    }
+
     
     
     public function add(Request $request)
