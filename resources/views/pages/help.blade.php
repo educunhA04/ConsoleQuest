@@ -55,9 +55,7 @@
                 </li>
                 <li><strong>Sign Out:</strong> Click the <strong>Logout</strong> button to securely log out of your account.</li>
             </ul>
-            <p>
-                If you encounter any issues or need assistance, feel free to visit the <a href="help">Help Page</a> or contact our support team.
-            </p>
+            
         </div>
 
         <div class="staticpage-item">
@@ -80,9 +78,7 @@
                 <li><strong>Add the product to your shopping cart</strong> for checkout.</li>
                 <li><strong>Add the product to your wishlist</strong> to save it for later.</li>
             </ul>
-            <p>
-                Scroll down to view related products or recommendations based on your browsing history.
-            </p>
+            
         </div>
 
         <div class="staticpage-item">
@@ -116,7 +112,6 @@
                 <li><strong>Additional Features:</strong>
                     <ul>
                         <li>If you are not logged in, you will be prompted to log in or create an account to complete the checkout process.</li>
-                        <li>Related product recommendations may be displayed to help you discover more items.</li>
                         <li>A link to your wishlist is provided, allowing you to move items from your cart to your wishlist for future reference.</li>
                     </ul>
                 </li>
@@ -152,7 +147,7 @@
                             <ul>
                                 <li><strong>NIF:</strong> Taxpayer Identification Number (must have exactly <strong>9 digits</strong>).</li>
                                 <li><strong>Card Number:</strong> Enter your <strong>16-digit</strong> credit or debit card number.</li></li>
-                                <li><strong>Expiry Date:</strong> Provide the card’s expiration date in the format <em>dd/mm/yyyy</em>.</li>
+                                <li><strong>Expiry Date:</strong> Provide the card’s expiration date in the format <em>mm/yyyy</em>.</li>
                                 <li><strong>CVV:</strong> Enter the <strong>3-digit</strong> security code on the back of your card.</li></li>
                             </ul>
                         </li>
@@ -168,7 +163,6 @@
                     <ul>
                         <li>If any required field is missing or invalid, you will receive an error message prompting you to correct the information.</li>
                         <li>Make sure to double-check your order summary before finalizing the purchase.</li>
-                        <li>Secure encryption ensures your payment details remain safe.</li>
                     </ul>
                 </li>
             </ul>

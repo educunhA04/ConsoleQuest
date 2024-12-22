@@ -98,8 +98,21 @@
     </div>
     @endif
 @endsection
+@section ('search_and_filter')
 
+<button id="toggleFiltersButton" class="filter-toggle">
+        <i class="fas fa-filter"></i>
+</button>
+<!-- Search Bar -->
+<div class="search-container">
+                        <form id="searchForm" method="GET" action="{{ url('/filtered') }}">
+                            @csrf
+                            <input type="text" name="query" id="query" value="{{ $query ?? '' }}" placeholder="Search...">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
 
+@endsection
 @section('scripts')
 <script>
     document.getElementById('toggleFiltersButton').addEventListener('click', function() {

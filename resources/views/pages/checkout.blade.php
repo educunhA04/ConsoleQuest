@@ -95,7 +95,7 @@
             <label for="NIF">NIF:</label>
             <div class="checkout-input-container">
                 <input type="text" name="NIF" id="NIF" placeholder = "123456789">
-                <span class="checkout-tooltip-icon" data-tooltip="O NIF deve conter 9 dígitos numéricos.">?</span>
+                <span class="checkout-tooltip-icon" data-tooltip="The NIF number must be 9 digits long.">?</span>
             </div>
         </div>
 
