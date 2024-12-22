@@ -365,9 +365,9 @@ INSERT INTO "Type" (id, name) VALUES
 
 INSERT INTO Product (id, category_id, name, type_id, description, quantity, price, discount_percent) VALUES
     (1, 1, 'PlayStation 5', 1, 'Next-gen gaming console', 50, 499.99, 10),
-    (2, 2, 'EA FC 25', 2, 'Cancer game', 100, 59.99, 20),
-    (3, 2, 'Fifa Street', 2, 'Goat game', 100, 19.99, 0),
-    (4, 2, 'League of Legends', 3, 'Virgin game', 10, 9.99, 0),
+    (2, 2, 'EA FC 25', 2, 'Football game', 100, 59.99, 20),
+    (3, 2, 'Fifa Street', 2, 'Football game', 100, 19.99, 0),
+    (4, 2, 'League of Legends', 3, 'Fight game', 10, 9.99, 0),
     (5, 3, 'DualSense Controller', 4, 'PS5 Wireless Controller', 200, 69.99, 15),
     (6, 1, 'Xbox Series X', 5, 'Powerful next-gen console', 40, 499.99, 5),
     (7, 2, 'The Legend of Zelda: Breath of the Wild', 6, 'Award-winning adventure game', 60, 59.99, 10),
