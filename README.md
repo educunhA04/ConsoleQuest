@@ -7,9 +7,9 @@ Command to start the Docker Image
 docker run -d --name lbaw24151 -p 8001:80 gitlab.up.pt:5050/lbaw/lbaw2425/lbaw24151
 ```
 
-## 2. Usage
+## Usage
 
-### 2.1. Administration Credentials
+### Administration Credentials
 
 Administration URL: 
 ```bash
@@ -20,7 +20,7 @@ http://127.0.0.1:8001/admin/login
 |----------|----------|
 | admin@example.com | 1234 |
 
-### 2.2. User Credentials
+### User Credentials
 
 | Type | Username | Password |
 |------|----------|----------|
